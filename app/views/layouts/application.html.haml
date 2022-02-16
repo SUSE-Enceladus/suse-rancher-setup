@@ -4,10 +4,48 @@
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
     %title CuratedCloudInstaller
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "ie=edge", "http-equiv" => "X-UA-Compatible"}/
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     = stylesheet_link_tag "bootstrap.min"
-    = javascript_importmap_tags
+    = stylesheet_link_tag "eos-style"
+    = stylesheet_link_tag "eos-icons"
+    = stylesheet_link_tag "eos-icons-outlined"
   %body
-    = yield
+    %nav.main-menu.js-main-menu{"aria-label" => "Site Navigation"}
+      %div.mm-navigation-container
+        %header
+          %a.hide-collapsed{href: "#"}
+            = image_tag 'suse-product-brand.svg', alt: 'SUSE product brand logotype', class: 'ds-logo'
+          %button.mm-navigation-close.js-sidebar-toggle
+            %i.eos-icons-outlined.js-sidebar-tooltip.js-tooltip{"data-placement" => "bottom", title: "Toggle collapsible menu", "aria-hidden" => "true"} menu
+            %span.sr-only Toggle collapsible menu
+        %div.nav-wrap.menu-togglable
+          %ul.no-list-style
+      %footer.footer-side-menu
+        %ul.footer-list
+          %li.footer-list-item.ml-auto
+            %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
+              = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
+    %nav.mobile-menu.js-main-menu{"aria-label" => "Mobile Navigation"}
+      %header
+        %a{href: "#"}
+          = image_tag 'suse-product-brand.svg', alt: 'SUSE product brand logotype', class: 'ds-logo'
+        %div.burger-menu.js-burger-menu
+          %button.btn-unstyled
+            %i.eos-icons-outlined{"aria-hidden" => "true"} menu
+            %span.sr-only Toggle collapsible menu
+      %nav.display-nav.js-display-nav
+        %div.nav-wrap.menu-togglable
+          %ul.no-list-style
+    %section.content
+      %nav.submenu.js-submenu-section{"aria-label" => "Page Navigation"}
+        %ul.main-submenu.js-submenu-make-visible.list-unstyled.list-inline.m-0{data: {"parent-menu" => "examples"}}
+      = yield
+    %footer.footer-content.js-footer-content
+      %ul.footer-list
+        %li.footer-list-item.ml-auto
+          %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
+            = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
+= javascript_importmap_tags
