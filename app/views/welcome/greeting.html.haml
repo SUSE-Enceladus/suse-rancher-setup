@@ -1,2 +1,4 @@
-%h1 Welcome#greeting
-%p Find me in app/views/welcome/greeting.html.haml
+%article.container
+  %h1= t('greeting.title')
+  %hr
+  %div.trix-content= t('greeting.content').html_safe

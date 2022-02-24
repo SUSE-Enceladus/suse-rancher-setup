@@ -30,4 +30,19 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  greeting:
+    title: "Rancher's Spouse"
+    content: "<p><b>Magna dictumst dignissim</b> euismod aliquam sociis duis
+      porta feugiat ultricies bibendum a nunc porta a ullamcorper inceptos
+      fermentum suspendisse justo vestibulum placerat. Odio curae ridiculus
+      etiam pharetra ornare mauris platea adipiscing in ullamcorper a a urna
+      vestibulum vel euismod a sodales nec cras laoreet. Urna at taciti a fames
+      vestibulum parturient a ad magna pulvinar dis leo magna sem nam nascetur.
+      </p>
+      <p>Scelerisque consectetur porttitor pharetra eget praesent parturient
+      vestibulum <i>adipiscing condimentum</i> dis sed a platea a velit a rutrum
+      viverra a cubilia vestibulum dolor lorem. Arcu vestibulum scelerisque
+      curabitur fringilla volutpat neque conubia lobortis mauris habitant
+      habitasse scelerisque a iaculis sociosqu bibendum commodo. A aenean
+      phasellus in convallis senectus quam euismod a interdum at laoreet a
+      scelerisque est et in ad neque condimentum.</p>"
