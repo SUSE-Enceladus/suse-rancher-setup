@@ -23,12 +23,9 @@
             %span.sr-only Toggle collapsible menu
         %div.nav-wrap.menu-togglable
           %ul.no-list-style
-            %li.menu-item
-              %div.menu-element
-                %a.main-collapsed-single.js-select-current-parent.js-feature-flag{href: '/'} Welcome
-              %a.menu-title.js-select-current-parent.js-feature-flag{href: '/'}
-                %i.eos-icons-outlined home
-                %span.menu-title-content Welcome
+            = render 'layouts/menu_item', caption: 'Welcome', target: '/', icon: 'home'
+            = render 'layouts/menu_item', caption: 'AWS CLI', target: '/aws', icon: 'terminal'
+            = yield "menu"
       %footer.footer-side-menu
         %ul.footer-list
           %li.footer-list-item.ml-auto
@@ -45,12 +42,9 @@
       %nav.display-nav.js-display-nav
         %div.nav-wrap.menu-togglable
           %ul.no-list-style
-            %li.menu-item
-              %div.menu-element
-                %a.main-collapsed-single.js-select-current-parent.js-feature-flag{href: '/'} Welcome
-              %a.menu-title.js-select-current-parent.js-feature-flag{href: '/'}
-                %i.eos-icons-outlined home
-                %span.menu-title-content Welcome
+            = render 'layouts/menu_item', caption: 'Welcome', target: '/', icon: 'home'
+            = render 'layouts/menu_item', caption: 'AWS CLI', target: '/aws', icon: 'terminal'
+            = yield "mobile-menu"
     %section.content
       %nav.submenu.js-submenu-section{"aria-label" => "Page Navigation"}
         %ul.main-submenu.js-submenu-make-visible.list-unstyled.list-inline.m-0{data: {"parent-menu" => "examples"}}
