@@ -1,0 +1,13 @@
+%article.container
+  %h2 Run an AWS-CLI command
+  %hr
+  = turbo_frame_tag "cli" do
+    = form_with url: aws.cli_path, method: "post" do |form|
+      %div.form-group
+        = form.label :arguments, "AWS-CLI arguments"
+        %div.input-group
+          %div.input-group-prepend
+            %span{style: "margin-top: -4px;"} aws
+          = form.text_field :arguments, class: "form-control"
+      %div.form-group
+        = form.submit "Execute", class: "btn btn-primary"

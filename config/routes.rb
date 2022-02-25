@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "welcome#greeting"
+
+  mount Aws::Engine, at: "/aws"
 end

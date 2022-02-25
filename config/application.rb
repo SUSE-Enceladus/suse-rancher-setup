@@ -6,6 +6,14 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+# Engine loading mechanism
+Dir.glob("#{__dir__}/../engines/*").select { |i| File.directory?(i) }.each do |dir|
+  engine_name = File.basename(dir)
+  filename = File.expand_path(File.join(dir, 'lib', "#{engine_name}.rb"))
+  require_relative(filename) if File.exist?(filename)
+end
+
 module CuratedCloudInstaller
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
