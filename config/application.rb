@@ -1,18 +1,10 @@
-require_relative "boot"
+require_relative 'boot'
 
-require "rails/all"
+require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
-
-
-# Engine loading mechanism
-Dir.glob("#{__dir__}/../engines/*").select { |i| File.directory?(i) }.each do |dir|
-  engine_name = File.basename(dir)
-  filename = File.expand_path(File.join(dir, 'lib', "#{engine_name}.rb"))
-  require_relative(filename) if File.exist?(filename)
-end
 
 module CuratedCloudInstaller
   class Application < Rails::Application
@@ -26,5 +18,15 @@ module CuratedCloudInstaller
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.engines = [ 'Aws' ]
   end
+end
+
+# Engine loading mechanism
+Rails.configuration.engines.each do |engine_name|
+  basedir = "#{__dir__}/../engines/"
+  engine = engine_name.to_s.downcase
+  filename = File.expand_path(File.join(basedir, engine, 'lib', "#{engine}.rb"))
+  require_relative(filename) if File.exist?(filename)
 end

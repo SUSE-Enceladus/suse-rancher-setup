@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "welcome#greeting"
 
-  mount Aws::Engine, at: "/aws"
+  mount Aws::Engine, at: '/aws' if defined?(Aws::Engine)
 end
