@@ -23,8 +23,8 @@
             %span.sr-only Toggle collapsible menu
         %div.nav-wrap.menu-togglable
           %ul.no-list-style
-            = render 'layouts/menu_item', caption: 'Welcome', target: '/', icon: 'home'
-            = render 'layouts/menu_item', caption: 'AWS CLI', target: '/aws', icon: 'terminal'
+            - Rails.configuration.menu_entries.each do |menu_entry|
+              = render 'layouts/menu_item', menu_entry
             = yield "menu"
       %footer.footer-side-menu
         %ul.footer-list
@@ -42,8 +42,8 @@
       %nav.display-nav.js-display-nav
         %div.nav-wrap.menu-togglable
           %ul.no-list-style
-            = render 'layouts/menu_item', caption: 'Welcome', target: '/', icon: 'home'
-            = render 'layouts/menu_item', caption: 'AWS CLI', target: '/aws', icon: 'terminal'
+            - Rails.configuration.menu_entries.each do |menu_entry|
+              = render 'layouts/menu_item', menu_entry
             = yield "mobile-menu"
     %section.content
       %nav.submenu.js-submenu-section{"aria-label" => "Page Navigation"}

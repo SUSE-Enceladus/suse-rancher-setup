@@ -20,6 +20,9 @@ module CuratedCloudInstaller
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.engines = [ 'Aws' ]
+    config.menu_entries = [
+      { caption: 'Welcome', icon: 'home', target: '/' }
+    ]
   end
 end
 
@@ -29,4 +32,5 @@ Rails.configuration.engines.each do |engine_name|
   engine = engine_name.to_s.downcase
   filename = File.expand_path(File.join(basedir, engine, 'lib', "#{engine}.rb"))
   require_relative(filename) if File.exist?(filename)
+  Rails.configuration.menu_entries += engine_name.constantize.menu_entries()
 end
