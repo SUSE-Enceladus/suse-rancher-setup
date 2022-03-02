@@ -42,9 +42,6 @@ gem "sassc-rails"
 # Beautiful templates with HAML
 gem "haml-rails"
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem "image_processing", "~> 1.2"
-
 # safe, convenient command line execution
 gem "cheetah"
 
