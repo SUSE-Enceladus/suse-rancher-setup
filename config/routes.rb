@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   root "welcome#greeting"
 
   mount Aws::Engine, at: '/aws' if defined?(Aws::Engine)
+  mount ShirtSize::Engine, at: '/size' if defined?(ShirtSize::Engine)
 end

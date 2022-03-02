@@ -19,7 +19,7 @@ module CuratedCloudInstaller
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.engines = [ 'Aws' ]
+    config.engines = [ 'ShirtSize', 'Aws' ]
     config.menu_entries = [
       { caption: 'Welcome', icon: 'home', target: '/' }
     ]
@@ -29,7 +29,7 @@ end
 # Engine loading mechanism
 Rails.configuration.engines.each do |engine_name|
   basedir = "#{__dir__}/../engines/"
-  engine = engine_name.to_s.downcase
+  engine = engine_name.underscore
   filename = File.expand_path(File.join(basedir, engine, 'lib', "#{engine}.rb"))
   require_relative(filename) if File.exist?(filename)
   Rails.configuration.menu_entries += engine_name.constantize.menu_entries()
