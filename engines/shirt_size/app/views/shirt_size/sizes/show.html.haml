@@ -3,3 +3,7 @@
     You're building a
     = @size
     cluster!
+  %hr
+  %div.text-right
+    = link_to(t('Back'), new_size_path(), class: 'btn btn-secondary')
+    = next_step_button(new_size_path())

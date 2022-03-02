@@ -1,9 +1,11 @@
 %article.container
-  %div.float-right
-    = link_to('Execute another AWS-CLI command', aws.new_cli_path, class: "btn btn-primary")
   %h2 command
   %pre= @cmd.join(' ')
   %h2 stdout
   %pre= @stdout
   %h2 stderr
   %pre= @stderr
+  %hr
+  %div.text-right
+    = link_to(t('Back'), new_cli_path(), class: 'btn btn-secondary')
+    = next_step_button(new_cli_path())

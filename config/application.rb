@@ -21,7 +21,7 @@ module CuratedCloudInstaller
 
     config.engines = [ 'ShirtSize', 'Aws' ]
     config.menu_entries = [
-      { caption: 'Welcome', icon: 'home', target: '/' }
+      { caption: 'Welcome', icon: 'home', target: '/'}
     ]
   end
 end

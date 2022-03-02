@@ -31,4 +31,37 @@ module ApplicationHelper
     )
     markdown.render(uncommented_text).html_safe
   end
+
+  def offset_step_path(offset=0, origin_path=request.path)
+    Rails.configuration.menu_entries.each_with_index do |menu_entry, index|
+      if Rails.application.routes.recognize_path(menu_entry[:target]) == Rails.application.routes.recognize_path(origin_path)
+        begin
+          return Rails.configuration.menu_entries[index + offset][:target]
+        rescue
+          return nil
+        end
+      end
+    end
+    return nil
+  end
+
+  def next_step_path(origin_path=request.path)
+    offset_step_path(1, origin_path)
+  end
+
+  def previous_step_path(origin_path=request.path)
+    offset_step_path(-1, origin_path)
+  end
+
+  def next_step_button(origin_path=request.path)
+    if path = next_step_path(origin_path)
+      link_to(t('Next'), path, class: "btn btn-primary")
+    end
+  end
+
+  def previous_step_button(origin_path=request.path)
+    if path = previous_step_path(origin_path)
+      link_to(t('Back'), path, class: "btn btn-secondary")
+    end
+  end
 end
