@@ -22,3 +22,16 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+## Component Engines
+
+Each UI & backend component is developed in an independent Rails Engine in order
+to provide test/dev isolation of components, while allowing for an instance of
+the Installer to load only the needed components.
+
+### Adding a new engine
+
+`rails plugin new engines/$ENGINE_NAME -d sqlite3 --skip-git --mountable --skip-gemfile-entry`
+
+Remove the `Gemfile`, `*.gemspec`, `lib/$ENGINE_NAME/version.rb`
