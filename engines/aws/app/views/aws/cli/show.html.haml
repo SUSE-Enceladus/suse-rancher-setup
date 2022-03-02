@@ -1,10 +1,9 @@
 %article.container
-  = turbo_frame_tag "cli" do
-    %div.float-right
-      = link_to('Execute another AWS-CLI command', aws.new_cli_path, class: "btn btn-primary")
-    %h2 command
-    %pre= @cmd.join(' ')
-    %h2 stdout
-    %pre= @stdout
-    %h2 stderr
-    %pre= @stderr
+  %div.float-right
+    = link_to('Execute another AWS-CLI command', aws.new_cli_path, class: "btn btn-primary")
+  %h2 command
+  %pre= @cmd.join(' ')
+  %h2 stdout
+  %pre= @stdout
+  %h2 stderr
+  %pre= @stderr
