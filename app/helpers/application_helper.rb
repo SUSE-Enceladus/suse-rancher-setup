@@ -64,4 +64,8 @@ module ApplicationHelper
       link_to(t('Back'), path, class: "btn btn-secondary")
     end
   end
+
+  def page_header(title)
+    render('layouts/page_header', title: title)
+  end
 end

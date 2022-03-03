@@ -1,5 +1,4 @@
-%h2 Size your cluster
-%hr
+= page_header(t('engines.shirt_size.sizes.title'))
 = form_with url: shirt_size.size_path, method: "post" do |form|
   %div.form-group
     = form.label :arguments, "What size cluster do you need?"

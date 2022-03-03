@@ -1,5 +1,4 @@
-%h2 Run an AWS-CLI command
-%hr
+= page_header(t('engines.aws.cli.title'))
 = form_with url: aws.cli_path, method: "post" do |form|
   %div.form-group
     = form.label :arguments, "AWS-CLI arguments"

@@ -30,6 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  filler: "Temporary content for development"
   greeting:
     title: "Rancher's Spouse"
     content: "_This is Markdown rendered from the translation file._
@@ -50,3 +51,11 @@ en:
       habitasse scelerisque a iaculis sociosqu bibendum commodo. A aenean
       phasellus in convallis senectus quam euismod a interdum at laoreet a
       scelerisque est et in ad neque condimentum."
+  engines:
+    shirt_size:
+      sizes:
+        title: "Size your cluster"
+  engines:
+    aws:
+      cli:
+        title: "Run an AWS-CLI command"
