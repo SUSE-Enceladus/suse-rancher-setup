@@ -1,14 +1,12 @@
 module ShirtSize
   class SizesController < ApplicationController
-    layout 'layouts/application'
-
-    def new;
+    def edit
       @size = KeyValue.get(:cluster_size, 'small')
-      @sizes = form_sizes()
+      @sizes = self.form_sizes
     end
 
-    def create
-      @size = size_param()
+    def update
+      @size = self.size_param
       KeyValue.set(:cluster_size, @size)
       render :show
     end
@@ -16,17 +14,11 @@ module ShirtSize
     private
 
     def form_sizes
-      [
-        OpenStruct.new(size: 'small', caption: 'Small'),
-        OpenStruct.new(size: 'medium', caption: 'Medium'),
-        OpenStruct.new(size: 'large', caption: 'Large')
-      ]
+      %w(small medium large)
     end
 
     def size_param
-      params.require(:size)
-      params[:size]
+      params.permit(:size)[:size]
     end
-
   end
 end

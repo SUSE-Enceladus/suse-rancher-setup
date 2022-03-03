@@ -3,7 +3,7 @@ module Aws
     def new; end
 
     def create
-      @args = aws_params()[:arguments]
+      @args = self.aws_params
       @cli = Cli.load
       @stdout, @stderr = @cli.execute(@args)
       render :show
@@ -12,10 +12,7 @@ module Aws
     private
 
     def aws_params
-      params.require(:arguments)
-      params[:arguments] = params[:arguments].split(' ')
-      return params
+      params.permit(:arguments)[:arguments].split(' ')
     end
-
   end
 end

@@ -47,5 +47,9 @@ module Aws
         region['RegionName']
       end.sort!
     end
+
+    def steps
+      [:version, :regions]
+    end
   end
 end

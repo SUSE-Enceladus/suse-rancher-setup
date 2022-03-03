@@ -1,5 +1,3 @@
 ShirtSize::Engine.routes.draw do
-  resource :size
-
-  root 'sizes#new'
+  resource :size, only: [:edit, :update]
 end

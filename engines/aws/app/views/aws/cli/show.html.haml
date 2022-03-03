@@ -8,5 +8,5 @@
 %pre= @stderr
 -# end
 = render('layouts/navigation_buttons') do
-  = link_to(t('Back'), new_cli_path(), class: 'btn btn-secondary')
+  = link_to(t('actions.previous'), aws.new_cli_path, class: 'btn btn-secondary')
   = next_step_button(new_cli_path())

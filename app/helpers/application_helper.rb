@@ -55,13 +55,13 @@ module ApplicationHelper
 
   def next_step_button(origin_path=request.path)
     if path = next_step_path(origin_path)
-      link_to(t('Next'), path, class: "btn btn-primary")
+      link_to(t('actions.next'), path, class: "btn btn-primary")
     end
   end
 
   def previous_step_button(origin_path=request.path)
     if path = previous_step_path(origin_path)
-      link_to(t('Back'), path, class: "btn btn-secondary")
+      link_to(t('actions.previous'), path, class: "btn btn-secondary")
     end
   end
 

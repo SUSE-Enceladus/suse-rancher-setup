@@ -1,0 +1,15 @@
+= page_header(t('engines.shirt_size.sizes.title'))
+-# body
+= form_with url: shirt_size.size_path, method: 'put' do |form|
+  %div.form-group
+    = form.label :arguments, t('engines.shirt_size.sizes.form_caption')
+    - @sizes.each do |option|
+      %div.form-check
+        = form.radio_button :size, option, class: 'form-check-input eos-radio-btn', checked: (option == @size)
+        = form.label "size_#{option}", class: 'form-check-label' do
+          = t("engines.shirt_size.sizes.labels.#{option}")
+  %div.form-group
+    = form.submit t('actions.save'), class: 'btn btn-primary'
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()

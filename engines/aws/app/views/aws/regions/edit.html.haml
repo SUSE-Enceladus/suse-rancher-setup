@@ -2,11 +2,11 @@
 -# body
 = form_with(model: @region, url: aws.region_path, method: 'put') do |form|
   %div.form-group
-    = form.label 'value' do
+    = form.label :value do
       %strong= t('engines.aws.region.form_caption')
     = form.select(:value, @region.options, {}, { class: 'custom-select' })
   %div.form-group
-    = form.submit t('action.set'), class: "btn btn-primary"
+    = form.submit t('actions.save'), class: 'btn btn-primary'
 -# end
 = render('layouts/navigation_buttons') do
   = previous_step_button()

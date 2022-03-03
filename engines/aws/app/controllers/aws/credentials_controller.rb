@@ -2,18 +2,14 @@ module Aws
   class CredentialsController < ApplicationController
     before_action :load_credential, only: [:edit, :show]
 
-    def edit
-    end
+    def edit; end
 
-    def show
-    end
-
-    def create
-      @credential = Credential.new(credential_params())
+    def update
+      @credential = Credential.new(self.credential_params)
       if @credential.save
-        redirect_to credential_path
+        render :show
       else
-        redirect_to edit_credential_path, flash: {
+        redirect_to aws.edit_credential_path, flash: {
           error: @credential.errors.full_messages
         }
       end
@@ -21,12 +17,12 @@ module Aws
 
     private
 
-      def load_credential
-        @credential = Credential.load
-      end
+    def load_credential
+      @credential = Credential.load
+    end
 
-      def credential_params
-        params.require(:credential).permit(:aws_access_key_id, :aws_secret_access_key)
-      end
+    def credential_params
+      params.require(:credential).permit(:aws_access_key_id, :aws_secret_access_key)
+    end
   end
 end

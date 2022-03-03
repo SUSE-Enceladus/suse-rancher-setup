@@ -16,6 +16,13 @@ module Aws
       )
     end
 
+    def attributes
+      {
+        aws_access_key_id: @aws_access_key_id,
+        aws_secret_access_key: @aws_secret_access_key
+      }
+    end
+
     def save!
       KeyValue.set(:aws_access_key_id, @aws_access_key_id)
       KeyValue.set(:aws_secret_access_key, @aws_secret_access_key)
