@@ -59,3 +59,5 @@ en:
     aws:
       cli:
         title: "Run an AWS-CLI command"
+      credentials:
+        title: "AWS Credentials"
