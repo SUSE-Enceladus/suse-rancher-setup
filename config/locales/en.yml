@@ -30,6 +30,8 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  action:
+    set: "Set"
   filler: "Temporary content for development"
   greeting:
     title: "Rancher's Spouse"
@@ -61,3 +63,6 @@ en:
         title: "Run an AWS-CLI command"
       credentials:
         title: "AWS Credentials"
+      region:
+        title: "AWS Region"
+        form_caption: "Select the AWS region to work in:"

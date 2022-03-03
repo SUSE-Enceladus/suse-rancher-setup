@@ -1,0 +1,9 @@
+= page_header(t('engines.aws.region.title'))
+-# body
+%p
+  Using AWS region:
+  %span.text-monospace= @region.value
+-# end
+= render('layouts/navigation_buttons') do
+  = link_to(t('Back'), edit_region_path(), class: 'btn btn-secondary')
+  = next_step_button(edit_region_path())

@@ -1,0 +1,8 @@
+= page_header(t('engines.aws.cli.title'))
+-# body
+%h3= @step
+%pre= @output
+-# end
+= render('layouts/navigation_buttons') do
+  = link_to(t('Back'), new_step_path(), class: 'btn btn-secondary')
+  = next_step_button(new_step_path())

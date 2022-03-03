@@ -1,0 +1,16 @@
+= page_header(t('engines.aws.cli.title'))
+-# body
+= form_with url: aws.step_path, method: "post" do |form|
+  %div.form-group
+    = form.label :title, "AWS CLI function"
+    %div.form-check
+      = form.radio_button :step, 'version', class: 'form-check-input eos-radio-btn'
+      = form.label 'step_version', 'show the version of the CLI', class: 'form-check-label'
+    %div.form-check
+      = form.radio_button :step, 'regions', class: 'form-check-input eos-radio-btn'
+      = form.label 'step_regions', 'List available regions (opt-in not required and opted-in)', class: 'form-check-label'
+  %div.form-group
+    = form.submit "Execute", class: "btn btn-primary"
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()
