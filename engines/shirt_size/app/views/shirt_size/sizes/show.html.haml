@@ -1,11 +1,12 @@
 = page_header(t('engines.shirt_size.sizes.title'))
+-# body
 %p
   %u=t('filler')
 %p
   You're building a
   = @size
   cluster!
-%hr
-%div.text-right
+-# end
+= render('layouts/navigation_buttons') do
   = link_to(t('Back'), new_size_path(), class: 'btn btn-secondary')
   = next_step_button(new_size_path())

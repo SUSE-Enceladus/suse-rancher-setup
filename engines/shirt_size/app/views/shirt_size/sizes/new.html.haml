@@ -1,4 +1,5 @@
 = page_header(t('engines.shirt_size.sizes.title'))
+-# body
 = form_with url: shirt_size.size_path, method: "post" do |form|
   %div.form-group
     = form.label :arguments, "What size cluster do you need?"
@@ -9,6 +10,6 @@
         = form.label "size_#{option.size}", option.caption, class: 'form-check-label'
   %div.form-group
     = form.submit "Select", class: "btn btn-primary"
-%hr
-%div.text-right
+-# end
+= render('layouts/navigation_buttons') do
   = previous_step_button()

@@ -1,5 +1,6 @@
 = page_header(t('greeting.title'))
+-# body
 = markdown(t('greeting.content'))
-%hr
-%div.text-right
+-# end
+= render('layouts/navigation_buttons') do
   = next_step_button()
