@@ -1,21 +1,11 @@
-require "cheetah"
-
 module Aws
   class CliController < ApplicationController
     def new; end
 
     def create
-      @cmd = ['aws'] + aws_params()[:arguments]
-      @credential = Credential.load
-      @stdout, @stderr = Cheetah.run(
-        @cmd,
-        stdout: :capture,
-        stderr: :capture,
-        env: {
-          'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
-          'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key
-        }
-      )
+      @args = aws_params()[:arguments]
+      @cli = Cli.load
+      @stdout, @stderr = @cli.execute(@args)
       render :show
     end
 

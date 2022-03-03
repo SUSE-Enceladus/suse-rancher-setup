@@ -1,7 +1,7 @@
 = page_header(t('engines.aws.cli.title'))
 -# body
 %h3 command
-%pre= @cmd.join(' ')
+%pre= 'aws ' + @args.join(' ')
 %h3 stdout
 %pre= @stdout
 %h3 stderr
