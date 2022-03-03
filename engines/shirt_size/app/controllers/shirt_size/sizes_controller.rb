@@ -1,5 +1,3 @@
-require "cheetah"
-
 module ShirtSize
   class SizesController < ApplicationController
     layout 'layouts/application'

@@ -1,15 +1,14 @@
-%article.container
-  %h2 Run an AWS-CLI command
-  %hr
-  = form_with url: aws.cli_path, method: "post" do |form|
-    %div.form-group
-      = form.label :arguments, "AWS-CLI arguments"
-      %div.input-group
-        %div.input-group-prepend
-          %span{style: "margin-top: -4px;"} aws
-        = form.text_field :arguments, class: "form-control"
-    %div.form-group
-      = form.submit "Execute", class: "btn btn-primary"
-  %hr
-  %div.text-right
-    = previous_step_button()
+%h2 Run an AWS-CLI command
+%hr
+= form_with url: aws.cli_path, method: "post" do |form|
+  %div.form-group
+    = form.label :arguments, "AWS-CLI arguments"
+    %div.input-group
+      %div.input-group-prepend
+        %span{style: "margin-top: -4px;"} aws
+      = form.text_field :arguments, class: "form-control"
+  %div.form-group
+    = form.submit "Execute", class: "btn btn-primary"
+%hr
+%div.text-right
+  = previous_step_button()

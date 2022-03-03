@@ -1,11 +1,10 @@
-%article.container
-  %h2 command
-  %pre= @cmd.join(' ')
-  %h2 stdout
-  %pre= @stdout
-  %h2 stderr
-  %pre= @stderr
-  %hr
-  %div.text-right
-    = link_to(t('Back'), new_cli_path(), class: 'btn btn-secondary')
-    = next_step_button(new_cli_path())
+%h2 command
+%pre= @cmd.join(' ')
+%h2 stdout
+%pre= @stdout
+%h2 stderr
+%pre= @stderr
+%hr
+%div.text-right
+  = link_to(t('Back'), new_cli_path(), class: 'btn btn-secondary')
+  = next_step_button(new_cli_path())
