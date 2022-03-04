@@ -6,7 +6,7 @@ module Aws
 
     def create
       @step = step_param
-      @output = @cli.send(@step)
+      @cli.send(@step)
       render :show
     end
 

@@ -74,6 +74,7 @@ en:
         labels:
           version: "Show the version of the CLI"
           regions: "List available regions (opt-in not required and opted-in)"
+          create_vpc: "Create a new VPC"
     shirt_size:
       sizes:
         title: "Size your cluster"
