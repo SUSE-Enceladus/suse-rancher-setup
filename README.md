@@ -34,4 +34,9 @@ the Installer to load only the needed components.
 
 `rails plugin new engines/$ENGINE_NAME -d sqlite3 --skip-git --mountable --skip-gemfile-entry`
 
-Remove the `Gemfile`, `*.gemspec`, `lib/$ENGINE_NAME/version.rb`
+* Remove the `Gemfile`, `*.gemspec`, `lib/$ENGINE_NAME/version.rb`
+* Add the following to `appliction_controller.rb`:
+  ```
+  helper Rails.application.helpers
+  layout 'layouts/application'
+  ```

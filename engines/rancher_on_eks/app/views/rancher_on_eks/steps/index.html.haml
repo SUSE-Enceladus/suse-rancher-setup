@@ -1,0 +1,26 @@
+= page_header(t('engines.rancher_on_eks.steps.title'))
+-# body
+%p
+  %strong= t('engines.rancher_on_eks.steps.form_caption')
+- @steps.each do |step|
+  %p
+    - if step.complete?
+      %i.eos-icons-outlined check_circle
+    - elsif step.started?
+      %i.eos-icons-outlined play_circle
+    - else
+      %i.eos-icons-outlined lens
+    = step.rank
+    \.
+    = step.action
+    - if step.resource_id.present?
+      [
+      %span.text-monospace= step.resource_id
+      ]
+- if @deployable
+  = form_with url: rancher_on_eks.deploy_steps_path, method: 'post' do |form|
+    %div.form-group
+      = form.submit t('actions.exec'), class: 'btn btn-primary'
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()

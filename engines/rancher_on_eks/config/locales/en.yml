@@ -1,0 +1,6 @@
+en:
+  engines:
+    rancher_on_eks:
+      steps:
+        title: "Deploy Rancher on AWS EKS"
+        form_caption: "Deployment steps:"
