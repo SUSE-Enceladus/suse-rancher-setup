@@ -50,12 +50,13 @@ module Aws
     end
 
     def create_vpc(cidr_block='192.168.0.0/16', vpc_name='curated-installer-vpc')
-      tag = "ResourceType=vpc, Tags=[{Key=Name,Value=#{vpc_name}}]"
+      tag = "ResourceType=vpc,Tags=[{Key=Name,Value=#{vpc_name}}]"
       args = %W(
-      ec2 create-vpc
-      --cidr-block #{cidr_block}
-      --tag-specifications "#{tag}"
+        ec2 create-vpc
+        --cidr-block #{cidr_block}
+        --tag-specifications #{tag}
       )
+
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
@@ -68,8 +69,75 @@ module Aws
       return stdout
     end
 
+    def create_subnets(vpc_id='')
+      vpc_id = "vpc-090f3057157e3054a"
+      public_cidr_blocks =[
+        '192.168.32.0/19',
+        '192.168.0.0/19',
+        '192.168.64.0/19'
+      ]
+      private_cidr_blocks = [
+        '192.168.128.0/19',
+        '192.168.96.0/19',
+        '192.168.160.0/19'
+      ]
+
+      availability_zones = _get_availability_zones
+      # if there is an error
+      return availability_zones unless availability_zones.kind_of?(Array)
+
+      availability_zones.each_with_index do |zone, index|
+        _create_public_subnet(vpc_id, zone=zone, public_cidr_blocks[index])
+        _create_private_subnet(vpc_id, zone=zone, private_cidr_blocks[index])
+      end
+
+      args = %W(ec2 describe-subnets --filters Name=vpc-id,Values=#{vpc_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def _get_availability_zones
+      args = %W(
+        ec2 describe-availability-zones
+        --region #{@region} --query AvailabilityZones[*].ZoneName
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      return JSON.parse(stdout)
+    end
+
+    def _create_private_subnet(vpc_id, zone, cidr_block)
+      tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=curated-installer-vpc/subnet_private_#{zone}}]"
+      args = %W(
+        ec2 create-subnet
+        --cidr-block #{cidr_block}
+        --availability-zone #{zone}
+        --vpc-id #{vpc_id}
+        --tag-specifications #{tag_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def _create_public_subnet(vpc_id, zone, cidr_block)
+      tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=curated-installer-vpc/subnet_public_#{zone}}]"
+      args = %W(
+        ec2 create-subnet
+        --cidr-block #{cidr_block}
+        --availability-zone #{zone}
+        --vpc-id #{vpc_id}
+        --tag-specifications #{tag_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
-      [:version, :regions, :create_vpc]
+      [:version, :regions, :create_vpc, :create_subnets]
     end
   end
 end
