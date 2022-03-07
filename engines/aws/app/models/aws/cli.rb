@@ -49,17 +49,20 @@ module Aws
       end.sort!
     end
 
-    def create_vpc(cidr_block='10.0.0.0/16')
-      args = %w(ec2 create-vpc --cidr-block)
-      args << cidr_block
+    def create_vpc(cidr_block='192.168.0.0/16', vpc_name='curated-installer-vpc')
+      tag = "ResourceType=vpc, Tags=[{Key=Name,Value=#{vpc_name}}]"
+      args = %W(
+      ec2 create-vpc
+      --cidr-block #{cidr_block}
+      --tag-specifications "#{tag}"
+      )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
     end
 
     def delete_vpc(vpc_id)
-      args = %w(ec2 delete-vpc --vpc-id)
-      args << vpc_id
+      args = %W(ec2 delete-vpc --vpc-id #{vpc_id})
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
