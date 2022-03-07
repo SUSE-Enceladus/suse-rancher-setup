@@ -10,13 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_02_004059) do
+ActiveRecord::Schema[7.0].define(version: 2022_03_07_190704) do
   create_table "key_values", force: :cascade do |t|
     t.string "key", null: false
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_key_values_on_key", unique: true
+  end
+
+  create_table "resources", id: :string, force: :cascade do |t|
+    t.string "type"
+    t.string "engine"
+    t.text "creation_attributes"
+    t.text "framework_raw_response"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.integer "rank"
+    t.string "action"
+    t.string "resource_id"
+    t.datetime "started_at"
+    t.datetime "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["rank"], name: "index_steps_on_rank", unique: true
   end
 
 end
