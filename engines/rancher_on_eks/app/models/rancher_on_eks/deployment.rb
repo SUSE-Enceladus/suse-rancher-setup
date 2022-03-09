@@ -29,6 +29,10 @@ module RancherOnEks
         rank: 7,
         action: 'Create Private Subnet 3'
       )
+      Step.create!(
+        rank: 8,
+        action: 'Create Internet Gateway'
+      )
     end
 
     def step(rank)
@@ -84,6 +88,9 @@ module RancherOnEks
           subnet_type: 'private',
           zone_index: 2
         )
+      end
+      step(8) do
+        @ig_id = Aws::InternetGateway.create(vpc_id: @vpc.id)
       end
     end
   end

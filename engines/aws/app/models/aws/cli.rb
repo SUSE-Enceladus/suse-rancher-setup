@@ -132,6 +132,45 @@ module Aws
       return stdout
     end
 
+    def describe_internet_gateways(vpc_id)
+      args = %W(
+        ec2 describe-internet-gateways
+        --filters Name=attachment.vpc-id,Values=#{vpc_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_internet_gateway(ig_name='curated-installed-ig')
+      tag = "ResourceType=internet-gateway,Tags=[{Key=Name,Value=\"#{ig_name}\"}]"
+      args = %W(
+        ec2 create-internet-gateway
+        --tag-specifications #{tag}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def attach_internet_gateway(vpc_id, ig_id)
+      args = %W(
+        ec2 attach-internet-gateway
+        --vpc-id #{vpc_id}
+        --internet-gateway-id #{ig_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_internet_gateway(ig_id)
+      args = %W(ec2 delete-internet-gateway --internet-gateway-id #{ig_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
