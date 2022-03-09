@@ -75,6 +75,56 @@ module Aws
       return stdout
     end
 
+    def describe_subnets(vpc_id)
+      args = %W(ec2 describe-subnets --filters Name=vpc-id,Values=#{vpc_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_subnet(vpc_id, type, zone_index)
+      public_cidr_blocks =[
+        '192.168.32.0/19',
+        '192.168.0.0/19',
+        '192.168.64.0/19'
+      ]
+      private_cidr_blocks = [
+        '192.168.128.0/19',
+        '192.168.96.0/19',
+        '192.168.160.0/19'
+      ]
+      cidr_block = public_cidr_blocks[zone_index] if type == 'public'
+      cidr_block = private_cidr_blocks[zone_index] if type == 'private'
+
+      availability_zones = _get_availability_zones
+      # if there is an error
+      return availability_zones unless availability_zones.kind_of?(Array)
+
+      zone = availability_zones[zone_index]
+      tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=curated-installer-vpc/subnet_#{type}_#{zone}}]"
+      args = %W(
+        ec2 create-subnet
+        --cidr-block #{cidr_block}
+        --availability-zone #{zone}
+        --vpc-id #{vpc_id}
+        --tag-specifications #{tag_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def _get_availability_zones
+      args = %W(
+        ec2 describe-availability-zones
+        --region #{@region} --query AvailabilityZones[*].ZoneName
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      return JSON.parse(stdout)
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
