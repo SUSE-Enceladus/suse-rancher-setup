@@ -125,6 +125,13 @@ module Aws
       return JSON.parse(stdout)
     end
 
+    def delete_subnet(subnet_id)
+      args = %W(ec2 delete-subnet --subnet-id #{subnet_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
