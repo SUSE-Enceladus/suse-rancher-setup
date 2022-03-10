@@ -267,6 +267,32 @@ module Aws
       return stdout
     end
 
+    def describe_security_group(vpc_id)
+      args = %W(ec2 describe-security-group --vpc-id #{vpc_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_security_group(group_name, vpc_id, tag_value)
+      args = %W(
+        ec2 create-security-group
+        --group-name #{group_name}
+        --vpc-id #{vpc_id}
+        --description #{tag_value}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_security_group(group_id)
+      args = %W(ec2 delete-security_group --group-id #{group_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
