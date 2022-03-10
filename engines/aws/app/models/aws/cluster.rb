@@ -22,6 +22,9 @@ module Aws
 
       # create security group
       sg = Aws::SecurityGroup.create(vpc_id: vpc_id)
+      # create role
+      role = Aws::Role.create(role_type: 'cluster')
+      self.id = @response['Cluster']['Name']
     end
 
     def aws_delete_cluster

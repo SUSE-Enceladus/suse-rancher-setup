@@ -293,6 +293,42 @@ module Aws
       return stdout
     end
 
+    def create_role(role_name, role_type)
+      document = "cluster-role-trust-policy.json" if role_type == 'cluster'
+      document = "node-role-trust-policy.json" if role_type == 'nodegroup'
+      assume_policy = "file://#{document}"
+
+      args = %W(
+        iam create-role
+        --role-name #{role_name}
+        --assume-role-policy-document #{assume_policy}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def attach_role_policy(role_name, policy)
+      args = %W(
+        iam attach-role-policy
+        --role-name #{role_name}
+        --policy-arn arn:aws:iam::aws:policy/#{policy}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_cluster(cluster_name)
+      args = %W(
+        eks delete-cluster
+        --name #{role_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
