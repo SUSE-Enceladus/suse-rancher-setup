@@ -25,20 +25,30 @@ module Aws
       # if there is an error, return the error
       return availability_zones unless availability_zones.kind_of?(Array)
 
-      # create subnets
+      public_route_table = Aws::RouteTable.create(
+        vpc_id: self.id,
+        tag: "curated-installer/public-route-table"
+      )
+      # create subnets and private route tables
       availability_zones.each_with_index do |zone, index|
-        Aws::Subnet.create(
+        public_subnet = Aws::Subnet.create(
           vpc_id: self.id,
           subnet_type: 'public',
           index: index,
           zone: zone
         )
-        Aws::Subnet.create(
+        private_subnet = Aws::Subnet.create(
           vpc_id: self.id,
           subnet_type: 'private',
           index: index,
           zone: zone
         )
+        private_route_table = Aws::RouteTable.create(
+          vpc_id: self.id,
+          tag: "curated-installer/private-route-table-#{zone}"
+        )
+        @cli.associate_route_table(private_subnet.id, private_route_table.id)
+        @cli.associate_route_table(public_subnet.id, public_route_table.id)
       end
       @ig_gw = Aws::InternetGateway.create(vpc_id: self.id)
       raw_describe_subnets_response = @cli.describe_subnets(self.id)

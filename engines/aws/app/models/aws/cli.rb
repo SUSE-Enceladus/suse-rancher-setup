@@ -218,6 +218,44 @@ module Aws
       return stdout
     end
 
+    def describe_route_tables(vpc_id)
+      filter = "Name=vpc-id,Values=#{vpc_id}"
+      args = %W(ec2 describe-route-tables --filters #{filter})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_route_table(vpc_id, tag)
+      tag = "ResourceType=route-table, Tags=[{Key=Name,Value=#{tag}}]"
+      args = %W(
+        ec2 create-route-table
+        --vpc-id #{vpc_id}
+        --tag-specifications #{tag}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def associate_route_table(subnet_id, route_table_id)
+      args = %W(
+        ec2 associate-route-table
+        --subnet-id #{subnet_id}
+        --route-table-id #{route_table_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_route_table(route_table_id)
+      args = %W(ec2 delete-route-table --route-table-id #{route_table_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
