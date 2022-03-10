@@ -19,7 +19,7 @@ module CuratedCloudInstaller
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.engines = [ 'ShirtSize', 'Aws' ]
+    config.engines = [ 'ShirtSize', 'Aws', 'RancherOnEks']
     config.menu_entries = [
       { caption: 'Welcome', icon: 'home', target: '/'}
     ]

@@ -61,6 +61,13 @@ module Aws
       return stdout
     end
 
+    def describe_vpc(vpc_id)
+      args = %W(ec2 describe-vpcs --vpc-ids #{vpc_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def delete_vpc(vpc_id)
       args = %W(ec2 delete-vpc --vpc-id #{vpc_id})
       stdout, stderr = execute(*args)
