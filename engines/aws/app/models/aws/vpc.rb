@@ -58,7 +58,7 @@ module Aws
       subnets['Subnets'].each do |subnet|
         subnet_id = subnet['SubnetId'] if subnet['CidrBlock'] == '192.168.0.0/19'
       end
-      # @nat_gw = Aws::NatGateway.create(subnet_id: subnet_id)
+      @nat_gw = Aws::NatGateway.create(subnet_id: subnet_id)
     end
 
     def aws_delete_vpc

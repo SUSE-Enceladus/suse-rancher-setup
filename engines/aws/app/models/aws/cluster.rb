@@ -24,7 +24,22 @@ module Aws
       sg = Aws::SecurityGroup.create(vpc_id: vpc_id)
       # create role
       role = Aws::Role.create(role_type: 'cluster')
-      self.id = @response['Cluster']['Name']
+      raw_response = @cli.describe_role("curated-installer-cluster-role")
+      response = JSON.parse(raw_response)
+      role_arn = response['Role']['Arn']
+      # get subnets ids
+      raw_describe_subnets_response = @cli.describe_subnets(vpc_id)
+      subnets = JSON.parse(raw_describe_subnets_response)
+      subnets_ids = []
+      subnets['Subnets'].each do |subnet|
+        subnets_ids.append(subnet['SubnetId'])
+      end
+
+      self.framework_raw_response = @cli.create_cluster(
+        "curated-installer-cluster", role_arn, subnets_ids.join(","), sg.id
+      )
+      @response = JSON.parse(self.framework_raw_response)
+      self.id = @response['cluster']['name']
     end
 
     def aws_delete_cluster

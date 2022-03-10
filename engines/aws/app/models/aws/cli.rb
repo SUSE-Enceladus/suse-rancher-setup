@@ -293,6 +293,13 @@ module Aws
       return stdout
     end
 
+    def describe_role(role_name)
+      args = %W(iam get-role --role-name #{role_name})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def create_role(role_name, role_type)
       document = "cluster-role-trust-policy.json" if role_type == 'cluster'
       document = "node-role-trust-policy.json" if role_type == 'nodegroup'
@@ -313,6 +320,19 @@ module Aws
         iam attach-role-policy
         --role-name #{role_name}
         --policy-arn arn:aws:iam::aws:policy/#{policy}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_cluster(cluster_name, role_arn, subnets_ids, sg_id)
+      args = %W(
+        eks create-cluster
+        --name #{cluster_name}
+        --kubernetes-version 1.21
+        --role-arn #{role_arn}
+        --resources-vpc-config subnetIds=#{subnets_ids},securityGroupIds=#{sg_id}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
