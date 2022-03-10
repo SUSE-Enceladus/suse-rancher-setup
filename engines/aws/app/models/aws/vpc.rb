@@ -41,6 +41,13 @@ module Aws
         )
       end
       @ig_gw = Aws::InternetGateway.create(vpc_id: self.id)
+      raw_describe_subnets_response = @cli.describe_subnets(self.id)
+      subnets = JSON.parse(raw_describe_subnets_response)
+      subnet_id = ''
+      subnets['Subnets'].each do |subnet|
+        subnet_id = subnet['SubnetId'] if subnet['CidrBlock'] == '192.168.0.0/19'
+      end
+      @nat_gw = Aws::NatGateway.create(subnet_id: subnet_id)
     end
 
     def aws_delete_vpc

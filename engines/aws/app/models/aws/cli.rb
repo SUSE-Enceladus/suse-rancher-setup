@@ -166,6 +166,58 @@ module Aws
       return stdout
     end
 
+    def describe_allocation_addresses
+      args = %W(ec2 describe-addresses)
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def allocate_address
+      args = %W(ec2 allocate-address --domain vpc)
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def release_address(allocation_address_id)
+      args = %W(ec2 release-address --allocation-id #{allocation_address_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def describe_nat_gateways(vpc_id)
+      args = %W(
+        ec2 describe-nat-gateways
+        --filters Name=vpc-id,Values=#{vpc_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_nat_gateway(subnet_id, nat_name, allocation_id)
+      tag = "ResourceType=natgateway,Tags=[{Key=Name,Value=\"#{nat_name}\"}]"
+      args = %W(
+        ec2 create-nat-gateway
+        --subnet-id #{subnet_id}
+        --connectivity-type public
+        --tag-specifications #{tag}
+        --allocation-id #{allocation_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_nat_gateway(natgw_id)
+      args = %W(ec2 delete-nat-gateway --nat-gateway-id #{natgw_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
