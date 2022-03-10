@@ -47,6 +47,7 @@ module Aws
           vpc_id: self.id,
           tag: "curated-installer/private-route-table-#{zone}"
         )
+        @cli.modify_subnet_attribute(public_subnet.id)
         @cli.associate_route_table(private_subnet.id, private_route_table.id)
         @cli.associate_route_table(public_subnet.id, public_route_table.id)
       end
@@ -57,7 +58,7 @@ module Aws
       subnets['Subnets'].each do |subnet|
         subnet_id = subnet['SubnetId'] if subnet['CidrBlock'] == '192.168.0.0/19'
       end
-      @nat_gw = Aws::NatGateway.create(subnet_id: subnet_id)
+      # @nat_gw = Aws::NatGateway.create(subnet_id: subnet_id)
     end
 
     def aws_delete_vpc

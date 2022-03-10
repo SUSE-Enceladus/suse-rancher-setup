@@ -120,6 +120,17 @@ module Aws
       return JSON.parse(stdout)
     end
 
+    def modify_subnet_attribute(subnet_id)
+      args = %W(
+        ec2 modify-subnet-attribute
+        --subnet-id #{subnet_id}
+        --map-public-ip-on-launch
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def delete_subnet(subnet_id)
       args = %W(ec2 delete-subnet --subnet-id #{subnet_id})
       stdout, stderr = execute(*args)
