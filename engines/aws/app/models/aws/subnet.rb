@@ -5,7 +5,7 @@ module Aws
     before_create :aws_create_subnet
     before_destroy :aws_delete_subnet
 
-    attr_accessor :vpc_id, :subnet_type, :zone_index
+    attr_accessor :vpc_id, :subnet_type, :index, :zone
 
     def refresh
       @cli ||= Aws::Cli.load
@@ -13,19 +13,16 @@ module Aws
       @response = JSON.parse(self.framework_raw_response)
     end
 
-    def get_availability_zones
-      @cli.get_availability_zones
-    end
-
     private
 
     def aws_create_subnet
+
       self.engine = 'Aws'
 
       @cli ||= Aws::Cli.load
 
       self.framework_raw_response = @cli.create_subnet(
-        vpc_id, subnet_type, zone_index
+        vpc_id, subnet_type, index, zone
       )
       @response = JSON.parse(self.framework_raw_response)
       self.id = @response['Subnet']['SubnetId']

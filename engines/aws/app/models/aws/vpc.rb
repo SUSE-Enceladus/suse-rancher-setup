@@ -20,6 +20,26 @@ module Aws
       self.framework_raw_response = @cli.create_vpc
       @response = JSON.parse(self.framework_raw_response)
       self.id = @response['Vpc']['VpcId']
+
+      availability_zones = @cli.get_availability_zones
+      # if there is an error, return the error
+      return availability_zones unless availability_zones.kind_of?(Array)
+
+      # create subnets
+      availability_zones.each_with_index do |zone, index|
+        Aws::Subnet.create(
+          vpc_id: self.id,
+          subnet_type: 'public',
+          index: index,
+          zone: zone
+        )
+        Aws::Subnet.create(
+          vpc_id: self.id,
+          subnet_type: 'private',
+          index: index,
+          zone: zone
+        )
+      end
     end
 
     def aws_delete_vpc

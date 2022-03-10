@@ -82,7 +82,7 @@ module Aws
       return stdout
     end
 
-    def create_subnet(vpc_id, type, zone_index)
+    def create_subnet(vpc_id, type, index, zone)
       public_cidr_blocks =[
         '192.168.32.0/19',
         '192.168.0.0/19',
@@ -93,14 +93,9 @@ module Aws
         '192.168.96.0/19',
         '192.168.160.0/19'
       ]
-      cidr_block = public_cidr_blocks[zone_index] if type == 'public'
-      cidr_block = private_cidr_blocks[zone_index] if type == 'private'
+      cidr_block = public_cidr_blocks[index] if type == 'public'
+      cidr_block = private_cidr_blocks[index] if type == 'private'
 
-      availability_zones = _get_availability_zones
-      # if there is an error
-      return availability_zones unless availability_zones.kind_of?(Array)
-
-      zone = availability_zones[zone_index]
       tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=curated-installer-vpc/subnet_#{type}_#{zone}}]"
       args = %W(
         ec2 create-subnet
@@ -114,7 +109,7 @@ module Aws
       return stdout
     end
 
-    def _get_availability_zones
+    def get_availability_zones
       args = %W(
         ec2 describe-availability-zones
         --region #{@region} --query AvailabilityZones[*].ZoneName
