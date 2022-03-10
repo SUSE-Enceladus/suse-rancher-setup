@@ -40,6 +40,7 @@ module Aws
           zone: zone
         )
       end
+      @ig_gw = Aws::InternetGateway.create(vpc_id: self.id)
     end
 
     def aws_delete_vpc
