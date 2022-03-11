@@ -201,7 +201,7 @@ module Aws
     def describe_nat_gateways(vpc_id)
       args = %W(
         ec2 describe-nat-gateways
-        --filters Name=vpc-id,Values=#{vpc_id}
+        --filter Name=vpc-id,Values=#{vpc_id}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
@@ -254,6 +254,18 @@ module Aws
         ec2 associate-route-table
         --subnet-id #{subnet_id}
         --route-table-id #{route_table_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_route(route_table_id, gw_id)
+      args = %W(
+        ec2 create-route
+        --route-table-id #{route_table_id}
+        --gateway-id #{gw_id}
+        --destination-cidr-block 0.0.0.0/0
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
@@ -326,6 +338,16 @@ module Aws
       return stdout
     end
 
+    def describe_cluster(cluster_name)
+      args = %W(
+        eks describe-cluster
+        --name #{cluster_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def create_cluster(cluster_name, role_arn, subnets_ids, sg_id)
       args = %W(
         eks create-cluster
@@ -343,6 +365,48 @@ module Aws
       args = %W(
         eks delete-cluster
         --name #{role_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def describe_node_group(node_group_name)
+      args = %W(
+        eks describe-nodegroup
+        --nodegroup-name #{node_group_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_node_group(
+      cluster_name, node_group_name, role_arn, public_subnets_ids
+    )
+      args = %W(
+        eks create-nodegroup
+        --cluster-name #{cluster_name}
+        --nodegroup-name #{node_group_name}
+        --scaling-config minSize=2,maxSize=2,desiredSize=2
+        --subnets #{public_subnets_ids}
+        --instance-types t3.medium
+        --ami-type AL2_x86_64
+        --node-role #{role_arn}
+        --labels role=curated-installer-general-worker
+        --capacity-type ON_DEMAND
+      )
+      # TODO: we need to collect ssh key name for the user to have ssh access
+      # --remoteaccess ec2SshKey=ssh_key_name,sourceSecurityGroup=sg_id
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_node_group(node_group_name)
+      args = %W(
+        eks delete-nodegroup
+        --nodergoup-name #{node_group_name}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

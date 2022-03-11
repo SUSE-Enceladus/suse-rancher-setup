@@ -21,10 +21,17 @@ module Aws
       @cli ||= Aws::Cli.load
 
       if role_type == 'cluster'
-        role_name = "curated-installer-cluster-role" # if role_type == 'cluster'
+        role_name = "curated-installer-cluster-role"
         self.framework_raw_response = @cli.create_role(role_name, role_type)
         @cli.attach_role_policy(role_name, "AmazonEKSClusterPolicy")
         @cli.attach_role_policy(role_name, "AmazonEKSVPCResourceController")
+      elsif role_type == 'nodegroup'
+        role_name = "curated-installer-nodegroup-role"
+        self.framework_raw_response = @cli.create_role(role_name, role_type)
+        @cli.attach_role_policy(role_name, "AmazonSSMManagedInstanceCore")
+        @cli.attach_role_policy(role_name, "AmazonEKS_CNI_Policy")
+        @cli.attach_role_policy(role_name, "AmazonEC2ContainerRegistryReadOnly")
+        @cli.attach_role_policy(role_name, "AmazonEKSWorkerNodePolicy")
       end
       @response = JSON.parse(self.framework_raw_response)
       self.id = @response['Role']['RoleId']

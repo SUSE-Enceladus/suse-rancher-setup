@@ -9,6 +9,10 @@ module RancherOnEks
         rank: 2,
         action: 'Create a Cluster'
       )
+      Step.create!(
+        rank: 3,
+        action: 'Create a Node Group'
+      )
     end
 
     def step(rank)
@@ -24,7 +28,10 @@ module RancherOnEks
         @vpc = Aws::Vpc.create
       end
       step(2) do
-        Aws::Cluster.create(vpc_id: @vpc.id)
+        @cluster = Aws::Cluster.create(vpc_id: @vpc.id)
+      end
+      step(3) do
+        Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
       end
     end
   end
