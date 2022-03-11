@@ -29,6 +29,7 @@ module Aws
         vpc_id: self.id,
         tag: "curated-installer/public-route-table"
       )
+      private_route_table_ids = []
       # create subnets and private route tables
       availability_zones.each_with_index do |zone, index|
         public_subnet = Aws::Subnet.create(
@@ -50,8 +51,9 @@ module Aws
         @cli.modify_subnet_attribute(public_subnet.id)
         @cli.associate_route_table(private_subnet.id, private_route_table.id)
         @cli.associate_route_table(public_subnet.id, public_route_table.id)
+        private_route_table_ids << private_route_table.id
       end
-      @ig_gw = Aws::InternetGateway.create(vpc_id: self.id)
+      @igw = Aws::InternetGateway.create(vpc_id: self.id)
       raw_describe_subnets_response = @cli.describe_subnets(self.id)
       subnets = JSON.parse(raw_describe_subnets_response)
       subnet_id = ''
@@ -59,6 +61,20 @@ module Aws
         subnet_id = subnet['SubnetId'] if subnet['CidrBlock'] == '192.168.0.0/19'
       end
       @nat_gw = Aws::NatGateway.create(subnet_id: subnet_id)
+      status = ''
+      while status != 'available'
+        sleep(60) # NAT gateway is not active yet, wait 60 seconds
+        puts "waiting (60 seconds) for NAT gateway to be available"
+        describe_nat_response = @cli.describe_nat_gateways(self.id)
+        describe_nat_response = JSON.parse(describe_nat_response)
+        describe_nat_response['NatGateways'].each do |nat|
+          status = nat['State']
+        end
+      end
+      private_route_table_ids.each do |private_route_table_id|
+        @cli.create_route(private_route_table_id, @nat_gw.id)
+      end
+      @cli.create_route(public_route_table.id, @igw.id)
     end
 
     def aws_delete_vpc
