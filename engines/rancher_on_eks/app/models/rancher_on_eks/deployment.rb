@@ -13,6 +13,10 @@ module RancherOnEks
         rank: 3,
         action: 'Create a Node Group'
       )
+      Step.create!(
+        rank: 4,
+        action: 'Deploy Rancher'
+      )
     end
 
     def step(rank)
@@ -33,6 +37,10 @@ module RancherOnEks
       step(3) do
         Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
       end
+      step(4) do
+        Helm::Deployment.create
+      end
+
     end
   end
 end
