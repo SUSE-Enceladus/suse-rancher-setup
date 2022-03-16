@@ -5,6 +5,8 @@
     %title CuratedCloudInstaller
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "ie=edge", "http-equiv" => "X-UA-Compatible"}/
+    - if @refresh_timer
+      %meta{"http-equiv" => "refresh", :content => @refresh_timer}/
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag "application"

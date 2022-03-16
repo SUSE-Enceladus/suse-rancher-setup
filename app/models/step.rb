@@ -2,7 +2,11 @@ class Step < ApplicationRecord
   belongs_to :resource, optional: true
 
   def self.deployable?
-    Step.where(completed_at: nil).count > 0
+    Step.count > 0 && Step.where(started_at: nil).count == Step.count
+  end
+
+  def self.all_complete?
+    Step.count > 0 && Step.where(completed_at: nil).count == 0
   end
 
   def start!
