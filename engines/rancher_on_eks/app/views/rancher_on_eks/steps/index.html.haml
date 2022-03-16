@@ -3,11 +3,11 @@
 %p
   %strong= t('engines.rancher_on_eks.steps.form_caption')
 - @steps.each do |step|
-  %p
+  %p.icon-container
     - if step.complete?
       %i.eos-icons-outlined check_circle
     - elsif step.started?
-      %i.eos-icons-outlined play_circle
+      = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
     - else
       %i.eos-icons-outlined lens
     = step.rank
