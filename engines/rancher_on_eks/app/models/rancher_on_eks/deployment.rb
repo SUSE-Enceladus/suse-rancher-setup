@@ -38,7 +38,7 @@ module RancherOnEks
         Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
       end
       step(4) do
-        Helm::Deployment.create # (vpc_id: @vpc.id, cluster_name: @cluster.id)
+        Helm::Deployment.create
       end
 
     end

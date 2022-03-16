@@ -12,19 +12,14 @@ module Helm
       )
     end
 
+    def self.load
+      new
+    end
     # def describe_deployment(node_group_name)
     #   # TODO
     # end
 
-    def create_deployment(node_group_name)
-      repo_url = "https://kubernetes.github.io/ingress-nginx"
-      repo_name = "ingress-nginx"
-      _add_repo(repo_name, repo_url)
-      _install_ingress(repo_name)
-      _get_load_balancer_ip(repo_name)
-    end
-
-    def _add_repo(repo_name, repo_url)
+    def add_repo(repo_name, repo_url)
       args = %W(
         repo add #{repo_name} #{repo_url}
       )
@@ -37,7 +32,7 @@ module Helm
       return stdout
     end
 
-    def _install_ingress(name_space)
+    def install_ingress(name_space)
       args = %W(
         upgrade --install
         ingress-nginx ingress-nginx/ingress-nginx
@@ -51,10 +46,27 @@ module Helm
       return stdout
     end
 
-    def _get_load_balance_ip(name_space)
+    def install_cert_manager
       args = %W(
-        kubectl get service ingress-nginx-controller
-        --namespace #{name_space} --output json
+        install cert-manager jetstack/cert-manager
+        --namespace cert-manager
+        --create-namespace
+      )
+      # TODO: check if version is necessary
+      # it works fine without
+      # Rancher docs https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager
+      # --version v1.5.1
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_deployment(host_name) # rancher.aws.bear454.com (name_space, host_name) #{name_space} #{host_name}
+      args = %W(
+        install rancher rancher-stable/rancher
+        --namespace cattle-system
+        --set hostname=#{host_name}
+        --set replicas=3
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

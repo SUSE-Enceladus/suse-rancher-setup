@@ -371,10 +371,21 @@ module Aws
       return stdout
     end
 
-    def describe_node_group(node_group_name)
+    def update_kube_config(cluster_name)
+      args = %W(
+        eks update-kubeconfig
+        --name #{cluster_name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def describe_node_group(node_group_name, cluster_name)
       args = %W(
         eks describe-nodegroup
         --nodegroup-name #{node_group_name}
+        --cluster-name #{cluster_name}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
@@ -408,6 +419,52 @@ module Aws
         eks delete-nodegroup
         --nodergoup-name #{node_group_name}
       )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def get_hosted_zones(dns_name)
+      args = %W(route53 list-hosted-zones-by-name --dns-name #{dns_name})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def create_dns_record(hosted_zone_id, zone_name, lb_ip)
+      json = {
+        "Comment": "Testing creating a record set",
+        "Changes": [
+          {
+            "Action": "UPSERT",
+            "ResourceRecordSet": {
+              "Name": "#{zone_name}",
+              "Type": "CNAME",
+              "TTL": 120,
+              "ResourceRecords": [
+                {
+                  "Value": "#{lb_ip}"
+                }
+              ]
+            }
+          }
+        ]
+      }
+      File.open("dns_record.json", "w") do |f|
+        f.write(json.to_json)
+      end
+      args = %W(
+        route53 change-resource-record-sets
+        --hosted-zone-id #{hosted_zone_id}
+        --change-batch file://dns_record.json
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def route53_get_change(id)
+      args = %W(route53  get-change --id #{id})
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
