@@ -5,7 +5,7 @@ module Aws
   class Cli
     include ActiveModel::Model
 
-    attr_accessor(:credential, :region)
+    attr_accessor(:credential, :region, :tag_scope)
 
     def initialize(*args)
       super
@@ -14,7 +14,8 @@ module Aws
     def self.load
       new(
         credential: Credential.load(),
-        region: Region.load().value
+        region: Region.load().value,
+        tag_scope: KeyValue.get('tag_scope', 'curated-cloud-installer')
       )
     end
 
@@ -49,8 +50,8 @@ module Aws
       end.sort!
     end
 
-    def create_vpc(cidr_block='192.168.0.0/16', vpc_name='curated-installer-vpc')
-      tag = "ResourceType=vpc,Tags=[{Key=Name,Value=\"#{vpc_name}\"}]"
+    def create_vpc(cidr_block='192.168.0.0/16', name='vpc')
+      tag = "ResourceType=vpc,Tags=[{Key=Name,Value=\"#{self.tag_scope}/#{name}\"}]"
       args = %W(
         ec2 create-vpc
         --cidr-block #{cidr_block}
@@ -96,7 +97,7 @@ module Aws
       cidr_block = public_cidr_blocks[index] if type == 'public'
       cidr_block = private_cidr_blocks[index] if type == 'private'
 
-      tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=curated-installer-vpc/subnet_#{type}_#{zone}}]"
+      tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=#{self.tag_scope}/subnet_#{type}_#{zone}}]"
       args = %W(
         ec2 create-subnet
         --cidr-block #{cidr_block}
@@ -148,8 +149,8 @@ module Aws
       return stdout
     end
 
-    def create_internet_gateway(ig_name='curated-installed-ig')
-      tag = "ResourceType=internet-gateway,Tags=[{Key=Name,Value=\"#{ig_name}\"}]"
+    def create_internet_gateway(name='internet-gateway')
+      tag = "ResourceType=internet-gateway,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
       args = %W(
         ec2 create-internet-gateway
         --tag-specifications #{tag}
@@ -208,8 +209,8 @@ module Aws
       return stdout
     end
 
-    def create_nat_gateway(subnet_id, nat_name, allocation_id)
-      tag = "ResourceType=natgateway,Tags=[{Key=Name,Value=\"#{nat_name}\"}]"
+    def create_nat_gateway(subnet_id, allocation_id, name='nat-gateway')
+      tag = "ResourceType=natgateway,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
       args = %W(
         ec2 create-nat-gateway
         --subnet-id #{subnet_id}
@@ -237,8 +238,8 @@ module Aws
       return stdout
     end
 
-    def create_route_table(vpc_id, tag)
-      tag = "ResourceType=route-table, Tags=[{Key=Name,Value=#{tag}}]"
+    def create_route_table(vpc_id, name='public-route-table')
+      tag = "ResourceType=route-table,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
       args = %W(
         ec2 create-route-table
         --vpc-id #{vpc_id}

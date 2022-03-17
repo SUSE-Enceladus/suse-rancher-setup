@@ -5,7 +5,7 @@ module Aws
     before_create :aws_create_route_table
     before_destroy :aws_delete_route_table
 
-    attr_accessor :vpc_id, :tag
+    attr_accessor :vpc_id
 
     def refresh
       @cli ||= Aws::Cli.load
@@ -20,7 +20,7 @@ module Aws
 
       @cli ||= Aws::Cli.load
 
-      self.framework_raw_response = @cli.create_route_table(vpc_id, tag)
+      self.framework_raw_response = @cli.create_route_table(vpc_id)
       @response = JSON.parse(self.framework_raw_response)
       self.id = @response['RouteTable']['RouteTableId']
     end

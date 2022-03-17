@@ -16,7 +16,6 @@ module Aws
     private
 
     def aws_create_subnet
-
       self.engine = 'Aws'
 
       @cli ||= Aws::Cli.load

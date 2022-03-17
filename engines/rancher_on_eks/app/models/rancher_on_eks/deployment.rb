@@ -1,6 +1,8 @@
 module RancherOnEks
   class Deployment
     def create_steps!
+      KeyValue.set('tag_scope', 'ranchers-spouse')
+
       Step.create!(
         rank: 1,
         action: 'Create a VPC'

@@ -23,7 +23,6 @@ module Aws
       allocation_address = Aws::AllocationAddress.create
       self.framework_raw_response = @cli.create_nat_gateway(
         subnet_id,
-        'curated-installer-nat-gw',
         allocation_address.id
       )
       @response = JSON.parse(self.framework_raw_response)
