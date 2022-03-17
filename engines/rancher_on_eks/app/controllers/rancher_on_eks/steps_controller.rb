@@ -6,10 +6,11 @@ module RancherOnEks
       @deployable = Step.deployable?
       @complete = Step.all_complete?
       @refresh_timer = 10 unless (@deployable || @complete)
+      @resources = Resource.all
     end
 
     def deploy
-      RancherOnEks::DeployerJob.perform_later
+      RancherOnEks::DeployerJob.perform_later(wait: 1.second)
       redirect_to rancher_on_eks.steps_path
     end
 

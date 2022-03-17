@@ -2,21 +2,30 @@
 -# body
 %p
   %strong= t('engines.rancher_on_eks.steps.form_caption')
-- @steps.each do |step|
-  %p.icon-container
-    - if step.complete?
-      %i.eos-icons-outlined check_circle
-    - elsif step.started?
-      = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
-    - else
-      %i.eos-icons-outlined lens
-    = step.rank
-    \.
-    = step.action
-    - if step.resource_id.present?
-      [
-      %span.text-monospace= step.resource_id
-      ]
+%div.container
+  %div.row
+    %div.col-6
+      - @steps.each do |step|
+        %p.icon-container
+          - if step.complete?
+            %i.eos-icons-outlined check_circle
+          - elsif step.started?
+            = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
+          - else
+            %i.eos-icons-outlined lens
+          = step.rank
+          \.
+          = step.action
+          - if step.resource_id.present?
+            [
+            %span.text-monospace= step.resource_id
+            ]
+    %div.col-6
+      %ul
+        - @resources.each do |resource|
+          %li
+            = resource.type
+            = resource.id
 - if @deployable
   = form_with url: rancher_on_eks.deploy_steps_path, method: 'post' do |form|
     %div.form-group
