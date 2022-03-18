@@ -83,15 +83,29 @@ module Aws
       return stdout
     end
 
+    def list_availability_zones_supporting_instance_type(instance_type)
+      args = %W(
+        ec2 describe-instance-type-offerings
+        --location-type availability-zone
+        --filters Name=instance-type,Values=#{instance_type}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      zones = JSON.parse(stdout)['InstanceTypeOfferings'].collect do |offering|
+        offering['Location']
+      end.sort!
+    end
+
     def create_subnet(vpc_id, type, index, zone)
       public_cidr_blocks =[
-        '192.168.32.0/19',
         '192.168.0.0/19',
+        '192.168.32.0/19',
         '192.168.64.0/19'
       ]
       private_cidr_blocks = [
-        '192.168.128.0/19',
         '192.168.96.0/19',
+        '192.168.128.0/19',
         '192.168.160.0/19'
       ]
       cidr_block = public_cidr_blocks[index] if type == 'public'
@@ -121,7 +135,7 @@ module Aws
       return JSON.parse(stdout)
     end
 
-    def modify_subnet_attribute(subnet_id)
+    def modify_subnet_to_map_public_ips(subnet_id)
       args = %W(
         ec2 modify-subnet-attribute
         --subnet-id #{subnet_id}
@@ -139,10 +153,10 @@ module Aws
       return stdout
     end
 
-    def describe_internet_gateways(vpc_id)
+    def describe_internet_gateway(igw_id)
       args = %W(
         ec2 describe-internet-gateways
-        --filters Name=attachment.vpc-id,Values=#{vpc_id}
+        --internet-gateway-ids #{igw_id}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
@@ -171,6 +185,17 @@ module Aws
       return stdout
     end
 
+    def detach_internet_gateway(vpc_id, igw_id)
+      args = %W(
+        ec2 detach-internet-gateway
+        --internet-gateway-id #{igw_id}
+        --vpc-id #{vpc_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
     def delete_internet_gateway(ig_id)
       args = %W(ec2 delete-internet-gateway --internet-gateway-id #{ig_id})
       stdout, stderr = execute(*args)
@@ -185,8 +210,9 @@ module Aws
       return stdout
     end
 
-    def allocate_address
-      args = %W(ec2 allocate-address --domain vpc)
+    def allocate_address(name='elastic-ip')
+      tag = "ResourceType=elastic-ip,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
+      args = %W(ec2 allocate-address --domain vpc --tag-specifications #{tag})
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
@@ -199,11 +225,8 @@ module Aws
       return stdout
     end
 
-    def describe_nat_gateways(vpc_id)
-      args = %W(
-        ec2 describe-nat-gateways
-        --filter Name=vpc-id,Values=#{vpc_id}
-      )
+    def describe_nat_gateway(nat_id)
+      args = %W(ec2 describe-nat-gateways --nat-gateway-ids #{nat_id})
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
@@ -230,9 +253,8 @@ module Aws
       return stdout
     end
 
-    def describe_route_tables(vpc_id)
-      filter = "Name=vpc-id,Values=#{vpc_id}"
-      args = %W(ec2 describe-route-tables --filters #{filter})
+    def describe_route_table(route_table_id)
+      args = %W(ec2 describe-route-tables --route-table-ids #{route_table_id})
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
@@ -255,6 +277,16 @@ module Aws
         ec2 associate-route-table
         --subnet-id #{subnet_id}
         --route-table-id #{route_table_id}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def disassociate_route_table(association_id)
+      args = %W(
+        ec2 disassociate-route-table
+        --association-id #{association_id}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

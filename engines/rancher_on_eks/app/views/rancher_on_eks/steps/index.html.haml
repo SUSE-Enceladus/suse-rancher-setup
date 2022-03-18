@@ -10,16 +10,13 @@
           - if step.complete?
             %i.eos-icons-outlined check_circle
           - elsif step.started?
-            = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
+            %i.eos-icons-outlined
+              = image_tag 'rotating_gear.svg', alt: 'working...'
           - else
             %i.eos-icons-outlined lens
           = step.rank
           \.
           = step.action
-          - if step.resource_id.present?
-            [
-            %span.text-monospace= step.resource_id
-            ]
     %div.col-6
       %ul
         - @resources.each do |resource|
