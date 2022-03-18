@@ -1,17 +1,6 @@
-require 'json'
-
 module Aws
-  class Subnet < Resource
-    after_initialize :set_cli
-    before_create :aws_create_subnet
-    before_destroy :aws_delete_subnet
-
+  class Subnet < AwsResource
     attr_accessor :vpc_id, :subnet_type, :index, :zone
-
-    def refresh
-      self.framework_raw_response = @cli.describe_subnets(self.id)
-      @response = JSON.parse(self.framework_raw_response)
-    end
 
     def map_public_ips!
       @cli.modify_subnet_to_map_public_ips(self.id)
@@ -23,22 +12,25 @@ module Aws
 
     private
 
-    def set_cli
-      @cli = Aws::Cli.load
-    end
-
-    def aws_create_subnet
-      self.engine = 'Aws'
-
-      self.framework_raw_response = @cli.create_subnet(
-        vpc_id, subnet_type, index, zone
+    def aws_create
+      response = @cli.create_subnet(
+        @vpc_id, @subnet_type, @index, @zone
       )
-      @response = JSON.parse(self.framework_raw_response)
-      self.id = @response['Subnet']['SubnetId']
+      self.id = JSON.parse(response)['Subnet']['SubnetId']
+      self.refresh()
     end
 
-    def aws_delete_subnet
+    def aws_destroy
       @cli.delete_subnet(self.id)
+      self.wait_until(:not_found)
+    end
+
+    def describe_resource
+      @cli.describe_subnet(self.id)
+    end
+
+    def state_attribute
+      @framework_attributes['Subnets'].first['State']
     end
   end
 end

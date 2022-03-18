@@ -55,18 +55,18 @@ module RancherOnEks
         )
         index += 1
       end
-      Step.create!(
-        rank: 15,
-        action: 'Create a Cluster'
-      )
-      Step.create
-        rank: 16,
-        action: 'Create a Node Group'
-      )
-      Step.create!(
-        rank: 17,
-        action: 'Deploy Rancher'
-      )
+      # Step.create!(
+      #   rank: 15,
+      #   action: 'Create a Cluster'
+      # )
+      # Step.create
+      #   rank: 16,
+      #   action: 'Create a Node Group'
+      # )
+      # Step.create!(
+      #   rank: 17,
+      #   action: 'Deploy Rancher'
+      # )
     end
 
     def step(rank)
@@ -100,6 +100,7 @@ module RancherOnEks
 
       step(1) do
         @vpc = Aws::Vpc.create()
+        @vpc.wait_until(:available)
       end
 
       @public_subnets = []
@@ -115,12 +116,13 @@ module RancherOnEks
           public_subnet.map_public_ips!
           @public_subnets << public_subnet
           index += 1
-          public_subnet
+          public_subnet.wait_until(:available)
         end
       end
       step(5) do
-        @gateway = Aws::InternetGateway.create(vpc_id: @vpc.id)
-        @gateway
+        @gateway = Aws::InternetGateway.create
+        @gateway.attach_to_vpc(@vpc.id)
+        @gateway.wait_until(:available)
       end
       step(6) do
         @public_route_table = Aws::RouteTable.create(vpc_id: @vpc.id)
@@ -128,7 +130,7 @@ module RancherOnEks
         @public_subnets.each do |public_subnet|
           public_subnet.set_route_table!(@public_route_table.id)
         end
-        @public_route_table
+        @public_route_table.wait_until(:available)
       end
 
       @private_subnets = []
@@ -143,16 +145,18 @@ module RancherOnEks
           )
           @private_subnets << private_subnet
           index += 1
-          private_subnet
+          private_subnet.wait_until(:available)
         end
       end
       step(10) do
         @elastic_ip = Aws::AllocationAddress.create()
+        @elastic_ip.wait_until(:available)
       end
       step(11) do
         @nat = Aws::NatGateway.create(
           subnet_id: @public_subnets.first.id,
-          allocation_address_id: @elastic_ip.id
+          allocation_address_id: @elastic_ip.id,
+          internet_gateway_id: @gateway.id
         )
         @nat.wait_until(:available)
       end
@@ -165,18 +169,18 @@ module RancherOnEks
           private_subnet.set_route_table!(private_route_table.id)
           @private_route_tables << private_route_table
           index += 1
-          private_route_table
+          private_route_table.wait_until(:available)
         end
       end
-      step(15) do
-        @cluster = Aws::Cluster.create(vpc_id: @vpc.id)
-      end
-      step(16) do
-        Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
-      end
-      step(17) do
-        Helm::Deployment.create
-      end
+      # step(15) do
+      #   @cluster = Aws::Cluster.create(vpc_id: @vpc.id)
+      # end
+      # step(16) do
+      #   Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
+      # end
+      # step(17) do
+      #   Helm::Deployment.create
+      # end
     end
   end
 end

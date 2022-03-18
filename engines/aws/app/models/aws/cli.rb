@@ -64,9 +64,15 @@ module Aws
 
     def describe_vpc(vpc_id)
       args = %W(ec2 describe-vpcs --vpc-ids #{vpc_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('InvalidVpcID.NotFound')
+          "{\"Vpcs\": [{\"State\": \"not_found\"}]}"
+        end
+      end
     end
 
     def delete_vpc(vpc_id)
@@ -76,11 +82,17 @@ module Aws
       return stdout
     end
 
-    def describe_subnets(vpc_id)
-      args = %W(ec2 describe-subnets --filters Name=vpc-id,Values=#{vpc_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+    def describe_subnet(subnet_id)
+      args = %W(ec2 describe-subnets --subnet-ids #{subnet_id})
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('.NotFound')
+          "{\"Subnets\": [{\"State\": \"not_found\"}]}"
+        end
+      end
     end
 
     def list_availability_zones_supporting_instance_type(instance_type)
@@ -98,19 +110,19 @@ module Aws
     end
 
     def create_subnet(vpc_id, type, index, zone)
-      public_cidr_blocks =[
-        '192.168.0.0/19',
-        '192.168.32.0/19',
-        '192.168.64.0/19'
-      ]
-      private_cidr_blocks = [
-        '192.168.96.0/19',
-        '192.168.128.0/19',
-        '192.168.160.0/19'
-      ]
-      cidr_block = public_cidr_blocks[index] if type == 'public'
-      cidr_block = private_cidr_blocks[index] if type == 'private'
-
+      cidr_blocks = {
+        'public' => [
+          '192.168.0.0/19',
+          '192.168.32.0/19',
+          '192.168.64.0/19'
+        ],
+        'private' => [
+          '192.168.96.0/19',
+          '192.168.128.0/19',
+          '192.168.160.0/19'
+        ]
+      }
+      cidr_block = cidr_blocks[type][index]
       tag_name = "ResourceType=subnet,Tags=[{Key=Name,Value=#{self.tag_scope}/subnet_#{type}_#{zone}}]"
       args = %W(
         ec2 create-subnet
@@ -158,9 +170,15 @@ module Aws
         ec2 describe-internet-gateways
         --internet-gateway-ids #{igw_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('.NotFound')
+          '{"State": "not_found"}'
+        end
+      end
     end
 
     def create_internet_gateway(name='internet-gateway')
@@ -203,11 +221,17 @@ module Aws
       return stdout
     end
 
-    def describe_allocation_addresses
-      args = %W(ec2 describe-addresses)
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+    def describe_allocation_address(eip_id)
+      args = %W(ec2 describe-addresses --allocation-ids #{eip_id})
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('InvalidAllocationID.NotFound')
+          '{"State": "not_found"}'
+        end
+      end
     end
 
     def allocate_address(name='elastic-ip')
@@ -255,9 +279,15 @@ module Aws
 
     def describe_route_table(route_table_id)
       args = %W(ec2 describe-route-tables --route-table-ids #{route_table_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('.NotFound')
+          '{"State": "not_found"}'
+        end
+      end
     end
 
     def create_route_table(vpc_id, name='public-route-table')

@@ -1,34 +1,33 @@
-require 'json'
-
 module Aws
-  class AllocationAddress < Resource
-    after_initialize :set_cli
-    before_create :aws_create_allocation_address
-    before_destroy :aws_delete_allocation_address
-
-    attr_accessor :subnet_id
-
-    def refresh
-      self.framework_raw_response = @cli.describe_allocation_addresses
-      @response = JSON.parse(self.framework_raw_response)
-    end
+  class AllocationAddress < AwsResource
 
     private
 
-    def set_cli
-      @cli = Aws::Cli.load
+    def aws_create
+      response = @cli.allocate_address
+      self.id = JSON.parse(response)['AllocationId']
+      self.refresh()
     end
 
-    def aws_create_allocation_address
-      self.engine = 'Aws'
-
-      self.framework_raw_response = @cli.allocate_address
-      @response = JSON.parse(self.framework_raw_response)
-      self.id = @response['AllocationId']
-    end
-
-    def aws_delete_allocation_address
+    def aws_destroy
       @cli.release_address(self.id)
+      self.wait_until(:not_found)
+    end
+
+    def describe_resource
+      begin
+        @cli.describe_allocation_address(self.id)
+      rescue Cheetah::ExecutionFailed
+        return ''
+      end
+    end
+
+    def state_attribute
+      if @framework_attributes['State']
+        @framework_attributes['State']
+      elsif @framework_attributes['Addresses']&.first
+        'available'
+      end
     end
   end
 end
