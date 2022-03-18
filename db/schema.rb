@@ -21,7 +21,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_07_190704) do
 
   create_table "resources", id: :string, force: :cascade do |t|
     t.string "type"
-    t.string "engine"
     t.text "creation_attributes"
     t.text "framework_raw_response"
     t.datetime "created_at", null: false
