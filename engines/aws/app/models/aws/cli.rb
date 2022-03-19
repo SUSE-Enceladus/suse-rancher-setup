@@ -342,27 +342,37 @@ module Aws
       return stdout
     end
 
-    def describe_security_group(vpc_id)
-      args = %W(ec2 describe-security-group --vpc-id #{vpc_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+    def describe_security_group(group_id)
+      args = %W(ec2 describe-security-groups --group-ids #{group_id})
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('.NotFound')
+          '{"State": "not_found"}'
+        end
+      end
     end
 
-    def create_security_group(group_name, vpc_id, tag_value)
+    def create_security_group(vpc_id)
+      description = "Security group for #{tag_scope}"
       args = %W(
         ec2 create-security-group
-        --group-name #{group_name}
         --vpc-id #{vpc_id}
-        --description #{tag_value}
+        --group-name #{@tag_scope}-sg
+        --description #{description}
       )
+      # --description \"Security Group for #{@tag_scope}\"
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
+    rescue StandardError => e
+      debugger
     end
 
     def delete_security_group(group_id)
-      args = %W(ec2 delete-security_group --group-id #{group_id})
+      args = %W(ec2 delete-security-group --group-id #{group_id})
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
@@ -370,31 +380,66 @@ module Aws
 
     def describe_role(role_name)
       args = %W(iam get-role --role-name #{role_name})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('NoSuchEntity')
+          '{"State": "not_found"}'
+        end
+      end
     end
 
-    def create_role(role_name, role_type)
-      document = "cluster-role-trust-policy.json" if role_type == 'cluster'
-      document = "node-role-trust-policy.json" if role_type == 'nodegroup'
-      assume_policy = "file://#{document}"
-
+    def list_role_attached_policies(name)
       args = %W(
-        iam create-role
-        --role-name #{role_name}
-        --assume-role-policy-document #{assume_policy}
+        iam list-attached-role-policies
+        --role-name #{name}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
     end
 
-    def attach_role_policy(role_name, policy)
+    def create_role(name, target)
+      role_name = "#{@tag_scope}-#{name}"
+      policy_doc = "file://#{File.dirname(__FILE__)}/#{target}-role-trust-policy.json"
+      args = %W(
+        iam create-role
+        --role-name #{role_name}
+        --assume-role-policy-document #{policy_doc}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def delete_role(name)
+      args = %W(
+        iam delete-role
+        --role-name #{name}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def attach_role_policy(name, policy)
       args = %W(
         iam attach-role-policy
-        --role-name #{role_name}
+        --role-name #{name}
         --policy-arn arn:aws:iam::aws:policy/#{policy}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    end
+
+    def detach_role_policy(role_name, policy_arn)
+      args = %W(
+        iam detach-role-policy
+        --role-name #{role_name}
+        --policy-arn #{policy_arn}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
@@ -406,16 +451,23 @@ module Aws
         eks describe-cluster
         --name #{cluster_name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('ResourceNotFoundException')
+          '{"cluster": {"status": "not_found"}}'
+        end
+      end
     end
 
-    def create_cluster(cluster_name, role_arn, subnets_ids, sg_id)
+    def create_cluster(role_arn, subnets_ids, sg_id, k8s_version='1.21')
+      name = "#{@tag_scope}-cluster"
       args = %W(
         eks create-cluster
-        --name #{cluster_name}
-        --kubernetes-version 1.21
+        --name #{name}
+        --kubernetes-version #{k8s_version}
         --role-arn #{role_arn}
         --resources-vpc-config subnetIds=#{subnets_ids},securityGroupIds=#{sg_id}
       )
@@ -424,10 +476,10 @@ module Aws
       return stdout
     end
 
-    def delete_cluster(cluster_name)
+    def delete_cluster(name)
       args = %W(
         eks delete-cluster
-        --name #{role_name}
+        --name #{name}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

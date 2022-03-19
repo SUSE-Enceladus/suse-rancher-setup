@@ -1,45 +1,55 @@
-require 'json'
-
 module Aws
-  class Role < Resource
-    before_create :aws_create_role
-    before_destroy :aws_delete_role
+  class Role < AwsResource
+    attr_accessor :target
 
-    attr_accessor :role_type
+    POLICIES_FOR_TARGET = {
+      'cluster' => [
+        'AmazonEKSClusterPolicy',
+        'AmazonEKSVPCResourceController'
+      ],
+      'nodegroup' => [
+        'AmazonSSMManagedInstanceCore',
+        'AmazonEKS_CNI_Policy',
+        'AmazonEC2ContainerRegistryReadOnly',
+        'AmazonEKSWorkerNodePolicy'
+      ]
+    }
 
-    def refresh
-      @cli ||= Aws::Cli.load
-      self.framework_raw_response = @cli.describe_role(role_id)
-      @response = JSON.parse(self.framework_raw_response)
+    def arn
+      @framework_attributes['Role']['Arn']
     end
 
     private
 
-    def aws_create_role
-      self.engine = 'Aws'
-
-      @cli ||= Aws::Cli.load
-
-      if role_type == 'cluster'
-        role_name = "curated-installer-cluster-role"
-        self.framework_raw_response = @cli.create_role(role_name, role_type)
-        @cli.attach_role_policy(role_name, "AmazonEKSClusterPolicy")
-        @cli.attach_role_policy(role_name, "AmazonEKSVPCResourceController")
-      elsif role_type == 'nodegroup'
-        role_name = "curated-installer-nodegroup-role"
-        self.framework_raw_response = @cli.create_role(role_name, role_type)
-        @cli.attach_role_policy(role_name, "AmazonSSMManagedInstanceCore")
-        @cli.attach_role_policy(role_name, "AmazonEKS_CNI_Policy")
-        @cli.attach_role_policy(role_name, "AmazonEC2ContainerRegistryReadOnly")
-        @cli.attach_role_policy(role_name, "AmazonEKSWorkerNodePolicy")
+    def aws_create
+      name = "#{target}-role"
+      response = @cli.create_role(name, target)
+      self.id = JSON.parse(response)['Role']['RoleName']
+      self.wait_until(:available)
+      POLICIES_FOR_TARGET[@target].each do |policy|
+        @cli.attach_role_policy(self.id, policy)
       end
-      @response = JSON.parse(self.framework_raw_response)
-      self.id = @response['Role']['RoleId']
     end
 
-    def aws_delete_role
-      @cli ||= Aws::Cli.load
-      @cli.delete_internet_gateway(self.id)
+    def aws_destroy
+      policies = JSON.parse(@cli.list_role_attached_policies(self.id))
+      policies['AttachedPolicies'].each do |policy|
+        @cli.detach_role_policy(self.id, policy['PolicyArn'])
+      end
+      @cli.delete_role(self.id)
+      self.wait_until(:not_found)
+    end
+
+    def describe_resource
+      @cli.describe_role(self.id)
+    end
+
+    def state_attribute
+      if @framework_attributes['State']
+        @framework_attributes['State']
+      elsif @framework_attributes['Role']
+        'available'
+      end
     end
   end
 end

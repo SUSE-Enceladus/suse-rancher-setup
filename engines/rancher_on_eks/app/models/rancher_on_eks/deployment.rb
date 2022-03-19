@@ -55,10 +55,18 @@ module RancherOnEks
         )
         index += 1
       end
-      # Step.create!(
-      #   rank: 15,
-      #   action: 'Create a Cluster'
-      # )
+      Step.create!(
+        rank: 15,
+        action: "Create a Security Group for the EKS control plane"
+      )
+      Step.create!(
+        rank: 16,
+        action: "Define an IAM Role for the EKS control plane"
+      )
+      Step.create!(
+        rank: 17,
+        action: 'Create the EKS control plane'
+      )
       # Step.create
       #   rank: 16,
       #   action: 'Create a Node Group'
@@ -172,9 +180,21 @@ module RancherOnEks
           private_route_table.wait_until(:available)
         end
       end
-      # step(15) do
-      #   @cluster = Aws::Cluster.create(vpc_id: @vpc.id)
-      # end
+      step(15) do
+        @security_group = Aws::SecurityGroup.create(vpc_id: @vpc.id)
+      end
+      step(16) do
+        @role = Aws::Role.create(target: 'cluster')
+      end
+      step(17) do
+        subnet_ids = Aws::Subnet.all.pluck(:id)
+        @cluster = Aws::Cluster.create(
+          sg_id: @security_group.id,
+          role_arn: @role.arn,
+          subnet_ids: subnet_ids
+        )
+        @cluster.wait_until(:ACTIVE)
+      end
       # step(16) do
       #   Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
       # end
