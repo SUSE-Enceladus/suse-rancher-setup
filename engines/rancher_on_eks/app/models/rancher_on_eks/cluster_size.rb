@@ -16,5 +16,14 @@ module RancherOnEks
     def instance_type
       TYPES_FOR_SIZE[@size.to_sym]
     end
+
+    def instance_count
+      3
+    end
+
+    def zones_count
+      3
+    end
+
   end
 end

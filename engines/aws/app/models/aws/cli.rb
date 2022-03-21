@@ -486,10 +486,12 @@ module Aws
       return stdout
     end
 
-    def update_kube_config(cluster_name)
+    def update_kube_config(cluster_name, kubeconfig="/tmp/kubeconfig")
+      FileUtils.rm_f(kubeconfig)
       args = %W(
         eks update-kubeconfig
         --name #{cluster_name}
+        --kubeconfig #{kubeconfig}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
@@ -502,37 +504,53 @@ module Aws
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      begin
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      rescue Cheetah::ExecutionFailed => err
+        if err.stderr.include?('ResourceNotFoundException')
+          '{"nodegroup": {"status": "not_found"}}'
+        end
+      end
     end
 
-    def create_node_group(
-      cluster_name, node_group_name, role_arn, public_subnets_ids
-    )
+    def create_node_group(cluster_name, role_arn, public_subnet_ids,
+        instance_type, instance_count
+      )
+      name = "#{cluster_name}-nodegroup"
+      role = "#{cluster_name}-general-worker"
+      scaling_config = [
+        "minSize=#{instance_count - 1}",
+        "maxSize=#{instance_count + 1}",
+        "desiredSize=#{instance_count}"
+      ]
       args = %W(
         eks create-nodegroup
         --cluster-name #{cluster_name}
-        --nodegroup-name #{node_group_name}
-        --scaling-config minSize=2,maxSize=2,desiredSize=2
-        --subnets #{public_subnets_ids}
-        --instance-types t3.medium
+        --nodegroup-name #{name}
+        --scaling-config #{scaling_config.join(',')}
+        --instance-types #{instance_type}
         --ami-type AL2_x86_64
         --node-role #{role_arn}
-        --labels role=curated-installer-general-worker
+        --labels role=#{role}
         --capacity-type ON_DEMAND
+        --subnets
       )
-      # TODO: we need to collect ssh key name for the user to have ssh access
-      # --remoteaccess ec2SshKey=ssh_key_name,sourceSecurityGroup=sg_id
+      args << public_subnet_ids
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
+    rescue Cheetah::ExecutionFailed => err
+      puts err.stderr
+      debugger
     end
 
-    def delete_node_group(node_group_name)
+    def delete_node_group(node_group_name, cluster_name)
       args = %W(
         eks delete-nodegroup
-        --nodergoup-name #{node_group_name}
+        --nodegroup-name #{node_group_name}
+        --cluster-name #{cluster_name}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

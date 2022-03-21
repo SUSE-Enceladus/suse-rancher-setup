@@ -67,10 +67,18 @@ module RancherOnEks
         rank: 17,
         action: 'Create the EKS control plane'
       )
-      # Step.create
-      #   rank: 16,
-      #   action: 'Create a Node Group'
-      # )
+      Step.create!(
+        rank: 18,
+        action: "Define an IAM Role for the EKS worker nodes"
+      )
+      Step.create!(
+        rank: 19,
+        action: 'Create a worker node group in the EKS cluster'
+      )
+      Step.create!(
+        rank: 20,
+        action: 'Fetch the kubeconfig for the EKS cluster'
+      )
       # Step.create!(
       #   rank: 17,
       #   action: 'Deploy Rancher'
@@ -94,16 +102,17 @@ module RancherOnEks
         zones = @cli.list_availability_zones_supporting_instance_type(
           @cluster_size.instance_type
         )
-        if zones.length >= 3
-          @zones = zones.sample(3)
+        if zones.length >= @cluster_size.zones_count
+          @zones = zones.sample(@cluster_size.zones_count)
         else
-          # if we have less than 3 AZ choices, set up multiple subnets in the
-          # same AZ, randomly selected
+          # if we have less than the required AZ choices, set up multiple
+          # subnets in the same AZ, randomly selected
           @zones = zones
-          while @zones.length < 3
+          while @zones.length < @cluster_size.zones_count
             @zones << zones.sample()
           end
         end
+        nil
       end
 
       step(1) do
@@ -181,21 +190,36 @@ module RancherOnEks
         @security_group = Aws::SecurityGroup.create(vpc_id: @vpc.id)
       end
       step(16) do
-        @role = Aws::Role.create(target: 'cluster')
+        @cluster_role = Aws::Role.create(target: 'cluster')
       end
       step(17) do
         subnet_ids =
           @public_subnets.collect(&:id) + @private_subnets.collect(&:id)
         @cluster = Aws::Cluster.create(
           sg_id: @security_group.id,
-          role_arn: @role.arn,
+          role_arn: @cluster_role.arn,
           subnet_ids: subnet_ids
         )
         @cluster.wait_until(:ACTIVE)
       end
-      # step(16) do
-      #   Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
-      # end
+      step(18) do
+        @ng_role = Aws::Role.create(target: 'nodegroup')
+      end
+      step(19) do
+        @public_subnet_ids = @public_subnets.collect(&:id)
+        @nodegroup = Aws::NodeGroup.create(
+          cluster_name: @cluster.id,
+          role_arn: @ng_role.arn,
+          subnet_ids: @public_subnet_ids,
+          instance_type: @cluster_size.instance_type,
+          instance_count: @cluster_size.instance_count
+        )
+        @nodegroup.wait_until(:ACTIVE)
+      end
+      step(20) do
+        @cli.update_kube_config(@cluster.id)
+        nil
+      end
       # step(17) do
       #   Helm::Deployment.create
       # end

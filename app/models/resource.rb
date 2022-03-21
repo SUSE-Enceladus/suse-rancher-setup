@@ -15,5 +15,8 @@ class Resource < ApplicationRecord
     rescue
       nil
     end
+    self.creation_attributes&.each do |key, value|
+      self.instance_variable_set("@#{key}".to_sym, value)
+    end
   end
 end

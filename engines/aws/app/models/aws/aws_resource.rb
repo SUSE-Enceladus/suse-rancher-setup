@@ -17,6 +17,7 @@ module Aws
           sleep(10) if status != desired_status
         rescue
           status = 'nope'
+          sleep(10)
         end
       end
       self
