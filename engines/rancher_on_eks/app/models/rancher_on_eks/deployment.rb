@@ -115,13 +115,11 @@ module RancherOnEks
       index = 0
       (2..4).each do |rank|
         step(rank) do
-          public_subnet = Aws::Subnet.create(
+          public_subnet = Aws::PublicSubnet.create(
             vpc_id: @vpc.id,
-            subnet_type: 'public',
             index: index,
             zone: @zones[index]
           )
-          public_subnet.map_public_ips!
           @public_subnets << public_subnet
           index += 1
           public_subnet.wait_until(:available)
@@ -145,9 +143,8 @@ module RancherOnEks
       index = 0
       (7..9).each do |rank|
         step(rank) do
-          private_subnet = Aws::Subnet.create(
+          private_subnet = Aws::PrivateSubnet.create(
             vpc_id: @vpc.id,
-            subnet_type: 'private',
             index: index,
             zone: @zones[index]
           )
@@ -187,7 +184,8 @@ module RancherOnEks
         @role = Aws::Role.create(target: 'cluster')
       end
       step(17) do
-        subnet_ids = Aws::Subnet.all.pluck(:id)
+        subnet_ids =
+          @public_subnets.collect(&:id) + @private_subnets.collect(&:id)
         @cluster = Aws::Cluster.create(
           sg_id: @security_group.id,
           role_arn: @role.arn,
