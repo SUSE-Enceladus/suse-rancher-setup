@@ -1,0 +1,20 @@
+en:
+  engines:
+    aws:
+      cli:
+        title: "Run an AWS-CLI command"
+        form_caption: "CLI Arguments"
+      credentials:
+        title: "AWS Credentials"
+        using: "Your cluster will be deployed using AWS Access Key '%{key_id}'."
+      region:
+        title: "AWS Region"
+        form_caption: "Select the AWS region to work in:"
+        using: "Your cluster will be deployed in '%{region}'."
+      steps:
+        title: "AWS Actions"
+        form_caption: "Select an action to execute:"
+        labels:
+          version: "Show the version of the CLI"
+          regions: "List available regions (opt-in not required and opted-in)"
+          create_vpc: "Create a new VPC"
