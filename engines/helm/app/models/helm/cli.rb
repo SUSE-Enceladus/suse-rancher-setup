@@ -3,21 +3,38 @@ require 'json'
 
 module Helm
   class Cli
+    attr_accessor :kubeconfig
+
+    def initialize(kubeconfig: '/tmp/kubeconfig')
+      @kubeconfig = kubeconfig
+    end
+
+    def self.load(*args)
+      self.new(*args)
+    end
+
     def execute(*args)
       stdout, stderr = Cheetah.run(
         ['helm', *args],
         stdout: :capture,
         stderr: :capture,
-        env: {}
+        env: {
+          'KUBECONFIG' => @kubeconfig
+        }
       )
     end
 
-    def self.load
-      new
+    def status(name, namespace)
+      args = %W(
+        status #{name}
+        --namespace #{namespace}
+        --show-desc
+        --output json
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
     end
-    # def describe_deployment(node_group_name)
-    #   # TODO
-    # end
 
     def add_repo(repo_name, repo_url)
       args = %W(
@@ -32,50 +49,38 @@ module Helm
       return stdout
     end
 
-    def install_ingress(name_space)
-      args = %W(
-        upgrade --install
-        ingress-nginx ingress-nginx/ingress-nginx
-        --namespace #{name_space}
-        --set controller.service.type=LoadBalancer
-        --version 3.12.0
-        --create-namespace
+    def install_load_balancer(name, chart, namespace, version)
+      self.install(
+        name,
+        chart,
+        namespace,
+        %W(
+          --version #{version}
+          --set controller.service.type=LoadBalancer
+        )
       )
+    end
+
+    def install(release_name, chart, namespace, additional_args=[])
+      args = %W(
+        install #{release_name} #{chart}
+        --namespace #{namespace}
+      )
+      args = args + additional_args
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
     end
 
-    def install_cert_manager
+    def delete_deployment(name, namespace)
       args = %W(
-        install cert-manager jetstack/cert-manager
-        --namespace cert-manager
-        --create-namespace
-      )
-      # TODO: check if version is necessary
-      # it works fine without
-      # Rancher docs https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/#4-install-cert-manager
-      # --version v1.5.1
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
-    end
-
-    def create_deployment(host_name) # rancher.aws.bear454.com (name_space, host_name) #{name_space} #{host_name}
-      args = %W(
-        install rancher rancher-stable/rancher
-        --namespace cattle-system
-        --set hostname=#{host_name}
-        --set replicas=3
+        uninstall #{name}
+        --namespace #{namespace}
+        --wait
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
     end
-
-    # def delete_deployment(deployment_id)
-    #   # TODO
-    # end
-
   end
 end

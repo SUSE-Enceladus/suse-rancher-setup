@@ -564,35 +564,55 @@ module Aws
       return stdout
     end
 
-    def create_dns_record(hosted_zone_id, zone_name, lb_ip)
-      json = {
-        "Comment": "Testing creating a record set",
+    def get_hosted_zone_id(domain)
+      args = %W(route53 list-hosted-zones-by-name --dns-name #{domain})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      JSON.parse(stdout)['HostedZones'].first['Id']
+    end
+
+    def list_dns_records(domain)
+      zone_id = self.get_hosted_zone_id(domain)
+      args = %W(route53 list-resource-record-sets --hosted-zone-id #{zone_id})
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      JSON.parse(stdout)['ResourceRecordSets']
+    end
+
+    def create_dns_record(hosted_zone_id, fqdn, target, record_type)
+      tmp_path = '/tmp/dns_record.json'
+      change_batch = {
+        "Comment": "Update record for Ingress controller",
         "Changes": [
           {
             "Action": "UPSERT",
             "ResourceRecordSet": {
-              "Name": "#{zone_name}",
-              "Type": "CNAME",
-              "TTL": 120,
+              "Name": "#{fqdn}",
+              "Type": "#{record_type}",
+              "TTL": 900,
               "ResourceRecords": [
                 {
-                  "Value": "#{lb_ip}"
+                  "Value": "#{target}"
                 }
               ]
             }
           }
         ]
       }
-      File.open("dns_record.json", "w") do |f|
-        f.write(json.to_json)
+      File.open(tmp_path, 'w') do |f|
+        f.write(change_batch.to_json)
       end
+
       args = %W(
         route53 change-resource-record-sets
         --hosted-zone-id #{hosted_zone_id}
-        --change-batch file://dns_record.json
+        --change-batch file://#{tmp_path}
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
+      FileUtils.rm_f(tmp_path)
       return stdout
     end
 

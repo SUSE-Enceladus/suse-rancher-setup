@@ -79,10 +79,22 @@ module RancherOnEks
         rank: 20,
         action: 'Fetch the kubeconfig for the EKS cluster'
       )
-      # Step.create!(
-      #   rank: 17,
-      #   action: 'Deploy Rancher'
-      # )
+      Step.create!(
+        rank: 21,
+        action: 'Deploy Ingress controller'
+      )
+      Step.create!(
+        rank: 22,
+        action: 'Add DNS entry for Ingress controller'
+      )
+      Step.create!(
+        rank: 23,
+        action: 'Deploy Certificate manager'
+      )
+      Step.create!(
+        rank: 24,
+        action: 'Deploy Rancher'
+      )
     end
 
     def step(rank)
@@ -220,9 +232,27 @@ module RancherOnEks
         @cli.update_kube_config(@cluster.id)
         nil
       end
-      # step(17) do
-      #   Helm::Deployment.create
-      # end
+      step(21) do
+        @ingress = Helm::IngressController.create()
+        @ingress.wait_until(:deployed)
+      end
+      step(22) do
+        @fqdn_record = Aws::DnsRecord.create(
+          fqdn: 'rancher.aws.bear454.com',  ### OMG FIX ME PLEASE
+          target: @ingress.hostname(),
+          record_type: 'CNAME'
+        )
+        # @fqdn_record.wait_until(:available)
+        # wait loop in DnsRecord is broken FIXME
+      end
+      step(23) do
+        @cert_manager = Helm::CertManager.create()
+        @cert_manager.wait_until(:deployed)
+      end
+      step(24) do
+        @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
+        @rancher.wait_until(:deployed)
+      end
     end
   end
 end
