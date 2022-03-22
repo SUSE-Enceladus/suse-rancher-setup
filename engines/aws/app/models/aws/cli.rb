@@ -33,6 +33,16 @@ module Aws
       )
     end
 
+    def get_description(args, find_message, not_found_message)
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
+    rescue Cheetah::ExecutionFailed => err
+      if err.stderr.include?(find_message)
+        not_found_message
+      end
+    end
+
     def version
       args = ['--version']
       stdout, stderr = execute(*args)
@@ -64,15 +74,9 @@ module Aws
 
     def describe_vpc(vpc_id)
       args = %W(ec2 describe-vpcs --vpc-ids #{vpc_id})
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('InvalidVpcID.NotFound')
-          "{\"Vpcs\": [{\"State\": \"not_found\"}]}"
-        end
-      end
+      get_description(
+        args, 'InvalidVpcID.NotFound', "{\"Vpcs\": [{\"State\": \"not_found\"}]}"
+      )
     end
 
     def delete_vpc(vpc_id)
@@ -84,15 +88,7 @@ module Aws
 
     def describe_subnet(subnet_id)
       args = %W(ec2 describe-subnets --subnet-ids #{subnet_id})
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('.NotFound')
-          "{\"Subnets\": [{\"State\": \"not_found\"}]}"
-        end
-      end
+      get_description(args, '.NotFound', "{\"Subnets\": [{\"State\": \"not_found\"}]}")
     end
 
     def list_availability_zones_supporting_instance_type(instance_type)
@@ -170,15 +166,7 @@ module Aws
         ec2 describe-internet-gateways
         --internet-gateway-ids #{igw_id}
       )
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('.NotFound')
-          '{"State": "not_found"}'
-        end
-      end
+      get_description(args, '.NotFound', '{"State": "not_found"}')
     end
 
     def create_internet_gateway(name='internet-gateway')
@@ -223,15 +211,7 @@ module Aws
 
     def describe_allocation_address(eip_id)
       args = %W(ec2 describe-addresses --allocation-ids #{eip_id})
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('InvalidAllocationID.NotFound')
-          '{"State": "not_found"}'
-        end
-      end
+      get_description(args, 'InvalidAllocationID.NotFound', '{"State": "not_found"}')
     end
 
     def allocate_address(name='elastic-ip')
@@ -279,15 +259,7 @@ module Aws
 
     def describe_route_table(route_table_id)
       args = %W(ec2 describe-route-tables --route-table-ids #{route_table_id})
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('.NotFound')
-          '{"State": "not_found"}'
-        end
-      end
+      get_description(args, '.NotFound', '{"State": "not_found"}')
     end
 
     def create_route_table(vpc_id, name='public-route-table')
@@ -344,15 +316,7 @@ module Aws
 
     def describe_security_group(group_id)
       args = %W(ec2 describe-security-groups --group-ids #{group_id})
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('.NotFound')
-          '{"State": "not_found"}'
-        end
-      end
+      get_description(args, '.NotFound', '{"State": "not_found"}')
     end
 
     def create_security_group(vpc_id)
@@ -380,15 +344,7 @@ module Aws
 
     def describe_role(role_name)
       args = %W(iam get-role --role-name #{role_name})
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('NoSuchEntity')
-          '{"State": "not_found"}'
-        end
-      end
+      get_description(args, 'NotSuchEntity', '{"State": "not_found"}')
     end
 
     def list_role_attached_policies(name)
@@ -451,15 +407,7 @@ module Aws
         eks describe-cluster
         --name #{cluster_name}
       )
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('ResourceNotFoundException')
-          '{"cluster": {"status": "not_found"}}'
-        end
-      end
+      get_description(args, 'ResourceNotFoundException', '{"cluster": {"status": "not_found"}}')
     end
 
     def create_cluster(role_arn, subnets_ids, sg_id, k8s_version='1.21')
@@ -504,15 +452,7 @@ module Aws
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      begin
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      rescue Cheetah::ExecutionFailed => err
-        if err.stderr.include?('ResourceNotFoundException')
-          '{"nodegroup": {"status": "not_found"}}'
-        end
-      end
+      get_description(args, 'ResourceNotFoundException', '{"cluster": {"status": "not_found"}}')
     end
 
     def create_node_group(cluster_name, role_arn, public_subnet_ids,
