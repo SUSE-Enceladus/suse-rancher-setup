@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ .alert-section .alert-title {
+   margin-top: 4px;
+ }

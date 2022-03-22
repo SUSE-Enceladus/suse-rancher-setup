@@ -1,0 +1,14 @@
+en:
+  engines:
+    shirt_size:
+      sizes:
+        title: "Size your cluster"
+        form_caption: "What size cluster do you need?"
+        using: "You're building a %{size} cluster."
+        failed: "The cluster size was not saved.
+
+          Please try again."
+        labels:
+          small: "Small - for up to 35 nodes under management"
+          medium: "Medium - for up to 75 nodes under management"
+          large: "Large - for up to 125 nodes under management"

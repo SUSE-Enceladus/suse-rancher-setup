@@ -35,6 +35,7 @@ en:
     next: "Next"
     previous: "Back"
     save: "Save"
+    close: "Close"
   filler: "Temporary content for development"
   greeting:
     content: "_This is Markdown rendered from the translation file._
@@ -55,31 +56,3 @@ en:
       habitasse scelerisque a iaculis sociosqu bibendum commodo. A aenean
       phasellus in convallis senectus quam euismod a interdum at laoreet a
       scelerisque est et in ad neque condimentum."
-  engines:
-    aws:
-      cli:
-        title: "Run an AWS-CLI command"
-        form_caption: "CLI Arguments"
-      credentials:
-        title: "AWS Credentials"
-        using: "Using AWS Access Key:"
-      region:
-        title: "AWS Region"
-        form_caption: "Select the AWS region to work in:"
-        using: "Using AWS region:"
-      steps:
-        title: "AWS Actions"
-        form_caption: "Select an action to execute:"
-        labels:
-          version: "Show the version of the CLI"
-          regions: "List available regions (opt-in not required and opted-in)"
-          create_vpc: "Create a new VPC"
-    shirt_size:
-      sizes:
-        title: "Size your cluster"
-        form_caption: "What size cluster do you need?"
-        using: "You're building a %{size} cluster."
-        labels:
-          small: "Small: 3×m5a.large - for up to 35 nodes under management"
-          medium: "Medium: 3×m5a.xlarge - for up to 75 nodes under management"
-          large: "Large: 3×m5a.2xlarge - for up to 125 nodes under management"
