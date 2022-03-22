@@ -68,4 +68,20 @@ module ApplicationHelper
   def page_header(title)
     render('layouts/page_header', title: title)
   end
+
+  def alerts
+    flash.collect do |context, message|
+      # Skip empty messages
+      next if message.blank?
+      message_sections = message.split("\n")
+      title = message_sections[0]
+      body = if message_sections.length > 1
+        message_sections[1..].join("\n")
+      else
+        ''
+      end
+
+      render "layouts/alerts/#{context}", title: title, body: body
+    end.join.html_safe
+  end
 end

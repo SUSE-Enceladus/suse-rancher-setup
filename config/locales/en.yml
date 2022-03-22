@@ -35,6 +35,7 @@ en:
     next: "Next"
     previous: "Back"
     save: "Save"
+    close: "Close"
   filler: "Temporary content for development"
   greeting:
     content: "_This is Markdown rendered from the translation file._
