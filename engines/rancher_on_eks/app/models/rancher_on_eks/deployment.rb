@@ -1,7 +1,7 @@
 module RancherOnEks
   class Deployment
     def create_steps!
-      KeyValue.set('tag_scope', 'ranchers-spouse')
+      KeyValue.set('tag_scope', "lasso-#{self.random_string()}")
       Step.create!(
         rank: 0,
         action: 'Prep'
@@ -104,6 +104,11 @@ module RancherOnEks
       step.resource = yield if block_given?
       step.save
       step.complete!
+    end
+
+    def random_string
+      # pick a random 4-digit number, return as string
+      rand(1000..9999).to_s
     end
 
     def deploy
