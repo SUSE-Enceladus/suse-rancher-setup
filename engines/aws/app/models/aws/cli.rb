@@ -33,21 +33,25 @@ module Aws
       )
     end
 
-    def get_description(args, find_message, not_found_message)
+    def get_description(args, not_found_exception, not_found_response)
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
       return stdout
     rescue Cheetah::ExecutionFailed => err
-      if err.stderr.include?(find_message)
-        not_found_message
+      if err.stderr.include?(not_found_exception)
+        not_found_response
       end
+    end
+
+    def run_command(args)
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+      return stdout
     end
 
     def version
       args = ['--version']
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def regions
@@ -67,28 +71,24 @@ module Aws
         --cidr-block #{cidr_block}
         --tag-specifications #{tag}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_vpc(vpc_id)
       args = %W(ec2 describe-vpcs --vpc-ids #{vpc_id})
       get_description(
-        args, 'InvalidVpcID.NotFound', "{\"Vpcs\": [{\"State\": \"not_found\"}]}"
+        args, 'InvalidVpcID.NotFound', '{"Vpcs": [{"State": "not_found"}]}'
       )
     end
 
     def delete_vpc(vpc_id)
       args = %W(ec2 delete-vpc --vpc-id #{vpc_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_subnet(subnet_id)
       args = %W(ec2 describe-subnets --subnet-ids #{subnet_id})
-      get_description(args, '.NotFound', "{\"Subnets\": [{\"State\": \"not_found\"}]}")
+      get_description(args, '.NotFound', '{"Subnets": [{"State": "not_found"}]}')
     end
 
     def list_availability_zones_supporting_instance_type(instance_type)
@@ -127,9 +127,7 @@ module Aws
         --vpc-id #{vpc_id}
         --tag-specifications #{tag_name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def get_availability_zones
@@ -149,16 +147,12 @@ module Aws
         --subnet-id #{subnet_id}
         --map-public-ip-on-launch
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def delete_subnet(subnet_id)
       args = %W(ec2 delete-subnet --subnet-id #{subnet_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_internet_gateway(igw_id)
@@ -175,9 +169,7 @@ module Aws
         ec2 create-internet-gateway
         --tag-specifications #{tag}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def attach_internet_gateway(vpc_id, ig_id)
@@ -186,9 +178,7 @@ module Aws
         --vpc-id #{vpc_id}
         --internet-gateway-id #{ig_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def detach_internet_gateway(vpc_id, igw_id)
@@ -197,16 +187,12 @@ module Aws
         --internet-gateway-id #{igw_id}
         --vpc-id #{vpc_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def delete_internet_gateway(ig_id)
       args = %W(ec2 delete-internet-gateway --internet-gateway-id #{ig_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_allocation_address(eip_id)
@@ -217,23 +203,17 @@ module Aws
     def allocate_address(name='elastic-ip')
       tag = "ResourceType=elastic-ip,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
       args = %W(ec2 allocate-address --domain vpc --tag-specifications #{tag})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def release_address(allocation_address_id)
       args = %W(ec2 release-address --allocation-id #{allocation_address_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_nat_gateway(nat_id)
       args = %W(ec2 describe-nat-gateways --nat-gateway-ids #{nat_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def create_nat_gateway(subnet_id, allocation_id, name='nat-gateway')
@@ -245,16 +225,12 @@ module Aws
         --tag-specifications #{tag}
         --allocation-id #{allocation_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def delete_nat_gateway(natgw_id)
       args = %W(ec2 delete-nat-gateway --nat-gateway-id #{natgw_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_route_table(route_table_id)
@@ -269,9 +245,7 @@ module Aws
         --vpc-id #{vpc_id}
         --tag-specifications #{tag}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def associate_route_table(subnet_id, route_table_id)
@@ -280,9 +254,7 @@ module Aws
         --subnet-id #{subnet_id}
         --route-table-id #{route_table_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def disassociate_route_table(association_id)
@@ -290,9 +262,7 @@ module Aws
         ec2 disassociate-route-table
         --association-id #{association_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def create_route(route_table_id, gw_id)
@@ -302,16 +272,12 @@ module Aws
         --gateway-id #{gw_id}
         --destination-cidr-block 0.0.0.0/0
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def delete_route_table(route_table_id)
       args = %W(ec2 delete-route-table --route-table-id #{route_table_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_security_group(group_id)
@@ -328,18 +294,14 @@ module Aws
         --description #{description}
       )
       # --description \"Security Group for #{@tag_scope}\"
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     rescue StandardError => e
       debugger
     end
 
     def delete_security_group(group_id)
       args = %W(ec2 delete-security-group --group-id #{group_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_role(role_name)
@@ -352,9 +314,7 @@ module Aws
         iam list-attached-role-policies
         --role-name #{name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def create_role(name, target)
@@ -365,9 +325,7 @@ module Aws
         --role-name #{role_name}
         --assume-role-policy-document #{policy_doc}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def delete_role(name)
@@ -375,9 +333,7 @@ module Aws
         iam delete-role
         --role-name #{name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def attach_role_policy(name, policy)
@@ -386,9 +342,7 @@ module Aws
         --role-name #{name}
         --policy-arn arn:aws:iam::aws:policy/#{policy}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def detach_role_policy(role_name, policy_arn)
@@ -397,9 +351,7 @@ module Aws
         --role-name #{role_name}
         --policy-arn #{policy_arn}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_cluster(cluster_name)
@@ -419,9 +371,7 @@ module Aws
         --role-arn #{role_arn}
         --resources-vpc-config subnetIds=#{subnets_ids},securityGroupIds=#{sg_id}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def delete_cluster(name)
@@ -429,9 +379,7 @@ module Aws
         eks delete-cluster
         --name #{name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def update_kube_config(cluster_name, kubeconfig="/tmp/kubeconfig")
@@ -441,9 +389,7 @@ module Aws
         --name #{cluster_name}
         --kubeconfig #{kubeconfig}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def describe_node_group(node_group_name, cluster_name)
@@ -478,9 +424,7 @@ module Aws
         --subnets
       )
       args << public_subnet_ids
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     rescue Cheetah::ExecutionFailed => err
       puts err.stderr
       debugger
@@ -492,16 +436,12 @@ module Aws
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def get_hosted_zones(dns_name)
       args = %W(route53 list-hosted-zones-by-name --dns-name #{dns_name})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def get_hosted_zone_id(domain)
@@ -550,17 +490,14 @@ module Aws
         --hosted-zone-id #{hosted_zone_id}
         --change-batch file://#{tmp_path}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
+      output = run_command(args)
       FileUtils.rm_f(tmp_path)
-      return stdout
+      output
     end
 
     def route53_get_change(id)
       args = %W(route53  get-change --id #{id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      run_command(args)
     end
 
     def steps
