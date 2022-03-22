@@ -259,5 +259,12 @@ module RancherOnEks
         @rancher.wait_until(:deployed)
       end
     end
+
+    def rollback
+      Step.all.order(rank: :desc).each do |step|
+        step.resource&.destroy
+        step.destroy
+      end
+    end
   end
 end
