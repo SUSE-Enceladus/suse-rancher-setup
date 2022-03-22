@@ -129,7 +129,7 @@ module RancherOnEks
             @zones << zones.sample()
           end
         end
-        nil
+        @fqdn = RancherOnEks::Fqdn.load()
       end
 
       step(1) do
@@ -243,7 +243,7 @@ module RancherOnEks
       end
       step(22) do
         @fqdn_record = Aws::DnsRecord.create(
-          fqdn: 'rancher.aws.bear454.com',  ### OMG FIX ME PLEASE
+          fqdn: @fqdn.value,
           target: @ingress.hostname(),
           record_type: 'CNAME'
         )

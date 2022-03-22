@@ -1,0 +1,12 @@
+= page_header(t('engines.rancher_on_eks.fqdn.title'))
+-# body
+= form_with(model: @fqdn, url: rancher_on_eks.fqdn_path, method: 'put') do |form|
+  %div.form-group
+    = markdown(t('engines.rancher_on_eks.fqdn.form_caption'))
+    = form.label(:value, "FQDN")
+    = form.text_field(:value, class: 'form-control')
+  %div.form-group
+    = form.submit t('actions.save'), class: 'btn btn-primary'
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()
