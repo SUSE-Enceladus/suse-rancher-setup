@@ -1,6 +1,6 @@
 %li.menu-item
   %div.menu-element
-    %a.main-collapsed-single.js-select-current-parent.js-feature-flag{href: target}= caption
-  %a.menu-title.js-select-current-parent.js-feature-flag{href: target}
+    = link_to(caption, target, class: 'main-collapsed-single js-select-current-parent js-feature-flag')
+  = active_link_to(target, class: 'menu-title js-select-current-parent js-feature-flag', active: :exclusive, class_active: 'selected') do
     %i.eos-icons-outlined= icon
     %span.menu-title-content= caption
