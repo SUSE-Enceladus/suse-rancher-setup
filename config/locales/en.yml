@@ -37,7 +37,6 @@ en:
     save: "Save"
   filler: "Temporary content for development"
   greeting:
-    title: "Rancher's Spouse"
     content: "_This is Markdown rendered from the translation file._
 
 
