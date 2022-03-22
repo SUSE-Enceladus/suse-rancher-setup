@@ -63,11 +63,11 @@ en:
         form_caption: "CLI Arguments"
       credentials:
         title: "AWS Credentials"
-        using: "Using AWS Access Key:"
+        using: "Your cluster will be deployed using AWS Access Key '%{key_id}'."
       region:
         title: "AWS Region"
         form_caption: "Select the AWS region to work in:"
-        using: "Using AWS region:"
+        using: "Your cluster will be deployed in '%{region}'."
       steps:
         title: "AWS Actions"
         form_caption: "Select an action to execute:"
@@ -80,7 +80,10 @@ en:
         title: "Size your cluster"
         form_caption: "What size cluster do you need?"
         using: "You're building a %{size} cluster."
+        failed: "The cluster size was not saved.
+
+          Please try again."
         labels:
-          small: "Small: 3×m5a.large - for up to 35 nodes under management"
-          medium: "Medium: 3×m5a.xlarge - for up to 75 nodes under management"
-          large: "Large: 3×m5a.2xlarge - for up to 125 nodes under management"
+          small: "Small - for up to 35 nodes under management"
+          medium: "Medium - for up to 75 nodes under management"
+          large: "Large - for up to 125 nodes under management"

@@ -7,11 +7,11 @@ module Aws
     def update
       @region = Region.new(region_params)
       if @region.save
-        render :show
+        flash[:success] = t('engines.aws.region.using', region: @region.value)
+        redirect_to(helpers.next_step_path(aws.edit_region_path))
       else
-        redirect_to edit_region_path, flash: {
-          error: @region.errors.full_messages
-        }
+        flash[:warning] = @region.errors.full_messages
+        redirect_to(aws.edit_region_path)
       end
     end
 

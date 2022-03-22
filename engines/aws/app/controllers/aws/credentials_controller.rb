@@ -7,11 +7,14 @@ module Aws
     def update
       @credential = Credential.new(self.credential_params)
       if @credential.save
-        render :show
+        flash[:success] = t(
+          'engines.aws.credentials.using',
+          key_id: @credential.aws_access_key_id
+        )
+        redirect_to(helpers.next_step_path(aws.edit_credential_path))
       else
-        redirect_to aws.edit_credential_path, flash: {
-          error: @credential.errors.full_messages
-        }
+        flash[:warning] = @credential.errors.full_messages
+        redirect_to(aws.edit_credential_path)
       end
     end
 

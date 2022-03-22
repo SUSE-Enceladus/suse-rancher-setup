@@ -7,8 +7,13 @@ module ShirtSize
 
     def update
       @size = self.size_param
-      KeyValue.set(:cluster_size, @size)
-      render :show
+      if KeyValue.set(:cluster_size, @size)
+        flash[:success] = t('engines.shirt_size.sizes.using', size: @size)
+        redirect_to(helpers.next_step_path(shirt_size.edit_size_path))
+      else
+        flash[:warning] = t('engines.shirt_size.sizes.failed')
+        redirect_to(shirt_size.edit_size_path)
+      end
     end
 
     private
