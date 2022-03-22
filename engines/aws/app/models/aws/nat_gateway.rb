@@ -1,52 +1,38 @@
-require 'json'
-
 module Aws
-  class NatGateway < Resource
-    after_initialize :set_cli
-    before_create :aws_create_nat_gateway
-    before_destroy :aws_delete_nat_gateway
-
-    attr_accessor :subnet_id, :allocation_address_id
-
-    def refresh
-      self.framework_raw_response = @cli.describe_nat_gateway(self.id)
-      @response = JSON.parse(self.framework_raw_response)
-    end
-
-    def wait_until(desired_status)
-      status = ''
-      while status != desired_status.to_s
-        logger.info "waiting for NAT gateway to be #{desired_status}..."
-        begin
-          status = JSON.parse(@cli.describe_nat_gateway(self.id))['NatGateways'].first['State']
-          sleep(15) if status != 'available'
-        rescue
-          status = 'nope'
-        end
-      end
-      self
-    end
+  class NatGateway < AwsResource
+    attr_accessor :subnet_id, :allocation_address_id, :internet_gateway_id
 
     private
 
-    def set_cli
-      @cli = Aws::Cli.load
-    end
-
-    def aws_create_nat_gateway
-      self.engine = 'Aws'
-
-      self.framework_raw_response = @cli.create_nat_gateway(
-        self.subnet_id,
-        self.allocation_address_id
+    def aws_create
+      response = JSON.parse(
+        @cli.describe_internet_gateway(@internet_gateway_id)
       )
-      @response = JSON.parse(self.framework_raw_response)
-      self.id = @response['NatGateway']['NatGatewayId']
+      begin
+        response['InternetGateways'].first['Attachments'].first
+      rescue
+        raise 'Internet Gateway must be present and attached to VPC'
+      end
+      response = @cli.create_nat_gateway(
+        @subnet_id,
+        @allocation_address_id
+      )
+      self.id = JSON.parse(response)['NatGateway']['NatGatewayId']
+      self.refresh()
+      # self.wait_until(:available)
     end
 
-    def aws_delete_nat_gateway
+    def aws_destroy
       @cli.delete_nat_gateway(self.id)
       self.wait_until(:deleted)
+    end
+
+    def describe_resource
+      @cli.describe_nat_gateway(self.id)
+    end
+
+    def state_attribute
+      @framework_attributes['NatGateways'].first['State']
     end
   end
 end

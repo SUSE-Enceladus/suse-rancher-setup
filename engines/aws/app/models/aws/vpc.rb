@@ -1,32 +1,26 @@
-require 'json'
-
 module Aws
-  class Vpc < Resource
-    after_initialize :set_cli
-    before_create :aws_create_vpc
-    before_destroy :aws_delete_vpc
-
-    def refresh
-      self.framework_raw_response = @cli.describe_vpc(self.id)
-      @response = JSON.parse(self.framework_raw_response)
-    end
+  class Vpc < AwsResource
 
     private
 
-    def set_cli
-      @cli = Aws::Cli.load
+    def aws_create
+      response = @cli.create_vpc()
+      self.id = JSON.parse(response)['Vpc']['VpcId']
+      self.refresh()
+      # self.wait_until(:available)
     end
 
-    def aws_create_vpc
-      self.engine = 'Aws'
-
-      self.framework_raw_response = @cli.create_vpc
-      @response = JSON.parse(self.framework_raw_response)
-      self.id = @response['Vpc']['VpcId']
-    end
-
-    def aws_delete_vpc
+    def aws_destroy
       @cli.delete_vpc(self.id)
+      self.wait_until(:not_found)
+    end
+
+    def describe_resource
+      @cli.describe_vpc(self.id)
+    end
+
+    def state_attribute
+      @framework_attributes['Vpcs'].first['State']
     end
   end
 end

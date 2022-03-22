@@ -57,14 +57,42 @@ module RancherOnEks
       end
       Step.create!(
         rank: 15,
-        action: 'Create a Cluster'
+        action: "Create a Security Group for the EKS control plane"
       )
-      Step.create
+      Step.create!(
         rank: 16,
-        action: 'Create a Node Group'
+        action: "Define an IAM Role for the EKS control plane"
       )
       Step.create!(
         rank: 17,
+        action: 'Create the EKS control plane'
+      )
+      Step.create!(
+        rank: 18,
+        action: "Define an IAM Role for the EKS worker nodes"
+      )
+      Step.create!(
+        rank: 19,
+        action: 'Create a worker node group in the EKS cluster'
+      )
+      Step.create!(
+        rank: 20,
+        action: 'Fetch the kubeconfig for the EKS cluster'
+      )
+      Step.create!(
+        rank: 21,
+        action: 'Deploy Ingress controller'
+      )
+      Step.create!(
+        rank: 22,
+        action: 'Add DNS entry for Ingress controller'
+      )
+      Step.create!(
+        rank: 23,
+        action: 'Deploy Certificate manager'
+      )
+      Step.create!(
+        rank: 24,
         action: 'Deploy Rancher'
       )
     end
@@ -86,41 +114,42 @@ module RancherOnEks
         zones = @cli.list_availability_zones_supporting_instance_type(
           @cluster_size.instance_type
         )
-        if zones.length >= 3
-          @zones = zones.sample(3)
+        if zones.length >= @cluster_size.zones_count
+          @zones = zones.sample(@cluster_size.zones_count)
         else
-          # if we have less than 3 AZ choices, set up multiple subnets in the
-          # same AZ, randomly selected
+          # if we have less than the required AZ choices, set up multiple
+          # subnets in the same AZ, randomly selected
           @zones = zones
-          while @zones.length < 3
+          while @zones.length < @cluster_size.zones_count
             @zones << zones.sample()
           end
         end
+        nil
       end
 
       step(1) do
         @vpc = Aws::Vpc.create()
+        @vpc.wait_until(:available)
       end
 
       @public_subnets = []
       index = 0
       (2..4).each do |rank|
         step(rank) do
-          public_subnet = Aws::Subnet.create(
+          public_subnet = Aws::PublicSubnet.create(
             vpc_id: @vpc.id,
-            subnet_type: 'public',
             index: index,
             zone: @zones[index]
           )
-          public_subnet.map_public_ips!
           @public_subnets << public_subnet
           index += 1
-          public_subnet
+          public_subnet.wait_until(:available)
         end
       end
       step(5) do
-        @gateway = Aws::InternetGateway.create(vpc_id: @vpc.id)
-        @gateway
+        @gateway = Aws::InternetGateway.create
+        @gateway.attach_to_vpc(@vpc.id)
+        @gateway.wait_until(:available)
       end
       step(6) do
         @public_route_table = Aws::RouteTable.create(vpc_id: @vpc.id)
@@ -128,31 +157,32 @@ module RancherOnEks
         @public_subnets.each do |public_subnet|
           public_subnet.set_route_table!(@public_route_table.id)
         end
-        @public_route_table
+        @public_route_table.wait_until(:available)
       end
 
       @private_subnets = []
       index = 0
       (7..9).each do |rank|
         step(rank) do
-          private_subnet = Aws::Subnet.create(
+          private_subnet = Aws::PrivateSubnet.create(
             vpc_id: @vpc.id,
-            subnet_type: 'private',
             index: index,
             zone: @zones[index]
           )
           @private_subnets << private_subnet
           index += 1
-          private_subnet
+          private_subnet.wait_until(:available)
         end
       end
       step(10) do
         @elastic_ip = Aws::AllocationAddress.create()
+        @elastic_ip.wait_until(:available)
       end
       step(11) do
         @nat = Aws::NatGateway.create(
           subnet_id: @public_subnets.first.id,
-          allocation_address_id: @elastic_ip.id
+          allocation_address_id: @elastic_ip.id,
+          internet_gateway_id: @gateway.id
         )
         @nat.wait_until(:available)
       end
@@ -165,17 +195,63 @@ module RancherOnEks
           private_subnet.set_route_table!(private_route_table.id)
           @private_route_tables << private_route_table
           index += 1
-          private_route_table
+          private_route_table.wait_until(:available)
         end
       end
       step(15) do
-        @cluster = Aws::Cluster.create(vpc_id: @vpc.id)
+        @security_group = Aws::SecurityGroup.create(vpc_id: @vpc.id)
       end
       step(16) do
-        Aws::NodeGroup.create(vpc_id: @vpc.id, cluster_name: @cluster.id)
+        @cluster_role = Aws::Role.create(target: 'cluster')
       end
       step(17) do
-        Helm::Deployment.create
+        subnet_ids =
+          @public_subnets.collect(&:id) + @private_subnets.collect(&:id)
+        @cluster = Aws::Cluster.create(
+          sg_id: @security_group.id,
+          role_arn: @cluster_role.arn,
+          subnet_ids: subnet_ids
+        )
+        @cluster.wait_until(:ACTIVE)
+      end
+      step(18) do
+        @ng_role = Aws::Role.create(target: 'nodegroup')
+      end
+      step(19) do
+        @public_subnet_ids = @public_subnets.collect(&:id)
+        @nodegroup = Aws::NodeGroup.create(
+          cluster_name: @cluster.id,
+          role_arn: @ng_role.arn,
+          subnet_ids: @public_subnet_ids,
+          instance_type: @cluster_size.instance_type,
+          instance_count: @cluster_size.instance_count
+        )
+        @nodegroup.wait_until(:ACTIVE)
+      end
+      step(20) do
+        @cli.update_kube_config(@cluster.id)
+        nil
+      end
+      step(21) do
+        @ingress = Helm::IngressController.create()
+        @ingress.wait_until(:deployed)
+      end
+      step(22) do
+        @fqdn_record = Aws::DnsRecord.create(
+          fqdn: 'rancher.aws.bear454.com',  ### OMG FIX ME PLEASE
+          target: @ingress.hostname(),
+          record_type: 'CNAME'
+        )
+        # @fqdn_record.wait_until(:available)
+        # wait loop in DnsRecord is broken FIXME
+      end
+      step(23) do
+        @cert_manager = Helm::CertManager.create()
+        @cert_manager.wait_until(:deployed)
+      end
+      step(24) do
+        @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
+        @rancher.wait_until(:deployed)
       end
     end
   end
