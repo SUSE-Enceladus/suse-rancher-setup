@@ -24,7 +24,7 @@ module Helm
 
     def helm_destroy
       @helm.delete_deployment(self.id, NAMESPACE)
-      @kubectl.delete_namespace(NAMESPACE)
+      # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource

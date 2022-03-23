@@ -26,7 +26,7 @@ module RancherOnEks
 
     def helm_destroy
       @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
-      @kubectl.delete_namespace(NAMESPACE)
+      # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource
