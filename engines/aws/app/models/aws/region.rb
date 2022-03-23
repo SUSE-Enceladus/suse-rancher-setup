@@ -6,10 +6,6 @@ module Aws
 
     attr_accessor(:value)
 
-    def initialize(*args)
-      super
-    end
-
     def self.load
       new(
         value: KeyValue.get(:aws_region, 'us-east-1')
