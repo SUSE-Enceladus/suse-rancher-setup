@@ -15,7 +15,8 @@ module CuratedCloudInstaller
     config.active_job.queue_adapter = :async
 
     # Engines to load
-    config.engines = [ 'ShirtSize', 'Aws', 'Helm', 'RancherOnEks']
+    # The order determines the menu order - engines with no UI should be last
+    config.engines = ['Aws', 'ShirtSize', 'RancherOnEks', 'Helm']
 
     # Application-level menu entries
     config.menu_entries = [
