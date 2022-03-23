@@ -130,6 +130,7 @@ module RancherOnEks
           end
         end
         @fqdn = RancherOnEks::Fqdn.load()
+        nil
       end
 
       step(1) do
