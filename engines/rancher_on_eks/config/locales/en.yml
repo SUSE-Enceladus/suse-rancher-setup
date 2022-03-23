@@ -1,6 +1,6 @@
 en:
   product_brand:
-    short_title: "Lasso"
+    short_title: "SUSE Lasso"
     long_title: "SUSE Lasso - the curated installer for Rancher"
   engines:
     rancher_on_eks:
