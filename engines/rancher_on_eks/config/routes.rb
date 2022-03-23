@@ -6,4 +6,6 @@ RancherOnEks::Engine.routes.draw do
       post 'deploy'
     end
   end
+
+  resource :wrapup, controller: 'wrapup', only: [:show]
 end
