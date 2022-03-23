@@ -306,7 +306,7 @@ module Aws
 
     def describe_role(role_name)
       args = %W(iam get-role --role-name #{role_name})
-      get_description(args, 'NotSuchEntity', '{"State": "not_found"}')
+      get_description(args, 'NoSuchEntity', '{"State": "not_found"}')
     end
 
     def list_role_attached_policies(name)
@@ -398,7 +398,7 @@ module Aws
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      get_description(args, 'ResourceNotFoundException', '{"cluster": {"status": "not_found"}}')
+      get_description(args, 'ResourceNotFoundException', '{"nodegroup": {"status": "not_found"}}')
     end
 
     def create_node_group(cluster_name, role_arn, public_subnet_ids,
