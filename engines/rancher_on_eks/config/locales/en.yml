@@ -19,3 +19,7 @@ en:
           `rancher.example.com`, then `example.com` must be a Route53 hosted
           zone, and Rancher will be served at `https://rancher.example.com` ."
         using: "Rancher will be served at 'https://%{fqdn}'."
+      wrapup:
+        title: "Congratulations - your Rancher is ready!"
+        content: "You can browse to your Rancher server at
+          [%{fqdn}](https://%{fqdn})."
