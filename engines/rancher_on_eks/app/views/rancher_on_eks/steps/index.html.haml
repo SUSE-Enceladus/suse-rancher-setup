@@ -2,27 +2,25 @@
 -# body
 %p
   %strong= t('engines.rancher_on_eks.steps.form_caption')
+-# progress bar
 %div.container
-  %div.row
-    %div.col-6
-      - @steps.each do |step|
-        %p.icon-container
-          - if step.complete?
-            %i.eos-icons-outlined check_circle
-          - elsif step.started?
-            %i.eos-icons-outlined
-              = image_tag 'rotating_gear.svg', alt: 'working...'
-          - else
-            %i.eos-icons-outlined lens
-          = step.rank
-          \.
-          = step.action
-    %div.col-6
-      %ul
-        - @resources.each do |resource|
-          %li
-            = resource.type
-            = resource.id
+  %div.d-flex.flex-row.border.border-dark.progress-bar
+    - @steps.each do |step|
+      - if step.complete?
+        - status = "complete"
+      - elsif step.started?
+        - status = "started"
+      - else
+        - status = "todo"
+      %div.p-2.step{class: status, style: "flex-grow: #{step.duration};", title: "#{step.rank}. #{step.action}", data: {toggle: "tooltip", placement: "bottom"}}
+  - @steps.each do |step|
+    - if step.started? && !step.complete?
+      %p.icon-container
+        %i.eos-icons-outlined
+          = image_tag 'rotating_gear.svg', alt: 'working...'
+        = step.rank
+        \.
+        = step.action
 - if @deployable
   = form_with url: rancher_on_eks.deploy_steps_path, method: 'post' do |form|
     %div.form-group

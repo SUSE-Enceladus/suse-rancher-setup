@@ -4,10 +4,12 @@ module RancherOnEks
       KeyValue.set('tag_scope', "lasso-#{self.random_string()}")
       Step.create!(
         rank: 0,
+        duration: 1,
         action: 'Prep'
       )
       Step.create!(
         rank: 1,
+        duration: 13,
         action: 'Create a VPC'
       )
 
@@ -15,6 +17,7 @@ module RancherOnEks
       (2..4).each do |rank|
         Step.create!(
           rank: rank,
+          duration: 14,
           action: "Create public subnet #{index}/3"
         )
         index += 1
@@ -22,10 +25,12 @@ module RancherOnEks
 
       Step.create!(
         rank: 5,
+        duration: 14,
         action: 'Create an Internet Gateway for public subnets'
       )
       Step.create!(
         rank: 6,
+        duration: 16,
         action: 'Route public subnets through Internet Gateway'
       )
 
@@ -33,6 +38,7 @@ module RancherOnEks
       (7..9).each do |rank|
         Step.create!(
           rank: rank,
+          duration: 13,
           action: "Create private subnet #{index}/3"
         )
         index += 1
@@ -40,10 +46,12 @@ module RancherOnEks
 
       Step.create!(
         rank: 10,
+        duration: 13,
         action: 'Secure an Elastic IP address'
       )
       Step.create!(
         rank: 11,
+        duration: 111,
         action: 'Create a NAT Gateway for private subnets on Elastic IP address'
       )
 
@@ -51,55 +59,67 @@ module RancherOnEks
       (12..14).each do |rank|
         Step.create!(
           rank: rank,
+          duration: 14,
           action: "Route private subnet #{index}/3 through NAT Gateway"
         )
         index += 1
       end
       Step.create!(
         rank: 15,
+        duration: 1,
         action: "Create a Security Group for the EKS control plane"
       )
       Step.create!(
         rank: 16,
+        duration: 14,
         action: "Define an IAM Role for the EKS control plane"
       )
       Step.create!(
         rank: 17,
+        duration: 518,
         action: 'Create the EKS control plane'
       )
       Step.create!(
         rank: 18,
+        duration: 16,
         action: "Define an IAM Role for the EKS worker nodes"
       )
       Step.create!(
         rank: 19,
+        duration: 156,
         action: 'Create a worker node group in the EKS cluster'
       )
       Step.create!(
         rank: 20,
+        duration: 1,
         action: 'Fetch the kubeconfig for the EKS cluster'
       )
       Step.create!(
         rank: 21,
+        duration: 35,
         action: 'Deploy Ingress controller'
       )
       Step.create!(
         rank: 22,
+        duration: 32,
         action: 'Add DNS entry for Ingress controller'
       )
       Step.create!(
         rank: 23,
+        duration: 50,
         action: 'Deploy Certificate manager'
       )
       Step.create!(
         rank: 24,
+        duration: 18,
         action: 'Deploy Rancher'
       )
     end
 
-    def step(rank)
+    def step(rank, force: false)
       step = Step.find_by(rank: rank)
-      return if step.complete?
+      return if step.complete? && !force
+
       step.start!
       step.resource = yield if block_given?
       step.save
@@ -112,7 +132,7 @@ module RancherOnEks
     end
 
     def deploy
-      step(0) do
+      step(0, force: true) do
         @cluster_size = RancherOnEks::ClusterSize.new
         @cli = Aws::Cli.load
 

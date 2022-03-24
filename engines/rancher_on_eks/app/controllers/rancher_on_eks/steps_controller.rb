@@ -5,8 +5,9 @@ module RancherOnEks
     def index
       @deployable = Step.deployable?
       @complete = Step.all_complete?
-      @refresh_timer = 10 unless (@deployable || @complete)
-      @resources = Resource.all
+      redirect_to rancher_on_eks.wrapup_path if @complete
+
+      @refresh_timer = 15 unless (@deployable || @complete)
     end
 
     def deploy

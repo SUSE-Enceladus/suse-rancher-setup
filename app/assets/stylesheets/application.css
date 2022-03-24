@@ -14,6 +14,18 @@
  *= require_self
  */
 
- .alert-section .alert-title {
-   margin-top: 4px;
- }
+.alert-section .alert-title {
+  margin-top: 4px;
+}
+
+.progress-bar .step.complete {
+  background-color: #0e7e3c;
+}
+
+.progress-bar .step.started {
+  background-color: #30BA78;
+}
+
+.progress-bar .step.todo {
+  background-color: #E4F6EE;
+}
