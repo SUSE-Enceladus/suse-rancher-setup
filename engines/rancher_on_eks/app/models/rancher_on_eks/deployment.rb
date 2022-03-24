@@ -261,10 +261,16 @@ module RancherOnEks
       end
     end
 
-    def rollback
+    def rollback(generate_script=false)
+      f = nil
+      f = File.open('/tmp/delete_resources_steps.txt', 'a') if generate_script
       Step.all.order(rank: :desc).each do |step|
-        step.resource&.destroy
+        step.resource&.destroy(f)
         step.destroy
+      end
+      if generated_script
+        f.flush
+        f.close
       end
     end
   end

@@ -81,9 +81,11 @@ module Aws
       )
     end
 
-    def delete_vpc(vpc_id)
+    def delete_vpc(vpc_id, f)
       args = %W(ec2 delete-vpc --vpc-id #{vpc_id})
-      run_command(args)
+      run_command(args) if f.nil?
+
+      f << args + "\n" if f
     end
 
     def describe_subnet(subnet_id)
@@ -150,9 +152,10 @@ module Aws
       run_command(args)
     end
 
-    def delete_subnet(subnet_id)
+    def delete_subnet(subnet_id, f)
       args = %W(ec2 delete-subnet --subnet-id #{subnet_id})
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_internet_gateway(igw_id)
@@ -190,9 +193,10 @@ module Aws
       run_command(args)
     end
 
-    def delete_internet_gateway(ig_id)
+    def delete_internet_gateway(ig_id, f)
       args = %W(ec2 delete-internet-gateway --internet-gateway-id #{ig_id})
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_allocation_address(eip_id)
@@ -206,9 +210,10 @@ module Aws
       run_command(args)
     end
 
-    def release_address(allocation_address_id)
+    def release_address(allocation_address_id, f)
       args = %W(ec2 release-address --allocation-id #{allocation_address_id})
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_nat_gateway(nat_id)
@@ -228,9 +233,10 @@ module Aws
       run_command(args)
     end
 
-    def delete_nat_gateway(natgw_id)
+    def delete_nat_gateway(natgw_id, f)
       args = %W(ec2 delete-nat-gateway --nat-gateway-id #{natgw_id})
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_route_table(route_table_id)
@@ -257,12 +263,13 @@ module Aws
       run_command(args)
     end
 
-    def disassociate_route_table(association_id)
+    def disassociate_route_table(association_id, f)
       args = %W(
         ec2 disassociate-route-table
         --association-id #{association_id}
       )
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def create_route(route_table_id, gw_id)
@@ -275,9 +282,10 @@ module Aws
       run_command(args)
     end
 
-    def delete_route_table(route_table_id)
+    def delete_route_table(route_table_id, f)
       args = %W(ec2 delete-route-table --route-table-id #{route_table_id})
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_security_group(group_id)
@@ -299,9 +307,10 @@ module Aws
       debugger
     end
 
-    def delete_security_group(group_id)
+    def delete_security_group(group_id, f)
       args = %W(ec2 delete-security-group --group-id #{group_id})
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_role(role_name)
@@ -328,12 +337,13 @@ module Aws
       run_command(args)
     end
 
-    def delete_role(name)
+    def delete_role(name, f)
       args = %W(
         iam delete-role
         --role-name #{name}
       )
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def attach_role_policy(name, policy)
@@ -345,13 +355,14 @@ module Aws
       run_command(args)
     end
 
-    def detach_role_policy(role_name, policy_arn)
+    def detach_role_policy(role_name, policy_arn, f)
       args = %W(
         iam detach-role-policy
         --role-name #{role_name}
         --policy-arn #{policy_arn}
       )
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def describe_cluster(cluster_name)
@@ -374,12 +385,13 @@ module Aws
       run_command(args)
     end
 
-    def delete_cluster(name)
+    def delete_cluster(name, f)
       args = %W(
         eks delete-cluster
         --name #{name}
       )
-      run_command(args)
+      run_command(args) f.nil?
+      f << args + "\n" if f
     end
 
     def update_kube_config(cluster_name, kubeconfig="/tmp/kubeconfig")
@@ -430,13 +442,14 @@ module Aws
       debugger
     end
 
-    def delete_node_group(node_group_name, cluster_name)
+    def delete_node_group(node_group_name, cluster_name, f)
       args = %W(
         eks delete-nodegroup
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      run_command(args)
+      run_command(args) if f.nil?
+      f << args + "\n" if f
     end
 
     def get_hosted_zones(dns_name)

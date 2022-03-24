@@ -10,8 +10,8 @@ module Aws
       # self.wait_until(:ACTIVE)
     end
 
-    def aws_destroy
-      @cli.delete_cluster(self.id)
+    def aws_destroy(f=nil)
+      @cli.delete_cluster(self.id, f)
       self.wait_until(:DELETING)
       self.wait_until(:not_found)
     end

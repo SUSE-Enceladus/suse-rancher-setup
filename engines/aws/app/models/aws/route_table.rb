@@ -14,12 +14,12 @@ module Aws
       self.refresh()
     end
 
-    def aws_destroy
+    def aws_destroy(f=nil)
       self.refresh()
       @framework_attributes['RouteTables'].first['Associations'].each do |association|
-        @cli.disassociate_route_table(association['RouteTableAssociationId'])
+        @cli.disassociate_route_table(association['RouteTableAssociationId'], f)
       end
-      @cli.delete_route_table(self.id)
+      @cli.delete_route_table(self.id, f)
       self.wait_until(:not_found)
     end
 

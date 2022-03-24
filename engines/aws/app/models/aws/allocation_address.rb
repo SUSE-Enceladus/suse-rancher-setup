@@ -9,8 +9,8 @@ module Aws
       self.refresh()
     end
 
-    def aws_destroy
-      @cli.release_address(self.id)
+    def aws_destroy(f=nil)
+      @cli.release_address(self.id, f)
       self.wait_until(:not_found)
     end
 

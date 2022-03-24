@@ -26,8 +26,8 @@ module Aws
       self.refresh()
     end
 
-    def aws_destroy
-      @cli.delete_subnet(self.id)
+    def aws_destroy(f=nil)
+      @cli.delete_subnet(self.id, f)
       self.wait_until(:not_found)
     end
 

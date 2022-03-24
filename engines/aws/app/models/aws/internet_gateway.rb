@@ -14,12 +14,12 @@ module Aws
       self.refresh()
     end
 
-    def aws_destroy
+    def aws_destroy(f=nil)
       self.refresh()
       @framework_attributes['InternetGateways'].first['Attachments'].each do |attachment|
-        @cli.detach_internet_gateway(attachment['VpcId'], self.id)
+        @cli.detach_internet_gateway(attachment['VpcId'], self.id, f)
       end
-      @cli.delete_internet_gateway(self.id)
+      @cli.delete_internet_gateway(self.id, f)
       self.wait_until(:not_found)
     end
 

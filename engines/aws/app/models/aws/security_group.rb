@@ -9,8 +9,8 @@ module Aws
       self.id = JSON.parse(response)['GroupId']
     end
 
-    def aws_destroy
-      @cli.delete_security_group(self.id)
+    def aws_destroy(f=nil)
+      @cli.delete_security_group(self.id, f)
     end
 
     def describe_resource

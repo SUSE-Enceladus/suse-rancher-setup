@@ -72,15 +72,19 @@ module Helm
       return stdout
     end
 
-    def delete_deployment(name, namespace)
+    def delete_deployment(name, namespace, f)
       args = %W(
         uninstall #{name}
         --namespace #{namespace}
         --wait
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      if f.nil?
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      else
+        f << args + "\n"
+      end
     end
   end
 end

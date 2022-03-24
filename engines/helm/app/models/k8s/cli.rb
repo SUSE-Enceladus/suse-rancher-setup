@@ -74,11 +74,15 @@ module K8s
       return stdout
     end
 
-    def delete_namespace(name)
+    def delete_namespace(name, f)
       args = %W(delete namespaces #{name})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      if f.nil?
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      else
+        f << args + "\n"
+      end
     end
 
     def update_cdr

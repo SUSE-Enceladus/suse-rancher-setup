@@ -22,8 +22,8 @@ module Aws
       # self.wait_until(:available)
     end
 
-    def aws_destroy
-      @cli.delete_nat_gateway(self.id)
+    def aws_destroy(f=nil)
+      @cli.delete_nat_gateway(self.id, f)
       self.wait_until(:deleted)
     end
 

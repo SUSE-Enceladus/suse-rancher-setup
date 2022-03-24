@@ -31,12 +31,12 @@ module Aws
       end
     end
 
-    def aws_destroy
+    def aws_destroy(f=nil)
       policies = JSON.parse(@cli.list_role_attached_policies(self.id))
       policies['AttachedPolicies'].each do |policy|
-        @cli.detach_role_policy(self.id, policy['PolicyArn'])
+        @cli.detach_role_policy(self.id, policy['PolicyArn'], f)
       end
-      @cli.delete_role(self.id)
+      @cli.delete_role(self.id, f)
       self.wait_until(:not_found)
     end
 

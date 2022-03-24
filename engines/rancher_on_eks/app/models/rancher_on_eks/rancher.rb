@@ -24,8 +24,8 @@ module RancherOnEks
       # self.wait_until(:deployed)
     end
 
-    def helm_destroy
-      @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
+    def helm_destroy(f=nil)
+      @helm.delete_deployment(RELEASE_NAME, NAMESPACE, f)
       # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
