@@ -10,6 +10,17 @@ module RancherOnEks
 
     attr_accessor :fqdn
 
+    def initial_password
+      args = %W(
+        get secret --namespace #{NAMESPACE} bootstrap-secret
+        -o go-template={{.data.bootstrapPassword|base64decode}}
+      )
+      stdout, stderr = @kubectl.execute(*args)
+      return stderr if stderr.present?
+
+      stdout
+    end
+
     private
 
     def helm_create
