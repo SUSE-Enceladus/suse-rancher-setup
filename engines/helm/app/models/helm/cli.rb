@@ -1,10 +1,8 @@
 require 'cheetah'
-require 'json'
 
 module Helm
   class Cli
     include ActiveModel::Model
-
     attr_accessor(:credential, :region, :kubeconfig)
 
     def self.load
@@ -83,7 +81,6 @@ module Helm
       args = %W(
         uninstall #{name}
         --namespace #{namespace}
-        --wait
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

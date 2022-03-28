@@ -263,6 +263,7 @@ module RancherOnEks
         @ingress.wait_until(:deployed)
       end
       step(22) do
+        @ingress ||= Step.find_by_rank(21).resource
         @fqdn_record = Aws::DnsRecord.create(
           fqdn: @fqdn.value,
           target: @ingress.hostname(),
@@ -276,6 +277,7 @@ module RancherOnEks
         @cert_manager.wait_until(:deployed)
       end
       step(24) do
+        @fqdn_record ||= Step.find_by_rank(22).resource
         @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
         @rancher.wait_until(:deployed)
       end

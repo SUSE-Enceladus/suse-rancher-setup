@@ -6,6 +6,7 @@ module RancherOnEks
     CHART = 'rancher-stable/rancher'
     # VERSION = ''
     NAMESPACE = 'cattle-system'
+    DEPLOYMENT = 'rancher-stable'
 
     attr_accessor :fqdn
 
@@ -34,7 +35,7 @@ module RancherOnEks
     end
 
     def state_attribute
-      @framework_attributes['info']['status']
+      @kubectl.status(DEPLOYMENT, NAMESPACE)
     end
   end
 end

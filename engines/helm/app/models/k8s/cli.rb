@@ -31,9 +31,22 @@ module K8s
       )
     end
 
-    # def describe_deployment(node_group_name)
-    #   # TODO
-    # end
+    def status(service_name, namespace)
+      args = %W(
+        rollout status deployment/#{service_name}
+        --namespace #{namespace}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      response = if stdout.include?('successfully rolled out')
+        'deployed'
+      elsif stdout.downcase.include?('waiting')
+        'waiting'
+      else
+        'unknown'
+      end
+    end
 
     def get_service_name(release_name, namespace)
       args = %W(get services --namespace #{namespace} --output json)
