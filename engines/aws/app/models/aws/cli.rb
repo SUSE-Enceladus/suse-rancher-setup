@@ -1,15 +1,10 @@
 require 'cheetah'
-require 'json'
 
 module Aws
   class Cli
     include ActiveModel::Model
 
     attr_accessor(:credential, :region, :tag_scope)
-
-    def initialize(*args)
-      super
-    end
 
     def self.load
       new(
@@ -28,6 +23,7 @@ module Aws
           'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
           'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key,
           'AWS_REGION' => @region,
+          'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json'
         }
       )

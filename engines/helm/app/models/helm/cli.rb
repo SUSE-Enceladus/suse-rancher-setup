@@ -3,14 +3,16 @@ require 'json'
 
 module Helm
   class Cli
-    attr_accessor :kubeconfig
+    include ActiveModel::Model
 
-    def initialize(kubeconfig: '/tmp/kubeconfig')
-      @kubeconfig = kubeconfig
-    end
+    attr_accessor(:credential, :region, :kubeconfig)
 
-    def self.load(*args)
-      self.new(*args)
+    def self.load
+      new(
+        credential: Aws::Credential.load(),
+        region: Aws::Region.load().value,
+        kubeconfig: '/tmp/kubeconfig'
+      )
     end
 
     def execute(*args)
@@ -19,6 +21,11 @@ module Helm
         stdout: :capture,
         stderr: :capture,
         env: {
+          'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
+          'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key,
+          'AWS_REGION' => @region,
+          'AWS_DEFAULT_REGION' => @region,
+          'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
         }
       )
