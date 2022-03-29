@@ -1,0 +1,15 @@
+-------------------------------------------------------------------
+Thu Mar 31 06:00:15 UTC 2022 - James Mason <jmason@suse.com>
+
+- Expand permissions via systemd to enable helm
+
+-------------------------------------------------------------------
+Thu Mar 31 12:15:55 UTC 2022 - James Mason <jmason@suse.com>
+
+- Extend package to include systemd service & nginx config
+
+-------------------------------------------------------------------
+Tue Mar 29 03:08:51 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.0.1
+  + initial packaging

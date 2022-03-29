@@ -32,6 +32,7 @@ dist: clean
 	@cp -r LICENSE $(NAME)-$(VERSION)/
 	@cp -r Rakefile $(NAME)-$(VERSION)/
 	@cp -r README.md $(NAME)-$(VERSION)/
+	@cp -r server-configs $(NAME)-$(VERSION)/
 
 	# don't package engine bin directory, specs (no need) and .gitignore (OBS complains)
 	@rm -rf $(NAME)-$(VERSION)/engines/*/bin
@@ -50,6 +51,9 @@ dist: clean
 
 	# compile assets
 	@cd $(NAME)-$(VERSION) && RAILS_ENV=production rails assets:precompile
+
+	# clean up the tmp directory
+	@cd $(NAME)-$(VERSION) && rails tmp:clear
 
 	# tidy any editor tmp files
 	@find $(NAME)-$(VERSION) -name \*~ -exec rm {} \;
