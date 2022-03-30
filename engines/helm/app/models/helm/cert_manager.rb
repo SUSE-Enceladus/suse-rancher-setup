@@ -6,6 +6,7 @@ module Helm
     CHART = 'jetstack/cert-manager'
     VERSION = '1.5.1'
     NAMESPACE = 'cert-manager'
+    DEPLOYMENT = 'cert-manager'
 
     def hostname
       @kubectl.get_load_balancer_hostname(RELEASE_NAME, NAMESPACE)
@@ -34,7 +35,7 @@ module Helm
     end
 
     def state_attribute
-      @framework_attributes['info']['status']
+      @kubectl.status(DEPLOYMENT, NAMESPACE)
     end
   end
 end

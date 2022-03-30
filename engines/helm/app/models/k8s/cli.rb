@@ -3,14 +3,16 @@ require 'json'
 
 module K8s
   class Cli
-    attr_accessor :kubeconfig
+    include ActiveModel::Model
 
-    def initialize(kubeconfig: '/tmp/kubeconfig')
-      @kubeconfig = kubeconfig
-    end
+    attr_accessor(:kubeconfig, :credential, :region)
 
-    def self.load(*args)
-      self.new(*args)
+    def self.load
+      new(
+        credential: Aws::Credential.load(),
+        region: Aws::Region.load().value,
+        kubeconfig: '/tmp/kubeconfig'
+      )
     end
 
     def execute(*args)
@@ -19,14 +21,32 @@ module K8s
         stdout: :capture,
         stderr: :capture,
         env: {
+          'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
+          'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key,
+          'AWS_REGION' => @region,
+          'AWS_DEFAULT_REGION' => @region,
+          'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
         }
       )
     end
 
-    # def describe_deployment(node_group_name)
-    #   # TODO
-    # end
+    def status(service_name, namespace)
+      args = %W(
+        rollout status deployment/#{service_name}
+        --namespace #{namespace}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      response = if stdout.include?('successfully rolled out')
+        'deployed'
+      elsif stdout.downcase.include?('waiting')
+        'waiting'
+      else
+        'unknown'
+      end
+    end
 
     def get_service_name(release_name, namespace)
       args = %W(get services --namespace #{namespace} --output json)

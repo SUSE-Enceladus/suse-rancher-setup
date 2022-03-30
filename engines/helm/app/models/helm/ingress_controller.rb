@@ -6,6 +6,7 @@ module Helm
     CHART = 'ingress-nginx/ingress-nginx'
     VERSION = '3.12.0'
     NAMESPACE = 'ingress-nginx'
+    DEPLOYMENT = 'ingress-nginx-controller'
 
     def hostname
       @kubectl.get_load_balancer_hostname(self.id, NAMESPACE)
@@ -23,16 +24,16 @@ module Helm
     end
 
     def helm_destroy
-      @helm.delete_deployment(self.id, NAMESPACE)
+      @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
       # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource
-      @helm.status(self.id, NAMESPACE)
+      @helm.status(RELEASE_NAME, NAMESPACE)
     end
 
     def state_attribute
-      @framework_attributes['info']['status']
+      @kubectl.status(DEPLOYMENT, NAMESPACE)
     end
   end
 end

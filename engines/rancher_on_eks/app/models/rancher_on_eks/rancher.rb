@@ -6,8 +6,20 @@ module RancherOnEks
     CHART = 'rancher-stable/rancher'
     # VERSION = ''
     NAMESPACE = 'cattle-system'
+    DEPLOYMENT = 'rancher-stable'
 
     attr_accessor :fqdn
+
+    def initial_password
+      args = %W(
+        get secret --namespace #{NAMESPACE} bootstrap-secret
+        -o go-template={{.data.bootstrapPassword|base64decode}}
+      )
+      stdout, stderr = @kubectl.execute(*args)
+      return stderr if stderr.present?
+
+      stdout
+    end
 
     private
 
@@ -34,7 +46,7 @@ module RancherOnEks
     end
 
     def state_attribute
-      @framework_attributes['info']['status']
+      @kubectl.status(DEPLOYMENT, NAMESPACE)
     end
   end
 end
