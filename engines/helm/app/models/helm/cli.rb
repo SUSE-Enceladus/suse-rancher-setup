@@ -24,6 +24,16 @@ module Helm
       )
     end
 
+    def handle_command(args, f=nil)
+      if f.nil?
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      end
+
+      f << args + "\n" if f
+    end
+
     def status(name, namespace)
       args = %W(
         status #{name}
@@ -31,9 +41,7 @@ module Helm
         --show-desc
         --output json
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
 
     def add_repo(repo_name, repo_url)
@@ -44,9 +52,7 @@ module Helm
       return stderr if stderr.present?
 
       args = %W(repo update)
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
 
     def install_load_balancer(name, chart, namespace, version)
@@ -67,9 +73,7 @@ module Helm
         --namespace #{namespace}
       )
       args = args + additional_args
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
 
     def delete_deployment(name, namespace, f)
@@ -78,13 +82,7 @@ module Helm
         --namespace #{namespace}
         --wait
       )
-      if f.nil?
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      else
-        f << args + "\n"
-      end
+      handle_command(args, f)
     end
   end
 end

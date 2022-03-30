@@ -24,6 +24,16 @@ module K8s
       )
     end
 
+    def handle_command(args, f=nil)
+      if f.nil?
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      end
+
+      f << args + "\n" if f
+    end
+
     # def describe_deployment(node_group_name)
     #   # TODO
     # end
@@ -69,47 +79,33 @@ module K8s
       return if self.get_namespaces().include?(name)
 
       args = %W(create namespace #{name})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
 
     def delete_namespace(name, f)
       args = %W(delete namespaces #{name})
-      if f.nil?
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      else
-        f << args + "\n"
-      end
+      handle_command(args, f)
     end
 
     def update_cdr
       args = %W(
         apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
 
     def get_pods(name_space)
       args = %W(
         get pods --namespace #{name_space} --output json
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
 
     def get_rancher_deployment_status
       args = %W(
         -n cattle-system rollout status deploy/rancher
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
     end
   end
 end
