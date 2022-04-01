@@ -1,0 +1,22 @@
+[Unit]
+Description=Curated Cloud Installer
+Wants=nginx.service
+
+[Service]
+PrivateDevices=true
+ProtectHostname=true
+ProtectClock=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectControlGroups=true
+RestrictRealtime=true
+Type=simple
+PrivateTmp=yes
+Environment="RAILS_ENV=production"
+WorkingDirectory=/usr/share/curated-cloud-installer
+ExecStart=/usr/share/curated-cloud-installer/bin/rails server -b 127.0.0.1 -p 3000
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
