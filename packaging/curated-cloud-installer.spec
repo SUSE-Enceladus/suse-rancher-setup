@@ -33,6 +33,7 @@ Source1:        curated-cloud-installer.rpmlintrc
 BuildRequires:  %{ruby_version}-devel
 BuildRequires:  chrpath
 BuildRequires:  gcc
+BuildRequires:  nginx
 BuildRequires:  sqlite3-devel
 Requires:       %{ruby_version}
 Requires:       %{k8s_version}-client
@@ -74,7 +75,7 @@ cp -ar . %{buildroot}%{app_dir}
 
 ln -s %{data_dir}/tmp %{buildroot}%{app_dir}/tmp
 ln -s %{data_dir}/db %{buildroot}%{app_dir}/db
-ln -s %{data_dir}/log %{buildroot}%{app_dir}/db
+ln -s %{data_dir}/log %{buildroot}%{app_dir}/log
 
 # systemd
 mkdir -p %{buildroot}%{_unitdir}
