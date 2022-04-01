@@ -1,30 +1,51 @@
-# README
+# curated-cloud-installer
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple, usable web application for deploying complex applications to the cloud; wrapping cloud native SDK/CLIs.
 
-Things you may want to cover:
+## Dependencies
 
-* Ruby version
+*Curated-cloud-installer* depends on, primarily:
 
-* System dependencies
+* Ruby 3.0 (currently 3.0.3)
+* Rails 7.0
+* Sqlite 3
+* AWS-CLI (v1 or v2)
+* helm ~3.4
+* kubectl ~1.18
 
-* Configuration
+It is recommended you use _[rvm](https://rvm.io/)_ to manage Ruby & gemsets for development.
 
-* Database creation
+## Contributing
 
-* Database initialization
+This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a virtual environment for development.
 
-* How to run the test suite
+1.  Clone this project
 
-* Services (job queues, cache servers, search engines, etc.)
+2.  RVM will prompt you to install the required ruby version, if necessary, when entering the project directory.
 
-* Deployment instructions
+3.  Install dependencies
+    ```
+    gem install bundler
+    bundle
+    ```
+    If you have trouble with _nokogiri_, make sure you have development versions of _libxml2_ & _libxslt_ installed. Install also sqlite-devel. On (open)SUSE:
+    ```
+    sudo zypper in libxml2-devel libxslt-devel sqlite3-devel
+    ```
 
-* ...
+4.  Initialize a development database
+    ```
+    rails db:setup
+    ```
 
+5.  Start a development server on http://localhost:3000
+    ```
+    rails server -b localhost -p 3000
+    ````
 
-## Component Engines
+Please be sure to include a screenshot with any view or style changes.
+
+## Component Engine Architecture
 
 Each UI & backend component is developed in an independent Rails Engine in order
 to provide test/dev isolation of components, while allowing for an instance of
@@ -42,3 +63,89 @@ the Installer to load only the needed components.
   layout 'layouts/application'
   ```
 * Remove any unnecessary components, if desired (mailers, jobs, assets)
+* Edit `config/routes.rb` to include a route for the engine, conditioned on the engine being loaded.
+
+### Loading a collection of engines as a workflow
+
+Engines are only loaded if the application is configured to do so. To load an engine it must be included in the list `Rails.configuration.engines`, defined in `config/application.rb`.
+
+Since each engine may define UI elements in the workflow, the order engines are loaded determines the order of the menu entries in the application. The only exception is the 'Welcome' page, which is always first.
+
+### Adding workflow UI to an engine
+
+Add web content to an engine like any other application; it must be routed, have controllers & views, and may use models.
+
+In order to include it in the workflow, _menu_entries_ must be defined for the engine. Menu entries are defined in `engines/$ENGINE/lib/$ENGINE.rb` as follows:
+
+```
+module SomeEngineName
+  def self.menu_entries
+    [
+      { caption: 'Do a thing', icon: 'manage_accounts', target: '/some_engine_name/do_a_thing' },
+      { caption: 'Do something else', icon: 'location_on', target: '/some_engine_name/do_something_else' },
+    ]
+  end
+end
+```
+
+`self.menu_entries` should return a list of dictionaries, each defining three attributes:
+
+* `caption:` the text to use on the main menu
+* `icon:` the name of the [EOS icon](https://eos-icons.com/) to use on the
+main menu
+* `target:` the route to the first page of the workflow. _This must include the top-level directory where the engine is mounted, as defined in `config/routes.rb`._
+
+**Translations** should be provided under the `engines.$ENGINE` namespace.
+
+While the web content of a component is defined exclusively by the engine, there are some user interface _conventions_ defined; complying with application UI conventions provides a consistent experience for end users.
+
+Page views should adhere to the following template:
+
+```
+= page_header(t('engines.$ENGINE.$MENU_ENTRY.title'))
+-# body
+YOUR CONTENT HERE
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()
+  = next_step_button()
+```
+
+### UI style
+
+_Curated-cloud-installer_ uses and conforms to the [EOS Design System](https://suse.eosdesignsystem.com/).
+
+## Packaging
+
+_Curate-cloud-installer_ includes supporting tools and documents to build on an open build service (OBS) instance, such as https://build.opensuse.org
+
+### New dependencies
+
+When updating dependencies, add a categorized entry with a comment, in Gemfile.development.
+
+_Please note any new external CLI dependencies in this documentation._
+
+### Releases
+
+[bumpversion](https://pypi.org/project/bumpversion/) is used to tag releases.
+
+```
+bumpversion [major|minor|patch]
+```
+
+### Generating a tarball
+
+1. All steps required for generating a production-ready tarball, including precompiling assets and preparing _bootsnap_ caches, are included in the Makefile task:
+  ```
+  make dist
+  ```
+2. Copy the specfile and move the tarball to an OBS project dir
+  ```
+  cp packaging/* path/of/your/project/
+  mv *.tar* path/of/your/project/
+  ```
+
+## License
+
+Copyright © 2022 SUSE LLC.
+Distributed under the terms of GPL-3.0+ license, see [LICENSE](LICENSE) for details.
