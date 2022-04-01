@@ -30,10 +30,10 @@ Group:          Productivity/Networking/Web/Frontends
 URL:            http://www.github.com/suse-enceladus/curated-cloud-installer
 Source0:        %{name}-%{version}.tar.bz2
 Source1:        curated-cloud-installer.rpmlintrc
-BuildRequires:  %{ruby_version}
 BuildRequires:  %{ruby_version}-devel
 BuildRequires:  chrpath
 BuildRequires:  gcc
+BuildRequires:  nginx
 BuildRequires:  sqlite3-devel
 Requires:       %{ruby_version}
 Requires:       %{k8s_version}-client
@@ -75,11 +75,11 @@ cp -ar . %{buildroot}%{app_dir}
 
 ln -s %{data_dir}/tmp %{buildroot}%{app_dir}/tmp
 ln -s %{data_dir}/db %{buildroot}%{app_dir}/db
-ln -s %{data_dir}/log %{buildroot}%{app_dir}/db
+ln -s %{data_dir}/log %{buildroot}%{app_dir}/log
 
 # systemd
 mkdir -p %{buildroot}%{_unitdir}
-install -m 444 server-configs/systemd/curated-cloud-installer.service %{buildroot}%{_unitdir}
+install -m 644 server-configs/systemd/curated-cloud-installer.service %{buildroot}%{_unitdir}
 
 # nginx
 install -D -m 644 server-configs/nginx/curated-cloud-installer.conf %{buildroot}%{_sysconfdir}/nginx/vhosts.d/curated-cloud-installer.conf
@@ -130,8 +130,18 @@ chrpath -d %{buildroot}%{lib_dir}/vendor/bundle/ruby/*/gems/nokogiri-*/lib/nokog
 %{lib_dir}
 %attr(-,root,root) %{data_dir}
 %{_unitdir}/curated-cloud-installer.service
-%dir %{_sysconfdir}/nginx
-%dir %{_sysconfdir}/nginx/vhosts.d
 %config(noreplace) %{_sysconfdir}/nginx/vhosts.d/curated-cloud-installer.conf
+
+%pre
+%service_add_pre curated-cloud-installer.service
+
+%post
+%service_add_post curated-cloud-installer.service
+
+%preun
+%service_del_preun curated-cloud-installer.service
+
+%postun
+%service_del_postun curated-cloud-installer.service
 
 %changelog
