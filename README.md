@@ -13,8 +13,6 @@ Simple, usable web application for deploying complex applications to the cloud; 
 * helm ~3.4
 * kubectl ~1.18
 
-It is recommended you use _[rvm](https://rvm.io/)_ to manage Ruby & gemsets for development.
-
 ## Contributing
 
 This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a virtual environment for development.
