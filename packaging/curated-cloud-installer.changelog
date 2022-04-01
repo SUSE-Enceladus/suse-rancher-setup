@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Fri Apr  1 23:53:22 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.1.0
+  + Updated packaging tools & config
+  + Updated documentation
+
+-------------------------------------------------------------------
 Thu Mar 31 06:00:15 UTC 2022 - James Mason <jmason@suse.com>
 
 - Expand permissions via systemd to enable helm
