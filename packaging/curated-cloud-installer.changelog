@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Sat Apr  2 01:44:39 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.2.0
+  + Updated copy (translations) to actual content
+  + Listing created resources on wrapup page
+  + Marked 'AWS' as an acronym; refactored to match
+
+-------------------------------------------------------------------
 Fri Apr  1 23:53:22 UTC 2022 - James Mason <jmason@suse.com>
 
 - version 0.1.0
