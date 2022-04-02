@@ -1,5 +1,5 @@
-module Aws
-  class DnsRecord < AwsResource
+module AWS
+  class DnsRecord < AWSResource
     attr_accessor :fqdn, :target, :record_type
 
     def hosted_zone

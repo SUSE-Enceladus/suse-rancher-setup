@@ -1,5 +1,5 @@
-module Aws
-  class Cluster < AwsResource
+module AWS
+  class Cluster < AWSResource
     attr_accessor :sg_id, :role_arn, :subnet_ids
 
     private

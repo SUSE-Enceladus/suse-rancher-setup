@@ -1,5 +1,5 @@
-module Aws
-  class AllocationAddress < AwsResource
+module AWS
+  class AllocationAddress < AWSResource
 
     private
 

@@ -1,7 +1,7 @@
 $LOAD_PATH.push File.expand_path(__dir__, '..')
 require "aws/engine"
 
-module Aws
+module AWS
   def self.menu_entries
     [
       { caption: 'AWS Credentials', icon: 'manage_accounts', target: '/aws/credential/edit' },

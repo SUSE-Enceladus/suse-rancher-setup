@@ -1,4 +1,4 @@
-module Aws
+module AWS
   class CredentialsController < ApplicationController
     before_action :load_credential, only: [:edit, :show]
 

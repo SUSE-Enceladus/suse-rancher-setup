@@ -1,6 +1,6 @@
 require 'cheetah'
 
-module Aws
+module AWS
   class Cli
     include ActiveModel::Model
 

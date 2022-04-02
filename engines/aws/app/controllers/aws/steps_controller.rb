@@ -1,4 +1,4 @@
-module Aws
+module AWS
   class StepsController < ApplicationController
     before_action :load_cli
 

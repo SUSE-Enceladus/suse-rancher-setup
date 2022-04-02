@@ -1,5 +1,5 @@
-module Aws
+module AWS
   class Engine < ::Rails::Engine
-    isolate_namespace Aws
+    isolate_namespace AWS
   end
 end

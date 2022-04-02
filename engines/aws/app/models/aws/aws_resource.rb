@@ -1,5 +1,5 @@
-module Aws
-  class AwsResource < Resource
+module AWS
+  class AWSResource < Resource
     after_initialize :set_cli
     before_create :aws_create
     before_destroy :aws_destroy
@@ -9,7 +9,7 @@ module Aws
     private
 
     def set_cli
-      @cli = Aws::Cli.load()
+      @cli = AWS::Cli.load()
     end
 
     def aws_create

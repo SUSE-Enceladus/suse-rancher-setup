@@ -1,5 +1,5 @@
-module Aws
-  class PublicSubnet < AwsResource
+module AWS
+  class PublicSubnet < AWSResource
     attr_accessor :vpc_id, :index, :zone
 
     def map_public_ips!

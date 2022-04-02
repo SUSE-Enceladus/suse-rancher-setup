@@ -1,4 +1,4 @@
-module Aws
+module AWS
   class Credential
     include ActiveModel::Model
     include Saveable

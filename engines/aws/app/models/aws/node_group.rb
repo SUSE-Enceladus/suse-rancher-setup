@@ -1,7 +1,7 @@
 require 'json'
 
-module Aws
-  class NodeGroup < AwsResource
+module AWS
+  class NodeGroup < AWSResource
     attr_accessor :cluster_name, :role_arn, :subnet_ids,
                   :instance_type, :instance_count
 

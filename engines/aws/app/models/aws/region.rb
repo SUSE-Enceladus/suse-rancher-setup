@@ -1,4 +1,4 @@
-module Aws
+module AWS
   # singular class for wrapping AWS region selection
   class Region
     include ActiveModel::Model

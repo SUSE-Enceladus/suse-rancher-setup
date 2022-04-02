@@ -1,5 +1,5 @@
-module Aws
-  class PrivateSubnet < AwsResource
+module AWS
+  class PrivateSubnet < AWSResource
     attr_accessor :vpc_id, :index, :zone
 
     def set_route_table!(route_table_id)

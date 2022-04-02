@@ -1,5 +1,5 @@
-module Aws
-  class SecurityGroup < AwsResource
+module AWS
+  class SecurityGroup < AWSResource
     attr_accessor :vpc_id
 
     private

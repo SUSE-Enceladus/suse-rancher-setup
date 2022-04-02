@@ -134,7 +134,7 @@ module RancherOnEks
     def deploy
       step(0, force: true) do
         @cluster_size = RancherOnEks::ClusterSize.new
-        @cli = Aws::Cli.load
+        @cli = AWS::Cli.load
 
         zones = @cli.list_availability_zones_supporting_instance_type(
           @cluster_size.instance_type
@@ -154,7 +154,7 @@ module RancherOnEks
       end
 
       step(1) do
-        @vpc = Aws::Vpc.create()
+        @vpc = AWS::Vpc.create()
         @vpc.wait_until(:available)
       end
 
@@ -162,7 +162,7 @@ module RancherOnEks
       index = 0
       (2..4).each do |rank|
         step(rank) do
-          public_subnet = Aws::PublicSubnet.create(
+          public_subnet = AWS::PublicSubnet.create(
             vpc_id: @vpc.id,
             index: index,
             zone: @zones[index]
@@ -173,12 +173,12 @@ module RancherOnEks
         end
       end
       step(5) do
-        @gateway = Aws::InternetGateway.create
+        @gateway = AWS::InternetGateway.create
         @gateway.attach_to_vpc(@vpc.id)
         @gateway.wait_until(:available)
       end
       step(6) do
-        @public_route_table = Aws::RouteTable.create(vpc_id: @vpc.id)
+        @public_route_table = AWS::RouteTable.create(vpc_id: @vpc.id)
         @cli.create_route(@public_route_table.id, @gateway.id)
         @public_subnets.each do |public_subnet|
           public_subnet.set_route_table!(@public_route_table.id)
@@ -190,7 +190,7 @@ module RancherOnEks
       index = 0
       (7..9).each do |rank|
         step(rank) do
-          private_subnet = Aws::PrivateSubnet.create(
+          private_subnet = AWS::PrivateSubnet.create(
             vpc_id: @vpc.id,
             index: index,
             zone: @zones[index]
@@ -201,11 +201,11 @@ module RancherOnEks
         end
       end
       step(10) do
-        @elastic_ip = Aws::AllocationAddress.create()
+        @elastic_ip = AWS::AllocationAddress.create()
         @elastic_ip.wait_until(:available)
       end
       step(11) do
-        @nat = Aws::NatGateway.create(
+        @nat = AWS::NatGateway.create(
           subnet_id: @public_subnets.first.id,
           allocation_address_id: @elastic_ip.id,
           internet_gateway_id: @gateway.id
@@ -217,7 +217,7 @@ module RancherOnEks
       (12..14).each do |rank|
         step(rank) do
           private_subnet = @private_subnets[index]
-          private_route_table = Aws::RouteTable.create(vpc_id: @vpc.id, name: "private-route-table-#{index}")
+          private_route_table = AWS::RouteTable.create(vpc_id: @vpc.id, name: "private-route-table-#{index}")
           private_subnet.set_route_table!(private_route_table.id)
           @private_route_tables << private_route_table
           index += 1
@@ -225,15 +225,15 @@ module RancherOnEks
         end
       end
       step(15) do
-        @security_group = Aws::SecurityGroup.create(vpc_id: @vpc.id)
+        @security_group = AWS::SecurityGroup.create(vpc_id: @vpc.id)
       end
       step(16) do
-        @cluster_role = Aws::Role.create(target: 'cluster')
+        @cluster_role = AWS::Role.create(target: 'cluster')
       end
       step(17) do
         subnet_ids =
           @public_subnets.collect(&:id) + @private_subnets.collect(&:id)
-        @cluster = Aws::Cluster.create(
+        @cluster = AWS::Cluster.create(
           sg_id: @security_group.id,
           role_arn: @cluster_role.arn,
           subnet_ids: subnet_ids
@@ -241,11 +241,11 @@ module RancherOnEks
         @cluster.wait_until(:ACTIVE)
       end
       step(18) do
-        @ng_role = Aws::Role.create(target: 'nodegroup')
+        @ng_role = AWS::Role.create(target: 'nodegroup')
       end
       step(19) do
         @public_subnet_ids = @public_subnets.collect(&:id)
-        @nodegroup = Aws::NodeGroup.create(
+        @nodegroup = AWS::NodeGroup.create(
           cluster_name: @cluster.id,
           role_arn: @ng_role.arn,
           subnet_ids: @public_subnet_ids,
@@ -264,7 +264,7 @@ module RancherOnEks
       end
       step(22) do
         @ingress ||= Step.find_by_rank(21).resource
-        @fqdn_record = Aws::DnsRecord.create(
+        @fqdn_record = AWS::DnsRecord.create(
           fqdn: @fqdn.value,
           target: @ingress.hostname(),
           record_type: 'CNAME'

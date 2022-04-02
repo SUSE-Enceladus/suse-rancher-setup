@@ -1,4 +1,4 @@
-module Aws
+module AWS
   class RegionsController < ApplicationController
     def edit
       @region = Region.load

@@ -1,5 +1,5 @@
-module Aws
-  class InternetGateway < AwsResource
+module AWS
+  class InternetGateway < AWSResource
 
     def attach_to_vpc(vpc_id)
       @cli.attach_internet_gateway(vpc_id, self.id)

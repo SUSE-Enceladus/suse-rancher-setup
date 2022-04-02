@@ -1,5 +1,5 @@
-module Aws
-  class NatGateway < AwsResource
+module AWS
+  class NatGateway < AWSResource
     attr_accessor :subnet_id, :allocation_address_id, :internet_gateway_id
 
     private

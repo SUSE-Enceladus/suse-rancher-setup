@@ -1,4 +1,4 @@
-module Aws
-  module AwsHelper
+module AWS
+  module AWSHelper
   end
 end

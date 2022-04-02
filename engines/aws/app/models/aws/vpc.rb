@@ -1,5 +1,5 @@
-module Aws
-  class Vpc < AwsResource
+module AWS
+  class Vpc < AWSResource
 
     private
 

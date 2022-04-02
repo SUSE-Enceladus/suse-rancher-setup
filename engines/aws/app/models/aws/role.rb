@@ -1,5 +1,5 @@
-module Aws
-  class Role < AwsResource
+module AWS
+  class Role < AWSResource
     attr_accessor :target
 
     POLICIES_FOR_TARGET = {

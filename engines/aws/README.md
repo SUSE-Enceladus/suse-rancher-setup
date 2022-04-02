@@ -1,4 +1,4 @@
-# Aws
+# AWS
 Short description and motivation.
 
 ...based on https://github.com/SUSE/rmt/blob/master/docs/PLUGINS.md

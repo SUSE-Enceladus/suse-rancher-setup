@@ -1,11 +1,11 @@
-module Aws
-  class RouteTable < AwsResource
+module AWS
+  class RouteTable < AWSResource
     attr_accessor :vpc_id, :name
 
     private
 
     def set_cli
-      @cli = Aws::Cli.load
+      @cli = AWS::Cli.load
     end
 
     def aws_create

@@ -1,4 +1,4 @@
-module Aws
+module AWS
   class CliController < ApplicationController
     def new; end
 

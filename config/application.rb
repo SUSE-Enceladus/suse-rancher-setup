@@ -16,7 +16,7 @@ module CuratedCloudInstaller
 
     # Engines to load
     # The order determines the menu order - engines with no UI should be last
-    config.engines = ['Aws', 'ShirtSize', 'RancherOnEks', 'Helm']
+    config.engines = ['AWS', 'ShirtSize', 'RancherOnEks', 'Helm']
 
     # Application-level menu entries
     config.menu_entries = [

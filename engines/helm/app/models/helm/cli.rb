@@ -7,8 +7,8 @@ module Helm
 
     def self.load
       new(
-        credential: Aws::Credential.load(),
-        region: Aws::Region.load().value,
+        credential: AWS::Credential.load(),
+        region: AWS::Region.load().value,
         kubeconfig: '/tmp/kubeconfig'
       )
     end
