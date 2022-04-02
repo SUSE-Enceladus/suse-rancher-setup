@@ -9,6 +9,6 @@ en:
 
           Please try again."
         labels:
-          small: "Small - for up to 35 nodes under management"
-          medium: "Medium - for up to 75 nodes under management"
-          large: "Large - for up to 125 nodes under management"
+          small: "Small"
+          medium: "Medium"
+          large: "Large"

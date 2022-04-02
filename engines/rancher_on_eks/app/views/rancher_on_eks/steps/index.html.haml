@@ -1,7 +1,7 @@
 = page_header(t('engines.rancher_on_eks.steps.title'))
 -# body
 %p
-  %strong= t('engines.rancher_on_eks.steps.form_caption')
+  = markdown(t('engines.rancher_on_eks.steps.form_caption'))
 -# progress bar
 %div.container
   %div.d-flex.flex-row.border.border-dark.progress-bar
@@ -28,4 +28,3 @@
 -# end
 = render('layouts/navigation_buttons') do
   = previous_step_button()
-  = next_step_button()

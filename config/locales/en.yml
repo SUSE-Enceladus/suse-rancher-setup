@@ -36,23 +36,3 @@ en:
     previous: "Back"
     save: "Save"
     close: "Close"
-  filler: "Temporary content for development"
-  greeting:
-    content: "_This is Markdown rendered from the translation file._
-
-
-      **Magna dictumst dignissim** euismod aliquam sociis duis
-      porta feugiat ultricies bibendum a nunc porta a ullamcorper inceptos
-      fermentum suspendisse justo vestibulum placerat. Odio curae ridiculus
-      etiam pharetra ornare mauris platea adipiscing in ullamcorper a a urna
-      vestibulum vel euismod a sodales nec cras laoreet. Urna at taciti a fames
-      vestibulum parturient a ad magna pulvinar dis leo magna sem nam nascetur.
-
-
-      Scelerisque consectetur porttitor pharetra eget praesent parturient
-      vestibulum *adipiscing condimentum* dis sed a platea a velit a rutrum
-      viverra a cubilia vestibulum dolor lorem. Arcu vestibulum scelerisque
-      curabitur fringilla volutpat neque conubia lobortis mauris habitant
-      habitasse scelerisque a iaculis sociosqu bibendum commodo. A aenean
-      phasellus in convallis senectus quam euismod a interdum at laoreet a
-      scelerisque est et in ad neque condimentum."

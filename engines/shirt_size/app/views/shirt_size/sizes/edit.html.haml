@@ -1,8 +1,8 @@
 = page_header(t('engines.shirt_size.sizes.title'))
 -# body
 = form_with url: shirt_size.size_path, method: 'put' do |form|
+  = markdown(t('engines.shirt_size.sizes.form_caption'))
   %div.form-group
-    = form.label :arguments, t('engines.shirt_size.sizes.form_caption')
     - @sizes.each do |option|
       %div.form-check
         = form.radio_button :size, option, class: 'form-check-input eos-radio-btn', checked: (option == @size)

@@ -1,9 +1,8 @@
 = page_header(t('engines.aws.region.title'))
 -# body
 = form_with(model: @region, url: aws.region_path, method: 'put') do |form|
+  = markdown(t('engines.aws.region.form_caption'))
   %div.form-group
-    = form.label :value do
-      %strong= t('engines.aws.region.form_caption')
     = form.select(:value, @region.options, {}, { class: 'custom-select' })
   %div.form-group
     = form.submit t('actions.save'), class: 'btn btn-primary'
