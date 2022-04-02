@@ -1,4 +1,14 @@
 = page_header(t('engines.rancher_on_eks.wrapup.title'))
 -# body
-= markdown(t('engines.rancher_on_eks.wrapup.content', fqdn: @fqdn, password: @password))
+%p= markdown(t('engines.rancher_on_eks.wrapup.caption'))
+%p= markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
+%p= markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
+%hr
+%h3= t('engines.rancher_on_eks.wrapup.resources.subtitle')
+%p= t('engines.rancher_on_eks.wrapup.resources.caption')
+%ul
+  - @resources.each do |resource|
+    %li
+      = resource.type
+      = resource.id
 -# end
