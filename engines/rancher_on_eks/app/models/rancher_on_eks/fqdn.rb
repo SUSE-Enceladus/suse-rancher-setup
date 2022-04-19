@@ -14,5 +14,9 @@ module RancherOnEks
     def save!
       KeyValue.set(:fqdn, @value)
     end
+
+    def dns_available?
+      system("ping -c 1 -W 1 #{@value}")
+    end
   end
 end
