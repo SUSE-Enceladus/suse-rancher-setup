@@ -1,3 +1,5 @@
+require 'resolv'
+
 module RancherOnEks
   class Fqdn
     include ActiveModel::Model
@@ -15,8 +17,12 @@ module RancherOnEks
       KeyValue.set(:fqdn, @value)
     end
 
-    def dns_available?
-      system("ping -c 1 -W 1 #{@value}")
+    def subdomain_hosted_zone?
+      hosted_zone = @value.partition(".").last
+      @cli = AWS::Cli.load
+      @cli.get_hosted_zone_id hosted_zone
+    rescue
+      false
     end
   end
 end
