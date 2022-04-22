@@ -1,4 +1,4 @@
-require 'resolv'
+require 'open-uri'
 
 module RancherOnEks
   class Fqdn
@@ -21,6 +21,13 @@ module RancherOnEks
       hosted_zone = @value.partition(".").last
       @cli = AWS::Cli.load
       @cli.get_hosted_zone_id hosted_zone
+    rescue
+      false
+    end
+
+    def valid_url?
+      status = URI.open("https://#{@value}").status
+      status.include? 'OK'
     rescue
       false
     end
