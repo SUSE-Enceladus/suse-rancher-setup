@@ -15,7 +15,7 @@ module AWS
         redirect_to(helpers.next_step_path(aws.edit_credential_path))
       else
         flash[:warning] = @credential.errors.full_messages if valid_credentials
-        flash[:warning] = "Credentials are not valid." unless valid_credentials
+        flash[:warning] = t('flash.invalid_credentials') unless valid_credentials
         redirect_to(aws.edit_credential_path)
       end
     end

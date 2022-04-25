@@ -36,3 +36,8 @@ en:
     previous: "Back"
     save: "Save"
     close: "Close"
+
+  flash:
+    invalid_credentials: "Credentials are not valid."
+    invalid_url: "URL is not valid: "
+    no_hosted_zone: "The subdomain is not a route 53 hosted zone: "
