@@ -6,14 +6,16 @@ module AWS
 
     def update
       @credential = Credential.new(self.credential_params)
-      if @credential.save
+      valid_credentials = @credential.valid_credentials? self.credential_params
+      if valid_credentials && @credential.save
         flash[:success] = t(
           'engines.aws.credentials.using',
           key_id: @credential.aws_access_key_id
         )
         redirect_to(helpers.next_step_path(aws.edit_credential_path))
       else
-        flash[:warning] = @credential.errors.full_messages
+        flash[:warning] = @credential.errors.full_messages if valid_credentials
+        flash[:warning] = t('flash.invalid_credentials') unless valid_credentials
         redirect_to(aws.edit_credential_path)
       end
     end

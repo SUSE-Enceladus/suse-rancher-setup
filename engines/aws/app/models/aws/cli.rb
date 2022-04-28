@@ -60,6 +60,25 @@ module AWS
       end.sort!
     end
 
+    def validate_credentials(aws_access_key_id, aws_secret_access_key)
+      args = %w(ec2 describe-regions)
+      stdout, stderr = Cheetah.run(
+        ['aws', *args],
+        stdout: :capture,
+        stderr: :capture,
+        env: {
+          'AWS_ACCESS_KEY_ID' => aws_access_key_id,
+          'AWS_SECRET_ACCESS_KEY' => aws_secret_access_key,
+          'AWS_REGION' => @region,
+          'AWS_DEFAULT_REGION' => @region,
+          'AWS_DEFAULT_OUTPUT' => 'json'
+        }
+      )
+      return stderr if stderr.present?
+
+      JSON.parse(stdout)['Regions']
+    end
+
     def create_vpc(cidr_block='192.168.0.0/16', name='vpc')
       tag = "ResourceType=vpc,Tags=[{Key=Name,Value=\"#{self.tag_scope}/#{name}\"}]"
       args = %W(

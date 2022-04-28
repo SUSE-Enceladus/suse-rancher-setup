@@ -6,11 +6,19 @@ module RancherOnEks
 
     def update
       @fqdn = Fqdn.new(self.fqdn_params)
-      if @fqdn.save
+      hosted_zone = @fqdn.subdomain_hosted_zone?
+      valid_url = @fqdn.valid_url?
+      if valid_url && hosted_zone && @fqdn.save
         flash[:success] = t('engines.rancher_on_eks.fqdn.using', fqdn: @fqdn.value)
         redirect_to(helpers.next_step_path(rancher_on_eks.edit_fqdn_path))
       else
-        flash[:warning] = @fqdn.errors.full_messages
+        if !valid_url
+          flash[:warning] = t('flash.invalid_url') + "https://#{@fqdn.value}."
+        elsif !hosted_zone
+          flash[:warning] = t('flash.no_hosted_zone') + "#{@fqdn.value}."
+        else
+          flash[:warning] = @fqdn.errors.full_messages
+        end
         redirect_to(rancher_on_eks.edit_fqdn_path)
       end
     end

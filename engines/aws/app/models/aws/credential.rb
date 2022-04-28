@@ -27,5 +27,15 @@ module AWS
       KeyValue.set(:aws_access_key_id, @aws_access_key_id)
       KeyValue.set(:aws_secret_access_key, @aws_secret_access_key)
     end
+
+    def valid_credentials?(params)
+      @cli = AWS::Cli.load
+      @cli.validate_credentials(
+        params[:aws_access_key_id],
+        params[:aws_secret_access_key]
+      )
+    rescue
+      false
+    end
   end
 end
