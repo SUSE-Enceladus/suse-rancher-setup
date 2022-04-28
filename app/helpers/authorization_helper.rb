@@ -28,7 +28,7 @@ module AuthorizationHelper
   end
 
   def credentials_set?
-    credentials = AWS::Credential.load()
+    credentials = AWS::Credential.load
     credentials.aws_access_key_id.present? && credentials.aws_secret_access_key.present?
   end
 
