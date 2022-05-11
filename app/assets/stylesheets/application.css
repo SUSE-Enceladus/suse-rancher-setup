@@ -29,3 +29,6 @@
 .progress-bar .step.todo {
   background-color: #E4F6EE;
 }
+.no-hover {
+  pointer-events: none;
+}

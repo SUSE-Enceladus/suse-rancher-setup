@@ -1,6 +1,11 @@
 %li.menu-item
   %div.menu-element
     = link_to(caption, target, class: 'main-collapsed-single js-select-current-parent js-feature-flag')
-  = active_link_to(target, class: 'menu-title js-select-current-parent js-feature-flag', active: :exclusive, class_active: 'selected') do
-    %i.eos-icons-outlined= icon
-    %span.menu-title-content= caption
+  - if can(target)
+    = active_link_to(target, class: 'menu-title js-select-current-parent js-feature-flag') do
+      %i.eos-icons-outlined= icon
+      %span.menu-title-content= caption
+  - else
+    = link_to('', class: 'menu-title js-feature-flag disabled no-hover') do
+      %i.eos-icons-outlined= icon
+      %span.menu-title-content= caption

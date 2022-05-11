@@ -39,6 +39,7 @@ Requires:       %{ruby_version}
 Requires:       %{k8s_version}-client
 Requires:       helm
 Requires:       nginx
+Requires:       python3-cloudinstancecredentials
 # Does not build for i586, s390, aarch64 and is not supported on those architectures
 ExcludeArch:    %{ix86} s390 aarch64
 
