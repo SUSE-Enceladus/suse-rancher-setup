@@ -36,3 +36,6 @@
 
 # Ignore IDE cruft
 .vscode
+
+# Ignore certs and keys
+public/localhost.*
