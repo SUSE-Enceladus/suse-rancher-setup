@@ -102,3 +102,4 @@ en:
           Make sure to run those commands with your credentials available in the env, i.e.
           `AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar aws ec2 command --options`
           or download the commands:"
+        clean_resources_file: 'clean_resources_commands'

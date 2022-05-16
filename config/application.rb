@@ -23,7 +23,8 @@ module CuratedCloudInstaller
       { caption: 'Welcome', icon: 'home', target: '/'}
     ]
     config.lasso_run = "run"
-    config.foo = "nil"
+    config.lasso_commands = "nil"
+    config.lasso_commands_file = '/tmp/delete_resources_steps'
   end
 end
 

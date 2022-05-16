@@ -91,7 +91,7 @@ module Helm
         return stderr if stderr.present?
         return stdout
       else
-        File.open('/tmp/delete_resources_steps', 'a') do |f|
+        File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
           envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} " \
             "AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key} " \
             "KUBECONFIG=#{@kubeconfig}"
