@@ -20,6 +20,8 @@ module AWS
         @cli.disassociate_route_table(association['RouteTableAssociationId'])
       end
       @cli.delete_route_table(self.id)
+      throw(:abort) unless Rails.application.config.lasso_run.present?
+
       self.wait_until(:not_found)
     end
 

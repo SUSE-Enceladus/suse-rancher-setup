@@ -20,6 +20,8 @@ module AWS
         @cli.detach_internet_gateway(attachment['VpcId'], self.id)
       end
       @cli.delete_internet_gateway(self.id)
+      throw(:abort) unless Rails.application.config.lasso_run.present?
+
       self.wait_until(:not_found)
     end
 

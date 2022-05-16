@@ -12,6 +12,8 @@ module AWS
 
     def aws_destroy
       @cli.delete_cluster(self.id)
+      throw(:abort) unless Rails.application.config.lasso_run.present?
+
       self.wait_until(:DELETING)
       self.wait_until(:not_found)
     end

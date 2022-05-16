@@ -18,5 +18,11 @@ module Helm
       # must be implemented in child class
       raise NotImplementedError
     end
+
+    def helm_destroy
+      # call cleanup and destroy functions in Helm CLI
+      # must be implemented in child class
+      raise NotImplementedError
+    end
   end
 end

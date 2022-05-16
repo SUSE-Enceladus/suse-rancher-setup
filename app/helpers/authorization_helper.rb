@@ -22,6 +22,8 @@ module AuthorizationHelper
       credentials_set? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.steps_path
       fqdn_set?
+    when RancherOnEks::Engine.routes.url_helpers.wrapup_path
+      Step.all_complete?
     else
       false
     end

@@ -11,6 +11,7 @@ module RancherOnEks
     end
 
     def deploy
+      Rails.application.config.lasso_run = true
       @steps.find_by_rank(0).start!
       RancherOnEks::DeployerJob.perform_later()
       redirect_to rancher_on_eks.steps_path

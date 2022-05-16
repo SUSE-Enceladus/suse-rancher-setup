@@ -94,12 +94,19 @@ module K8s
       return stdout
     end
 
-    def delete_namespace(name)
-      args = %W(delete namespaces #{name})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
-    end
+    # def delete_namespace(name)
+    #   args = %W(delete namespaces #{name})
+    #   if Rails.application.config.lasso_run.present?
+    #     stdout, stderr = execute(*args)
+    #     return stderr if stderr.present?
+    #     return stdout
+    #   else
+    #     File.open('/tmp/delete_resources_steps', 'a') do |f|
+    #       envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key}"
+    #       f.write "#{envs} aws #{args.join(' ')} --region #{@region} --output json\n"
+    #     end
+    #   end
+    # end
 
     def update_cdr
       args = %W(

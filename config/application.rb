@@ -22,6 +22,8 @@ module CuratedCloudInstaller
     config.menu_entries = [
       { caption: 'Welcome', icon: 'home', target: '/'}
     ]
+    config.lasso_run = "run"
+    config.foo = "nil"
   end
 end
 

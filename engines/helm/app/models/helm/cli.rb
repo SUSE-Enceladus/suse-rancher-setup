@@ -82,9 +82,22 @@ module Helm
         uninstall #{name}
         --namespace #{namespace}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      handle_command(args)
+    end
+
+    def handle_command(args)
+      if Rails.application.config.lasso_run.present?
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      else
+        File.open('/tmp/delete_resources_steps', 'a') do |f|
+          envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} " \
+            "AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key} " \
+            "KUBECONFIG=#{@kubeconfig}"
+          f.write "#{envs} helm #{args.join(' ')} --region #{@region} --output json\n"
+        end
+      end
     end
   end
 end
