@@ -71,7 +71,7 @@ module AWS
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
 
-      regions = JSON.parse(stdout)
+      JSON.parse(stdout)
     end
 
     def validate_credentials(aws_access_key_id, aws_secret_access_key)
