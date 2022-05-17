@@ -60,6 +60,20 @@ module AWS
       end.sort!
     end
 
+    def describe_instance_type(region, instance_types)
+      args = %W(
+        ec2 describe-instance-type-offerings
+        --location-type availability-zone
+        --filters Name=instance-type,Values=#{instance_types}
+        --query InstanceTypeOfferings[].InstanceType
+        --region #{region}
+      )
+      stdout, stderr = execute(*args)
+      return stderr if stderr.present?
+
+      regions = JSON.parse(stdout)
+    end
+
     def validate_credentials(aws_access_key_id, aws_secret_access_key)
       args = %w(ec2 describe-regions)
       stdout, stderr = Cheetah.run(

@@ -19,5 +19,11 @@ module AWS
     def save!
       KeyValue.set(:aws_region, @value)
     end
+
+    def supported_instance_type
+      @cli = Cli.load
+      instance_types = RancherOnEks::ClusterSize.instance_types.values.join(',')
+      @cli.describe_instance_type(value, instance_types).present?
+    end
   end
 end
