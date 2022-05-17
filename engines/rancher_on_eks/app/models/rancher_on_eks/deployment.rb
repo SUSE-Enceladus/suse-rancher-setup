@@ -139,7 +139,6 @@ module RancherOnEks
         zones = @cli.list_availability_zones_supporting_instance_type(
           @cluster_size.instance_type
         )
-        puts "ZONEESSS #{zones}"
         if zones.length >= @cluster_size.zones_count
           @zones = zones.sample(@cluster_size.zones_count)
         else
@@ -150,7 +149,6 @@ module RancherOnEks
             @zones << zones.sample()
           end
         end
-        puts "CHJOSEN ZONES #{@zones}"
         @fqdn = RancherOnEks::Fqdn.load()
         nil
       end
@@ -234,7 +232,6 @@ module RancherOnEks
       end
 
       step(17) do
-        puts "STEP 17"
         subnet_ids =
           @public_subnets.collect(&:id) + @private_subnets.collect(&:id)
         @cluster = AWS::Cluster.create(

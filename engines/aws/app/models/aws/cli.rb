@@ -393,7 +393,6 @@ module AWS
         --role-arn #{role_arn}
         --resources-vpc-config subnetIds=#{subnets_ids},securityGroupIds=#{sg_id}
       )
-      puts "WEEEEL cli create clustaaaa"
       handle_command(args)
     end
 
@@ -402,7 +401,6 @@ module AWS
         eks delete-cluster
         --name #{name}
       )
-      puts "DEELETING CLASSSSSSTAHHH"
       handle_command(args)
     end
 
