@@ -17,7 +17,7 @@ module AuthorizationHelper
     when AWS::Engine.routes.url_helpers.edit_region_path
       credentials_set?
     when ShirtSize::Engine.routes.url_helpers.edit_size_path
-      true
+      region_set?
     when RancherOnEks::Engine.routes.url_helpers.edit_fqdn_path
       credentials_set? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.steps_path

@@ -9,12 +9,25 @@ module RancherOnEks
       large: 'm5a.2xlarge'
     }
 
+    TYPES_INDEX = {
+      small: 0,
+      medium: 1,
+      large: 2
+    }
+
     def initialize(*args)
       @size = KeyValue.get('cluster_size', 'small')
     end
 
     def instance_type
-      TYPES_FOR_SIZE[@size.to_sym]
+      @region = AWS::Region.load
+      supported_instance_types = @region.supported_instance_types
+      supported_instance_types = supported_instance_types.split(',')
+      supported_instance_types[TYPES_INDEX[@size.to_sym]]
+    end
+
+    def self.instance_types
+      TYPES_FOR_SIZE
     end
 
     def instance_count
