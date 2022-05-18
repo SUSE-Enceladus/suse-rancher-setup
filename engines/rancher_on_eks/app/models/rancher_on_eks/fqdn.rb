@@ -24,12 +24,5 @@ module RancherOnEks
     rescue
       false
     end
-
-    def valid_url?
-      status = URI.open("https://#{@value}").status
-      status.include? 'OK'
-    rescue
-      false
-    end
   end
 end
