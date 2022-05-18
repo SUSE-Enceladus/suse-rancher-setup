@@ -22,7 +22,7 @@
 %define         k8s_version  kubernetes1.18
 
 Name:           curated-cloud-installer
-Version:        0.3.0
+Version:        0.4.0
 Release:        0
 Summary:        Curated Cloud Installation of Rancher on AWS EKS
 License:        GPL-3.0
