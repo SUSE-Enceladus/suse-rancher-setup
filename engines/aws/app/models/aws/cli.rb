@@ -39,15 +39,22 @@ module AWS
       end
     end
 
-    def run_command(args)
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+    def handle_command(args)
+      if Rails.application.config.lasso_run.present?
+        stdout, stderr = execute(*args)
+        return stderr if stderr.present?
+        return stdout
+      else
+        File.open('/tmp/delete_resources_steps', 'a') do |f|
+          envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key}"
+          f.write "#{envs} aws #{args.join(' ')} --region #{@region} --output json\n"
+        end
+      end
     end
 
     def version
       args = ['--version']
-      run_command(args)
+      handle_command(args)
     end
 
     def regions
@@ -86,7 +93,7 @@ module AWS
         --cidr-block #{cidr_block}
         --tag-specifications #{tag}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_vpc(vpc_id)
@@ -98,7 +105,7 @@ module AWS
 
     def delete_vpc(vpc_id)
       args = %W(ec2 delete-vpc --vpc-id #{vpc_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_subnet(subnet_id)
@@ -142,7 +149,7 @@ module AWS
         --vpc-id #{vpc_id}
         --tag-specifications #{tag_name}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def get_availability_zones
@@ -162,12 +169,12 @@ module AWS
         --subnet-id #{subnet_id}
         --map-public-ip-on-launch
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def delete_subnet(subnet_id)
       args = %W(ec2 delete-subnet --subnet-id #{subnet_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_internet_gateway(igw_id)
@@ -184,7 +191,7 @@ module AWS
         ec2 create-internet-gateway
         --tag-specifications #{tag}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def attach_internet_gateway(vpc_id, ig_id)
@@ -193,7 +200,7 @@ module AWS
         --vpc-id #{vpc_id}
         --internet-gateway-id #{ig_id}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def detach_internet_gateway(vpc_id, igw_id)
@@ -202,12 +209,12 @@ module AWS
         --internet-gateway-id #{igw_id}
         --vpc-id #{vpc_id}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def delete_internet_gateway(ig_id)
       args = %W(ec2 delete-internet-gateway --internet-gateway-id #{ig_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_allocation_address(eip_id)
@@ -218,17 +225,17 @@ module AWS
     def allocate_address(name='elastic-ip')
       tag = "ResourceType=elastic-ip,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
       args = %W(ec2 allocate-address --domain vpc --tag-specifications #{tag})
-      run_command(args)
+      handle_command(args)
     end
 
     def release_address(allocation_address_id)
       args = %W(ec2 release-address --allocation-id #{allocation_address_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_nat_gateway(nat_id)
       args = %W(ec2 describe-nat-gateways --nat-gateway-ids #{nat_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def create_nat_gateway(subnet_id, allocation_id, name='nat-gateway')
@@ -240,12 +247,12 @@ module AWS
         --tag-specifications #{tag}
         --allocation-id #{allocation_id}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def delete_nat_gateway(natgw_id)
       args = %W(ec2 delete-nat-gateway --nat-gateway-id #{natgw_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_route_table(route_table_id)
@@ -260,7 +267,7 @@ module AWS
         --vpc-id #{vpc_id}
         --tag-specifications #{tag}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def associate_route_table(subnet_id, route_table_id)
@@ -269,7 +276,7 @@ module AWS
         --subnet-id #{subnet_id}
         --route-table-id #{route_table_id}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def disassociate_route_table(association_id)
@@ -277,7 +284,7 @@ module AWS
         ec2 disassociate-route-table
         --association-id #{association_id}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def create_route(route_table_id, gw_id)
@@ -287,12 +294,12 @@ module AWS
         --gateway-id #{gw_id}
         --destination-cidr-block 0.0.0.0/0
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def delete_route_table(route_table_id)
       args = %W(ec2 delete-route-table --route-table-id #{route_table_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_security_group(group_id)
@@ -309,14 +316,14 @@ module AWS
         --description #{description}
       )
       # --description \"Security Group for #{@tag_scope}\"
-      run_command(args)
+      handle_command(args)
     rescue StandardError => e
       debugger
     end
 
     def delete_security_group(group_id)
       args = %W(ec2 delete-security-group --group-id #{group_id})
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_role(role_name)
@@ -329,7 +336,7 @@ module AWS
         iam list-attached-role-policies
         --role-name #{name}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def create_role(name, target)
@@ -340,7 +347,7 @@ module AWS
         --role-name #{role_name}
         --assume-role-policy-document #{policy_doc}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def delete_role(name)
@@ -348,7 +355,7 @@ module AWS
         iam delete-role
         --role-name #{name}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def attach_role_policy(name, policy)
@@ -357,7 +364,7 @@ module AWS
         --role-name #{name}
         --policy-arn arn:aws:iam::aws:policy/#{policy}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def detach_role_policy(role_name, policy_arn)
@@ -366,7 +373,7 @@ module AWS
         --role-name #{role_name}
         --policy-arn #{policy_arn}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_cluster(cluster_name)
@@ -386,7 +393,7 @@ module AWS
         --role-arn #{role_arn}
         --resources-vpc-config subnetIds=#{subnets_ids},securityGroupIds=#{sg_id}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def delete_cluster(name)
@@ -394,7 +401,7 @@ module AWS
         eks delete-cluster
         --name #{name}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def update_kube_config(cluster_name, kubeconfig="/tmp/kubeconfig")
@@ -404,7 +411,7 @@ module AWS
         --name #{cluster_name}
         --kubeconfig #{kubeconfig}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def describe_node_group(node_group_name, cluster_name)
@@ -439,7 +446,7 @@ module AWS
         --subnets
       )
       args << public_subnet_ids
-      run_command(args)
+      handle_command(args)
     rescue Cheetah::ExecutionFailed => err
       puts err.stderr
       debugger
@@ -451,12 +458,12 @@ module AWS
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      run_command(args)
+      handle_command(args)
     end
 
     def get_hosted_zones(dns_name)
       args = %W(route53 list-hosted-zones-by-name --dns-name #{dns_name})
-      run_command(args)
+      handle_command(args)
     end
 
     def get_hosted_zone_id(domain)
@@ -505,14 +512,14 @@ module AWS
         --hosted-zone-id #{hosted_zone_id}
         --change-batch file://#{tmp_path}
       )
-      output = run_command(args)
+      output = handle_command(args)
       FileUtils.rm_f(tmp_path)
       output
     end
 
     def route53_get_change(id)
       args = %W(route53  get-change --id #{id})
-      run_command(args)
+      handle_command(args)
     end
 
     def steps

@@ -11,6 +11,8 @@ module AWS
 
     def aws_destroy
       @cli.release_address(self.id)
+      throw(:abort) unless Rails.application.config.lasso_run.present?
+
       self.wait_until(:not_found)
     end
 

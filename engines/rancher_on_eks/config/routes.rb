@@ -7,5 +7,5 @@ RancherOnEks::Engine.routes.draw do
     end
   end
 
-  resource :wrapup, controller: 'wrapup', only: [:show]
+  resource :wrapup, controller: 'wrapup', only: [:show, :destroy]
 end

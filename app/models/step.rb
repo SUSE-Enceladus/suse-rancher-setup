@@ -9,6 +9,14 @@ class Step < ApplicationRecord
     Step.count > 0 && Step.where(completed_at: nil).count == 0
   end
 
+  def self.all_deleted?
+    Step.count == 0
+  end
+
+  def self.resources_left?
+    Step.count > 0 && Step.where(completed_at: nil).count > 0
+  end
+
   def start!
     self.update_attribute(:started_at, DateTime.now)
   end

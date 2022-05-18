@@ -4,6 +4,37 @@
 %p= markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
 %p= markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
 %hr
+%div.float-left.btn-group.steps-container.form_container.container
+  - if @downloading
+    = button_to wrapup_path(run: true), method: :delete, class: "btn btn-danger", disabled: true, id: "destroy", title: t('tooltips.run')  do
+      %i.eos-icons cloud_off
+      = t('clean_resources')
+  - else
+    - if @resources_deleted
+      = button_to wrapup_path(run: true), method: :delete, disabled: true, class: "btn btn-danger", id: "destroy", title: t('tooltips.run')  do
+        %i.eos-icons-outlined check_circle
+        = t('resources_cleaned')
+    - elsif @in_process
+      = button_to wrapup_path(run: true), method: :delete, disabled: true, class: "btn btn-danger", id: "destroy", title: t('tooltips.run')  do
+        = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
+        = t('cleaning_resources')
+    - else
+      = button_to wrapup_path(run: true), method: :delete, class: "btn btn-danger", id: "destroy", title: t('tooltips.run')  do
+        %i.eos-icons cloud_off
+        = t('clean_resources')
+  - if @downloading
+    = button_to wrapup_path(run: nil), method: :delete, class: "btn btn-outline-primary download", disabled: true, id: "destroy-commands", title: t('tooltips.run')  do
+      = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
+      = t('generating_clean_resources_commands')
+  - elsif @lasso_commands  || @in_process || @resources_deleted
+    = button_to wrapup_path(run: nil), method: :delete, class: "btn btn-outline-primary download", disabled: true, id: "destroy-commands", title: t('tooltips.run')  do
+      %i.eos-icons articles
+      = t('generate_clean_resources_commands')
+  - else
+    = button_to wrapup_path(run: nil), method: :delete, class: "btn btn-outline-primary download", id: "destroy-commands", title: t('tooltips.run')  do
+      %i.eos-icons article
+      = t('generate_clean_resources_commands')
+
 %h3= t('engines.rancher_on_eks.wrapup.resources.subtitle')
 %p= t('engines.rancher_on_eks.wrapup.resources.caption')
 %ul
@@ -12,3 +43,46 @@
       = resource.type
       = resource.id
 -# end
+%div.float-left.btn-group.steps-container.form_container.container
+  - if @downloading
+    = button_to wrapup_path(run: true), method: :delete, class: "btn btn-danger", disabled: true, id: "destroy", title: t('tooltips.run')  do
+      %i.eos-icons cloud_off
+      = t('clean_resources')
+  - else
+    - if @resources_deleted
+      = button_to wrapup_path(run: true), method: :delete, disabled: true, class: "btn btn-danger", id: "destroy", title: t('tooltips.run')  do
+        %i.eos-icons-outlined check_circle
+        = t('resources_cleaned')
+    - elsif @in_process
+      = button_to wrapup_path(run: true), method: :delete, disabled: true, class: "btn btn-danger", id: "destroy", title: t('tooltips.run')  do
+        = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
+        = t('cleaning_resources')
+    - else
+      = button_to wrapup_path(run: true), method: :delete, class: "btn btn-danger", id: "destroy", title: t('tooltips.run')  do
+        %i.eos-icons cloud_off
+        = t('clean_resources')
+  - if @downloading
+    = button_to wrapup_path(run: nil), method: :delete, class: "btn btn-outline-primary download", disabled: true, id: "destroy-commands", title: t('tooltips.run')  do
+      = image_tag 'rotating_gear.svg', alt: 'working...', height: 24
+      = t('generating_clean_resources_commands')
+  - elsif @lasso_commands || @in_process || @resources_deleted
+    = button_to wrapup_path(run: nil), method: :delete, class: "btn btn-outline-primary download", disabled: true, id: "destroy-commands", title: t('tooltips.run')  do
+      %i.eos-icons article
+      = t('generate_clean_resources_commands')
+  - else
+    = button_to wrapup_path(run: nil), method: :delete, class: "btn btn-outline-primary download", id: "destroy-commands", title: t('tooltips.run')  do
+      %i.eos-icons article
+      = t('generate_clean_resources_commands')
+
+- if @lasso_commands
+  %h3= t('engines.rancher_on_eks.wrapup.commands.subtitle')
+  %p= markdown(t('engines.rancher_on_eks.wrapup.commands.caption'))
+  %div.float-left.btn-group.steps-container.form_container.container.download-commands
+    = button_to wrapup_path, method: :get, class: "btn btn-outline-primary", id: "destroy-commands", title: t('tooltips.run'), params: {download: true}  do
+      %i.eos-icons archive
+      = t('clean_resources_commands')
+
+  %div#commands
+    - if @commands
+      - @commands.each do |command|
+        %p= command[@substring.length..-1]

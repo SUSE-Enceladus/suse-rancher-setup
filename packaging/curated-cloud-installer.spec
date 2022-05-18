@@ -67,6 +67,7 @@ bundle.%{ruby_version} install --local
 mkdir -p %{buildroot}%{app_dir}
 mkdir -p %{buildroot}%{lib_dir}
 mkdir -p %{buildroot}%{data_dir}
+mkdir -p %{_sharedstatedir}/%{name}
 
 mv vendor %{buildroot}%{lib_dir}
 mv db %{buildroot}%{data_dir}

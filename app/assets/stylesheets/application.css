@@ -32,3 +32,18 @@
 .no-hover {
   pointer-events: none;
 }
+form.button_to {
+    width: 50% !important;
+    margin: 0 auto !important;
+}
+.container {
+    width: 100%;
+}
+.hide {
+    display: none;
+}
+.download-commands {
+    float: right !important;
+    width: 50% !important;
+    margin-right: 64% !important;
+}

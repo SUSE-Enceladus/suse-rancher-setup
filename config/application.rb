@@ -22,6 +22,9 @@ module CuratedCloudInstaller
     config.menu_entries = [
       { caption: 'Welcome', icon: 'home', target: '/'}
     ]
+    config.lasso_run = "run"
+    config.lasso_commands = "nil"
+    config.lasso_commands_file = '/var/lib/curated-cloud-installer/delete_resources_steps'
   end
 end
 

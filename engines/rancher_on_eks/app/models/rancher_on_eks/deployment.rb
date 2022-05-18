@@ -230,6 +230,7 @@ module RancherOnEks
       step(16) do
         @cluster_role = AWS::Role.create(target: 'cluster')
       end
+
       step(17) do
         subnet_ids =
           @public_subnets.collect(&:id) + @private_subnets.collect(&:id)
@@ -283,10 +284,10 @@ module RancherOnEks
       end
     end
 
-    def rollback
+    def self.rollback
       Step.all.order(rank: :desc).each do |step|
         step.resource&.destroy
-        step.destroy
+        step.destroy if Rails.application.config.lasso_run.present?
       end
     end
   end

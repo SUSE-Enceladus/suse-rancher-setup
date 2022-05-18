@@ -94,13 +94,6 @@ module K8s
       return stdout
     end
 
-    def delete_namespace(name)
-      args = %W(delete namespaces #{name})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
-    end
-
     def update_cdr
       args = %W(
         apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
