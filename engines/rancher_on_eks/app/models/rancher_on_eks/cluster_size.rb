@@ -21,10 +21,9 @@ module RancherOnEks
 
     def instance_type
       @region = AWS::Region.load
-      supported_instance_type = @region.supported_instance_type
-      supported_instance_type = supported_instance_type.split(',')
-      # TYPES_FOR_SIZE[@size.to_sym]
-      supported_instance_type[TYPES_INDEX[@size.to_sym]]
+      supported_instance_types = @region.supported_instance_types
+      supported_instance_types = supported_instance_types.split(',')
+      supported_instance_types[TYPES_INDEX[@size.to_sym]]
     end
 
     def self.instance_types

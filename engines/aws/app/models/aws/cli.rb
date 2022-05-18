@@ -60,7 +60,7 @@ module AWS
       end.sort!
     end
 
-    def describe_instance_type(region, instance_types)
+    def describe_instance_type_offerings(region, instance_types)
       args = %W(
         ec2 describe-instance-type-offerings
         --location-type availability-zone

@@ -20,13 +20,13 @@ module AWS
       KeyValue.set(:aws_region, @value)
     end
 
-    def supported_instance_type
+    def supported_instance_types
       @cli = Cli.load
       instance_types = RancherOnEks::ClusterSize.instance_types.values.join(',')
-      if @cli.describe_instance_type(value, instance_types).empty?
+      if @cli.describe_instance_type_offerings(value, instance_types).empty?
         [4, 5].each do |instance_type_number|
           instance_types = "m#{instance_type_number}.large,m#{instance_type_number}.xlarge,m#{instance_type_number}.2xlarge"
-          return instance_types if @cli.describe_instance_type(value, instance_types).present?
+          return instance_types if @cli.describe_instance_type_offerings(value, instance_types).present?
         end
         nil
       else

@@ -6,7 +6,7 @@ module AWS
 
     def update
       @region = Region.new(region_params)
-      if @region.supported_instance_type.present? && @region.save
+      if @region.supported_instance_types.present? && @region.save
         flash[:success] = t('engines.aws.region.using', region: @region.value)
         redirect_to(helpers.next_step_path(aws.edit_region_path))
       else
