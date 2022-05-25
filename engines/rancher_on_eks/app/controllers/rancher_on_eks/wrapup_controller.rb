@@ -26,6 +26,7 @@ module RancherOnEks
       deleting = true if Rails.application.config.lasso_run.present?
 
       Rails.application.config.lasso_commands = "running" unless deleting
+      File.delete(Rails.application.config.lasso_commands_file) unless deleting || !File.exist?(Rails.application.config.lasso_commands_file)
       RancherOnEks::WrapupJob.perform_later()
       redirect_to rancher_on_eks.wrapup_path(deleting: deleting)
     end
