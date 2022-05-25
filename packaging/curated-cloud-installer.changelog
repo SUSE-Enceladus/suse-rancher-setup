@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Wed May 18 16:08:22 UTC 2022 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
+
+- version 0.4.0
+  + Form validation
+  + Navigation flow
+  + SSL support
+  + User/password protection
+  + Cleanup/rollback
+  + Support for no available instance types in AZs
+
+-------------------------------------------------------------------
+Sat Apr  2 03:39:54 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.2.1
+  + Remove acronym handlers; revert refactor
+
+-------------------------------------------------------------------
 Sat Apr  2 01:44:39 UTC 2022 - James Mason <jmason@suse.com>
 
 - version 0.2.0
