@@ -12,6 +12,8 @@ module RancherOnEks
     private
 
     def handle_cli_exception(exception)
+      Rails.logger.error exception.message
+      Rails.logger.error exception.stderr
       Rails.application.config.lasso_error = exception.stderr
     end
   end
