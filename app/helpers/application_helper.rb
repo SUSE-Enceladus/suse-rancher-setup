@@ -65,6 +65,19 @@ module ApplicationHelper
     end
   end
 
+  def cancel_deploy_button()
+    img_tag = content_tag(:i, 'cancel', class: 'eos-icons')
+    span_tag = content_tag(:span, t('cancel_deployment'))
+    tags = [img_tag, span_tag]
+
+    style = "color: red; border-color:red; float: left"
+    link_to(wrapup_path(cancel: true), class: "btn btn-secondary", style: style) do
+      tags.map do |item|
+        concat(item)
+      end
+    end
+  end
+
   def page_header(title)
     render('layouts/page_header', title: title)
   end

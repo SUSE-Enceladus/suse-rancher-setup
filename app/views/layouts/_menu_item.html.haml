@@ -1,7 +1,7 @@
 %li.menu-item
   %div.menu-element
     = link_to(caption, target, class: 'main-collapsed-single js-select-current-parent js-feature-flag')
-  - if can(target)
+  - if (can(target) && !@cancel_deploy) || (target.include?('wrapup') && @cancel_deploy)
     = active_link_to(target, class: 'menu-title js-select-current-parent js-feature-flag') do
       %i.eos-icons-outlined= icon
       %span.menu-title-content= caption

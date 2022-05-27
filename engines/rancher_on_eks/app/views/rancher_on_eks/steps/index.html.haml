@@ -27,4 +27,7 @@
       = form.submit t('actions.exec'), class: 'btn btn-primary'
 -# end
 = render('layouts/navigation_buttons') do
+  -if @cancel_deploy
+    = cancel_deploy_button()
+  -# end
   = previous_step_button()
