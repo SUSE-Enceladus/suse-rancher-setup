@@ -47,3 +47,7 @@ form.button_to {
     width: 50% !important;
     margin-right: 64% !important;
 }
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}

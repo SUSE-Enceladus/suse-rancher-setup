@@ -60,8 +60,9 @@ module ApplicationHelper
   end
 
   def previous_step_button(origin_path=request.path)
+    disabled = if @refresh_timer then "disabled" else "" end
     if path = previous_step_path(origin_path)
-      link_to(t('actions.previous'), path, class: "btn btn-secondary")
+      link_to(t('actions.previous'), path, class: "btn btn-secondary #{disabled}")
     end
   end
 
