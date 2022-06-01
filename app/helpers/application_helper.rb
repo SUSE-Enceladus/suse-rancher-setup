@@ -26,7 +26,7 @@ module ApplicationHelper
     uncommented_text = text.gsub(/<!--(.*?)-->/, '')
 
     markdown = Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(render_options),
+      LassoRender.new(render_options),
       markdown_options
     )
     markdown.render(uncommented_text).html_safe
@@ -54,27 +54,16 @@ module ApplicationHelper
   end
 
   def next_step_button(origin_path=request.path)
+    style = if @deploy_failed then "float: left" else "" end
     if path = next_step_path(origin_path)
-      link_to(t('actions.next'), path, class: "btn btn-primary")
+      link_to(t('actions.next'), path, class: "btn btn-primary", style: style)
     end
   end
 
   def previous_step_button(origin_path=request.path)
+    disabled = if (@refresh_timer || @deploy_failed) then "disabled" else "" end
     if path = previous_step_path(origin_path)
-      link_to(t('actions.previous'), path, class: "btn btn-secondary")
-    end
-  end
-
-  def cancel_deploy_button()
-    img_tag = content_tag(:i, 'cancel', class: 'eos-icons')
-    span_tag = content_tag(:span, t('cancel_deployment'))
-    tags = [img_tag, span_tag]
-
-    style = "color: red; border-color:red; float: left"
-    link_to(wrapup_path(cancel: true), class: "btn btn-secondary", style: style) do
-      tags.map do |item|
-        concat(item)
-      end
+      link_to(t('actions.previous'), path, class: "btn btn-secondary #{disabled}")
     end
   end
 

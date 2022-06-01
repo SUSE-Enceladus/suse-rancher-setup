@@ -5,11 +5,12 @@ module RancherOnEks
     def index
       @deployable = Step.deployable?
       @complete = Step.all_complete?
+      @resources = Resource.all
       redirect_to rancher_on_eks.wrapup_path if @complete
 
       if Rails.application.config.lasso_error != ""
         flash.now[:danger] = Rails.application.config.lasso_error
-        @cancel_deploy = true
+        @deploy_failed = true
         @complete = true
       end
       @refresh_timer = 15 unless (@deployable || @complete)
