@@ -1,17 +1,18 @@
 en:
   product_brand:
-    short_title: "SUSE Lasso"
-    long_title: "SUSE Lasso - the curated installer for Rancher"
+    short_title: "SUSE Rancher Setup"
+    long_title: "SUSE Rancher Setup - the curated installer for Rancher"
   greeting:
-    content: "Rancher is a complete software stack for teams adopting
-      containers. It addresses the operational and security challenges of
-      managing multiple Kubernetes clusters, while providing DevOps teams with
-      integrated tools for running containerized workloads.
+    content: "This tool is designed to automate the deployment of Rancher
+      Manager in your AWS account. At the end of this process, you should
+      have a highly-available instance of Rancher running on EKS. To get
+      the most out of your Rancher experience, we recommend you familiarize
+      yourself with the product documentation: [rancher docs](https://rancher.com/docs/)
 
 
-      So, you shouldn't have to be an expert in container management to run
-      Rancher. **SUSE Lasso** will make Rancher set up as easy as we can make
-      it... you just need a few things in place to deploy Rancher on a dedicated
+      You shouldn't have to be an expert in container management to run Rancher.
+      **SUSE Rancher Setup** tool will make the process as easy as we can make it…
+      you’ll just need to provide a few things to deploy Rancher on a dedicated
       AWS EKS cluster, sized just right for your needs.
 
 
