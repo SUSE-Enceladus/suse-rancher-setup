@@ -24,6 +24,7 @@ module CuratedCloudInstaller
     ]
     config.lasso_run = "run"
     config.lasso_commands = "nil"
+    config.lasso_error = ""
     config.lasso_commands_file = '/var/lib/curated-cloud-installer/delete_resources_steps'
   end
 end
