@@ -26,7 +26,7 @@ module ApplicationHelper
     uncommented_text = text.gsub(/<!--(.*?)-->/, '')
 
     markdown = Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML.new(render_options),
+      LassoRender.new(render_options),
       markdown_options
     )
     markdown.render(uncommented_text).html_safe
