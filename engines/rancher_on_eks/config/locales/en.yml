@@ -11,7 +11,7 @@ en:
 
 
       You shouldn't have to be an expert in container management to run Rancher.
-      SUSE Rancher Setup tool will make the process as easy as we can make it…
+      **SUSE Rancher Setup** tool will make the process as easy as we can make it…
       you’ll just need to provide a few things to deploy Rancher on a dedicated
       AWS EKS cluster, sized just right for your needs.
 
