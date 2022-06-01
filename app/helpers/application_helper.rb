@@ -54,13 +54,14 @@ module ApplicationHelper
   end
 
   def next_step_button(origin_path=request.path)
+    style = if @deploy_failed then "float: left" else "" end
     if path = next_step_path(origin_path)
-      link_to(t('actions.next'), path, class: "btn btn-primary")
+      link_to(t('actions.next'), path, class: "btn btn-primary", style: style)
     end
   end
 
   def previous_step_button(origin_path=request.path)
-    disabled = if @refresh_timer then "disabled" else "" end
+    disabled = if (@refresh_timer || @deploy_failed) then "disabled" else "" end
     if path = previous_step_path(origin_path)
       link_to(t('actions.previous'), path, class: "btn btn-secondary #{disabled}")
     end

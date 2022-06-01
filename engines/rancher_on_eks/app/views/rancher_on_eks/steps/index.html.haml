@@ -38,4 +38,7 @@
 -# end
 
 = render('layouts/navigation_buttons') do
+  -if @deploy_failed
+    = next_step_button()
+  -# end
   = previous_step_button()

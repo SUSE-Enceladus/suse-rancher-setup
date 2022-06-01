@@ -8,7 +8,11 @@ module RancherOnEks
       @resources = Resource.all
       redirect_to rancher_on_eks.wrapup_path if @complete
 
-      flash.now[:danger] = Rails.application.config.lasso_error if Rails.application.config.lasso_error != ""
+      if Rails.application.config.lasso_error != ""
+        flash.now[:danger] = Rails.application.config.lasso_error
+        @deploy_failed = true
+        @complete = true
+      end
       @refresh_timer = 15 unless (@deployable || @complete)
     end
 
