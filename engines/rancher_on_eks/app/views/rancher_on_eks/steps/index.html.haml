@@ -26,5 +26,16 @@
     %div.form-group
       = form.submit t('actions.exec'), class: 'btn btn-primary'
 -# end
+
+- if @resources.length > 0
+  %p= t('engines.rancher_on_eks.wrapup.resources.caption')
+  %ul
+    - @resources.each do |resource|
+      %li
+        = resource.type
+        = resource.id
+    -# end
+-# end
+
 = render('layouts/navigation_buttons') do
   = previous_step_button()
