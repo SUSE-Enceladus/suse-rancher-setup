@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module CuratedCloudInstaller
+module SUSERancherSetup
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
@@ -25,7 +25,7 @@ module CuratedCloudInstaller
     config.lasso_run = "run"
     config.lasso_commands = "nil"
     config.lasso_error = ""
-    config.lasso_commands_file = '/var/lib/curated-cloud-installer/delete_resources_steps'
+    config.lasso_commands_file = '/var/lib/suse-rancher-setup/delete_resources_steps'
   end
 end
 

@@ -1,5 +1,5 @@
 #
-# spec file for package curated-cloud-installer
+# spec file for package suse-rancher-setup
 #
 # Copyright (c) 2022 SUSE LLC
 #
@@ -14,22 +14,22 @@
 
 # Please submit bugfixes or comments via https://bugs.opensuse.org/
 #
-%define         app_dir      %{_datadir}/curated-cloud-installer
-%define         lib_dir      %{_libdir}/curated-cloud-installer
-%define         data_dir     %{_sharedstatedir}/curated-cloud-installer
+%define         app_dir      %{_datadir}/suse-rancher-setup
+%define         lib_dir      %{_libdir}/suse-rancher-setup
+%define         data_dir     %{_sharedstatedir}/suse-rancher-setup
 
 %define         ruby_version ruby3.0
 %define         k8s_version  kubernetes1.18
 
-Name:           curated-cloud-installer
+Name:           suse-rancher-setup
 Version:        0.5.0
 Release:        0
-Summary:        Curated Cloud Installation of Rancher on AWS EKS
+Summary:        SUSE Rancher Setup on Public Cloud k8s service
 License:        GPL-3.0
 Group:          Productivity/Networking/Web/Frontends
-URL:            http://www.github.com/suse-enceladus/curated-cloud-installer
+URL:            http://www.github.com/suse-enceladus/suse-rancher-setup
 Source0:        %{name}-%{version}.tar.bz2
-Source1:        curated-cloud-installer.rpmlintrc
+Source1:        suse-rancher-setup.rpmlintrc
 BuildRequires:  %{ruby_version}-devel
 BuildRequires:  chrpath
 BuildRequires:  gcc
@@ -81,13 +81,13 @@ ln -s %{data_dir}/log %{buildroot}%{app_dir}/log
 
 # systemd
 mkdir -p %{buildroot}%{_unitdir}
-install -m 644 server-configs/systemd/curated-cloud-installer.service %{buildroot}%{_unitdir}
+install -m 644 server-configs/systemd/suse-rancher-setup.service %{buildroot}%{_unitdir}
 
 # nginx
-install -D -m 644 server-configs/nginx/curated-cloud-installer.conf %{buildroot}%{_sysconfdir}/nginx/vhosts.d/curated-cloud-installer.conf
+install -D -m 644 server-configs/nginx/suse-rancher-setup.conf %{buildroot}%{_sysconfdir}/nginx/vhosts.d/suse-rancher-setup.conf
 
 # set relocated destination for gems
-sed -i -e '/BUNDLE_PATH: .*/cBUNDLE_PATH: "\/usr\/lib64\/curated-cloud-installer\/vendor\/bundle\/"' \
+sed -i -e '/BUNDLE_PATH: .*/cBUNDLE_PATH: "\/usr\/lib64\/suse-rancher-setup\/vendor\/bundle\/"' \
     -e 's/^BUNDLE_JOBS: .*/BUNDLE_JOBS: "1"/' \
     %{buildroot}%{app_dir}/.bundle/config
 
@@ -131,19 +131,19 @@ chrpath -d %{buildroot}%{lib_dir}/vendor/bundle/ruby/*/gems/nokogiri-*/lib/nokog
 %doc README.md LICENSE
 %{lib_dir}
 %attr(-,root,root) %{data_dir}
-%{_unitdir}/curated-cloud-installer.service
-%config(noreplace) %{_sysconfdir}/nginx/vhosts.d/curated-cloud-installer.conf
+%{_unitdir}/suse-rancher-setup.service
+%config(noreplace) %{_sysconfdir}/nginx/vhosts.d/suse-rancher-setup.conf
 
 %pre
-%service_add_pre curated-cloud-installer.service
+%service_add_pre suse-rancher-setup.service
 
 %post
-%service_add_post curated-cloud-installer.service
+%service_add_post suse-rancher-setup.service
 
 %preun
-%service_del_preun curated-cloud-installer.service
+%service_del_preun suse-rancher-setup.service
 
 %postun
-%service_del_postun curated-cloud-installer.service
+%service_del_postun suse-rancher-setup.service
 
 %changelog

@@ -1,7 +1,7 @@
 en:
   product_brand:
     short_title: "SUSE Rancher Setup"
-    long_title: "SUSE Rancher Setup - the curated installer for Rancher"
+    long_title: "SUSE Rancher Setup - Public Cloud Rancher Setup"
   greeting:
     content: "This tool is designed to automate the deployment of Rancher
       Manager in your AWS account. At the end of this process, you should

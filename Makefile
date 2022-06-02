@@ -1,5 +1,5 @@
-NAME          = curated-cloud-installer
-VERSION       = $(shell ruby -e 'require "./lib/curated_cloud_installer.rb"; print CuratedCloudInstaller::VERSION')
+NAME          = suse-rancher-setup
+VERSION       = $(shell ruby -e 'require "./lib/suse-rancher-setup.rb"; print SUSERancherSetup::VERSION')
 
 all:
 	@:
