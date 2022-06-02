@@ -1,5 +1,5 @@
 [Unit]
-Description=Curated Cloud Installer
+Description=SUSE Rancher Setup for Public Cloud k8s service
 Wants=nginx.service
 
 [Service]
@@ -14,8 +14,8 @@ RestrictRealtime=true
 Type=simple
 PrivateTmp=yes
 Environment="RAILS_ENV=production"
-WorkingDirectory=/usr/share/curated-cloud-installer
-ExecStart=/usr/share/curated-cloud-installer/bin/rails server -b 127.0.0.1 -p 3000
+WorkingDirectory=/usr/share/suse-rancher-setup
+ExecStart=/usr/share/suse-rancher-setup/bin/rails server -b 127.0.0.1 -p 3000
 Restart=always
 
 [Install]

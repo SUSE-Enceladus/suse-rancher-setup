@@ -10,7 +10,7 @@ module AWS
       new(
         credential: Credential.load(),
         region: Region.load().value,
-        tag_scope: KeyValue.get('tag_scope', 'curated-cloud-installer')
+        tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
       )
     end
 
