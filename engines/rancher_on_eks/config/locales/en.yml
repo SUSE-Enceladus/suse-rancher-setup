@@ -104,3 +104,9 @@ en:
           `AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar aws ec2 command --options`
           or download the commands:"
         clean_resources_file: 'clean_resources_commands'
+        clean_resources_commands: 'Clean resources commands'
+        clean_resources: 'Clean resources'
+        cleaning_resources: 'Cleaning resources'
+        resources_cleaned: 'Resources cleaned'
+        generate_clean_resources_commands: 'Generate clean resources commands'
+        generating_clean_resources_commands: 'Generating clean resources commands'
