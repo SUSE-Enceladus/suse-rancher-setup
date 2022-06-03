@@ -111,6 +111,15 @@ module AWS
       handle_command(args)
     end
 
+    def modify_vpc_attribute(vpc_id, attribute)
+      args = %W(
+        ec2 modify-vpc-attribute
+        --vpc-id #{vpc_id}
+        #{attribute}
+      )
+      handle_command(args)
+    end
+
     def describe_vpc(vpc_id)
       args = %W(ec2 describe-vpcs --vpc-ids #{vpc_id})
       get_description(
