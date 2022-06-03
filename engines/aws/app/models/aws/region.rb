@@ -32,6 +32,8 @@ module AWS
       else
         instance_types
       end
+    rescue
+      nil
     end
   end
 end
