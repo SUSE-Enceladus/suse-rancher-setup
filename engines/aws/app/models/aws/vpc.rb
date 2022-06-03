@@ -6,6 +6,11 @@ module AWS
     def aws_create
       response = @cli.create_vpc()
       self.id = JSON.parse(response)['Vpc']['VpcId']
+      # update the VPC settings
+      ['--enable-dns-hostnames', '--enable-dns-support'].each do |attr|
+        @cli.modify_vpc_attribute(self.id, attr)
+      end
+
       self.refresh()
       # self.wait_until(:available)
     end
