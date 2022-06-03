@@ -3,6 +3,7 @@ module RancherOnEks
     queue_as :default
 
     rescue_from Cheetah::ExecutionFailed, with: :handle_cli_exception
+    rescue_from StandardError, with: :handle_cli_exception
 
     def perform(*args)
       deployment = RancherOnEks::Deployment.new

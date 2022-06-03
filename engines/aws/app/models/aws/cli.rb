@@ -329,10 +329,7 @@ module AWS
         --group-name #{@tag_scope}-sg
         --description #{description}
       )
-      # --description \"Security Group for #{@tag_scope}\"
       handle_command(args)
-    rescue StandardError => e
-      debugger
     end
 
     def delete_security_group(group_id)
@@ -461,9 +458,6 @@ module AWS
       )
       args << public_subnet_ids
       handle_command(args)
-    rescue Cheetah::ExecutionFailed => err
-      puts err.stderr
-      debugger
     end
 
     def delete_node_group(node_group_name, cluster_name)
