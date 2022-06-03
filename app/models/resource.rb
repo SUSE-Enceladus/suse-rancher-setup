@@ -26,7 +26,7 @@ class Resource < ApplicationRecord
         self.refresh()
         status = self.state_attribute()
         if status.downcase.include? 'failed'
-          Rails.application.config.lasso_error = 'failed'
+          Rails.application.config.lasso_error = "Getting the status of #{self.type} #{self.id} failed"
           raise StandardError.new('Operation failed')
         end
       rescue
