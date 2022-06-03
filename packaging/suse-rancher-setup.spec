@@ -22,7 +22,7 @@
 %define         k8s_version  kubernetes1.18
 
 Name:           suse-rancher-setup
-Version:        0.6.0
+Version:        0.6.1
 Release:        0
 Summary:        SUSE Rancher Setup on Public Cloud k8s service
 License:        GPL-3.0
