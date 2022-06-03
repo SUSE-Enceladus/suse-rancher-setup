@@ -27,23 +27,25 @@ module AWS
           'AWS_DEFAULT_OUTPUT' => 'json'
         }
       )
+      raise StandardError.new(stderr) if stderr.present?
+
+      stdout
     end
 
     def get_description(args, not_found_exception, not_found_response)
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-      return stdout
+      execute(*args)
     rescue Cheetah::ExecutionFailed => err
+      Rails.logger.error err.stderr
       if err.stderr.include?(not_found_exception)
         not_found_response
+      else
+        raise StandardError.new(err.stderr)
       end
     end
 
     def handle_command(args)
       if Rails.application.config.lasso_run.present?
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
+        execute(*args)
       else
         File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
           envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key}"
@@ -59,12 +61,13 @@ module AWS
 
     def regions
       args = %w(ec2 describe-regions)
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-
+      stdout = execute(*args)
       regions = JSON.parse(stdout)['Regions'].collect do |region|
         region['RegionName']
       end.sort!
+    rescue StandardError => err
+      Rails.logger.error err.message
+      return err.message
     end
 
     def describe_instance_type_offerings(region, instance_types)
@@ -75,9 +78,7 @@ module AWS
         --query InstanceTypeOfferings[].InstanceType
         --region #{region}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-
+      stdout = execute(*args)
       JSON.parse(stdout)
     end
 
@@ -95,7 +96,7 @@ module AWS
           'AWS_DEFAULT_OUTPUT' => 'json'
         }
       )
-      return stderr if stderr.present?
+      raise StandardError.new(stderr) if stderr.present?
 
       JSON.parse(stdout)['Regions']
     end
@@ -133,8 +134,7 @@ module AWS
         --location-type availability-zone
         --filters Name=instance-type,Values=#{instance_type}
       )
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
+      stdout = execute(*args)
 
       zones = JSON.parse(stdout)['InstanceTypeOfferings'].collect do |offering|
         offering['Location']
@@ -482,18 +482,14 @@ module AWS
 
     def get_hosted_zone_id(domain)
       args = %W(route53 list-hosted-zones-by-name --dns-name #{domain})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-
+      stdout = execute(*args)
       JSON.parse(stdout)['HostedZones'].first['Id']
     end
 
     def list_dns_records(domain)
       zone_id = self.get_hosted_zone_id(domain)
       args = %W(route53 list-resource-record-sets --hosted-zone-id #{zone_id})
-      stdout, stderr = execute(*args)
-      return stderr if stderr.present?
-
+      stdout = execute(*args)
       JSON.parse(stdout)['ResourceRecordSets']
     end
 

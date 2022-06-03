@@ -26,6 +26,7 @@ class Resource < ApplicationRecord
         self.refresh()
         status = self.state_attribute()
       rescue
+        Rails.logger.warning "Something may have gone wrong getting the status of #{self.type} #{self.id}"
         status = 'nope'
       end
       sleep(10) if status != desired_status
