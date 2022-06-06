@@ -155,6 +155,7 @@ module RancherOnEks
 
       step(1) do
         @vpc = AWS::Vpc.create()
+        @vpc.modify_vpc_attrs
         @vpc.wait_until(:available)
       end
 
