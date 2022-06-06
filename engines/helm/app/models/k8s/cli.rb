@@ -16,6 +16,7 @@ module K8s
     end
 
     def execute(*args)
+      Rails.logger.info "Kubernetes command to run: \'#{args.join(' ')}\'"
       stdout, stderr = Cheetah.run(
         ['kubectl', *args],
         stdout: :capture,
@@ -29,6 +30,9 @@ module K8s
           'KUBECONFIG' => @kubeconfig
         }
       )
+      Rails.logger.info "Command stdout: #{stdout}" if stdout.present?
+      Rails.logger.info "Command stderr: #{stderr}" if stderr.present?
+      stdout, stderr
     end
 
     def status(service_name, namespace)

@@ -15,6 +15,7 @@ module AWS
     end
 
     def execute(*args)
+      Rails.logger.info "AWS command to run: \'#{args.join(' ')}\'"
       stdout, stderr = Cheetah.run(
         ['aws', *args],
         stdout: :capture,
@@ -27,6 +28,7 @@ module AWS
           'AWS_DEFAULT_OUTPUT' => 'json'
         }
       )
+      Rails.logger.info "Command stdout: #{stdout}" if stdout.present?
       raise StandardError.new(stderr) if stderr.present?
 
       stdout
