@@ -86,7 +86,7 @@ en:
         using: "Rancher will be served at 'https://%{fqdn}'."
       wrapup:
         title: "Congratulations - your Rancher server is ready!"
-        failed_title: "Oh no ! - your Rancher deployment has failed!"
+        failed_title: "Oh no ! Your Rancher deployment has failed!"
         caption: "**It's done! Your Rancher server, deployed on a dedicated
           EKS cluster, is ready and waiting to manage the rest of your container
           workloads.**"
