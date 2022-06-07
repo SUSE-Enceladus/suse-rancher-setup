@@ -155,10 +155,14 @@ module RancherOnEks
 
       step(1) do
         @vpc = AWS::Vpc.create()
+        @type = @vpc.type
         @vpc.modify_vpc_attrs
         @vpc.wait_until(:available)
       end
 
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
+      end
       @public_subnets = []
       index = 0
       (2..4).each do |rank|
@@ -168,23 +172,43 @@ module RancherOnEks
             index: index,
             zone: @zones[index]
           )
+          @type = public_subnet.type
           @public_subnets << public_subnet
           index += 1
           public_subnet.wait_until(:available)
         end
+        if Rails.application.config.lasso_error.present?
+          raise StandardError.new("Creating #{@type}: status failed")
+        end
       end
+
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
+      end
+
       step(5) do
         @gateway = AWS::InternetGateway.create
+        @type = @gateway.type
         @gateway.attach_to_vpc(@vpc.id)
         @gateway.wait_until(:available)
       end
+
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
+      end
+
       step(6) do
         @public_route_table = AWS::RouteTable.create(vpc_id: @vpc.id)
+        @type = @public_route_table.type
         @cli.create_route(@public_route_table.id, @gateway.id)
         @public_subnets.each do |public_subnet|
           public_subnet.set_route_table!(@public_route_table.id)
         end
         @public_route_table.wait_until(:available)
+      end
+
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
 
       @private_subnets = []
@@ -196,14 +220,24 @@ module RancherOnEks
             index: index,
             zone: @zones[index]
           )
+          @type = private_subnet.type
           @private_subnets << private_subnet
           index += 1
           private_subnet.wait_until(:available)
         end
+        if Rails.application.config.lasso_error.present?
+          raise StandardError.new("Creating #{@type}: status failed")
+        end
       end
+
       step(10) do
         @elastic_ip = AWS::AllocationAddress.create()
+        @type = @elastic_ip.type
         @elastic_ip.wait_until(:available)
+      end
+
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
       step(11) do
         @nat = AWS::NatGateway.create(
@@ -211,7 +245,12 @@ module RancherOnEks
           allocation_address_id: @elastic_ip.id,
           internet_gateway_id: @gateway.id
         )
+        @type = @nat.type
         @nat.wait_until(:available)
+      end
+
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
       @private_route_tables = []
       index = 0
@@ -219,10 +258,14 @@ module RancherOnEks
         step(rank) do
           private_subnet = @private_subnets[index]
           private_route_table = AWS::RouteTable.create(vpc_id: @vpc.id, name: "private-route-table-#{index}")
+          @type = private_route_table.type
           private_subnet.set_route_table!(private_route_table.id)
           @private_route_tables << private_route_table
           index += 1
           private_route_table.wait_until(:available)
+        end
+        if Rails.application.config.lasso_error.present?
+          raise StandardError.new("Creating #{@type}: status failed")
         end
       end
       step(15) do
@@ -240,7 +283,11 @@ module RancherOnEks
           role_arn: @cluster_role.arn,
           subnet_ids: subnet_ids
         )
+        @type = @cluster.type
         @cluster.wait_until(:ACTIVE)
+      end
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
       step(18) do
         @ng_role = AWS::Role.create(target: 'nodegroup')
@@ -254,7 +301,11 @@ module RancherOnEks
           instance_type: @cluster_size.instance_type,
           instance_count: @cluster_size.instance_count
         )
+        @type = @nodegroup.type
         @nodegroup.wait_until(:ACTIVE)
+      end
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
       step(20) do
         @cli.update_kube_config(@cluster.id)
@@ -262,7 +313,11 @@ module RancherOnEks
       end
       step(21) do
         @ingress = Helm::IngressController.create()
+        @type = @ingress.type
         @ingress.wait_until(:deployed)
+      end
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
       step(22) do
         @ingress ||= Step.find_by_rank(21).resource
@@ -276,12 +331,20 @@ module RancherOnEks
       end
       step(23) do
         @cert_manager = Helm::CertManager.create()
+        @type = @cert_manager.type
         @cert_manager.wait_until(:deployed)
+      end
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
       step(24) do
         @fqdn_record ||= Step.find_by_rank(22).resource
         @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
+        @type = @rancher.type
         @rancher.wait_until(:deployed)
+      end
+      if Rails.application.config.lasso_error.present?
+        raise StandardError.new("Creating #{@type}: status failed")
       end
     end
 

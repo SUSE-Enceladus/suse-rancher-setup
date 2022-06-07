@@ -11,6 +11,7 @@ module RancherOnEks
       @password = nil if @in_process
       @password = RancherOnEks::Rancher.last&.initial_password unless @in_process
       @resources = Resource.all
+      @resources_created = @resources.length > 0
       @resources_deleted = Step.all_deleted?
       @downloading = ["running"].include? Rails.application.config.lasso_commands
       @refresh_timer = 15 if @in_process || @downloading
@@ -19,6 +20,7 @@ module RancherOnEks
         creds = AWS::Credential.load
         @substring = "AWS_ACCESS_KEY_ID=AWS_SECRET_ACCESS_KEY=" + creds.aws_access_key_id + creds.aws_secret_access_key + "  "
       end
+      @failed = true if Rails.application.config.lasso_error != ""
     end
 
     def destroy

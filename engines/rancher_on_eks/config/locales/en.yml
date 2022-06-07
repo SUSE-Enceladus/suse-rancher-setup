@@ -86,9 +86,12 @@ en:
         using: "Rancher will be served at 'https://%{fqdn}'."
       wrapup:
         title: "Congratulations - your Rancher server is ready!"
+        failed_title: "Oh no ! - your Rancher deployment has failed!"
         caption: "**It's done! Your Rancher server, deployed on a dedicated
           EKS cluster, is ready and waiting to manage the rest of your container
           workloads.**"
+        failed_caption: "**Deployment failed. Something went wrong during the deployment.**"
+        failed_info: "The resources created should be cleaned up, if any. Retry another deployment once the issue has been resolved."
         url: "You can browse to your Rancher server at
           [%{fqdn}](https://%{fqdn})."
         password: "The initial password is: `%{password}`. You will be prompted
@@ -96,6 +99,7 @@ en:
         resources:
           subtitle: "AWS Resources"
           caption: "The following resources were created as part of your deployment:"
+        resources_not_created: "No resources were created."
         commands:
           subtitle: "AWS Clean Resources Commands"
           caption: "The following commands clean up the resources created, please,
