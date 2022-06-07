@@ -117,6 +117,8 @@ module RancherOnEks
     end
 
     def step(rank, force: false)
+      raise StandardError.new("Creating #{@type[5..].underscore.humanize}: status failed") if Rails.application.config.lasso_error.present?
+
       step = Step.find_by(rank: rank)
       return if step.complete? && !force
 
@@ -155,6 +157,7 @@ module RancherOnEks
 
       step(1) do
         @vpc = AWS::Vpc.create()
+        @type = @vpc.type
         @vpc.modify_vpc_attrs
         @vpc.wait_until(:available)
       end
@@ -168,18 +171,23 @@ module RancherOnEks
             index: index,
             zone: @zones[index]
           )
+          @type = public_subnet.type
           @public_subnets << public_subnet
           index += 1
           public_subnet.wait_until(:available)
         end
       end
+
       step(5) do
         @gateway = AWS::InternetGateway.create
+        @type = @gateway.type
         @gateway.attach_to_vpc(@vpc.id)
         @gateway.wait_until(:available)
       end
+
       step(6) do
         @public_route_table = AWS::RouteTable.create(vpc_id: @vpc.id)
+        @type = @public_route_table.type
         @cli.create_route(@public_route_table.id, @gateway.id)
         @public_subnets.each do |public_subnet|
           public_subnet.set_route_table!(@public_route_table.id)
@@ -196,29 +204,36 @@ module RancherOnEks
             index: index,
             zone: @zones[index]
           )
+          @type = private_subnet.type
           @private_subnets << private_subnet
           index += 1
           private_subnet.wait_until(:available)
         end
       end
+
       step(10) do
         @elastic_ip = AWS::AllocationAddress.create()
+        @type = @elastic_ip.type
         @elastic_ip.wait_until(:available)
       end
+
       step(11) do
         @nat = AWS::NatGateway.create(
           subnet_id: @public_subnets.first.id,
           allocation_address_id: @elastic_ip.id,
           internet_gateway_id: @gateway.id
         )
+        @type = @nat.type
         @nat.wait_until(:available)
       end
+
       @private_route_tables = []
       index = 0
       (12..14).each do |rank|
         step(rank) do
           private_subnet = @private_subnets[index]
           private_route_table = AWS::RouteTable.create(vpc_id: @vpc.id, name: "private-route-table-#{index}")
+          @type = private_route_table.type
           private_subnet.set_route_table!(private_route_table.id)
           @private_route_tables << private_route_table
           index += 1
@@ -240,6 +255,7 @@ module RancherOnEks
           role_arn: @cluster_role.arn,
           subnet_ids: subnet_ids
         )
+        @type = @cluster.type
         @cluster.wait_until(:ACTIVE)
       end
       step(18) do
@@ -254,6 +270,7 @@ module RancherOnEks
           instance_type: @cluster_size.instance_type,
           instance_count: @cluster_size.instance_count
         )
+        @type = @nodegroup.type
         @nodegroup.wait_until(:ACTIVE)
       end
       step(20) do
@@ -262,6 +279,7 @@ module RancherOnEks
       end
       step(21) do
         @ingress = Helm::IngressController.create()
+        @type = @ingress.type
         @ingress.wait_until(:deployed)
       end
       step(22) do
@@ -276,13 +294,17 @@ module RancherOnEks
       end
       step(23) do
         @cert_manager = Helm::CertManager.create()
+        @type = @cert_manager.type
         @cert_manager.wait_until(:deployed)
       end
       step(24) do
         @fqdn_record ||= Step.find_by_rank(22).resource
         @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
+        @type = @rancher.type
         @rancher.wait_until(:deployed)
       end
+      # in case Rancher create command gets failed status
+      raise StandardError.new("Creating #{@type}: status failed") if Rails.application.config.lasso_error.present?
     end
 
     def self.rollback

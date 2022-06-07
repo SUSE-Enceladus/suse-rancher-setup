@@ -26,11 +26,15 @@ class Resource < ApplicationRecord
         self.refresh()
         status = self.state_attribute()
         if status.downcase.include? 'failed'
-          Rails.application.config.lasso_error = "Getting the status of #{self.type} #{self.id} failed"
-          raise StandardError.new('Operation failed')
+          @failed = true
+          message = "Status of #{self.type} #{self.id} failed, deployment interrupted. Please, go to the next page"
+          Rails.logger.error message
+          Rails.application.config.lasso_error = message
+          desired_status = status.to_sym
+          next
         end
       rescue
-        Rails.logger.warning "Something may have gone wrong getting the status of #{self.type} #{self.id}"
+        Rails.logger.warn "Something may have gone wrong getting the status of #{self.type} #{self.id}"
         status = 'nope'
       end
       sleep(10) if status != desired_status
