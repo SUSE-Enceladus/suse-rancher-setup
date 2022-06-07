@@ -117,6 +117,8 @@ module RancherOnEks
     end
 
     def step(rank, force: false)
+      raise StandardError.new("Creating #{@type}: status failed") if Rails.application.config.lasso_error.present?
+
       step = Step.find_by(rank: rank)
       return if step.complete? && !force
 
@@ -160,9 +162,6 @@ module RancherOnEks
         @vpc.wait_until(:available)
       end
 
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
       @public_subnets = []
       index = 0
       (2..4).each do |rank|
@@ -177,13 +176,6 @@ module RancherOnEks
           index += 1
           public_subnet.wait_until(:available)
         end
-        if Rails.application.config.lasso_error.present?
-          raise StandardError.new("Creating #{@type}: status failed")
-        end
-      end
-
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
       end
 
       step(5) do
@@ -191,10 +183,6 @@ module RancherOnEks
         @type = @gateway.type
         @gateway.attach_to_vpc(@vpc.id)
         @gateway.wait_until(:available)
-      end
-
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
       end
 
       step(6) do
@@ -205,10 +193,6 @@ module RancherOnEks
           public_subnet.set_route_table!(@public_route_table.id)
         end
         @public_route_table.wait_until(:available)
-      end
-
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
       end
 
       @private_subnets = []
@@ -225,9 +209,6 @@ module RancherOnEks
           index += 1
           private_subnet.wait_until(:available)
         end
-        if Rails.application.config.lasso_error.present?
-          raise StandardError.new("Creating #{@type}: status failed")
-        end
       end
 
       step(10) do
@@ -236,9 +217,6 @@ module RancherOnEks
         @elastic_ip.wait_until(:available)
       end
 
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
       step(11) do
         @nat = AWS::NatGateway.create(
           subnet_id: @public_subnets.first.id,
@@ -249,9 +227,6 @@ module RancherOnEks
         @nat.wait_until(:available)
       end
 
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
       @private_route_tables = []
       index = 0
       (12..14).each do |rank|
@@ -263,9 +238,6 @@ module RancherOnEks
           @private_route_tables << private_route_table
           index += 1
           private_route_table.wait_until(:available)
-        end
-        if Rails.application.config.lasso_error.present?
-          raise StandardError.new("Creating #{@type}: status failed")
         end
       end
       step(15) do
@@ -286,9 +258,6 @@ module RancherOnEks
         @type = @cluster.type
         @cluster.wait_until(:ACTIVE)
       end
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
       step(18) do
         @ng_role = AWS::Role.create(target: 'nodegroup')
       end
@@ -304,9 +273,6 @@ module RancherOnEks
         @type = @nodegroup.type
         @nodegroup.wait_until(:ACTIVE)
       end
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
       step(20) do
         @cli.update_kube_config(@cluster.id)
         nil
@@ -315,9 +281,6 @@ module RancherOnEks
         @ingress = Helm::IngressController.create()
         @type = @ingress.type
         @ingress.wait_until(:deployed)
-      end
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
       end
       step(22) do
         @ingress ||= Step.find_by_rank(21).resource
@@ -334,18 +297,14 @@ module RancherOnEks
         @type = @cert_manager.type
         @cert_manager.wait_until(:deployed)
       end
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
       step(24) do
         @fqdn_record ||= Step.find_by_rank(22).resource
         @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
         @type = @rancher.type
         @rancher.wait_until(:deployed)
       end
-      if Rails.application.config.lasso_error.present?
-        raise StandardError.new("Creating #{@type}: status failed")
-      end
+      # in case Rancher create command gets failed status
+      raise StandardError.new("Creating #{@type}: status failed") if Rails.application.config.lasso_error.present?
     end
 
     def self.rollback
