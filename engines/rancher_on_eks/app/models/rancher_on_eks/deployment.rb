@@ -117,7 +117,7 @@ module RancherOnEks
     end
 
     def step(rank, force: false)
-      raise StandardError.new("Creating #{@type}: status failed") if Rails.application.config.lasso_error.present?
+      raise StandardError.new("Creating #{@type[5..].underscore.humanize}: status failed") if Rails.application.config.lasso_error.present?
 
       step = Step.find_by(rank: rank)
       return if step.complete? && !force
