@@ -30,7 +30,7 @@ module Helm
       )
       Rails.logger.info "Command stdout: #{stdout}" if stdout.present?
       Rails.logger.info "Command stderr: #{stderr}" if stderr.present?
-      stdout, stderr
+      return stdout, stderr
     end
 
     def status(name, namespace)
