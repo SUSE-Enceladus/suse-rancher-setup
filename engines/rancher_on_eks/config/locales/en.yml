@@ -81,7 +81,8 @@ en:
 
           The subdomain containing this *FQDN* _must be preconfigured as an
           AWS Route53 hosted zone_. For example, if the *FQDN* is
-          `rancher.example.com`, then `example.com` must be a Route53 hosted
+          `rancher.example.com`, then `example.com` (domain that you **must own**,
+           otherwise deployment may fail due to Rancher needs) must be a Route53 hosted
           zone, and Rancher will be served at `https://rancher.example.com` ."
         using: "Rancher will be served at 'https://%{fqdn}'."
       wrapup:
