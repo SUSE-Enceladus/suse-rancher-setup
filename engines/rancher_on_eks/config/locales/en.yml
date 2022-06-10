@@ -31,7 +31,8 @@ en:
       as an AWS Route53 hosted zone. We'll take care of the DNS record for
       Rancher, and make sure it's all properly routed, you just need to give
       us a place to work. It can be a public zone or a private zone, as long as
-      it is resolvable by your PC.
+      it is resolvable by this virtual machine and your PC, and the
+      *AWS credentials* you provide have rights to edit the zone.
       [More Info](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html)
 
 
