@@ -86,4 +86,12 @@ module ApplicationHelper
       render "layouts/alerts/#{context}", title: title, body: body
     end.join.html_safe
   end
+
+  def friendly_type(type)
+    type = type.split("::")
+    resource_name = type[1].underscore.humanize
+    resource_name = if resource_name.include? ' ' then resource_name.titleize  else resource_name.upcase end
+    type = type[0]
+    "#{type} #{resource_name}"
+  end
 end
