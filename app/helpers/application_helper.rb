@@ -90,7 +90,7 @@ module ApplicationHelper
   def friendly_type(type)
     type = type.split("::")
     resource_name = type[1].underscore.humanize
-    resource_name = if resource_name.include? ' ' then resource_name.titleize  else resource_name.upcase end
+    resource_name = resource_name.titleize if resource_name.include? ' '
     type = type[0]
     "#{type} #{resource_name}"
   end
