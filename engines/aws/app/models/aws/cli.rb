@@ -487,7 +487,11 @@ module AWS
     def get_hosted_zone_id(domain)
       args = %W(route53 list-hosted-zones-by-name --dns-name #{domain})
       stdout = execute(*args)
-      JSON.parse(stdout)['HostedZones'].first['Id']
+      hosted_zones = JSON.parse(stdout)['HostedZones']
+      hosted_zone = hosted_zones.select {|hosted_zone| hosted_zone['Name'] == (domain + ".")}
+      return hosted_zone[0]['Id'] if hosted_zone.length > 0
+
+      return nil
     end
 
     def list_dns_records(domain)
@@ -495,6 +499,8 @@ module AWS
       args = %W(route53 list-resource-record-sets --hosted-zone-id #{zone_id})
       stdout = execute(*args)
       JSON.parse(stdout)['ResourceRecordSets']
+    rescue Cheetah::ExecutionFailed
+      return []
     end
 
     def create_dns_record(hosted_zone_id, fqdn, target, record_type)
