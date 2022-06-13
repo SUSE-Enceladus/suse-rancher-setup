@@ -49,7 +49,7 @@
   %ul
     - @resources.each do |resource|
       %li
-        = resource.type
+        = friendly_type(resource.type)
         = resource.id
     -# end
   -unless @resources_deleted

@@ -27,7 +27,7 @@ class Resource < ApplicationRecord
         status = self.state_attribute()
         if status.downcase.include? 'failed'
           @failed = true
-          message = "Status of #{self.type} #{self.id} failed, deployment interrupted. Please, go to the next page"
+          message = "Status of #{friendly_type(self.type)} #{self.id} failed, deployment interrupted. Please, go to the next page"
           Rails.logger.error message
           Rails.application.config.lasso_error = message
           desired_status = status.to_sym
