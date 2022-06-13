@@ -25,7 +25,8 @@ module AWS
           'AWS_REGION' => @region,
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json'
-        }
+        },
+        logger: Rails.logger
       )
       raise StandardError.new(stderr) if stderr.present?
 

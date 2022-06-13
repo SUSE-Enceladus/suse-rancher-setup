@@ -25,7 +25,8 @@ module Helm
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
-        }
+        },
+        logger: Rails.logger
       )
     end
 
