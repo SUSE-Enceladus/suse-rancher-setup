@@ -27,6 +27,8 @@ module RancherOnEks
       @kubectl.create_namespace(NAMESPACE)
       @helm.add_repo(REPO_NAME, REPO_URL)
       args = %W(
+        --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS
+        --set-string extraEnv[0].value=true
         --set hostname=#{@fqdn}
         --set replicas=3
       )
