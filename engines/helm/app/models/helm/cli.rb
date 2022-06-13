@@ -14,7 +14,6 @@ module Helm
     end
 
     def execute(*args)
-      Rails.logger.info "Helm command to run: \'#{args.join(' ')}\'"
       stdout, stderr = Cheetah.run(
         ['helm', *args],
         stdout: :capture,
@@ -26,11 +25,9 @@ module Helm
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
-        }
+        },
+        logger: Rails.logger
       )
-      Rails.logger.info "Command stdout: #{stdout}" if stdout.present?
-      Rails.logger.info "Command stderr: #{stderr}" if stderr.present?
-      return stdout, stderr
     end
 
     def status(name, namespace)
