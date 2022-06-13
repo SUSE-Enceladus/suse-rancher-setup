@@ -3,7 +3,8 @@ module AWS
     attr_accessor :fqdn, :target, :record_type
 
     def hosted_zone
-      @fqdn.split('.')[1..].join('.')
+      @fqdn = RancherOnEks::Fqdn.load()
+      @fqdn.value.split('.')[1..].join('.')
     end
 
     private
@@ -18,8 +19,14 @@ module AWS
     end
 
     def aws_destroy
-      # @cli.release_address(self.id)
-      # self.wait_until(:not_found)
+      hosted_zone_id = @cli.get_hosted_zone_id(self.hosted_zone())
+      fqdn = RancherOnEks::Fqdn.load()
+      hostname = Helm::IngressController.find(
+        Helm::IngressController.release_name()
+      ).hostname()
+      @cli.delete_dns_record(
+        hosted_zone_id, fqdn.value, hostname, 'CNAME'
+      )
     end
 
     def describe_resource

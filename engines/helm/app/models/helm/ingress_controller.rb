@@ -12,6 +12,10 @@ module Helm
       @kubectl.get_load_balancer_hostname(self.id, NAMESPACE)
     end
 
+    def self.release_name
+      RELEASE_NAME
+    end
+
     private
 
     def helm_create
