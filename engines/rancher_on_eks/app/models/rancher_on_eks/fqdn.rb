@@ -24,5 +24,13 @@ module RancherOnEks
     rescue
       false
     end
+
+    def dns_record_exist?
+      domain = @value.partition(".").last
+      @cli = AWS::Cli.load
+      dns_records = @cli.list_dns_records(domain)
+      duplicated_record = dns_records.select {|dns_record| dns_record['Name'] == (@value + ".")}
+      return duplicated_record.present?
+    end
   end
 end

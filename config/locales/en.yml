@@ -40,3 +40,5 @@ en:
   flash:
     invalid_credentials: "Credentials are not valid."
     no_hosted_zone: "The subdomain is not a route 53 hosted zone: "
+    duplicated_record: "The FQDN is already a DNS record: "
+    new_record: "Please, introduce a new FQDN or delete that record."
