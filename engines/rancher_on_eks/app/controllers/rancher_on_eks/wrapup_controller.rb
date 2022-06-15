@@ -13,7 +13,6 @@ module RancherOnEks
       @resources = Resource.all
       # keep showing the buttons after cleaning up
       @resources_created = @resources.length > 0 || params[:deleting]
-      @resources_deleted = Step.all_deleted?
       @downloading = ["running"].include? Rails.application.config.lasso_commands
       @refresh_timer = 15 if @in_process || @downloading
       if @lasso_commands && File.exist?(Rails.application.config.lasso_commands_file)

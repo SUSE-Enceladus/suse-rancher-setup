@@ -4,6 +4,7 @@ module RancherOnEks
 
     after_perform do |job|
       Rails.application.config.lasso_commands = "done" if Rails.application.config.lasso_run != "true"
+      Rails.application.config.lasso_error = "error-cleanup" if Rails.application.config.lasso_error != "" # special value in case there were errors
     end
 
     def perform(*args)
