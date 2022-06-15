@@ -1,9 +1,9 @@
-- if @failed
+- if @failed && !@cleaning_up
   = page_header(t('engines.rancher_on_eks.wrapup.failed_title'))
   -# body
   %p= markdown(t('engines.rancher_on_eks.wrapup.failed_caption'))
   %p= markdown(t('engines.rancher_on_eks.wrapup.failed_info'))
-- else
+- elsif !@cleaning_up
   = page_header(t('engines.rancher_on_eks.wrapup.title'))
   -# body
   %p= markdown(t('engines.rancher_on_eks.wrapup.caption'))

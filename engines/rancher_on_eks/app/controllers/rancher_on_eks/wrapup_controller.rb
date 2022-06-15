@@ -11,6 +11,8 @@ module RancherOnEks
       @password = nil if @in_process
       @password = RancherOnEks::Rancher.last&.initial_password unless @in_process
       @resources = Resource.all
+      # do not show any text if cleaning up
+      @cleaning_up = params[:deleting]
       # keep showing the buttons after cleaning up
       @resources_created = @resources.length > 0 || params[:deleting]
       @downloading = ["running"].include? Rails.application.config.lasso_commands
