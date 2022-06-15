@@ -3,7 +3,7 @@
 = form_with(model: @fqdn, url: rancher_on_eks.fqdn_path, method: 'put') do |form|
   %div.form-group
     = markdown(t('engines.rancher_on_eks.fqdn.form_caption'))
-    = form.label(:value, "FQDN")
+    = form.label(:value, "Rancher FQDN")
     = form.text_field(:value, class: 'form-control')
   %div.form-group
     = form.submit t('actions.save'), class: 'btn btn-primary'
