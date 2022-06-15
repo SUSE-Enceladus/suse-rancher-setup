@@ -3,8 +3,8 @@ module AWS
     attr_accessor :fqdn, :target, :record_type
 
     def hosted_zone
-      @fqdn = RancherOnEks::Fqdn.load()
-      @fqdn.value.split('.')[1..].join('.')
+      fqdn = RancherOnEks::Fqdn.load()
+      fqdn.value.split('.')[1..].join('.')
     end
 
     private
