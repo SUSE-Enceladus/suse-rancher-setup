@@ -1,4 +1,14 @@
 -------------------------------------------------------------------
+Wed Jun 15 11:37:53 UTC 2022 - Jesús Bermúdez Velázquez <jesusbv@suse.com>
+
+- version 0.6.5
+  + Side menu not available during deployment
+  + Side menu not available during cleanup
+  + Remove errors after cleanup so rerun is possible
+  + Error wording in wrapup consistent
+  + Explicit and clear FQDN label
+
+-------------------------------------------------------------------
 Tue Jun 14 09:57:46 UTC 2022 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
 
 - version 0.6.4
