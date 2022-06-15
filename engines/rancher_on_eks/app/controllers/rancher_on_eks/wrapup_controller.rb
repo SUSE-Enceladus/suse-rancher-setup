@@ -8,6 +8,9 @@ module RancherOnEks
       @resources_deleted = Step.all_deleted?
       @in_process = params[:deleting] && !@resources_deleted
       @fqdn = RancherOnEks::Fqdn.load.value
+      @region = AWS::Region.load.value
+      @cluster_name = Resource.find_by(type: 'AWS::Cluster')
+      @cluster_name = @cluster_name.id unless @cluster_name.nil?
       @password = nil if @in_process
       @password = RancherOnEks::Rancher.last&.initial_password unless @in_process
       @resources = Resource.all

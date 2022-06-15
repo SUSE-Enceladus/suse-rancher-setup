@@ -9,6 +9,7 @@
   %p= markdown(t('engines.rancher_on_eks.wrapup.caption'))
   %p= markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
   %p= markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
+  %p= markdown(t('engines.rancher_on_eks.wrapup.kubeconfig_info', region: @region, cluster_name: @cluster_name))
 -# end
 %hr
 
