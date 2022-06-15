@@ -536,7 +536,7 @@ module AWS
           }
         ]
       }
-      File.open(Rails.application.config.lasso_dns_json_tmp_path, 'w') do |f|
+      File.open(Rails.application.config.lasso_dns_json_path, 'w') do |f|
         f.write(change_batch.to_json)
       end
     end
