@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jun 16 11:42:28 UTC 2022 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
+
+- version 0.6.6
+  + Add wording for kubeconfig info
+  + Do not show any text if cleaning up
+  + Disable extra links
+
+-------------------------------------------------------------------
 Wed Jun 15 11:37:53 UTC 2022 - Jesús Bermúdez Velázquez <jesusbv@suse.com>
 
 - version 0.6.5
