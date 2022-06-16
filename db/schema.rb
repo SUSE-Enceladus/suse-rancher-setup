@@ -10,13 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_24_022910) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_15_181613) do
   create_table "key_values", force: :cascade do |t|
     t.string "key", null: false
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_key_values_on_key", unique: true
+  end
+
+  create_table "rancher_setup_logins", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "resources", id: :string, force: :cascade do |t|
