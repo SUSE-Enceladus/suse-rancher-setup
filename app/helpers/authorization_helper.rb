@@ -12,18 +12,20 @@ module AuthorizationHelper
     case path
     when  "/"
       true
+    when '/welcome'
+      valid_login?
     when AWS::Engine.routes.url_helpers.edit_credential_path
-      true
+      valid_login? && true
     when AWS::Engine.routes.url_helpers.edit_region_path
-      credentials_set?
+      valid_login? && credentials_set?
     when ShirtSize::Engine.routes.url_helpers.edit_size_path
-      region_set?
+      valid_login? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.edit_fqdn_path
-      credentials_set? && region_set?
+      valid_login? && credentials_set? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.steps_path
-      fqdn_set?
+      valid_login? && fqdn_set?
     when RancherOnEks::Engine.routes.url_helpers.wrapup_path
-      Step.all_complete?
+      valid_login? && Step.all_complete?
     else
       false
     end
@@ -42,5 +44,9 @@ module AuthorizationHelper
   def fqdn_set?
     fqdn = RancherOnEks::Fqdn.load
     fqdn.value.present?
+  end
+
+  def valid_login?
+    Rails.application.config.lasso_logged
   end
 end

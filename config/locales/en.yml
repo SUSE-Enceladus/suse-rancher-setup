@@ -36,6 +36,7 @@ en:
     previous: "Back"
     save: "Save"
     close: "Close"
+    login: "Login"
 
   flash:
     invalid_credentials: "Credentials are not valid."
