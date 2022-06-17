@@ -299,7 +299,15 @@ module RancherOnEks
       end
       step(24) do
         @fqdn_record ||= Step.find_by_rank(22).resource
-        @rancher = RancherOnEks::Rancher.create(fqdn: @fqdn_record.id)
+        @custom_config = RancherOnEks::CustomConfig.load
+        @rancher = RancherOnEks::Rancher.create(
+          fqdn: @fqdn_record.id
+          repo_name: @custom_config.repo_name,
+          repo_url: @custom_config.repo_url,
+          chart: @custom_config.chart,
+          release_name: @custom_config.release_name,
+          version: @custom_config.version
+        )
         @type = @rancher.type
         @rancher.wait_until(:deployed)
       end

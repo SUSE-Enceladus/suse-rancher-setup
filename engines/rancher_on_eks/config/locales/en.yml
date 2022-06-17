@@ -118,3 +118,6 @@ en:
         resources_cleaned: 'Resources cleaned'
         generate_clean_resources_commands: 'Generate clean resources commands'
         generating_clean_resources_commands: 'Generating clean resources commands'
+      custom_configs:
+        title: 'Install Rancher from a customized location'
+        success: 'Rancher will be installed from the specified sources.'
