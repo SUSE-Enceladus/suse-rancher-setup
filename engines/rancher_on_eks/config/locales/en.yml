@@ -6,7 +6,7 @@ en:
     content: "In order to login into SUSE Rancher setup, you need:"
     aws:
       username: "username: this is the instance ID"
-      password: "password: this is the account ID"
+      password: "password: this is the account ID (without '-')"
   greeting:
     content: "This tool is designed to automate the deployment of Rancher
       Manager in your AWS account. At the end of this process, you should
