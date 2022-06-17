@@ -3,8 +3,8 @@
 = form_for(@rancher_setup_login, url: "/rancher_setup_logins/update", method: 'put') do |form|
   = markdown(t('login.content'))
   %ul
-    %li= t('login.username')
-    %li= t('login.password')
+    %li= t("login.#{@csp_login_info}.username")
+    %li= t("login.#{@csp_login_info}.password")
   %div.form-group
     = form.label :username, :username.to_s.titlecase(keep_id_suffix: true)
     = form.text_field :username, class: 'form-control'

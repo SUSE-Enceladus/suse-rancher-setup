@@ -1,6 +1,10 @@
 class RancherSetupLoginsController < ApplicationController
   before_action :set_rancher_setup_login, only: %i[ index update ]
 
+  def index
+    @csp_login_info = 'aws' # currently AWS only, planning for other CSPs
+  end
+
   # PATCH/PUT /rancher_setup_logins/1 or /rancher_setup_logins/1.json
   def update
     @login = RancherSetupLogin.new(self.rancher_setup_login_params)
