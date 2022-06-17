@@ -1,0 +1,101 @@
+-------------------------------------------------------------------
+Fri Jun 17 10:55:45 UTC 2022 - Robert Schweikert <rjschwei@suse.com>
+
+- Move .changelog file to .changes file
+- USe license macro for license instead of doc macro
+
+-------------------------------------------------------------------
+Thu Jun 16 11:42:28 UTC 2022 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
+
+- version 0.6.6
+  + Add wording for kubeconfig info
+  + Do not show any text if cleaning up
+  + Disable extra links
+
+-------------------------------------------------------------------
+Wed Jun 15 11:37:53 UTC 2022 - Jesús Bermúdez Velázquez <jesusbv@suse.com>
+
+- version 0.6.5
+  + Side menu not available during deployment
+  + Side menu not available during cleanup
+  + Remove errors after cleanup so rerun is possible
+  + Error wording in wrapup consistent
+  + Explicit and clear FQDN label
+
+-------------------------------------------------------------------
+Tue Jun 14 09:57:46 UTC 2022 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
+
+- version 0.6.4
+  + Check FQDN does not exist (it is not a duplicated DNS record)
+  + Add path for DNS json file in config
+
+-------------------------------------------------------------------
+Mon Jun 13 16:42:46 UTC 2022 - Jesús Bermúdez Velázquez <jesusbv@suse.com>
+
+- version 0.6.3
+  + logs all commands
+  + add DNS permissions text at welcome page
+  + user-friendly resource names
+  + translations
+
+-------------------------------------------------------------------
+Tue Jun  7 19:59:20 UTC 2022 - Jesús Bermúdez Velázquez <jesusbv@suse.com>
+
+- version 0.6.2
+  + Handle a resource created but in a failed state
+  + Update wording when error in wrapup page
+
+-------------------------------------------------------------------
+Fri Jun  3 16:01:16 UTC 2022 - Jesús Bermúdez Velázquez <jesusbv@suse.com>
+
+- version 0.6.1
+  + handle error
+  + handle successfully command with failed status
+
+-------------------------------------------------------------------
+Wed May 18 16:08:22 UTC 2022 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
+
+- version 0.4.0
+  + Form validation
+  + Navigation flow
+  + SSL support
+  + User/password protection
+  + Cleanup/rollback
+  + Support for no available instance types in AZs
+
+-------------------------------------------------------------------
+Sat Apr  2 03:39:54 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.2.1
+  + Remove acronym handlers; revert refactor
+
+-------------------------------------------------------------------
+Sat Apr  2 01:44:39 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.2.0
+  + Updated copy (translations) to actual content
+  + Listing created resources on wrapup page
+  + Marked 'AWS' as an acronym; refactored to match
+
+-------------------------------------------------------------------
+Fri Apr  1 23:53:22 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.1.0
+  + Updated packaging tools & config
+  + Updated documentation
+
+-------------------------------------------------------------------
+Thu Mar 31 06:00:15 UTC 2022 - James Mason <jmason@suse.com>
+
+- Expand permissions via systemd to enable helm
+
+-------------------------------------------------------------------
+Thu Mar 31 12:15:55 UTC 2022 - James Mason <jmason@suse.com>
+
+- Extend package to include systemd service & nginx config
+
+-------------------------------------------------------------------
+Tue Mar 29 03:08:51 UTC 2022 - James Mason <jmason@suse.com>
+
+- version 0.0.1
+  + initial packaging
