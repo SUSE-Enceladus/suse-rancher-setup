@@ -8,4 +8,6 @@ RancherOnEks::Engine.routes.draw do
   end
 
   resource :wrapup, controller: 'wrapup', only: [:show, :destroy]
+
+  resource :custom_config, only: [:edit, :update]
 end

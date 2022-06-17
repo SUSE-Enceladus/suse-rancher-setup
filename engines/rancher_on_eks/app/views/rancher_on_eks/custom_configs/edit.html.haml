@@ -1,0 +1,12 @@
+= page_header(t('engines.rancher_on_eks.custom_configs.title'))
+-# body
+= form_with(model: @custom_config, url: rancher_on_eks.custom_config_path, method: 'put') do |form|
+  - RancherOnEks::CustomConfig.attribute_names.each do |attribute|
+    %div.form-group
+      = form.label(attribute, attribute.titleize)
+      = form.text_field(attribute, class: 'form-control')
+  %div.form-group
+    = form.submit t('actions.save'), class: 'btn btn-primary'
+-# end
+= render('layouts/navigation_buttons') do
+  = link_to(t('actions.previous'), '/', class: "btn btn-secondary")

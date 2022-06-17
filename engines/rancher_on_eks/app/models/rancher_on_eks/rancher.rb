@@ -1,14 +1,8 @@
 module RancherOnEks
   class Rancher < Helm::HelmResource
-    REPO_NAME = 'rancher-stable'
-    REPO_URL = 'https://releases.rancher.com/server-charts/stable'
-    RELEASE_NAME = 'rancher-stable'
-    CHART = 'rancher-stable/rancher'
-    # VERSION = ''
     NAMESPACE = 'cattle-system'
-    DEPLOYMENT = 'rancher-stable'
 
-    attr_accessor :fqdn
+    attr_accessor :fqdn, :repo_name, :repo_url, :chart, :release_name, :version
 
     def initial_password
       args = %W(
@@ -24,33 +18,43 @@ module RancherOnEks
     private
 
     def helm_create
+      @repo_name ||= Rails.application.config.x.rancher.repo_name
+      @repo_url ||= Rails.application.config.x.rancher.repo_url
+      @chart ||= Rails.application.config.x.rancher.chart
+      @release_name ||= Rails.application.config.x.rancher.release_name
+      @version ||= Rails.application.config.x.rancher.version
+
       @kubectl.create_namespace(NAMESPACE)
-      @helm.add_repo(REPO_NAME, REPO_URL)
+      @helm.add_repo(@repo_name, @repo_url)
       args = %W(
         --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS
         --set-string extraEnv[0].value=true
         --set hostname=#{@fqdn}
         --set replicas=3
       )
-      @helm.install(RELEASE_NAME, CHART, NAMESPACE, args)
-      self.id = RELEASE_NAME
+      unless @version.blank?
+        args << '--version'
+        args << @version
+      end
+      @helm.install(@release_name, @chart, NAMESPACE, args)
+      self.id = @release_name
       self.refresh()
       # self.wait_until(:deployed)
     end
 
     def helm_destroy
-      @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
+      @helm.delete_deployment(@release_name, NAMESPACE)
       throw(:abort) unless Rails.application.config.lasso_run.present?
 
       # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource
-      @helm.status(RELEASE_NAME, NAMESPACE)
+      @helm.status(self.id, NAMESPACE)
     end
 
     def state_attribute
-      @kubectl.status(DEPLOYMENT, NAMESPACE)
+      @kubectl.status(self.id, NAMESPACE)
     end
   end
 end
