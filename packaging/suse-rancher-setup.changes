@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Jun 17 08:58:41 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 0.7.0
+  + enable CATTLE_PROMETHEUS_METRICS
+  + custom versions of Rancher can be installed
+
+-------------------------------------------------------------------
 Fri Jun 17 10:55:45 UTC 2022 - Robert Schweikert <rjschwei@suse.com>
 
 - Move .changelog file to .changes file
