@@ -6,7 +6,6 @@ module RancherOnEks
     CHART = 'rancher-stable/rancher'
     # VERSION = ''
     NAMESPACE = 'cattle-system'
-    DEPLOYMENT = 'rancher-stable'
 
     attr_accessor :fqdn
 
@@ -44,11 +43,11 @@ module RancherOnEks
     end
 
     def describe_resource
-      @helm.status(RELEASE_NAME, NAMESPACE)
+      @helm.status(self.id, NAMESPACE)
     end
 
     def state_attribute
-      @kubectl.status(DEPLOYMENT, NAMESPACE)
+      @kubectl.status(self.id, NAMESPACE)
     end
   end
 end
