@@ -128,7 +128,8 @@ chrpath -d %{buildroot}%{lib_dir}/vendor/bundle/ruby/*/gems/nokogiri-*/lib/nokog
 
 %files
 %attr(-,root,root) %{app_dir}
-%doc README.md LICENSE
+%doc README.md
+%license LICENSE
 %{lib_dir}
 %attr(-,root,root) %{data_dir}
 %{_unitdir}/suse-rancher-setup.service
