@@ -19,7 +19,6 @@
 %define         data_dir     %{_sharedstatedir}/suse-rancher-setup
 
 %define         ruby_version ruby3.0
-%define         k8s_version  kubernetes1.18
 
 Name:           suse-rancher-setup
 Version:        0.7.0
@@ -36,7 +35,7 @@ BuildRequires:  gcc
 BuildRequires:  nginx
 BuildRequires:  sqlite3-devel
 Requires:       %{ruby_version}
-Requires:       %{k8s_version}-client
+Requires:       kuberlr
 Requires:       helm
 Requires:       nginx
 Requires:       python3-cloudinstancecredentials
