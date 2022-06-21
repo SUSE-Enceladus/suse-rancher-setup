@@ -405,7 +405,7 @@ module AWS
       get_description(args, 'ResourceNotFoundException', '{"cluster": {"status": "not_found"}}')
     end
 
-    def create_cluster(role_arn, subnets_ids, sg_id, k8s_version='1.20')
+    def create_cluster(role_arn, subnets_ids, sg_id, k8s_version)
       name = "#{@tag_scope}-cluster"
       args = %W(
         eks create-cluster
