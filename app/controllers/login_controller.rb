@@ -2,7 +2,7 @@ class LoginController < ApplicationController
   before_action :set_rancher_setup_login, only: %i[ index update ]
 
   def index
-    if Rails.application.config.lasso_logged
+    if ApplicationController.helpers.valid_login?
       redirect = helpers.next_step_path(login_index_path)
       redirect_to(redirect)
     end

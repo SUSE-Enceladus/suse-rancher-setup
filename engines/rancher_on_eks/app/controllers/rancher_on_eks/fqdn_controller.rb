@@ -1,6 +1,7 @@
 module RancherOnEks
   class FqdnController < ApplicationController
     def edit
+      redirect_to("/") unless ApplicationController.helpers.valid_login?
       @fqdn = Fqdn.load
     end
 

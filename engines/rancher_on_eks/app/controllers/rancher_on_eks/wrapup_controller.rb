@@ -2,6 +2,8 @@ module RancherOnEks
   class WrapupController < ApplicationController
 
     def show
+      redirect_to("/") unless ApplicationController.helpers.valid_login?
+
       download_file if params[:download]
 
       @lasso_commands = ["done"].include? Rails.application.config.lasso_commands

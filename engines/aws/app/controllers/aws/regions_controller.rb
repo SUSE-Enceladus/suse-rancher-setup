@@ -1,6 +1,7 @@
 module AWS
   class RegionsController < ApplicationController
     def edit
+      redirect_to("/") unless ApplicationController.helpers.valid_login?
       @region = Region.load
     end
 
