@@ -43,7 +43,7 @@ module RancherOnEks
     end
 
     def helm_destroy
-      @helm.delete_deployment(@release_name, NAMESPACE)
+      @helm.delete_deployment(self.id, NAMESPACE)
       throw(:abort) unless Rails.application.config.lasso_run.present?
 
       # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
