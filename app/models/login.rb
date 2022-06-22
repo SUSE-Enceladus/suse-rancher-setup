@@ -1,4 +1,4 @@
-class RancherSetupLogin < ApplicationRecord
+class Login < ApplicationRecord
 
   attr_accessor(:username, :password)
 

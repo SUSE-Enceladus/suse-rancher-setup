@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :rancher_setup_logins, only: [:index, :update]
+  resources :login, only: [:index, :update]
   # Defines the root path route ("/")
-  root "rancher_setup_logins#index"
+  root "login#index"
   get "/welcome", to: "welcome#greeting"
 
   # 1 Deployable solution should be mounted

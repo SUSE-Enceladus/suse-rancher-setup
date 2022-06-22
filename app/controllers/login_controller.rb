@@ -1,9 +1,9 @@
-class RancherSetupLoginsController < ApplicationController
+class LoginController < ApplicationController
   before_action :set_rancher_setup_login, only: %i[ index update ]
 
   def index
     if Rails.application.config.lasso_logged
-      redirect = helpers.next_step_path(rancher_setup_logins_path)
+      redirect = helpers.next_step_path(login_index_path)
       redirect_to(redirect)
     end
     @csp_login_info = 'aws' # currently AWS only, planning for other CSPs
@@ -11,12 +11,12 @@ class RancherSetupLoginsController < ApplicationController
 
   # PATCH/PUT /rancher_setup_logins/1 or /rancher_setup_logins/1.json
   def update
-    @login = RancherSetupLogin.new(self.rancher_setup_login_params)
+    @login = Login.new(self.rancher_setup_login_params)
     valid_pass, err = _verify_credentials
     redirect_path = nil
     if valid_pass
       Rails.application.config.lasso_logged = true
-      redirect_path = helpers.next_step_path(rancher_setup_logins_path)
+      redirect_path = helpers.next_step_path(login_index_path)
     else
       flash[:danger] = "Could not verify your login credentials #{err}" if err.present?
       flash[:danger] = "You can not access the setup" if err.nil?
@@ -28,12 +28,12 @@ class RancherSetupLoginsController < ApplicationController
 
   private
     def set_rancher_setup_login
-      @rancher_setup_login = RancherSetupLogin.load
+      @rancher_setup_login = Login.load
     end
 
     # Only allow a list of trusted parameters through.
     def rancher_setup_login_params
-      params.require(:rancher_setup_login).permit(:username, :password)
+      params.require(:login).permit(:username, :password)
     end
 
     def _verify_credentials

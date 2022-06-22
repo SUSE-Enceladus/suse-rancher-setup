@@ -1,6 +1,6 @@
 = page_header(t('product_brand.long_title'))
 -# body
-= form_for(@rancher_setup_login, url: "/rancher_setup_logins/update", method: 'put') do |form|
+= form_for(@rancher_setup_login, url: "/login/update", method: 'put') do |form|
   = markdown(t('login.content'))
   %ul
     %li= t("login.#{@csp_login_info}.username")
