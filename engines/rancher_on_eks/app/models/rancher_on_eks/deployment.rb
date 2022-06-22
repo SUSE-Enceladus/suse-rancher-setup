@@ -253,7 +253,8 @@ module RancherOnEks
         @cluster = AWS::Cluster.create(
           sg_id: @security_group.id,
           role_arn: @cluster_role.arn,
-          subnet_ids: subnet_ids
+          subnet_ids: subnet_ids,
+          k8s_version: '1.22'
         )
         @type = @cluster.type
         @cluster.wait_until(:ACTIVE)

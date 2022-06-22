@@ -1,11 +1,16 @@
 module AWS
   class Cluster < AWSResource
-    attr_accessor :sg_id, :role_arn, :subnet_ids
+    attr_accessor :sg_id, :role_arn, :subnet_ids, :k8s_version
 
     private
 
     def aws_create
-      response = @cli.create_cluster(@role_arn, @subnet_ids.join(','), @sg_id)
+      response = @cli.create_cluster(
+        @role_arn,
+        @subnet_ids.join(','),
+        @sg_id,
+        @k8s_version
+      )
       self.id = JSON.parse(response)['cluster']['name']
       # self.wait_until(:ACTIVE)
     end
