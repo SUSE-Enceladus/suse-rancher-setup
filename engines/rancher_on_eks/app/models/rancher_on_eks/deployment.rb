@@ -301,7 +301,7 @@ module RancherOnEks
         @fqdn_record ||= Step.find_by_rank(22).resource
         @custom_config = RancherOnEks::CustomConfig.load
         @rancher = RancherOnEks::Rancher.create(
-          fqdn: @fqdn_record.id
+          fqdn: @fqdn_record.id,
           repo_name: @custom_config.repo_name,
           repo_url: @custom_config.repo_url,
           chart: @custom_config.chart,
