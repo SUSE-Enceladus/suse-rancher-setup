@@ -1,6 +1,6 @@
 require "test_helper"
 
-class RancherSetupLoginTest < ActiveSupport::TestCase
+class LoginTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
