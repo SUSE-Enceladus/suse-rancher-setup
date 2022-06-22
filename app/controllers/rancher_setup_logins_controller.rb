@@ -2,6 +2,10 @@ class RancherSetupLoginsController < ApplicationController
   before_action :set_rancher_setup_login, only: %i[ index update ]
 
   def index
+    if Rails.application.config.lasso_logged
+      redirect = helpers.next_step_path(rancher_setup_logins_path)
+      redirect_to(redirect)
+    end
     @csp_login_info = 'aws' # currently AWS only, planning for other CSPs
   end
 
