@@ -3,7 +3,7 @@ en:
     short_title: "SUSE Rancher Setup"
     long_title: "SUSE Rancher Setup - Public Cloud Rancher Setup"
   login:
-    content: "In order to login into SUSE Rancher setup, you need:"
+    content: "In order to login into SUSE Rancher Setup, you need:"
     aws:
       username: "username: this is the instance ID"
       password: "password: this is the account ID (without '-')"
