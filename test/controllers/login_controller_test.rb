@@ -1,6 +1,6 @@
 require "test_helper"
 
-class RancherSetupLoginsControllerTest < ActionDispatch::IntegrationTest
+class LoginControllerTest < ActionDispatch::IntegrationTest
   setup do
     @rancher_setup_login = rancher_setup_logins(:one)
   end
