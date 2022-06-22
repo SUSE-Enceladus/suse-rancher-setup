@@ -1,4 +1,6 @@
-class Login < ApplicationRecord
+class Login
+
+  include ActiveModel::Model
 
   attr_accessor(:username, :password)
 
