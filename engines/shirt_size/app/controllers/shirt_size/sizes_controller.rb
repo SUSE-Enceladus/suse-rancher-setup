@@ -1,7 +1,6 @@
 module ShirtSize
   class SizesController < ApplicationController
     def edit
-      redirect_to("/") unless ApplicationController.helpers.valid_login?
       @size = KeyValue.get(:cluster_size, 'small')
       @sizes = self.form_sizes
     end

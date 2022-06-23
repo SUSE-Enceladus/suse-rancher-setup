@@ -9,7 +9,6 @@ class LoginController < ApplicationController
     @csp_login_info = 'aws' # currently AWS only, planning for other CSPs
   end
 
-  # PATCH/PUT /rancher_setup_logins/1 or /rancher_setup_logins/1.json
   def update
     @login = Login.new(self.rancher_setup_login_params)
     valid_pass, err = _verify_credentials
