@@ -18,7 +18,7 @@
 %define         lib_dir      %{_libdir}/suse-rancher-setup
 %define         data_dir     %{_sharedstatedir}/suse-rancher-setup
 
-%define         ruby_version ruby3.0
+%define         ruby_version ruby3.1
 
 Name:           suse-rancher-setup
 Version:        0.8.0
