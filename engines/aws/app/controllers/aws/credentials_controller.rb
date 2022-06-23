@@ -2,9 +2,7 @@ module AWS
   class CredentialsController < ApplicationController
     before_action :load_credential, only: [:edit, :show]
 
-    def edit
-      redirect_to("/") unless ApplicationController.helpers.valid_login?
-    end
+    def edit; end
 
     def update
       @credential = Credential.new(self.credential_params)
