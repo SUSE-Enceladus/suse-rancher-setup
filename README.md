@@ -115,6 +115,11 @@ _suse-rancher-setup_ uses and conforms to the [EOS Design System](https://suse.e
 
 ## Packaging
 
+In order to have the necessary info for packaging, some content should be obtained
+from secrets repo.
+
+Place the master key in `config` directory and the certs in `public` directory. 
+
 _suse-rancher-setup_ includes supporting tools and documents to build on an open build service (OBS) instance, such as https://build.opensuse.org
 
 ### New dependencies
