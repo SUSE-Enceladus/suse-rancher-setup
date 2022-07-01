@@ -3,6 +3,7 @@ Thu Jun 23 07:06:47 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 0.8.0
   - web login based on cloudinstancecredentials
   - based on Ruby 3.1
+
 -------------------------------------------------------------------
 Tue Jun 21 06:36:43 PM UTC 2022 - James Mason <jmason@suse.com>
 - use kuberlr instead of a specific kubectl version
