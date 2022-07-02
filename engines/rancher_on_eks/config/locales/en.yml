@@ -23,13 +23,15 @@ en:
 
       ### What we need from you
 
-      1. **AWS credentials.** In order to perform the set up for you, this
-      application needs to access AWS - it will need a *secret key* with
+      1. **AWS permissions** In order to perform the set up for you, this
+      application needs to access AWS - this virtual machine must have an
+      *associated IAM instance profile* with
       persmission to create and modify EKS clusters and nodegroups, VPCs,
       subnets, routes, Internet Gateways, NATs, elastic IP addresses, EC2
       instances and auto-scaling groups, and Route53 records in an existing
       hosted zone.
-      [More Info](https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys)
+      [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
+      | [Required permissions](https://rancher.com/docs/rancher/v2.5/en/cluster-provisioning/hosted-kubernetes-clusters/eks/permissions/)
 
       2. **A Route53 Hosted Zone.** We need to give your Rancher server a
       domain name, and to do so, the subdomain we use needs to be configured

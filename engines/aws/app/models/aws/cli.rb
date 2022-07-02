@@ -4,11 +4,10 @@ module AWS
   class Cli
     include ActiveModel::Model
 
-    attr_accessor(:credential, :region, :tag_scope)
+    attr_accessor(:region, :tag_scope)
 
     def self.load
       new(
-        credential: Credential.load(),
         region: Region.load().value,
         tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
       )
@@ -20,8 +19,6 @@ module AWS
         stdout: :capture,
         stderr: :capture,
         env: {
-          'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
-          'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key,
           'AWS_REGION' => @region,
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json'
@@ -49,7 +46,6 @@ module AWS
         execute(*args)
       else
         File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
-          envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key}"
           f.write "#{envs} aws #{args.join(' ')} --region #{@region} --output json\n"
         end
       end
@@ -81,25 +77,6 @@ module AWS
       )
       stdout = execute(*args)
       JSON.parse(stdout)
-    end
-
-    def validate_credentials(aws_access_key_id, aws_secret_access_key)
-      args = %w(ec2 describe-regions)
-      stdout, stderr = Cheetah.run(
-        ['aws', *args],
-        stdout: :capture,
-        stderr: :capture,
-        env: {
-          'AWS_ACCESS_KEY_ID' => aws_access_key_id,
-          'AWS_SECRET_ACCESS_KEY' => aws_secret_access_key,
-          'AWS_REGION' => @region,
-          'AWS_DEFAULT_REGION' => @region,
-          'AWS_DEFAULT_OUTPUT' => 'json'
-        }
-      )
-      raise StandardError.new(stderr) if stderr.present?
-
-      JSON.parse(stdout)['Regions']
     end
 
     def create_vpc(cidr_block='192.168.0.0/16', name='vpc')

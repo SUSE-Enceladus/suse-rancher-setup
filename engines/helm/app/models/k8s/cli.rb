@@ -5,11 +5,10 @@ module K8s
   class Cli
     include ActiveModel::Model
 
-    attr_accessor(:kubeconfig, :credential, :region)
+    attr_accessor(:kubeconfig, :region)
 
     def self.load
       new(
-        credential: AWS::Credential.load(),
         region: AWS::Region.load().value,
         kubeconfig: '/tmp/kubeconfig'
       )
@@ -21,8 +20,6 @@ module K8s
         stdout: :capture,
         stderr: :capture,
         env: {
-          'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
-          'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key,
           'AWS_REGION' => @region,
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json',
