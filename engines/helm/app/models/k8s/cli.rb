@@ -25,7 +25,7 @@ module K8s
           'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
         },
-        logger: Rails.logger
+        logger: Logger.new(Rails.application.config.cli_log)
       )
     end
 

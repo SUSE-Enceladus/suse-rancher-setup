@@ -23,7 +23,7 @@ module AWS
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json'
         },
-        logger: Rails.logger
+        logger: Logger.new(Rails.application.config.cli_log)
       )
       raise StandardError.new(stderr) if stderr.present?
 

@@ -30,6 +30,7 @@ module SUSERancherSetup
     config.lasso_dns_json_path = '/var/tmp/dns_record.json'
     config.lasso_nginx_pass_file = '/etc/nginx/cloudinstancecredentials'
     config.lasso_logged = false
+    config.cli_log = 'log/cli.log'
   end
 end
 

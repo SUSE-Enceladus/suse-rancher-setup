@@ -23,7 +23,7 @@ module Helm
           'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
         },
-        logger: Rails.logger
+        logger: Logger.new(Rails.application.config.cli_log)
       )
     end
 
@@ -60,6 +60,7 @@ module Helm
         %W(
           --version #{version}
           --set controller.service.type=LoadBalancer
+          --set controller.watchIngressWithoutClass=true
         )
       )
     end
