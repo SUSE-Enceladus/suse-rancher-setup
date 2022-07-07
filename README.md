@@ -117,6 +117,12 @@ _suse-rancher-setup_ uses and conforms to the [EOS Design System](https://suse.e
 
 _suse-rancher-setup_ includes supporting tools and documents to build on an open build service (OBS) instance, such as https://build.opensuse.org
 
+**⚠ Note:** before packaging or running in production mode, session storage secrets must be generated and provided as:
+* config/credentials.yml.enc
+* config/master.key
+
+These files can be generated using `bin/rails credentials:edit` and are ignored by _git_. We recommend storing the key in a secure location.
+
 ### New dependencies
 
 When updating dependencies, add a categorized entry with a comment, in Gemfile.development.

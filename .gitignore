@@ -32,6 +32,7 @@
 /public/assets
 
 # Ignore master key for decrypting credentials and more.
+/config/credentials.yml.enc
 /config/master.key
 
 # Ignore IDE cruft
