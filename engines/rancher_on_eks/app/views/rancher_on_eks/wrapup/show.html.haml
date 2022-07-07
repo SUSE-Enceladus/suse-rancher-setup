@@ -96,6 +96,6 @@
     %div#commands
       - if @commands
         - @commands.each do |command|
-          %p= command[@substring.length..-1]
+          %p= command
 - else
   %h3= t('engine.rancher_on_eks.wrapup.resources_not_created')

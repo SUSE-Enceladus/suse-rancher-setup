@@ -4,15 +4,6 @@ en:
       cli:
         title: "Run an AWS-CLI command"
         form_caption: "CLI Arguments"
-      credentials:
-        title: "AWS Credentials"
-        form_caption: "We will be using AWS programatically to deploy your
-          Rancher server, so we need credentials to do so. Please ensure the
-          Access Key you provide has permission to create and update EKS
-          clusters and nodegroups, VPCs, subnets, routes, Internet Gateways,
-          NATs, elastic IP addresses, EC2 instances and auto-scaling groups,
-          and Route53 records in an existing hosted zone."
-        using: "Your cluster will be deployed using AWS Access Key '%{key_id}'."
       region:
         title: "AWS Region"
         form_caption: "Which AWS Region do you want your Rancher server to be

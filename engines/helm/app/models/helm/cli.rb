@@ -3,11 +3,10 @@ require 'cheetah'
 module Helm
   class Cli
     include ActiveModel::Model
-    attr_accessor(:credential, :region, :kubeconfig)
+    attr_accessor(:region, :kubeconfig)
 
     def self.load
       new(
-        credential: AWS::Credential.load(),
         region: AWS::Region.load().value,
         kubeconfig: '/tmp/kubeconfig'
       )
@@ -19,14 +18,12 @@ module Helm
         stdout: :capture,
         stderr: :capture,
         env: {
-          'AWS_ACCESS_KEY_ID' => @credential.aws_access_key_id,
-          'AWS_SECRET_ACCESS_KEY' => @credential.aws_secret_access_key,
           'AWS_REGION' => @region,
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
         },
-        logger: Rails.logger
+        logger: Logger.new(Rails.application.config.cli_log)
       )
     end
 
@@ -63,6 +60,7 @@ module Helm
         %W(
           --version #{version}
           --set controller.service.type=LoadBalancer
+          --set controller.watchIngressWithoutClass=true
         )
       )
     end
@@ -93,9 +91,7 @@ module Helm
         return stdout
       else
         File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
-          envs = "AWS_ACCESS_KEY_ID=#{@credential.aws_access_key_id} " \
-            "AWS_SECRET_ACCESS_KEY=#{@credential.aws_secret_access_key} " \
-            "KUBECONFIG=#{@kubeconfig}"
+          envs = "KUBECONFIG=#{@kubeconfig}"
           f.write "#{envs} helm #{args.join(' ')} --region #{@region} --output json\n"
         end
       end

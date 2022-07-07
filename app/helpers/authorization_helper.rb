@@ -14,14 +14,12 @@ module AuthorizationHelper
       true
     when '/welcome'
       valid_login?
-    when AWS::Engine.routes.url_helpers.edit_credential_path
-      valid_login? && true
     when AWS::Engine.routes.url_helpers.edit_region_path
-      valid_login? && credentials_set?
+      valid_login?
     when ShirtSize::Engine.routes.url_helpers.edit_size_path
       valid_login? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.edit_fqdn_path
-      valid_login? && credentials_set? && region_set?
+      valid_login? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.steps_path
       valid_login? && fqdn_set?
     when RancherOnEks::Engine.routes.url_helpers.wrapup_path
@@ -29,11 +27,6 @@ module AuthorizationHelper
     else
       false
     end
-  end
-
-  def credentials_set?
-    credentials = AWS::Credential.load
-    credentials.aws_access_key_id.present? && credentials.aws_secret_access_key.present?
   end
 
   def region_set?

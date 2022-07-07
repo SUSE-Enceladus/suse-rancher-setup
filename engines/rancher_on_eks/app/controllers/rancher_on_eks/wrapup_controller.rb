@@ -22,8 +22,6 @@ module RancherOnEks
       @refresh_timer = 15 if @in_process || @downloading
       if @lasso_commands && File.exist?(Rails.application.config.lasso_commands_file)
         @commands = get_commands
-        creds = AWS::Credential.load
-        @substring = "AWS_ACCESS_KEY_ID=AWS_SECRET_ACCESS_KEY=" + creds.aws_access_key_id + creds.aws_secret_access_key + "  "
       end
       @failed = true if Rails.application.config.lasso_error != ""
     end
