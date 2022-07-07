@@ -77,6 +77,7 @@ cp -ar . %{buildroot}%{app_dir}
 ln -s %{data_dir}/tmp %{buildroot}%{app_dir}/tmp
 ln -s %{data_dir}/db %{buildroot}%{app_dir}/db
 ln -s %{data_dir}/log %{buildroot}%{app_dir}/log
+ln -s %{lib_dir}/vendor %{buildroot}%{app_dir}/vendor
 
 # systemd
 mkdir -p %{buildroot}%{_unitdir}
