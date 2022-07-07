@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Jul  7 03:25:05 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 0.9.0
+  - Do not prompt for AWS credentials (requires IAM machine role or
+    local credentials)
+  - Use ingress-nginx v4
+  - Workaround for https://github.com/rancher/rancher/issues/37971
+
+-------------------------------------------------------------------
 Thu Jun 23 07:06:47 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 0.8.0
   - web login based on cloudinstancecredentials
