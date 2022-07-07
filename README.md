@@ -143,10 +143,15 @@ _Please note any new external CLI dependencies in this documentation._
 
 ### Releases
 
-[bumpversion](https://pypi.org/project/bumpversion/) is used to tag releases.
+Update the [changelog](packaging/suse-rancher-setup.changes) for the expected release version, and stage it for _git_.
+
+**💡 Hint:** You can use `date -u` to get the proper date format for changelogs.
+
+
+[bumpversion](https://pypi.org/project/bumpversion/) is used to tag releases; the `--allow-dirty` flag will include the _changelog_ in the version bump commit.
 
 ```
-bumpversion [major|minor|patch]
+bumpversion [major|minor|patch] --allow-dirty
 ```
 
 ### Generating a tarball
