@@ -6,12 +6,12 @@ Simple, usable web application for deploying complex applications to the cloud; 
 
 *suse-rancher-setup* depends on, primarily:
 
-* Ruby 3.0 (currently 3.0.3)
+* Ruby 3.1 (currently 3.1.2)
 * Rails 7.0
 * Sqlite 3
 * AWS-CLI (v1 or v2)
 * helm ~3.4
-* kubectl ~1.18
+* [kuberlr](https://github.com/flavio/kuberlr) (or kubectl 1.22)
 
 ## Contributing
 
@@ -112,6 +112,18 @@ YOUR CONTENT HERE
 ### UI style
 
 _suse-rancher-setup_ uses and conforms to the [EOS Design System](https://suse.eosdesignsystem.com/).
+
+## Engine Notes
+
+### AWS
+
+In order to comply with AWS Marketplace requirements, the AWS module does not prompt for credentials. In order to use AWS via this application, it must be run either on an EC2 instance with an assigned IAM machine role, or credentials must be configured locally in `~/.aws/credentials`.
+
+## Workflow Notes
+
+### Rancher on EKS
+
+An example file of IAM permissions required to run the _Rancher on EKS_ workflow are provided as [engines/rancher_on_eks/example_iam_role.json](engines/rancher_on_eks/example_iam_role.json).
 
 ## Packaging
 
