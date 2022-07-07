@@ -1,4 +1,9 @@
 -------------------------------------------------------------------
+Thu Jul  7 05:42:13 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 0.9.1
+  - Fix a path issue in packaging
+
+-------------------------------------------------------------------
 Thu Jul  7 03:25:05 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 0.9.0
   - Do not prompt for AWS credentials (requires IAM machine role or
