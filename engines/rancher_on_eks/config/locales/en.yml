@@ -31,7 +31,7 @@ en:
       instances and auto-scaling groups, and Route53 records in an existing
       hosted zone.
       [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
-      | [Required permissions](https://rancher.com/docs/rancher/v2.5/en/cluster-provisioning/hosted-kubernetes-clusters/eks/permissions/)
+      | [Required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/engines/rancher_on_eks/example_iam_role.json)
 
       2. **A Route53 Hosted Zone.** We need to give your Rancher server a
       domain name, and to do so, the subdomain we use needs to be configured
