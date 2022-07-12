@@ -1,6 +1,6 @@
 = page_header(t('engines.aws.permissions.title'))
 -# body
-%p= markdown(t('engines.aws.permissions.caption'))
+%p= markdown(t('engines.aws.permissions.caption', arn: @metadata.policy_source_arn()))
 - if @permissions.passed?
   %p
     %b= t('engines.aws.permissions.passed')
