@@ -61,7 +61,7 @@
                 "iam:SimulatePrincipalPolicy",
                 "route53:ChangeResourceRecordSets",
                 "route53:ListHostedZonesByName",
-                "route53:ListResourceRecordSets",
+                "route53:ListResourceRecordSets"
             ],
             "Resource": "*"
         }
