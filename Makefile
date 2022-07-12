@@ -12,6 +12,7 @@ dist: clean
 	@mkdir -p $(NAME)-$(VERSION)/
 
 	@cp -r app $(NAME)-$(VERSION)/
+	@cp -r aws-iam $(NAME)-$(VERSION)/
 	@mkdir $(NAME)-$(VERSION)/bin
 	@cp -r bin/rails $(NAME)-$(VERSION)/bin
 	@cp -r config $(NAME)-$(VERSION)/
