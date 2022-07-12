@@ -123,7 +123,7 @@ In order to comply with AWS Marketplace requirements, the AWS module does not pr
 
 ### Rancher on EKS
 
-An example file of IAM permissions required to run the _Rancher on EKS_ workflow are provided as [engines/rancher_on_eks/example_iam_role.json](engines/rancher_on_eks/example_iam_role.json).
+The minimum IAM permissions required to run the _Rancher on EKS_ workflow are provided as [aws-iam/iam_role.json](aws-iam/iam_role.json).
 
 ## Packaging
 
