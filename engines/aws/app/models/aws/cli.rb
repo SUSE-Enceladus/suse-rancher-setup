@@ -537,6 +537,11 @@ module AWS
       handle_command(args)
     end
 
+    def simulate_principal_policy(arn, *actions)
+      args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names #{actions})
+      handle_command(args)
+    end
+
     def steps
       [:version, :regions, :create_vpc]
     end
