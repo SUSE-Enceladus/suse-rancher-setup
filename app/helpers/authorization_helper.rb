@@ -14,8 +14,10 @@ module AuthorizationHelper
       true
     when '/welcome'
       valid_login?
-    when AWS::Engine.routes.url_helpers.edit_region_path
+    when AWS::Engine.routes.url_helpers.permissions_path
       valid_login?
+    when AWS::Engine.routes.url_helpers.edit_region_path
+      valid_login? && has_permissions?
     when ShirtSize::Engine.routes.url_helpers.edit_size_path
       valid_login? && region_set?
     when RancherOnEks::Engine.routes.url_helpers.edit_fqdn_path
@@ -41,5 +43,16 @@ module AuthorizationHelper
 
   def valid_login?
     Rails.application.config.lasso_logged
+  end
+
+  def has_permissions?
+    metadata = AWS::Metadata.load()
+    permissions = AWS::Permissions.new(
+      source_policy_file: Rails.application.config.aws_iam_source_policy_path,
+      arn: metadata.policy_source_arn()
+    )
+    permissions.passed?
+  rescue
+    false
   end
 end
