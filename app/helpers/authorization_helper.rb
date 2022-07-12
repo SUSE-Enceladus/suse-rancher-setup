@@ -14,6 +14,8 @@ module AuthorizationHelper
       true
     when '/welcome'
       valid_login?
+    when AWS::Engine.routes.url_helpers.permissions_path
+      valid_login?
     when AWS::Engine.routes.url_helpers.edit_region_path
       valid_login?
     when ShirtSize::Engine.routes.url_helpers.edit_size_path
