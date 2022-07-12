@@ -22,7 +22,7 @@ module AWS
       @report.all? { |result| result['EvalDecision'] == 'allowed' }
     end
 
-    def missing_permissions()
+    def missing
       @report ||= self.generate_report()
       @report.map{ |result| result['EvalActionName'] if result['EvalDecision'] != 'allowed' }.compact
     end

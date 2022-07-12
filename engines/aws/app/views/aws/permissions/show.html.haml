@@ -1,0 +1,16 @@
+= page_header(t('engines.aws.permissions.title'))
+-# body
+%p= markdown(t('engines.aws.permissions.caption'))
+- if @permissions.passed?
+  %p
+    %b= t('engines.aws.permissions.passed')
+- else
+  %p= t('engines.aws.permissions.missing')
+  %ul
+    - @permissions.missing().each do |action|
+      %li= action
+  = link_to(t('engines.aws.permissions.retest'), url_for(params))
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()
+  = next_step_button() if @permissions.passed?
