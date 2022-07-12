@@ -9,8 +9,8 @@ en:
         caption: "We're using the
           [AWS Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)
           to verify that all the necessary permissions are in place."
-        passed: "👍 Nice work, the application has all the required permissions!"
-        missing: "👎 It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
+        passed: "Nice work, the application has all the required permissions!"
+        missing: "It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
         retest: "Check again"
       region:
         title: "AWS Region"
