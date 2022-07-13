@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Wed Jul 13 03:41:58 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 1.0.0
+  - Resolved issue with generated cleanup command
+  - Final language changes
+
+-------------------------------------------------------------------
 Tue Jul 12 07:27:17 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 0.10.0
   - Relocate AWS IAM role document
