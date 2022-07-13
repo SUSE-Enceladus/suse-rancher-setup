@@ -46,7 +46,7 @@ module AWS
         execute(*args)
       else
         File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
-          f.write "#{envs} aws #{args.join(' ')} --region #{@region} --output json\n"
+          f.write "aws #{args.join(' ')} --region #{@region} --output json\n"
         end
       end
     end
