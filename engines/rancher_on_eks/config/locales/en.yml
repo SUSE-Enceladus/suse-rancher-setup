@@ -1,7 +1,6 @@
 en:
   product_brand:
     short_title: "SUSE Rancher Setup"
-    long_title: "SUSE Rancher Setup - Public Cloud Rancher Setup"
   login:
     content: "In order to login into SUSE Rancher Setup, you need:"
     aws:
@@ -9,7 +8,7 @@ en:
       password: "password: this is the account ID (without '-')"
   greeting:
     content: "This tool is designed to automate the deployment of Rancher
-      Manager in your AWS account. At the end of this process, you should
+      Management Server in your AWS account. At the end of this process, you should
       have a highly-available instance of Rancher running on EKS. To get
       the most out of your Rancher experience, we recommend you familiarize
       yourself with the product documentation: [rancher docs](https://rancher.com/docs/)
