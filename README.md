@@ -31,6 +31,7 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
     sudo zypper in libxml2-devel libxslt-devel sqlite3-devel
     ```
 
+    You need `ec2metadata` as well, follow the [instructions to install it](https://github.com/SUSE-Enceladus/ec2metadata#installation)
 4.  Initialize a development database
     ```
     rails db:setup
