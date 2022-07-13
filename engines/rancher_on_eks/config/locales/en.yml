@@ -1,6 +1,6 @@
 en:
   product_brand:
-    short_title: "SUSE Rancher Setup"
+    title: "SUSE Rancher Setup"
   login:
     content: "In order to login into SUSE Rancher Setup, you need:"
     aws:
