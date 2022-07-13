@@ -10,6 +10,7 @@ Simple, usable web application for deploying complex applications to the cloud; 
 * Rails 7.0
 * Sqlite 3
 * AWS-CLI (v1 or v2)
+* [ec2metadata](https://github.com/SUSE-Enceladus/ec2metadata)
 * helm ~3.4
 * [kuberlr](https://github.com/flavio/kuberlr) (or kubectl 1.22)
 
@@ -31,7 +32,6 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
     sudo zypper in libxml2-devel libxslt-devel sqlite3-devel
     ```
 
-    You need `ec2metadata` as well, follow the [instructions to install it](https://github.com/SUSE-Enceladus/ec2metadata#installation)
 4.  Initialize a development database
     ```
     rails db:setup
