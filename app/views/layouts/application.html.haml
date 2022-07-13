@@ -2,7 +2,7 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title= t('product_brand.short_title')
+    %title= t('product_brand.title')
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "ie=edge", "http-equiv" => "X-UA-Compatible"}/
     - if @refresh_timer
@@ -19,7 +19,7 @@
       %div.mm-navigation-container
         %header
           %a.hide-collapsed{href: "#"}
-            = image_tag 'product-brand.svg', alt: t('product_brand.title'), title: t('product_brand.short_title'), class: 'ds-logo'
+            = image_tag 'product-brand.svg', alt: t('product_brand.title'), title: t('product_brand.title'), class: 'ds-logo'
           %button.mm-navigation-close.js-sidebar-toggle
             %i.eos-icons-outlined.js-sidebar-tooltip.js-tooltip{"data-placement" => "bottom", title: "Toggle collapsible menu", "aria-hidden" => "true"} menu
             %span.sr-only Toggle collapsible menu
