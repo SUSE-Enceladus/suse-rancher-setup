@@ -20,8 +20,8 @@ en:
           for you.
 
 
-          The list below includes all the regions the Access Key you provided
-          has access to. **Please select one:**"
+          The list below includes all the regions you have access to.
+          **Please select one:**"
         using: "Your cluster will be deployed in '%{region}'."
         not_available: "Region '%{region}' does not support the selected instance types."
       steps:
