@@ -31,6 +31,7 @@ module SUSERancherSetup
     config.lasso_nginx_pass_file = '/etc/nginx/cloudinstancecredentials'
     config.lasso_logged = false
     config.cli_log = 'log/cli.log'
+    config.permissions_passed = false
   end
 end
 

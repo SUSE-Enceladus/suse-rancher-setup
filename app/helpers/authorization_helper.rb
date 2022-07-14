@@ -46,11 +46,14 @@ module AuthorizationHelper
   end
 
   def has_permissions?
+    return true if Rails.application.config.permissions_passed
+
     metadata = AWS::Metadata.load()
     permissions = AWS::Permissions.new(
       source_policy_file: Rails.application.config.aws_iam_source_policy_path,
       arn: metadata.policy_source_arn()
     )
+    Rails.application.config.permissions_passed = permissions.passed?
     permissions.passed?
   rescue
     false
