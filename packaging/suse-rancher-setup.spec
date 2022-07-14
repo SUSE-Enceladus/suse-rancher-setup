@@ -33,6 +33,7 @@ BuildRequires:  %{ruby_version}-devel
 BuildRequires:  chrpath
 BuildRequires:  gcc
 BuildRequires:  nginx
+BuildRequires:  openssl
 BuildRequires:  sqlite3-devel
 Requires:       %{ruby_version}
 Requires:       kuberlr
@@ -125,6 +126,9 @@ rm -rf %{buildroot}%{app_dir}/server-configs
 
 # drop custom rpath from native gems
 chrpath -d %{buildroot}%{lib_dir}/vendor/bundle/ruby/*/gems/nokogiri-*/lib/nokogiri/*/nokogiri.so
+
+# generate TLS self-signed cert for nginx
+cd %{buildroot}%{app_dir}/public/ && openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/CN=localhost" -keyout suse-rancher-setup.key -out suse-rancher-setup.crt
 
 %files
 %attr(-,root,root) %{app_dir}
