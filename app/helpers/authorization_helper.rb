@@ -54,7 +54,6 @@ module AuthorizationHelper
       arn: metadata.policy_source_arn()
     )
     Rails.application.config.permissions_passed = permissions.passed?
-    Rails.application.config.permissions_passed
   rescue
     false
   end
