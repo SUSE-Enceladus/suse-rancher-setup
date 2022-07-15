@@ -21,7 +21,7 @@
 %define         ruby_version ruby3.1
 
 Name:           suse-rancher-setup
-Version:        1.0.0
+Version:        1.0.1
 Release:        0
 Summary:        SUSE Rancher Setup on Public Cloud k8s service
 License:        GPL-3.0
