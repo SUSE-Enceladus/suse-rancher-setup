@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Mon Jul 18 06:00:02 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 1.0.1
+  - Bugfix to AWS permissions check
+  - generate secrets and certificates at package time
+
+-------------------------------------------------------------------
 Wed Jul 13 03:41:58 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 1.0.0
   - Resolved issue with generated cleanup command
