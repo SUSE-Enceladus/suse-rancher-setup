@@ -47,6 +47,9 @@ dist: clean
 	@sed -i '/source .*rubygems\.org/d' $(NAME)-$(VERSION)/Gemfile
 	@sed -i '/remote: .*rubygems\.org/d' $(NAME)-$(VERSION)/Gemfile.lock
 
+	# generate session secret
+	@cd $(NAME)-$(VERSION) && EDITOR=cat rails credentials:edit
+
 	# prebuild the database
 	@cd $(NAME)-$(VERSION) && RAILS_ENV=production rails db:reset
 
