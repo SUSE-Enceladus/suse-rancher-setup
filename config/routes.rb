@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :login, only: [:index, :update]
+  resource :login, controller: 'login', only: [:show, :update]
   # Defines the root path route ("/")
-  root "login#index"
+  root "login#show"
   get "/welcome", to: "welcome#greeting"
 
   # 1 Deployable solution should be mounted
