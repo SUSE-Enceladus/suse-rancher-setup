@@ -1,6 +1,4 @@
 module Helm
-  class ApplicationController < ActionController::Base
-    helper Rails.application.helpers
-    layout 'layouts/application'
+  class ApplicationController < ApplicationController
   end
 end

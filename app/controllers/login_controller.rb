@@ -1,4 +1,6 @@
 class LoginController < ApplicationController
+  skip_before_action :authorize
+
   def show
     if @current_user.is_authorized?
       redirect = helpers.next_step_path(login_path)

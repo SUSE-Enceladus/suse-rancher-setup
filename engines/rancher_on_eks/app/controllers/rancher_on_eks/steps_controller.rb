@@ -1,5 +1,5 @@
 module RancherOnEks
-  class StepsController < ApplicationController
+  class StepsController < RancherOnEks::ApplicationController
     before_action :load_steps
 
     def index

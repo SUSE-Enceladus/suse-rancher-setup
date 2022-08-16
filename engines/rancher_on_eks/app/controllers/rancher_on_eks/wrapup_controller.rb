@@ -1,5 +1,5 @@
 module RancherOnEks
-  class WrapupController < ApplicationController
+  class WrapupController < RancherOnEks::ApplicationController
 
     def show
       download_file if params[:download]
