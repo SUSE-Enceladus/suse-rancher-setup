@@ -1,4 +1,8 @@
 en:
+  login:
+    aws:
+      username: "EC2 Instance ID"
+      password: "AWS Account ID (without '-')"
   engines:
     aws:
       cli:

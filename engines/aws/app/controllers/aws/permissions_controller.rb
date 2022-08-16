@@ -7,7 +7,7 @@ module AWS
         arn: @metadata.policy_source_arn()
       )
     rescue StandardError => error
-      flash[:danger] = t('error', message: error.full_messages)
+      flash[:danger] = t('error', message: error.message)
     end
   end
 end

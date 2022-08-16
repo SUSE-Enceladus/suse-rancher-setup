@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Authorize access to steps
 module AuthorizationHelper
   def can(path)
@@ -41,8 +39,12 @@ module AuthorizationHelper
     fqdn.value.present?
   end
 
+  def current_user
+    @current_user ||= User.load
+  end
+
   def valid_login?
-    Rails.application.config.lasso_logged
+    current_user.is_authorized?
   end
 
   def has_permissions?
