@@ -1,5 +1,5 @@
 module RancherOnEks
-  class CustomConfigsController < ApplicationController
+  class CustomConfigsController < RancherOnEks::ApplicationController
     def edit
       @custom_config = CustomConfig.load
     end

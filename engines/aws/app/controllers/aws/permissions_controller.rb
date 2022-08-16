@@ -1,5 +1,5 @@
 module AWS
-  class PermissionsController < ApplicationController
+  class PermissionsController < AWS::ApplicationController
     def show
       @metadata = AWS::Metadata.load()
       @permissions = AWS::Permissions.new(
