@@ -72,7 +72,7 @@ Since each engine may define UI elements in the workflow, the order engines are 
 
 ### Deployment Engine
 
-One Engine in the workflow should be designated at as 'deployment engine'. This should define the overall workflow and the steps to be performed for the deployment, including authorization for the entire workflow. See [engines/rancher_on_eks/app/helpers/rancher_on_eks/authorization_helper.rb](engines/rancher_on_eks/app/helpers/rancher_on_eks/authorization_helper.rb) for an example.
+One Engine in the workflow should be designated as the 'deployment engine'. This should define the overall workflow and the steps to be performed for the deployment, including authorization for the entire workflow. See [engines/rancher_on_eks/app/helpers/rancher_on_eks/authorization_helper.rb](engines/rancher_on_eks/app/helpers/rancher_on_eks/authorization_helper.rb) for an example.
 
 ### Adding workflow UI to an engine
 

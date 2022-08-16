@@ -1,5 +1,5 @@
 class User
-  include Authable
+  include Authenticateable
   include ActiveModel::Model
 
   attr_accessor(:username, :password)

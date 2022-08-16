@@ -1,5 +1,5 @@
-# perform authorization based on the output of cloud-instance-credentials
-module Authable
+# perform authentication based on the output of cloud-instance-credentials
+module Authenticateable
   def credentials
     @credentials ||= File.read(Rails.application.config.nginx_pass_file).strip
   end
