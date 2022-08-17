@@ -32,6 +32,12 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
     sudo zypper in libxml2-devel libxslt-devel sqlite3-devel
     ```
 
+4.  Create a local config file
+    ```
+    cp config/config.yml.example config/config.yml
+    ```
+    Only an example config is included in the project for reference. Your working config is not included in the source repository.
+
 4.  Initialize a development database
     ```
     rails db:setup

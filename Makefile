@@ -35,6 +35,9 @@ dist: clean
 	@cp -r README.md $(NAME)-$(VERSION)/
 	@cp -r server-configs $(NAME)-$(VERSION)/
 
+	# don't bundle external config
+	@rm $(NAME)-$(VERSION)/config/config.yml
+
 	# don't package engine bin directory, specs (no need) and .gitignore (OBS complains)
 	@rm -rf $(NAME)-$(VERSION)/engines/*/bin
 	@rm -rf $(NAME)-$(VERSION)/engines/*/test

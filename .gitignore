@@ -40,3 +40,6 @@
 
 # Ignore certs and keys
 public/localhost.*
+
+# Ignore instance-specific config
+/config/config.yml
