@@ -48,14 +48,14 @@ module RancherOnEks
     end
 
     def has_permissions?
-      return true if Rails.application.config.permissions_passed
+      return true if Rails.configuration.permissions_passed
 
       metadata = AWS::Metadata.load()
       permissions = AWS::Permissions.new(
-        source_policy_file: Rails.application.config.aws_iam_source_policy_path,
+        source_policy_file: Rails.configuration.aws_iam_source_policy_path,
         arn: metadata.policy_source_arn()
       )
-      Rails.application.config.permissions_passed = permissions.passed?
+      Rails.configuration.permissions_passed = permissions.passed?
     rescue
       false
     end

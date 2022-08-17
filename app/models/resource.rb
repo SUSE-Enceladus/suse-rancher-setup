@@ -29,7 +29,7 @@ class Resource < ApplicationRecord
           @failed = true
           message = "Status of #{ApplicationController.helpers.friendly_type(self.type)} #{self.id} failed, deployment interrupted. Please, go to the next page\n"
           Rails.logger.error message
-          Rails.application.config.lasso_error = message
+          Rails.configuration.lasso_error = message
           desired_status = status.to_sym
           next
         end

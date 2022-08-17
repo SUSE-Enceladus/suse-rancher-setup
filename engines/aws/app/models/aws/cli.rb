@@ -23,7 +23,7 @@ module AWS
           'AWS_DEFAULT_REGION' => @region,
           'AWS_DEFAULT_OUTPUT' => 'json'
         },
-        logger: Logger.new(Rails.application.config.cli_log)
+        logger: Logger.new(Rails.configuration.cli_log)
       )
       raise StandardError.new(stderr) if stderr.present?
 
@@ -42,10 +42,10 @@ module AWS
     end
 
     def handle_command(args)
-      if Rails.application.config.lasso_run.present?
+      if Rails.configuration.lasso_run.present?
         execute(*args)
       else
-        File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
+        File.open(Rails.configuration.lasso_commands_file, 'a') do |f|
           f.write "aws #{args.join(' ')} --region #{@region} --output json\n"
         end
       end
@@ -487,10 +487,10 @@ module AWS
       args = %W(
         route53 change-resource-record-sets
         --hosted-zone-id #{hosted_zone_id}
-        --change-batch file://#{Rails.application.config.lasso_dns_json_path}
+        --change-batch file://#{Rails.configuration.lasso_dns_json_path}
       )
       output = handle_command(args)
-      FileUtils.rm_f(Rails.application.config.lasso_dns_json_path)
+      FileUtils.rm_f(Rails.configuration.lasso_dns_json_path)
       output
     end
 
@@ -513,7 +513,7 @@ module AWS
           }
         ]
       }
-      File.open(Rails.application.config.lasso_dns_json_path, 'w') do |f|
+      File.open(Rails.configuration.lasso_dns_json_path, 'w') do |f|
         f.write(change_batch.to_json)
       end
     end
@@ -525,10 +525,10 @@ module AWS
       args = %W(
         route53 change-resource-record-sets
         --hosted-zone-id #{hosted_zone_id}
-        --change-batch file://#{Rails.application.config.lasso_dns_json_path}
+        --change-batch file://#{Rails.configuration.lasso_dns_json_path}
       )
       output = handle_command(args)
-      FileUtils.rm_f(Rails.application.config.lasso_dns_json_path)
+      FileUtils.rm_f(Rails.configuration.lasso_dns_json_path)
       output
     end
 

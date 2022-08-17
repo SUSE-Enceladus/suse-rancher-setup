@@ -9,8 +9,8 @@ module RancherOnEks
       @complete = Step.all_complete?
       @resources = Resource.all
       redirect_to rancher_on_eks.wrapup_path if @complete
-      if Rails.application.config.lasso_error != "" && Rails.application.config.lasso_error != "error-cleanup"
-        flash.now[:danger] = Rails.application.config.lasso_error
+      if Rails.configuration.lasso_error != "" && Rails.configuration.lasso_error != "error-cleanup"
+        flash.now[:danger] = Rails.configuration.lasso_error
         @deploy_failed = true
         @complete = true
       end
@@ -18,8 +18,8 @@ module RancherOnEks
     end
 
     def deploy
-      Rails.application.config.lasso_run = true
-      Rails.application.config.lasso_commands = "nil"
+      Rails.configuration.lasso_run = true
+      Rails.configuration.lasso_commands = "nil"
       @steps.find_by_rank(0).start!
       RancherOnEks::DeployerJob.perform_later()
       redirect_to rancher_on_eks.steps_path

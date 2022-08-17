@@ -18,11 +18,11 @@ module RancherOnEks
     private
 
     def helm_create
-      @repo_name ||= Rails.application.config.x.rancher.repo_name
-      @repo_url ||= Rails.application.config.x.rancher.repo_url
-      @chart ||= Rails.application.config.x.rancher.chart
-      @release_name ||= Rails.application.config.x.rancher.release_name
-      @version ||= Rails.application.config.x.rancher.version
+      @repo_name ||= Rails.configuration.x.rancher.repo_name
+      @repo_url ||= Rails.configuration.x.rancher.repo_url
+      @chart ||= Rails.configuration.x.rancher.chart
+      @release_name ||= Rails.configuration.x.rancher.release_name
+      @version ||= Rails.configuration.x.rancher.version
 
       @kubectl.create_namespace(NAMESPACE)
       @helm.add_repo(@repo_name, @repo_url)
@@ -44,7 +44,7 @@ module RancherOnEks
 
     def helm_destroy
       @helm.delete_deployment(self.id, NAMESPACE)
-      throw(:abort) unless Rails.application.config.lasso_run.present?
+      throw(:abort) unless Rails.configuration.lasso_run.present?
 
       # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end

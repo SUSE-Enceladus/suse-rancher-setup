@@ -117,7 +117,7 @@ module RancherOnEks
     end
 
     def step(rank, force: false)
-      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.application.config.lasso_error.present? && Rails.application.config.lasso_error != "error-cleanup"
+      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
 
       step = Step.find_by(rank: rank)
       return if step.complete? && !force
@@ -313,13 +313,13 @@ module RancherOnEks
         @rancher.wait_until(:deployed)
       end
       # in case Rancher create command gets failed status
-      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.application.config.lasso_error.present? && Rails.application.config.lasso_error != "error-cleanup"
+      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
     end
 
     def self.rollback
       Step.all.order(rank: :desc).each do |step|
         step.resource&.destroy
-        step.destroy if Rails.application.config.lasso_run.present?
+        step.destroy if Rails.configuration.lasso_run.present?
       end
     end
   end

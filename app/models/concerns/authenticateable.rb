@@ -1,7 +1,7 @@
 # perform authentication based on the output of cloud-instance-credentials
 module Authenticateable
   def credentials
-    @credentials ||= File.read(Rails.application.config.nginx_pass_file).strip
+    @credentials ||= File.read(Rails.configuration.nginx_pass_file).strip
   end
 
   def username_is_valid?(username)
@@ -23,7 +23,7 @@ module Authenticateable
     Cheetah.run(
       %W(openssl passwd -apr1 -salt #{salt} #{password}),
       stdout: :capture,
-      logger: Logger.new(Rails.application.config.cli_log)
+      logger: Logger.new(Rails.configuration.cli_log)
     ).strip
   end
 end

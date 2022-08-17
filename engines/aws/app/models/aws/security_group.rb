@@ -11,7 +11,7 @@ module AWS
 
     def aws_destroy
       @cli.delete_security_group(self.id)
-      throw(:abort) unless Rails.application.config.lasso_run.present?
+      throw(:abort) unless Rails.configuration.lasso_run.present?
     end
 
     def describe_resource

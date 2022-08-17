@@ -23,7 +23,7 @@ module Helm
           'AWS_DEFAULT_OUTPUT' => 'json',
           'KUBECONFIG' => @kubeconfig
         },
-        logger: Logger.new(Rails.application.config.cli_log)
+        logger: Logger.new(Rails.configuration.cli_log)
       )
     end
 
@@ -85,12 +85,12 @@ module Helm
     end
 
     def handle_command(args)
-      if Rails.application.config.lasso_run.present?
+      if Rails.configuration.lasso_run.present?
         stdout, stderr = execute(*args)
         return stderr if stderr.present?
         return stdout
       else
-        File.open(Rails.application.config.lasso_commands_file, 'a') do |f|
+        File.open(Rails.configuration.lasso_commands_file, 'a') do |f|
           envs = "KUBECONFIG=#{@kubeconfig}"
           f.write "#{envs} helm #{args.join(' ')} --region #{@region} --output json\n"
         end
