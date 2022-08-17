@@ -14,15 +14,6 @@ module SUSERancherSetup
     # Asynchronous in-memory background job handler
     config.active_job.queue_adapter = :async
 
-    # Engines to load
-    # The order determines the menu order - engines with no UI should be last
-    config.engines = ['AWS', 'ShirtSize', 'RancherOnEks', 'Helm']
-
-    # Application-level menu entries
-    config.menu_entries = [
-      { caption: 'Login', icon: 'login', target: '/' },
-      { caption: 'Welcome', icon: 'home', target: '/welcome' }
-    ]
     config.lasso_run = "run"
     config.lasso_commands = "nil"
     config.lasso_error = ""
@@ -32,6 +23,18 @@ module SUSERancherSetup
     config.lasso_logged = false
     config.cli_log = 'log/cli.log'
     config.permissions_passed = false
+
+    # External configs: config.yml
+    ## Engines to load
+    ## The order determines the menu order - engines with no UI should be last
+    config.engines = config_for(:config)[:engines]
+    ## Application-level menu entries - these come before Engine UIs
+    config.menu_entries = [
+      { caption: 'Login', icon: 'login', target: '/' },
+      { caption: 'Welcome', icon: 'home', target: '/welcome' }
+    ]
+    # Rancher source - for _helm_
+    config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
   end
 end
 
