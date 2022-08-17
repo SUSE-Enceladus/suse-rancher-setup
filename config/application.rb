@@ -28,7 +28,7 @@ module SUSERancherSetup
     config.lasso_error = ""
     config.lasso_commands_file = '/var/lib/suse-rancher-setup/delete_resources_steps'
     config.lasso_dns_json_path = '/var/tmp/dns_record.json'
-    config.lasso_nginx_pass_file = '/etc/nginx/cloudinstancecredentials'
+    config.nginx_pass_file = '/etc/nginx/cloudinstancecredentials'
     config.lasso_logged = false
     config.cli_log = 'log/cli.log'
     config.permissions_passed = false

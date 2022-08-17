@@ -1,15 +1,12 @@
 = page_header(t('product_brand.title'))
 -# body
-= form_for(@rancher_setup_login, url: "/login/update", method: 'put') do |form|
+= form_for(@current_user, url: login_url, method: 'put') do |form|
   = markdown(t('login.content'))
-  %ul
-    %li= t("login.#{@csp_login_info}.username")
-    %li= t("login.#{@csp_login_info}.password")
   %div.form-group
-    = form.label :username, :username.to_s.titlecase(keep_id_suffix: true)
+    = form.label :username, t("login.#{@csp_login_info}.username")
     = form.text_field :username, class: 'form-control'
   %div.form-group
-    = form.label :password, :password.to_s.titlecase
+    = form.label :password, t("login.#{@csp_login_info}.password")
     = form.password_field :password, class: 'form-control'
   %div.form-group
     = form.submit t('actions.login'), class: "btn btn-primary"

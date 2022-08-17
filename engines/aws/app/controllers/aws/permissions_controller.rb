@@ -1,5 +1,5 @@
 module AWS
-  class PermissionsController < ApplicationController
+  class PermissionsController < AWS::ApplicationController
     def show
       @metadata = AWS::Metadata.load()
       @permissions = AWS::Permissions.new(
@@ -7,7 +7,7 @@ module AWS
         arn: @metadata.policy_source_arn()
       )
     rescue StandardError => error
-      flash[:danger] = t('error', message: error.full_messages)
+      flash[:danger] = t('error', message: error.message)
     end
   end
 end
