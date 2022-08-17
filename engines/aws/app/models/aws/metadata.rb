@@ -17,7 +17,7 @@ module AWS
         ['ec2metadata', '--api', 'latest', *args],
         stdout: :capture,
         stderr: :capture,
-        logger: Logger.new(Rails.application.config.cli_log)
+        logger: Logger.new(Rails.configuration.cli_log)
       )
       raise StandardError.new(stderr) if stderr.present?
 

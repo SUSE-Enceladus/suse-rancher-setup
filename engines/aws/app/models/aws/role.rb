@@ -32,15 +32,15 @@ module AWS
     end
 
     def aws_destroy
-      original_lasso_run = Rails.application.config.lasso_run
-      Rails.application.config.lasso_run = "run"
+      original_lasso_run = Rails.configuration.lasso_run
+      Rails.configuration.lasso_run = "run"
       policies = JSON.parse(@cli.list_role_attached_policies(self.id))
-      Rails.application.config.lasso_run = original_lasso_run
+      Rails.configuration.lasso_run = original_lasso_run
       policies['AttachedPolicies'].each do |policy|
         @cli.detach_role_policy(self.id, policy['PolicyArn'])
       end
       @cli.delete_role(self.id)
-      throw(:abort) unless Rails.application.config.lasso_run.present?
+      throw(:abort) unless Rails.configuration.lasso_run.present?
 
       self.wait_until(:not_found)
     end

@@ -12,19 +12,19 @@ module RancherOnEks
     def self.load
       new(
         repo_name: KeyValue.get(
-          :rancher_repo_name, Rails.application.config.x.rancher.repo_name
+          :rancher_repo_name, Rails.configuration.x.rancher.repo_name
         ),
         repo_url: KeyValue.get(
-          :rancher_repo_url, Rails.application.config.x.rancher.repo_url
+          :rancher_repo_url, Rails.configuration.x.rancher.repo_url
         ),
         chart: KeyValue.get(
-          :rancher_chart, Rails.application.config.x.rancher.chart
+          :rancher_chart, Rails.configuration.x.rancher.chart
         ),
         release_name: KeyValue.get(
-          :rancher_release_name, Rails.application.config.x.rancher.release_name
+          :rancher_release_name, Rails.configuration.x.rancher.release_name
         ),
         version: KeyValue.get(
-          :rancher_version, Rails.application.config.x.rancher.version
+          :rancher_version, Rails.configuration.x.rancher.version
         )
       )
     end

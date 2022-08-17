@@ -15,13 +15,13 @@ module RancherOnEks
     def handle_cli_exception(exception)
       if exception.class == Cheetah::ExecutionFailed
         Rails.logger.error exception.stderr
-        Rails.application.config.lasso_error = exception.stderr
+        Rails.configuration.lasso_error = exception.stderr
       elsif exception.class == StandardError
         Rails.logger.error exception.message
-        Rails.application.config.lasso_error = exception.message
+        Rails.configuration.lasso_error = exception.message
       else
         Rails.logger.error exception
-        Rails.application.config.lasso_error = exception
+        Rails.configuration.lasso_error = exception
       end
     end
   end
