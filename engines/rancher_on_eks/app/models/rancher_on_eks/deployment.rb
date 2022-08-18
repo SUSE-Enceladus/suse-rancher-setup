@@ -254,7 +254,7 @@ module RancherOnEks
           sg_id: @security_group.id,
           role_arn: @cluster_role.arn,
           subnet_ids: subnet_ids,
-          k8s_version: '1.22'
+          k8s_version: Rails.configuration.x.rancher_on_eks.k8s_version
         )
         @type = @cluster.type
         @cluster.wait_until(:ACTIVE)
