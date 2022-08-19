@@ -35,6 +35,8 @@ module SUSERancherSetup
     ]
     # Rancher source - for _helm_
     config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
+    # kubernetes version
+    config.x.rancher_on_eks = OpenStruct.new(config_for(:config)[:rancher_on_eks])
   end
 end
 
