@@ -12,7 +12,7 @@ on:
     branches: [ "main", "next"]
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: alpine-latest
     env:
       RAILS_ENV: test
     steps:
