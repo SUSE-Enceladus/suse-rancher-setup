@@ -42,6 +42,10 @@ RSpec.describe RancherOnEks::Rancher, :type => :model do
           expected_namespace,
           [
             '--set',
+            'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
+            '--set-string',
+            'extraEnv[0].value=true',
+            '--set',
             "hostname=#{mock_fqdn}",
             '--set',
             'replicas=3'
@@ -82,6 +86,10 @@ RSpec.describe RancherOnEks::Rancher, :type => :model do
             expected_chart,
             expected_namespace,
             [
+              '--set',
+              'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
+              '--set-string',
+              'extraEnv[0].value=true',
               '--set',
               "hostname=#{mock_fqdn}",
               '--set',
@@ -132,6 +140,10 @@ RSpec.describe RancherOnEks::Rancher, :type => :model do
             custom_config.chart,
             expected_namespace,
             [
+              '--set',
+              'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
+              '--set-string',
+              'extraEnv[0].value=true',
               '--set',
               "hostname=#{mock_fqdn}",
               '--set',
