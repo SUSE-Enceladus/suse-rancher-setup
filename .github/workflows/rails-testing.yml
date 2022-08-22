@@ -1,0 +1,25 @@
+name: "Rails testing"
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main", "next"]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.1
+      - name: Set up database schema
+        run: bin/rails db:reset
+      - name: Run minitest
+        run: bin/rails test
+      - name: Run rspec
+        run: bundle exec rspec
