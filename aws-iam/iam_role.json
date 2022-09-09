@@ -53,6 +53,7 @@
                 "eks:DescribeNodegroup",
                 "iam:AttachRolePolicy",
                 "iam:CreateRole",
+                "iam:CreateServiceLinkedRole",
                 "iam:DeleteRole",
                 "iam:DetachRolePolicy",
                 "iam:GetRole",
