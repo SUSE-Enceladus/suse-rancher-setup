@@ -14,6 +14,9 @@ module SUSERancherSetup
     # Asynchronous in-memory background job handler
     config.active_job.queue_adapter = :async
 
+    # Allow all data types in YAML DB embedding
+    config.active_record.use_yaml_unsafe_load = true
+
     config.lasso_run = "run"
     config.lasso_commands = "nil"
     config.lasso_error = ""
