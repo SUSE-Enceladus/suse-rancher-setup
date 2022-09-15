@@ -12,6 +12,10 @@ module RancherOnEks
         true
       when '/welcome'
         valid_login?
+      when RancherOnEks::Engine.routes.url_helpers.edit_custom_config_path
+        valid_login?
+      when RancherOnEks::Engine.routes.url_helpers.custom_config_path
+        valid_login?
       when AWS::Engine.routes.url_helpers.permissions_path
         valid_login?
       when AWS::Engine.routes.url_helpers.edit_region_path
