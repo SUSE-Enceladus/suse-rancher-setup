@@ -19,6 +19,7 @@ module SUSERancherSetup
 
     config.lasso_run = "run"
     config.lasso_commands = "nil"
+    config.lasso_deploy_complete = false
     config.lasso_error = ""
     config.lasso_commands_file = '/var/lib/suse-rancher-setup/delete_resources_steps'
     config.lasso_dns_json_path = '/var/tmp/dns_record.json'
