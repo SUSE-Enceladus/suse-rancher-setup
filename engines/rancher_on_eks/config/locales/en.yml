@@ -66,7 +66,7 @@ en:
         title: "Deploy Rancher on AWS EKS"
         form_caption: "Okay, we have everything we need. It's time to deploy
           your Rancher server on a dedicated EKS cluster. When you're ready to
-          start, just click **Execute**, and sit back. Your Rancher server will
+          start, just click **Next**, and sit back. Your Rancher server will
           be ready in about 20 minutes, and we'll tell you how to access it.
 
 
