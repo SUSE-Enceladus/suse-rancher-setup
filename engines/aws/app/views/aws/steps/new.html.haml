@@ -8,8 +8,7 @@
       %div.form-check
         = form.radio_button :step, step, class: 'form-check-input eos-radio-btn'
         = form.label "step_#{step}", t("engines.aws.steps.labels.#{step}"), class: 'form-check-label'
-  %div.form-group
-    = form.submit t('actions.exec'), class: 'btn btn-primary'
+  = render('layouts/navigation_buttons') do
+    = previous_step_button()
+    = form.submit t('actions.next'), class: 'btn btn-primary'
 -# end
-= render('layouts/navigation_buttons') do
-  = previous_step_button()

@@ -14,8 +14,12 @@ module SUSERancherSetup
     # Asynchronous in-memory background job handler
     config.active_job.queue_adapter = :async
 
+    # Allow all data types in YAML DB embedding
+    config.active_record.use_yaml_unsafe_load = true
+
     config.lasso_run = "run"
     config.lasso_commands = "nil"
+    config.lasso_deploy_complete = false
     config.lasso_error = ""
     config.lasso_commands_file = '/var/lib/suse-rancher-setup/delete_resources_steps'
     config.lasso_dns_json_path = '/var/tmp/dns_record.json'
