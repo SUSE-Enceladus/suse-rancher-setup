@@ -101,4 +101,12 @@ module ApplicationHelper
     deployment_failed = (target.include?('wrapup') && @deploy_failed)
     return (access_and_not_failed || deployment_failed) && !@refresh_timer && login_access
   end
+
+  def selected_class(target)
+    active_link_to_class(target, class_active: 'selected', active: :exclusive)
+  end
+
+  def disabled_class(target)
+    'disabled' unless access_menu?(target)
+  end
 end
