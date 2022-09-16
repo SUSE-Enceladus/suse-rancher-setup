@@ -1,3 +1,5 @@
+![CI testing](https://github.com/SUSE-Enceladus/suse-rancher-setup/actions/workflows/rails-testing.yml/badge.svg)
+
 # SUSE Rancher Setup
 
 Simple, usable web application for deploying complex applications to the cloud; wrapping cloud native SDK/CLIs.

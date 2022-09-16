@@ -10,4 +10,11 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def mock_login
+    Rails.application.config.lasso_logged = true
+  end
+
+  def clear_login
+    Rails.application.config.lasso_logged = nil
+  end
 end
