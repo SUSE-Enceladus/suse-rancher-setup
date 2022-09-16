@@ -11,10 +11,10 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def mock_login
-    Rails.application.config.lasso_logged = true
+    KeyValue.set(:authorized_at, DateTime.now)
   end
 
   def clear_login
-    Rails.application.config.lasso_logged = nil
+    KeyValue.set(:authorized_at, false)
   end
 end
