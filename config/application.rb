@@ -28,20 +28,30 @@ module SUSERancherSetup
     config.cli_log = 'log/cli.log'
     config.permissions_passed = false
 
-    # External configs: config.yml
-    ## Engines to load
-    ## The order determines the menu order - engines with no UI should be last
-    config.engines = config_for(:config)[:engines]
     ## Application-level menu entries - these come before Engine UIs
     config.menu_entries = [
       { caption: 'Login', icon: 'login', target: '/' },
       { caption: 'Welcome', icon: 'home', target: '/welcome' }
     ]
-    # Rancher source - for _helm_
-    config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
-    # kubernetes version
-    config.x.rancher_on_eks = OpenStruct.new(config_for(:config)[:rancher_on_eks])
-  end
+
+    # External configs: config.yml
+    begin
+      ## Engines to load
+      ## The order determines the menu order - engines with no UI should be last
+      config.engines = config_for(:config)[:engines]
+
+      # Rancher source - for _helm_
+      config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
+      # kubernetes version
+      config.x.rancher_on_eks = OpenStruct.new(config_for(:config)[:rancher_on_eks])
+    rescue Exception
+      # don't crash if a config isn't present (necessary for packaging)
+      puts("WARNING: config.yml not present - the application will not be usable without it.")
+      config.engines = []
+      config.x.rancher = nil
+      config.x.rancher_on_eks = nil
+    end
+end
 end
 
 # Engine loading mechanism
