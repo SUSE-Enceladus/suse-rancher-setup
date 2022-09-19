@@ -117,7 +117,7 @@ module RancherOnEks
     end
 
     def step(rank, force: false)
-      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.application.config.lasso_error.present? && Rails.application.config.lasso_error != "error-cleanup"
+      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
 
       step = Step.find_by(rank: rank)
       return if step.complete? && !force
@@ -254,7 +254,7 @@ module RancherOnEks
           sg_id: @security_group.id,
           role_arn: @cluster_role.arn,
           subnet_ids: subnet_ids,
-          k8s_version: '1.22'
+          k8s_version: Rails.configuration.x.rancher_on_eks.k8s_version
         )
         @type = @cluster.type
         @cluster.wait_until(:ACTIVE)
@@ -312,14 +312,16 @@ module RancherOnEks
         @type = @rancher.type
         @rancher.wait_until(:deployed)
       end
+      Rails.configuration.lasso_deploy_complete = true
       # in case Rancher create command gets failed status
-      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.application.config.lasso_error.present? && Rails.application.config.lasso_error != "error-cleanup"
+      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
     end
 
     def self.rollback
+      Rails.configuration.lasso_deploy_complete = true
       Step.all.order(rank: :desc).each do |step|
         step.resource&.destroy
-        step.destroy if Rails.application.config.lasso_run.present?
+        step.destroy if Rails.configuration.lasso_run.present?
       end
     end
   end

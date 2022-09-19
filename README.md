@@ -34,6 +34,12 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
     sudo zypper in libxml2-devel libxslt-devel sqlite3-devel
     ```
 
+4.  Create a local config file
+    ```
+    cp config/config.yml.example config/config.yml
+    ```
+    Only an example config is included in the project for reference. Your working config is not included in the source repository.
+
 4.  Initialize a development database
     ```
     rails db:setup
@@ -71,6 +77,10 @@ the Installer to load only the needed components.
 Engines are only loaded if the application is configured to do so. To load an engine it must be included in the list `Rails.configuration.engines`, defined in `config/application.rb`.
 
 Since each engine may define UI elements in the workflow, the order engines are loaded determines the order of the menu entries in the application. The only exception is the 'Welcome' page, which is always first.
+
+### Deployment Engine
+
+One Engine in the workflow should be designated as the 'deployment engine'. This should define the overall workflow and the steps to be performed for the deployment, including authorization for the entire workflow. See [engines/rancher_on_eks/app/helpers/rancher_on_eks/authorization_helper.rb](engines/rancher_on_eks/app/helpers/rancher_on_eks/authorization_helper.rb) for an example.
 
 ### Adding workflow UI to an engine
 

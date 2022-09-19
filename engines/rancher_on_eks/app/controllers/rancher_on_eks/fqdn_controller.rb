@@ -1,5 +1,5 @@
 module RancherOnEks
-  class FqdnController < ApplicationController
+  class FqdnController < RancherOnEks::ApplicationController
     def edit
       @fqdn = Fqdn.load
     end

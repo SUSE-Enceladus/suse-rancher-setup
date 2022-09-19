@@ -4,8 +4,6 @@
   = markdown(t('engines.aws.region.form_caption'))
   %div.form-group
     = form.select(:value, @region.options, {}, { class: 'custom-select' })
-  %div.form-group
+  = render('layouts/navigation_buttons') do
+    = previous_step_button()
     = form.submit t('actions.next'), class: 'btn btn-primary'
--# end
-= render('layouts/navigation_buttons') do
-  = previous_step_button()

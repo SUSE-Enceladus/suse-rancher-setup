@@ -21,7 +21,7 @@
 %define         ruby_version ruby3.1
 
 Name:           suse-rancher-setup
-Version:        1.0.1
+Version:        1.1.0
 Release:        0
 Summary:        SUSE Rancher Setup on Public Cloud k8s service
 License:        GPL-3.0
@@ -39,6 +39,7 @@ Requires:       %{ruby_version}
 Requires:       kuberlr
 Requires:       helm
 Requires:       nginx
+Requires:       openssl
 Requires:       python3-cloudinstancecredentials
 # Does not build for i586, s390, aarch64 and is not supported on those architectures
 ExcludeArch:    %{ix86} s390 aarch64

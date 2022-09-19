@@ -1,10 +1,10 @@
 module RancherOnEks
-  class WrapupController < ApplicationController
+  class WrapupController < RancherOnEks::ApplicationController
 
     def show
       download_file if params[:download]
 
-      @lasso_commands = ["done"].include? Rails.application.config.lasso_commands
+      @lasso_commands = ["done"].include? Rails.configuration.lasso_commands
       @resources_deleted = Step.all_deleted?
       @in_process = params[:deleting] && !@resources_deleted
       @fqdn = RancherOnEks::Fqdn.load.value
@@ -18,20 +18,20 @@ module RancherOnEks
       @cleaning_up = params[:deleting]
       # keep showing the buttons after cleaning up
       @resources_created = @resources.length > 0 || params[:deleting]
-      @downloading = ["running"].include? Rails.application.config.lasso_commands
+      @downloading = ["running"].include? Rails.configuration.lasso_commands
       @refresh_timer = 15 if @in_process || @downloading
-      if @lasso_commands && File.exist?(Rails.application.config.lasso_commands_file)
+      if @lasso_commands && File.exist?(Rails.configuration.lasso_commands_file)
         @commands = get_commands
       end
-      @failed = true if Rails.application.config.lasso_error != ""
+      @failed = true if Rails.configuration.lasso_error != ""
     end
 
     def destroy
-      Rails.application.config.lasso_run = params[:run]
-      deleting = true if Rails.application.config.lasso_run.present?
+      Rails.configuration.lasso_run = params[:run]
+      deleting = true if Rails.configuration.lasso_run.present?
 
-      Rails.application.config.lasso_commands = "running" unless deleting
-      File.delete(Rails.application.config.lasso_commands_file) unless deleting || !File.exist?(Rails.application.config.lasso_commands_file)
+      Rails.configuration.lasso_commands = "running" unless deleting
+      File.delete(Rails.configuration.lasso_commands_file) unless deleting || !File.exist?(Rails.configuration.lasso_commands_file)
       RancherOnEks::WrapupJob.perform_later()
       redirect_to rancher_on_eks.wrapup_path(deleting: deleting)
     end
@@ -47,14 +47,14 @@ module RancherOnEks
     end
 
     def download_file
-      compressed_filestream = zip_files(Rails.application.config.lasso_commands_file)
+      compressed_filestream = zip_files(Rails.configuration.lasso_commands_file)
       @zip_name = "#{t('engines.rancher_on_eks.wrapup.clean_resources_file').downcase.gsub(' ', '_')}"\
         "-#{DateTime.now.iso8601}.zip"
       send_data compressed_filestream.read, filename: @zip_name
     end
 
     def get_commands
-      File.open(Rails.application.config.lasso_commands_file, 'r') { |f| f.readlines }
+      File.open(Rails.configuration.lasso_commands_file, 'r') { |f| f.readlines }
     end
   end
 end

@@ -1,5 +1,5 @@
 module ShirtSize
-  class SizesController < ApplicationController
+  class SizesController < ShirtSize::ApplicationController
     def edit
       @size = KeyValue.get(:cluster_size, 'small')
       @sizes = self.form_sizes

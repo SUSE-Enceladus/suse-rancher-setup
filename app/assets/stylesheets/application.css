@@ -51,3 +51,8 @@ a.disabled {
   pointer-events: none;
   cursor: default;
 }
+
+.menu-item.no-link * {
+  pointer-events: none;
+  cursor: default;
+}

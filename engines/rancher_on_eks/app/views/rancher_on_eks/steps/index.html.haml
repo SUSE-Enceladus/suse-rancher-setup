@@ -21,13 +21,20 @@
         = step.rank
         \.
         = step.action
-- if @deployable
-  = form_with url: rancher_on_eks.deploy_steps_path, method: 'post' do |form|
-    %div.form-group
-      = form.submit t('actions.exec'), class: 'btn btn-primary'
--# end
+
+= render('layouts/navigation_buttons') do
+  - if @deployable
+    = form_with url: rancher_on_eks.deploy_steps_path, method: 'post' do |form|
+      = previous_step_button()
+      = form.submit t('actions.next'), class: 'btn btn-primary'
+  - elsif @deploy_failed
+    = previous_step_button()
+    = next_step_button()
+  - else
+    = previous_step_button()
 
 - if @resources.length > 0
+  %hr
   %p= t('engines.rancher_on_eks.wrapup.resources.caption')
   %ul
     - @resources.each do |resource|
@@ -36,9 +43,3 @@
         = resource.id
     -# end
 -# end
-
-= render('layouts/navigation_buttons') do
-  -if @deploy_failed
-    = next_step_button()
-  -# end
-  = previous_step_button()

@@ -17,6 +17,8 @@ jobs:
         with:
           bundler-cache: true
           ruby-version: 3.1
+      - name: create test config
+        run: cp config/config.yml.example config/config.yml
       - name: Set up database schema
         run: bin/rails db:reset
       - name: Run minitest

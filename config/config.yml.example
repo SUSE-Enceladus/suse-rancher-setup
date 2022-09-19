@@ -20,3 +20,7 @@ shared:
     chart: rancher-stable/rancher
     release_name: rancher-stable
     version:
+
+  # What version of kubernetes will be deployed?
+  rancher_on_eks:
+    k8s_version: 1.22

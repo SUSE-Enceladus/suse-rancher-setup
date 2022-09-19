@@ -1,5 +1,5 @@
 module AWS
-  class RegionsController < ApplicationController
+  class RegionsController < AWS::ApplicationController
     def edit
       @region = Region.load
     end

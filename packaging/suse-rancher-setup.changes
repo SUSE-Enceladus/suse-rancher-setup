@@ -1,4 +1,16 @@
 -------------------------------------------------------------------
+Fri Sep 16 04:27:31 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 1.1.0
+  - Resolves Fixed bsc#1203298 - missing permission
+  - Authentication encapsulated in a User model
+  - Authorization moved to the workflow engine
+  - All application actions require authorization
+  - Translation key use is logged
+  - Rancher install source & kubernetes version are managed in an
+    external config file (config/config.yml)
+  - Consistent navigation through all steps
+  - Sidebar no longer contains links
+-------------------------------------------------------------------
 Mon Jul 18 06:00:02 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 1.0.1
   - Bugfix to AWS permissions check
