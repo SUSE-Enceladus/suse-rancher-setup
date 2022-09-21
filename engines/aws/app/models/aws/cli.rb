@@ -481,9 +481,10 @@ module AWS
     end
 
     def create_dns_record(hosted_zone_id, fqdn, target, record_type)
-      write_change_batch(
+      change_batch = get_change_batch(
         "Update record for Ingress controller", "UPSERT", fqdn, record_type, target
       )
+      write_change_batch(change_batch)
       args = %W(
         route53 change-resource-record-sets
         --hosted-zone-id #{hosted_zone_id}
@@ -494,7 +495,7 @@ module AWS
       output
     end
 
-    def write_change_batch(comment, operation, fqdn, record_type, target)
+    def get_change_batch(comment, operation, fqdn, record_type, target)
       change_batch = {
         "Comment": "#{comment}",
         "Changes": [
@@ -513,23 +514,25 @@ module AWS
           }
         ]
       }
+      change_batch
+    end
+
+    def write_change_batch(change_batch)
       File.open(Rails.configuration.lasso_dns_json_path, 'w') do |f|
         f.write(change_batch.to_json)
       end
     end
 
     def delete_dns_record(hosted_zone_id, fqdn, target, record_type)
-      write_change_batch(
+      change_batch = get_change_batch(
         "Delete suse-rancher-setup record set", "DELETE", fqdn, record_type, target
       )
       args = %W(
         route53 change-resource-record-sets
         --hosted-zone-id #{hosted_zone_id}
-        --change-batch file://#{Rails.configuration.lasso_dns_json_path}
+        --change-batch '#{JSON.generate(change_batch)}'
       )
-      output = handle_command(args)
-      FileUtils.rm_f(Rails.configuration.lasso_dns_json_path)
-      output
+      handle_command(args)
     end
 
     def route53_get_change(id)
