@@ -92,9 +92,18 @@ en:
         caption: "**It's done! Your Rancher server, deployed on a dedicated
           EKS cluster, is ready and waiting to manage the rest of your container
           workloads.**"
-        kubeconfig_info: "\nIn case you need to manage the Rancher cluster please generate your kubeconfig file using
-        `aws eks update-kubeconfig --region %{region} --name %{cluster_name}`
-        for more details see the [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)"
+        more_info: "In case you need to manage the Rancher cluster, you can
+          generate your kubeconfig file using the command:
+
+          `aws eks update-kubeconfig --region %{region} --name %{cluster_name}`
+
+          For more details see the
+          [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+
+
+          When you are ready to upgrade your Rancher instance, please see the
+          [Rancher documentation](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades)
+          for details."
         failed_caption: "**Deployment failed. Something went wrong during the deployment.**"
         failed_info: "The resources created should be cleaned up, if any. Retry another deployment once the issue has been resolved."
         url: "You can browse to your Rancher server at
