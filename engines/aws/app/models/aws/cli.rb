@@ -530,7 +530,7 @@ module AWS
       args = %W(
         route53 change-resource-record-sets
         --hosted-zone-id #{hosted_zone_id}
-        --change-batch '#{JSON.generate(change_batch)}'
+        --change-batch #{JSON.generate(change_batch)}
       )
       handle_command(args)
     end
