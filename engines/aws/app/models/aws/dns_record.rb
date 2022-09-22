@@ -27,6 +27,7 @@ module AWS
       @cli.delete_dns_record(
         hosted_zone_id, fqdn.value, hostname, 'CNAME'
       )
+      throw(:abort) unless Rails.configuration.lasso_run.present?
     end
 
     def describe_resource
