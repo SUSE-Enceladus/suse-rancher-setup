@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Thu Sep 22 04:32:15 PM UTC 2022 - James Mason <jmason@suse.com>
+- version 1.1.1
+  - Add link to Rancher update instructions
+  - Add a missing permission
+  - improve dowloadable cleanup instructions
+-------------------------------------------------------------------
 Fri Sep 16 04:27:31 PM UTC 2022 - James Mason <jmason@suse.com>
 - version 1.1.0
   - Resolves Fixed bsc#1203298 - missing permission
