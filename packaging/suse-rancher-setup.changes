@@ -1,5 +1,6 @@
 -------------------------------------------------------------------
 Thu Sep 22 04:32:15 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 1.1.1
   - Add link to Rancher update instructions
   - Add a missing permission
@@ -7,6 +8,7 @@ Thu Sep 22 04:32:15 PM UTC 2022 - James Mason <jmason@suse.com>
 
 -------------------------------------------------------------------
 Fri Sep 16 04:27:31 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 1.1.0
   - Resolves Fixed bsc#1203298 - missing permission
   - Authentication encapsulated in a User model
@@ -20,29 +22,34 @@ Fri Sep 16 04:27:31 PM UTC 2022 - James Mason <jmason@suse.com>
 
 -------------------------------------------------------------------
 Mon Jul 18 06:00:02 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 1.0.1
   - Bugfix to AWS permissions check
   - generate secrets and certificates at package time
 
 -------------------------------------------------------------------
 Wed Jul 13 03:41:58 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 1.0.0
   - Resolved issue with generated cleanup command
   - Final language changes
 
 -------------------------------------------------------------------
 Tue Jul 12 07:27:17 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 0.10.0
   - Relocate AWS IAM role document
   - Check AWS permissions; report any missing permissions
 
 -------------------------------------------------------------------
 Thu Jul  7 05:42:13 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 0.9.1
   - Fix a path issue in packaging
 
 -------------------------------------------------------------------
 Thu Jul  7 03:25:05 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 0.9.0
   - Do not prompt for AWS credentials (requires IAM machine role or
     local credentials)
@@ -51,17 +58,20 @@ Thu Jul  7 03:25:05 PM UTC 2022 - James Mason <jmason@suse.com>
 
 -------------------------------------------------------------------
 Thu Jun 23 07:06:47 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 0.8.0
   - web login based on cloudinstancecredentials
   - based on Ruby 3.1
 
 -------------------------------------------------------------------
 Tue Jun 21 06:36:43 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - use kuberlr instead of a specific kubectl version
 - set Rancher on EKS to deploy with k8s v1.22
 
 -------------------------------------------------------------------
 Fri Jun 17 08:58:41 PM UTC 2022 - James Mason <jmason@suse.com>
+
 - version 0.7.0
   + enable CATTLE_PROMETHEUS_METRICS
   + custom versions of Rancher can be installed
