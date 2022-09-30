@@ -158,7 +158,7 @@ _Please note any new external CLI dependencies in this documentation._
 
 Update the [changelog](packaging/suse-rancher-setup.changes) for the expected release version, and stage it for _git_.
 
-**💡 Hint:** You can use `date -u` to get the proper date format for changelogs.
+**💡 Hint:** You can use `bin/vc` to get the proper format for changelogs, assuming you have [_osc_](https://software.opensuse.org/package/osc) installed.
 
 
 [bumpversion](https://pypi.org/project/bumpversion/) is used to tag releases; the `--allow-dirty` flag will include the _changelog_ in the version bump commit.
