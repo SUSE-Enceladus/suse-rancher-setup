@@ -14,7 +14,7 @@ module AWS
 
     def execute(*args)
       stdout, stderr = Cheetah.run(
-        ['ec2metadata', '--api', 'latest', *args],
+        ['ec2metadata', '--api', '2021-07-15', *args],
         stdout: :capture,
         stderr: :capture,
         logger: Logger.new(Rails.configuration.cli_log)
