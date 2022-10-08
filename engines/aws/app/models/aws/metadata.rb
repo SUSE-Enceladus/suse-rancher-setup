@@ -34,7 +34,11 @@ module AWS
     end
 
     def iam_info
-      JSON.parse(self.execute('--info'))
+      begin
+        JSON.parse(self.execute('--iam-info'))
+      rescue
+        JSON.parse(self.execute('--info'))
+      end
     end
 
     def instance_profile_arn
