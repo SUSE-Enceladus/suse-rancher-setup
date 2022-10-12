@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   mount RancherOnEks::Engine, at: '/deploy' if defined?(RancherOnEks::Engine)
   # Required CSP engines should be mounted
   mount AWS::Engine, at: '/aws' if defined?(AWS::Engine)
+  mount Azure::Engine, at: '/azure' if defined?(Azure::Engine)
   # Configuration options, as needed
   mount ShirtSize::Engine, at: '/size' if defined?(ShirtSize::Engine)
 end
