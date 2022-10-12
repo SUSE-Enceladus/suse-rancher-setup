@@ -64,11 +64,6 @@ the Installer to load only the needed components.
 
 * Remove the `Gemfile`, `*.gemspec`, `lib/$ENGINE_NAME/version.rb`
 * Remove `require '$ENGINE_NAME/version'` from `lib/$ENGINE_NAME.rb`
-* Add the following to the _ApplicationController_ class `application_controller.rb`:
-  ```
-  helper Rails.application.helpers
-  layout 'layouts/application'
-  ```
 * Remove any unnecessary components, if desired (mailers, jobs, assets)
 * Edit `config/routes.rb` to include a route for the engine, conditioned on the engine being loaded.
 
