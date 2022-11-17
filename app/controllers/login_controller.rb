@@ -11,7 +11,7 @@ class LoginController < ApplicationController
 
   def update
     user = User.new(self.login_params)
-    user.authorize
+    session[:authorized_at] = user.authorize
     redirect_path = helpers.next_step_path(login_path)
     unless user.is_authorized?
       flash[:danger] = user.errors.full_messages.join("\n")
