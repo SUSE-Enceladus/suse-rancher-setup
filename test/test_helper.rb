@@ -11,10 +11,6 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   def mock_login
-    KeyValue.set(:authorized_at, DateTime.now)
-  end
-
-  def clear_login
-    KeyValue.set(:authorized_at, false)
+    put login_url, params: { user: { username: 'username', password: 'password' } }
   end
 end
