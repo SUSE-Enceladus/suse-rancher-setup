@@ -44,6 +44,10 @@ module Azure
       JSON.parse(stdout)['value']
     end
 
+    def set_default_region(region)
+      self.set_config(key: 'defaults.region', value: region)
+    end
+
     def set_defaults()
       return if KeyValue.get(:azure_defaults_set, false)
 

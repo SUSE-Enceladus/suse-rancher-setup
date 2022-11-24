@@ -1,5 +1,10 @@
+$LOAD_PATH.push File.expand_path(__dir__, '..')
 require "azure/engine"
 
 module Azure
-  # Your code goes here...
+  def self.menu_entries
+    [
+      { caption: 'Azure Location', icon: 'location_on', target: '/azure/region/edit' }
+    ]
+  end
 end

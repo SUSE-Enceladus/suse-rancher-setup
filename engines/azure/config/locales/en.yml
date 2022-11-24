@@ -1,0 +1,17 @@
+en:
+  login:
+    azure:
+      username: ""
+      password: ""
+  engines:
+    azure:
+      region:
+        title: "Azure Location"
+        form_caption: "Which Azure Location do you want your Rancher server to
+          be deployed in? Any region will do, it's just a matter of what's best
+          for you.
+
+
+          The list below includes all the regions that support AKS zones.
+          **Please select one:**"
+        using: "Your cluster will be deployed in '%{region}'."
