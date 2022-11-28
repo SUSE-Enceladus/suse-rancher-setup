@@ -1,5 +1,5 @@
 module Azure
-  # singular class for wrapping AWS region selection
+  # singular class for wrapping Azure region selection
   class Region
     include ActiveModel::Model
     include Saveable

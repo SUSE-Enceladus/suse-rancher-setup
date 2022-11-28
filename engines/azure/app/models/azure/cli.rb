@@ -2,6 +2,8 @@ require 'cheetah'
 
 module Azure
   class Cli
+    class CliError < StandardError; end
+
     include ActiveModel::Model
 
     attr_accessor(:tag_scope)
@@ -29,6 +31,7 @@ module Azure
         "Standard output: #{e.stdout}\n" \
         "Error output:    #{e.stderr}"
       )
+      raise CliError.new(e.stderr)
     end
 
     def set_config(key:, value:)
@@ -57,6 +60,15 @@ module Azure
       self.set_config(key: 'core.only_show_errors', value: 'true')
       self.set_config(key: 'core.no_color', value: 'true')
       KeyValue.set(:azure_defaults_set, true)
+    end
+
+    def login(app_id:, password:, tenant:)
+      # login as a service principal
+      # https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli
+      response = JSON.parse(self.execute(
+        %W(login --service-principal -u #{app_id} -p=#{password} --tenant #{tenant})
+      ))
+      response.first['user']['name'] == app_id
     end
   end
 end

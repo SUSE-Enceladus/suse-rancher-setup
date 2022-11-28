@@ -4,6 +4,7 @@ require "azure/engine"
 module Azure
   def self.menu_entries
     [
+      { caption: 'Azure Login', icon: 'badge', target: '/azure/login/edit' },
       { caption: 'Azure Location', icon: 'location_on', target: '/azure/region/edit' }
     ]
   end

@@ -12,11 +12,11 @@ module RancherOnAks
         true
       when '/welcome'
         valid_login?
-      when Azure::Engine.routes.url_helpers.edit_region_path
+      when azure.edit_login_path, azure.login_path
         valid_login?
-      when Azure::Engine.routes.url_helpers.region_path
+      when azure.edit_region_path, azure.region_path
         valid_login?
-      when RancherOnAks::Engine.routes.url_helpers.wrapup_path
+       when rancher_on_aks.wrapup_path
         valid_login? && setup_done?
       else
         false
