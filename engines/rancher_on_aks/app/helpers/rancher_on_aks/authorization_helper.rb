@@ -16,6 +16,8 @@ module RancherOnAks
         valid_login?
       when Azure::Engine.routes.url_helpers.region_path
         valid_login?
+      when RancherOnAks::Engine.routes.url_helpers.wrapup_path
+        valid_login? && setup_done?
       else
         false
       end
@@ -27,6 +29,10 @@ module RancherOnAks
 
     def valid_login?
       current_user.is_authorized?
+    end
+
+    def setup_done?
+      true # Rails.configuration.lasso_deploy_complete || Rails.configuration.lasso_error.present?
     end
   end
 end
