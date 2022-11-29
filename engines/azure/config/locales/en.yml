@@ -1,8 +1,8 @@
 en:
   login:
     azure:
-      username: ""
-      password: ""
+      username: "Virtual Machine Name"
+      password: "Subscription ID"
   engines:
     azure:
       login:
