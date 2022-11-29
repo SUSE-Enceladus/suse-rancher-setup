@@ -7,11 +7,17 @@ shared:
   # Which engines are loaded for this workflow?
   # * Order determines menu order
   # * Engines without UI components should be last
+
+  # Rancher on EKS workflow
   engines:
     - AWS
     - ShirtSize
     - RancherOnEks
     - Helm
+  # Rancher on AKS workflow
+  # engines:
+  #   - Azure
+  #   - RancherOnAks
 
   # Where are we installing Rancher from? (passed to _helm_)
   rancher:

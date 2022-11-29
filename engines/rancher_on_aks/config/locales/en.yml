@@ -1,0 +1,65 @@
+en:
+  product_brand:
+    title: "SUSE Rancher Setup"
+  greeting:
+    content: "This tool is designed to automate the deployment of Rancher
+      Manager in your Azure subscription. At the end of this process, you should
+      have a highly-available instance of Rancher running on AKS. To get
+      the most out of your Rancher experience, we recommend you familiarize
+      yourself with the product documentation:
+      [Rancher Docs](https://rancher.com/docs/)
+
+
+      You shouldn't have to be an expert in container management to run Rancher.
+      **SUSE Rancher Setup** will make the process as easy as we can make it…
+      you’ll just need to provide a few things to deploy Rancher on a dedicated
+      AKS cluster, sized just right for your needs.
+
+
+      ### What we need from you
+
+      1. **Azure service principal**
+      In order to perform the set up for you, this application needs to access
+      Azure - service principal credentials need to be provided, with
+      persmission to create and modify AKS clusters and nodegroups,
+      and Azure DNS Zone records in an existing hosted zone.
+      [More Info](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)
+
+      2. **An Azure DNS Zone.** We need to give your Rancher server a
+      domain name,. To do so, the subdomain we use needs to be configured
+      as an Azure DNS Zone. We'll take care of the DNS record for
+      Rancher, and make sure it's all properly routed, you just need to give
+      us a place to work. It can be a public zone or a private zone, as long as
+      it is resolvable by this virtual machine and your PC, and the
+      *Azure service principal* you provide has rights to edit the zone.
+      [More Info](https://learn.microsoft.com/en-us/azure/dns/)
+
+
+      ### Let's go
+
+
+      When you have that ready, click the big, orange **Next** button to get
+      started, and go ahead and brew a cup of coffee or tea... *the full
+      deployment will take about 20 minutes.*"
+  engines:
+    # override the shirt size settings, to be specific to Rancher on EKS
+    shirt_size:
+      sizes:
+        form_caption: "We don't expect you to know *exactly* what you're going
+        to manage with your Rancher server, but we also don't want you to waste
+        resources on capacity you don't need. We just need a general idea of
+        what your plans are, and we'll set things up accordingly. Think of it as
+        finding the 'shirt size' for your deployment.
+
+
+        The measurement we use is the number of kubernetes nodes that will be
+        managed by your Rancher server."
+        labels:
+            small:  "SMALL - up to 35 nodes"
+            medium: "MEDIUM - up to 75 nodes"
+            large:  "LARGE - up to 125 nodes"
+
+    rancher_on_aks:
+      wrapup:
+        title: "Congratulations!"
+        caption: "Nothing happened yet ;-)"

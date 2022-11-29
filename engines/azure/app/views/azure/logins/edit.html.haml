@@ -1,0 +1,16 @@
+= page_header(t('engines.azure.login.title'))
+-# body
+= form_with(model: @credential, url: azure.login_path, method: 'put') do |form|
+  = markdown(t('engines.azure.login.form_caption'))
+  %div.form-group
+    = form.label(:app_id, t('engines.azure.login.app_id'))
+    = form.text_field(:app_id, class: 'form-control')
+  %div.form-group
+    = form.label(:password, t('engines.azure.login.password'))
+    = form.password_field(:password, class: 'form-control')
+  %div.form-group
+    = form.label(:tenant, t('engines.azure.login.tenant'))
+    = form.text_field(:tenant, class: 'form-control')
+  =render('layouts/navigation_buttons') do
+    = previous_step_button()
+    = form.submit(t('actions.next'), class: 'btn btn-primary')
