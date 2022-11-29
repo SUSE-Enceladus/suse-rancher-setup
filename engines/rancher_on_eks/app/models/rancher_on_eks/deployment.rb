@@ -1,7 +1,6 @@
 module RancherOnEks
-  class Deployment
+  class Deployment < Deployable
     def create_steps!
-      KeyValue.set('tag_scope', "lasso-#{self.random_string()}")
       Step.create!(
         rank: 0,
         duration: 1,
@@ -116,25 +115,10 @@ module RancherOnEks
       )
     end
 
-    def step(rank, force: false)
-      raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
-
-      step = Step.find_by(rank: rank)
-      return if step.complete? && !force
-
-      step.start!
-      step.resource = yield if block_given?
-      step.save
-      step.complete!
-    end
-
-    def random_string
-      # pick a random 4-digit number, return as string
-      rand(1000..9999).to_s
-    end
-
     def deploy
       step(0, force: true) do
+        KeyValue.set('tag_scope', "suse-rancher-setup-#{self.random_num()}")
+
         @cluster_size = RancherOnEks::ClusterSize.new
         @cli = AWS::Cli.load
 
@@ -315,14 +299,6 @@ module RancherOnEks
       Rails.configuration.lasso_deploy_complete = true
       # in case Rancher create command gets failed status
       raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
-    end
-
-    def self.rollback
-      Rails.configuration.lasso_deploy_complete = true
-      Step.all.order(rank: :desc).each do |step|
-        step.resource&.destroy
-        step.destroy if Rails.configuration.lasso_run.present?
-      end
     end
   end
 end
