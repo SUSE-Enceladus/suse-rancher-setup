@@ -6,7 +6,7 @@ class LoginController < ApplicationController
       redirect = helpers.next_step_path(login_path)
       redirect_to(redirect)
     end
-    @csp_login_info = 'aws' # currently AWS only, planning for other CSPs
+    @csp_login_info = helpers.csp_key()
   end
 
   def update

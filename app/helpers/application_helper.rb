@@ -109,4 +109,9 @@ module ApplicationHelper
   def disabled_class(target)
     'disabled' unless access_menu?(target)
   end
+
+  def csp_key()
+    'aws' if defined?(AWS::Engine)
+    'azure' if defined?(Azure::Engine)
+  end
 end
