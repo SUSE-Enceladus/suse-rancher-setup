@@ -62,6 +62,8 @@ en:
             large:  "LARGE - up to 125 nodes"
 
     rancher_on_eks:
+      resources:
+        caption: "The following resources were created as part of your deployment:"
       steps:
         title: "Deploy Rancher on AWS EKS"
         form_caption: "Okay, we have everything we need. It's time to deploy
@@ -112,7 +114,6 @@ en:
           to change it when you first log in."
         resources:
           subtitle: "AWS Resources"
-          caption: "The following resources were created as part of your deployment:"
         resources_not_created: "No resources were created."
         commands:
           subtitle: "AWS Clean Resources Commands"
