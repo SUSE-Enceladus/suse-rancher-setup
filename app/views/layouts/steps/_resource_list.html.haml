@@ -1,0 +1,8 @@
+- if resources.length > 0
+  %hr
+  %p= caption
+  %ul
+    - resources.each do |resource|
+      %li
+        = friendly_type(resource.type)
+        = resource.id
