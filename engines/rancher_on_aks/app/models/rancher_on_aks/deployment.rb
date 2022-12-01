@@ -51,7 +51,13 @@ module RancherOnAks
     def deploy()
       step(0, force: true) do
         KeyValue.set('tag_scope', "suse-rancher-setup-#{self.random_num()}")
+        @tag_scope = KeyValue.get('tag_scope')
+        @cli = Azure::Cli.load()
         nil
+      end
+      step(1) do
+        @resource_group = Azure::ResourceGroup.create(name: "#{@tag_scope}_rg")
+        @resource_group.ready!
       end
       Rails.configuration.lasso_deploy_complete = true
     end
