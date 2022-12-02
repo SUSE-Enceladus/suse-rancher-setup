@@ -30,7 +30,7 @@ module RancherOnEks
       Step.create!(
         rank: 6,
         duration: 16,
-        action: 'Route public subnets through Internet Gateway'
+        action: 'Route public subnets through the Internet Gateway'
       )
 
       index = 1
@@ -59,7 +59,7 @@ module RancherOnEks
         Step.create!(
           rank: rank,
           duration: 14,
-          action: "Route private subnet #{index}/3 through NAT Gateway"
+          action: "Route private subnet #{index}/3 through the NAT Gateway"
         )
         index += 1
       end
@@ -96,17 +96,17 @@ module RancherOnEks
       Step.create!(
         rank: 21,
         duration: 35,
-        action: 'Deploy Ingress controller'
+        action: 'Deploy the ingress controller'
       )
       Step.create!(
         rank: 22,
         duration: 32,
-        action: 'Add DNS entry for Ingress controller'
+        action: 'Create a DNS record for the Rancher server'
       )
       Step.create!(
         rank: 23,
         duration: 50,
-        action: 'Deploy Certificate manager'
+        action: 'Deploy the certificate manager'
       )
       Step.create!(
         rank: 24,

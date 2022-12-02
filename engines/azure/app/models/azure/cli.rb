@@ -8,7 +8,7 @@ module Azure
 
     attr_accessor(:tag_scope)
 
-    def self.load
+    def self.load()
       cli = new(
         tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
       )
@@ -48,7 +48,7 @@ module Azure
     end
 
     def set_default_region(region)
-      self.set_config(key: 'defaults.region', value: region)
+      self.set_config(key: 'defaults.location', value: region)
     end
 
     def set_defaults()
@@ -69,6 +69,28 @@ module Azure
         %W(login --service-principal -u #{app_id} -p=#{password} --tenant #{tenant})
       ))
       response.first['user']['name'] == app_id
+    end
+
+    def create_resource_group(name:)
+      self.execute(
+        %W(group create --name #{name})
+      )
+    end
+
+    def describe_resource_group(name:)
+      self.execute(
+        %W(group show --name #{name})
+      )
+    end
+
+    def destroy_resource_group(name:)
+      self.execute(
+        %W(
+          group delete --name #{name}
+          --force-deletion-types Microsoft.Compute/virtualMachines
+          --force-deletion-types Microsoft.Compute/virtualMachineScaleSets
+        )
+      )
     end
   end
 end
