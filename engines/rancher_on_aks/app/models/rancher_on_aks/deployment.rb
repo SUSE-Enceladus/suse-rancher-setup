@@ -76,6 +76,10 @@ module RancherOnAks
         )
         nil
       end
+      step(4) do
+        @ingress = Helm::IngressController.create()
+        @ingress.wait_until(:deployed)
+      end
       Rails.configuration.lasso_deploy_complete = true
     end
   end
