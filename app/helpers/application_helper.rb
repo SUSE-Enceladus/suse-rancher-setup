@@ -114,4 +114,10 @@ module ApplicationHelper
     'aws' if defined?(AWS::Engine)
     'azure' if defined?(Azure::Engine)
   end
+
+  def wt(key)
+    # workflow translation
+    prefix = Rails.configuration.workflow_translation_prefix
+    t("#{prefix}#{key}")
+  end
 end

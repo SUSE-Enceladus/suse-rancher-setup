@@ -4,17 +4,20 @@
 
 shared:
 
+  # Which workflow is running?
   # Which engines are loaded for this workflow?
   # * Order determines menu order
   # * Engines without UI components should be last
 
   # Rancher on EKS workflow
+  workflow: RancherOnEks
   engines:
     - AWS
     - ShirtSize
     - RancherOnEks
     - Helm
   # Rancher on AKS workflow
+  # workflow: RancherOnAks
   # engines:
   #   - Azure
   #   - RancherOnAks
