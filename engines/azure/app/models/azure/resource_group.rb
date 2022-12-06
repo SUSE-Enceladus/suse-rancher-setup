@@ -6,8 +6,8 @@ module Azure
       self.creation_attributes = {
         name: @name
       }
-      response = JSON.parse(@cli.create_resource_group(name: @name))
-      self.id = response['id']
+      @cli.create_resource_group(name: @name)
+      self.id = @name
       self.refresh()
     end
 
