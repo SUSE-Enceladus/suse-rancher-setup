@@ -36,8 +36,11 @@ module SUSERancherSetup
 
     # External configs: config.yml
     begin
-      ## Engines to load
-      ## The order determines the menu order - engines with no UI should be last
+      # Engines to load
+      # The order determines the menu order - engines with no UI should be last
+      config.workflow = config_for(:config)[:workflow]
+      # prefix for common translation keys
+      config.workflow_translation_prefix = "workflow.#{config.workflow.underscore}."
       config.engines = config_for(:config)[:engines]
 
       # Rancher source - for _helm_
