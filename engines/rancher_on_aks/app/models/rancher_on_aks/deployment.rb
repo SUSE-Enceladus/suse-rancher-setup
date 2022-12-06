@@ -69,6 +69,13 @@ module RancherOnAks
         )
         @cluster.ready!
       end
+      step(3) do
+        @cli.update_kubeconfig(
+          cluster_name: @cluster.id,
+          resource_group_name: @resource_group.id
+        )
+        nil
+      end
       Rails.configuration.lasso_deploy_complete = true
     end
   end
