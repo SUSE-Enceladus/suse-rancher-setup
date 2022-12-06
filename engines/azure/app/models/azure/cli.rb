@@ -115,5 +115,15 @@ module Azure
         %W(aks show --name #{name} --resource-group #{resource_group_name})
       )
     end
+
+    def update_kubeconfig(cluster_name:, resource_group_name:)
+      self.execute(
+        %W(
+          aks get-credentials
+          --name #{cluster_name}
+          --resource-group #{resource_group_name}
+        )
+      )
+    end
   end
 end
