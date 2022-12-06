@@ -56,3 +56,93 @@ en:
           attributes:
             base:
               invalid: "Credentials are not valid."
+
+  workflow:
+    rancher_on_aks:
+      product_brand:
+        title: "SUSE Rancher Setup"
+      greeting:
+        content: "This tool is designed to automate the deployment of Rancher
+          Manager in your Azure subscription. At the end of this process, you should
+          have a highly-available instance of Rancher running on AKS. To get
+          the most out of your Rancher experience, we recommend you familiarize
+          yourself with the product documentation:
+          [Rancher Docs](https://rancher.com/docs/)
+
+
+          You shouldn't have to be an expert in container management to run Rancher.
+          **SUSE Rancher Setup** will make the process as easy as we can make it…
+          you’ll just need to provide a few things to deploy Rancher on a dedicated
+          AKS cluster, sized just right for your needs.
+
+
+          ### What we need from you
+
+          1. **Azure service principal**
+          In order to perform the set up for you, this application needs to access
+          Azure - service principal credentials need to be provided, with
+          persmission to create and modify AKS clusters and nodegroups,
+          and Azure DNS Zone records in an existing hosted zone.
+          [More Info](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)
+
+          2. **An Azure DNS Zone.** We need to give your Rancher server a
+          domain name,. To do so, the subdomain we use needs to be configured
+          as an Azure DNS Zone. We'll take care of the DNS record for
+          Rancher, and make sure it's all properly routed, you just need to give
+          us a place to work. It can be a public zone or a private zone, as long as
+          it is resolvable by this virtual machine and your PC, and the
+          *Azure service principal* you provide has rights to edit the zone.
+          [More Info](https://learn.microsoft.com/en-us/azure/dns/)
+
+
+          ### Let's go
+
+
+          When you have that ready, click the big, orange **Next** button to get
+          started, and go ahead and brew a cup of coffee or tea... *the full
+          deployment will take about 20 minutes.*"
+    rancher_on_eks:
+      product_brand:
+        title: "SUSE Rancher Setup"
+      greeting:
+        content: "This tool is designed to automate the deployment of Rancher
+          Manager in your AWS account. At the end of this process, you should
+          have a highly-available instance of Rancher running on EKS. To get
+          the most out of your Rancher experience, we recommend you familiarize
+          yourself with the product documentation: [rancher docs](https://rancher.com/docs/)
+
+
+          You shouldn't have to be an expert in container management to run Rancher.
+          **SUSE Rancher Setup** tool will make the process as easy as we can make it…
+          you’ll just need to provide a few things to deploy Rancher on a dedicated
+          AWS EKS cluster, sized just right for your needs.
+
+
+          ### What we need from you
+
+          1. **AWS permissions** In order to perform the set up for you, this
+          application needs to access AWS - this virtual machine must have an
+          *associated IAM instance profile* with
+          persmission to create and modify EKS clusters and nodegroups, VPCs,
+          subnets, routes, Internet Gateways, NATs, elastic IP addresses, EC2
+          instances and auto-scaling groups, and Route53 records in an existing
+          hosted zone.
+          [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
+          | [Required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/aws-iam/iam_role.json)
+
+          2. **A Route53 Hosted Zone.** We need to give your Rancher server a
+          domain name, and to do so, the subdomain we use needs to be configured
+          as an AWS Route53 hosted zone. We'll take care of the DNS record for
+          Rancher, and make sure it's all properly routed, you just need to give
+          us a place to work. It can be a public zone or a private zone, as long as
+          it is resolvable by this virtual machine and your PC, and the
+          *AWS credentials* you provide have rights to edit the zone.
+          [More Info](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html)
+
+
+          ### Let's go
+
+
+          When you have that ready, click the big, orange **Next** button to get
+          started, and go ahead and brew a cup of coffee or tea... *the full
+          deployment will take about 20 minutes.*"
