@@ -152,3 +152,154 @@ en:
           When you have that ready, click the big, orange **Next** button to get
           started, and go ahead and brew a cup of coffee or tea... *the full
           deployment will take about 20 minutes.*"
+
+  engines:
+    aws:
+      cli:
+        title: "Run an AWS-CLI command"
+        form_caption: "CLI Arguments"
+      permissions:
+        title: "Checking AWS IAM Permissions"
+        caption: "We're using the
+          [AWS Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)
+          to verify that all the necessary permissions are in place in `%{arn}`."
+        arn: "The"
+        passed: "Nice work, the application has all the required permissions!"
+        missing: "It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
+        retest: "Check again"
+      region:
+        title: "AWS Region"
+        form_caption: "Which AWS Region do you want your Rancher server to be
+          deployed in? Any region will do, it's just a matter of what's best
+          for you.
+
+
+          The list below includes all the regions you have access to.
+          **Please select one:**"
+        using: "Your cluster will be deployed in '%{region}'."
+        not_available: "Region '%{region}' does not support the selected instance types."
+      steps:
+        title: "AWS Actions"
+        form_caption: "Select an action to execute:"
+        labels:
+          version: "Show the version of the CLI"
+          regions: "List available regions (opt-in not required and opted-in)"
+          create_vpc: "Create a new VPC"
+
+    azure:
+      login:
+        title: "Azure Login"
+        form_caption: "Please provide the credentials for the Azure *service
+          principal* that will be used to set up your Rancher server.
+          If you do not already have a *service principal* ready, you can create
+          one using the
+          [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli)
+          or
+          [Azure Portal](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+
+
+          The *service principal* must have a password, and permissions to
+          creat and manage an AKS cluster and nodegroups, and manage the Azure
+          DNS zone that includes the Rancher server's FQDN.
+          We recommend simply assigning the _Contributor_ role on your
+          subscription."
+        app_id: "App ID"
+        password: "Password"
+        tenant: "Tenant"
+        success: "Successfully authenticated as service principal '%{service_principal}'"
+        failure: "Unable to authenticate:
+
+
+          %{message}"
+      region:
+        title: "Azure Location"
+        form_caption: "Which Azure Location do you want your Rancher server to
+          be deployed in? Any region will do, it's just a matter of what's best
+          for you.
+
+
+          The list below includes all the regions that support AKS zones.
+          **Please select one:**"
+        using: "Your cluster will be deployed in '%{region}'."
+
+    rancher_on_aks:
+      steps:
+        title: "Deploy Rancher on AKS"
+        form_caption: "Okay, we have everything we need. It's time to deploy
+          your Rancher server on a dedicated AKS cluster. When you're ready to
+          start, just click **Next**, and sit back. Your Rancher server will
+          be ready in about 20 minutes, and we'll tell you how to access it."
+      wrapup:
+        title: "Congratulations!"
+        caption: "Nothing happened yet ;-)"
+    rancher_on_eks:
+      resources:
+        caption: "The following resources were created as part of your deployment:"
+      steps:
+        title: "Deploy Rancher on AWS EKS"
+        form_caption: "Okay, we have everything we need. It's time to deploy
+          your Rancher server on a dedicated EKS cluster. When you're ready to
+          start, just click **Next**, and sit back. Your Rancher server will
+          be ready in about 20 minutes, and we'll tell you how to access it.
+
+
+          Along the way, we'll be sure to show you exactly what we're doing,
+          so there are no surpises, and when we're done we'll also give you a
+          list of all the AWS resources that were created to support your
+          Rancher server."
+      fqdn:
+        title: "Rancher URL"
+        form_caption: "What is the Fully Qualified Domain Name (*FQDN*) where
+          Rancher will be served? This forms the URL you will enter into your
+          web browser to access Rancher.
+
+
+          The subdomain containing this *FQDN* _must be preconfigured as an
+          AWS Route53 hosted zone_. For example, if the *FQDN* is
+          `rancher.example.com`, then `example.com` must be a Route53 hosted
+          zone, and Rancher will be served at `https://rancher.example.com` ."
+        using: "Rancher will be served at 'https://%{fqdn}'."
+      wrapup:
+        title: "Congratulations - your Rancher server is ready!"
+        failed_title: "Oh no ! Your Rancher deployment has failed!"
+        caption: "**It's done! Your Rancher server, deployed on a dedicated
+          EKS cluster, is ready and waiting to manage the rest of your container
+          workloads.**"
+        more_info: "In case you need to manage the Rancher cluster, you can
+          generate your kubeconfig file using the command:
+
+          `aws eks update-kubeconfig --region %{region} --name %{cluster_name}`
+
+          For more details see the
+          [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+
+
+          When you are ready to upgrade your Rancher instance, please see the
+          [Rancher documentation](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades)
+          for details."
+        failed_caption: "**Deployment failed. Something went wrong during the deployment.**"
+        failed_info: "The resources created should be cleaned up, if any. Retry another deployment once the issue has been resolved."
+        url: "You can browse to your Rancher server at
+          [%{fqdn}](https://%{fqdn})."
+        password: "The initial password is: `%{password}`. You will be prompted
+          to change it when you first log in."
+        resources:
+          subtitle: "AWS Resources"
+        resources_not_created: "No resources were created."
+        commands:
+          subtitle: "AWS Clean Resources Commands"
+          caption: "The following commands clean up the resources created, please,
+          apply in that order.
+          Make sure to run those commands with your credentials available in the env, i.e.
+          `AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar aws ec2 command --options`
+          or download the commands:"
+        clean_resources_file: 'clean_resources_commands'
+        clean_resources_commands: 'Clean resources commands'
+        clean_resources: 'Clean resources'
+        cleaning_resources: 'Cleaning resources'
+        resources_cleaned: 'Resources cleaned'
+        generate_clean_resources_commands: 'Generate clean resources commands'
+        generating_clean_resources_commands: 'Generating clean resources commands'
+      custom_configs:
+        title: 'Install Rancher from a customized location'
+        success: 'Rancher will be installed from the specified sources.'
