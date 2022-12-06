@@ -28,5 +28,8 @@ shared:
     version:
 
   # What version of kubernetes will be deployed?
+  # https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-6-9/
   rancher_on_eks:
     k8s_version: 1.22
+  rancher_on_aks:
+    k8s_version: 1.24.3
