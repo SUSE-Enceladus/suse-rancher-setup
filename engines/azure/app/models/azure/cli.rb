@@ -92,5 +92,28 @@ module Azure
         )
       )
     end
+
+    def create_cluster(name:, resource_group_name:, k8s_version:, vm_size:, node_resource_group_name:)
+      self.execute(
+        %W(
+          aks create
+          --resource-group #{resource_group_name}
+          --name #{name}
+          --generate-ssh-keys
+          --kubernetes-version #{k8s_version}
+          --load-balancer-sku standard
+          --node-count 3
+          --node-vm-size #{vm_size}
+          --node-resource-group #{node_resource_group_name}
+          --zones 1 2 3
+        )
+      )
+    end
+
+    def describe_cluster(name:, resource_group_name:)
+      self.execute(
+        %W(aks show --name #{name} --resource-group #{resource_group_name})
+      )
+    end
   end
 end

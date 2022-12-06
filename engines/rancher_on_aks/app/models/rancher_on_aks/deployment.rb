@@ -51,13 +51,23 @@ module RancherOnAks
     def deploy()
       step(0, force: true) do
         KeyValue.set('tag_scope', "suse-rancher-setup-#{self.random_num()}")
-        @tag_scope = KeyValue.get('tag_scope')
+        @prefix = KeyValue.get('tag_scope')
         @cli = Azure::Cli.load()
         nil
       end
       step(1) do
-        @resource_group = Azure::ResourceGroup.create(name: "#{@tag_scope}_rg")
+        @resource_group = Azure::ResourceGroup.create(name: @prefix)
         @resource_group.ready!
+      end
+      step(2) do
+        @cluster = Azure::Cluster.create(
+          name: "#{@prefix}_cluster",
+          resource_group_name: @resource_group.name,
+          k8s_version: Rails.configuration.x.rancher_on_aks.k8s_version,
+          vm_size: "Standard_D2_v3",
+          node_resource_group_name: "#{@prefix}_nodes"
+        )
+        @cluster.ready!
       end
       Rails.configuration.lasso_deploy_complete = true
     end
