@@ -303,3 +303,24 @@ en:
       custom_configs:
         title: 'Install Rancher from a customized location'
         success: 'Rancher will be installed from the specified sources.'
+
+    shirt_size:
+      sizes:
+        title: "Size your cluster"
+        form_caption: "We don't expect you to know *exactly* what you're going
+        to manage with your Rancher server, but we also don't want you to waste
+        resources on capacity you don't need. We just need a general idea of
+        what your plans are, and we'll set things up accordingly. Think of it as
+        finding the 'shirt size' for your deployment.
+
+
+        The measurement we use is the number of kubernetes nodes that will be
+        managed by your Rancher server."
+        using: "You're building a %{size} cluster."
+        failed: "The cluster size was not saved.
+
+          Please try again."
+        labels:
+          small:  "SMALL - up to 35 nodes"
+          medium: "MEDIUM - up to 75 nodes"
+          large:  "LARGE - up to 125 nodes"
