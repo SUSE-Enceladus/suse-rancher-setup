@@ -9,22 +9,25 @@ module K8s
 
     def self.load
       new(
-        region: AWS::Region.load().value,
+        region: (AWS::Region.load().value if defined?(AWS::Engine)),
         kubeconfig: '/tmp/kubeconfig'
       )
     end
 
     def execute(*args)
+      env = {
+        'KUBECONFIG' => @kubeconfig
+      }
+      if defined?(AWS::Engine)
+        env['AWS_REGION'] = @region
+        env['AWS_DEFAULT_REGION'] = @region
+        env['AWS_DEFAULT_OUTPUT'] = 'json'
+      end
       stdout, stderr = Cheetah.run(
         ['kubectl', *args],
         stdout: :capture,
         stderr: :capture,
-        env: {
-          'AWS_REGION' => @region,
-          'AWS_DEFAULT_REGION' => @region,
-          'AWS_DEFAULT_OUTPUT' => 'json',
-          'KUBECONFIG' => @kubeconfig
-        },
+        env: env,
         logger: Logger.new(Rails.configuration.cli_log)
       )
     end
