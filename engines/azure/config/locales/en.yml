@@ -1,9 +1,5 @@
 en:
-  login:
-    azure:
-      username: "Virtual Machine Name"
-      password: "Subscription ID"
-  engines:
+ engines:
     azure:
       login:
         title: "Azure Login"

@@ -48,6 +48,12 @@ en:
   login:
     content: "Please log in to continue.
       The credentials are based on data about this instance."
+    aws:
+      username: "EC2 Instance ID"
+      password: "AWS Account ID (without '-')"
+    azure:
+      username: "Virtual Machine Name"
+      password: "Subscription ID"
 
   activemodel:
     errors:
