@@ -1,14 +1,18 @@
 module Azure
   class Cluster < AzureResource
-    attr_accessor :name, :resource_group_name, :k8s_version, :vm_size, :node_resource_group_name
+    attr_accessor :name, :resource_group, :k8s_version, :vm_size, :node_resource_group
+
+    def to_s
+      @name
+    end
 
     def azure_create()
       self.creation_attributes = {
         name: @name,
-        resource_group_name: @resource_group_name,
+        resource_group: @resource_group,
         k8s_version: @k8s_version,
         vm_size: @vm_size,
-        node_resource_group_name: @node_resource_group_name
+        node_resource_group: @node_resource_group
       }
       @cli.create_cluster(**self.creation_attributes)
       self.id = @name
@@ -22,7 +26,7 @@ module Azure
     def describe_resource()
       @cli.describe_cluster(
         name: @name,
-        resource_group_name: @resource_group_name
+        resource_group: @resource_group
       )
     end
 
