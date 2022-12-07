@@ -2,6 +2,10 @@ module Azure
   class ResourceGroup < AzureResource
     attr_accessor :name
 
+    def to_s
+      @name
+    end
+
     def azure_create()
       self.creation_attributes = {
         name: @name
@@ -26,6 +30,5 @@ module Azure
     def state_attribute()
       @framework_attributes['properties']['provisioningState']
     end
-
-  end
+ end
 end
