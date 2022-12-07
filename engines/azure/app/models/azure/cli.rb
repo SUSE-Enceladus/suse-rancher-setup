@@ -116,12 +116,15 @@ module Azure
       )
     end
 
-    def update_kubeconfig(cluster_name:, resource_group_name:)
+    def update_kubeconfig(cluster_name:, resource_group_name:, kubeconfig: '/tmp/kubeconfig')
       self.execute(
         %W(
           aks get-credentials
           --name #{cluster_name}
           --resource-group #{resource_group_name}
+          --admin
+          --file #{kubeconfig}
+          --overwrite-existing
         )
       )
     end
