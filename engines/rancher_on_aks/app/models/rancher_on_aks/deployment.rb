@@ -80,6 +80,14 @@ module RancherOnAks
         @ingress = Helm::IngressController.create()
         @ingress.wait_until(:deployed)
       end
+      step(5) do
+        @load_balancer = Azure::LoadBalancer.load(
+          resource_group: @cluster.creation_attributes[:node_resource_group_name]
+        )
+        @public_ip = @load_balancer.public_ip
+        @public_ip.save
+        @public_ip
+      end
       Rails.configuration.lasso_deploy_complete = true
     end
   end

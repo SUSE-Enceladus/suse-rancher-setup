@@ -128,5 +128,21 @@ module Azure
         )
       )
     end
+
+    def describe_load_balancer(name:, resource_group:)
+      self.execute(
+        %W(
+          network lb show
+          --name #{name}
+          --resource-group #{resource_group}
+        )
+      )
+    end
+
+    def describe_public_ip(id:)
+      self.execute(
+        %W(network public-ip show --ids #{id})
+      )
+    end
   end
 end
