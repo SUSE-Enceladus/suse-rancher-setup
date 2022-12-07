@@ -93,35 +93,35 @@ module Azure
       )
     end
 
-    def create_cluster(name:, resource_group_name:, k8s_version:, vm_size:, node_resource_group_name:)
+    def create_cluster(name:, resource_group:, k8s_version:, vm_size:, node_resource_group:)
       self.execute(
         %W(
           aks create
-          --resource-group #{resource_group_name}
+          --resource-group #{resource_group}
           --name #{name}
           --generate-ssh-keys
           --kubernetes-version #{k8s_version}
           --load-balancer-sku standard
           --node-count 3
           --node-vm-size #{vm_size}
-          --node-resource-group #{node_resource_group_name}
+          --node-resource-group #{node_resource_group}
           --zones 1 2 3
         )
       )
     end
 
-    def describe_cluster(name:, resource_group_name:)
+    def describe_cluster(name:, resource_group:)
       self.execute(
-        %W(aks show --name #{name} --resource-group #{resource_group_name})
+        %W(aks show --name #{name} --resource-group #{resource_group})
       )
     end
 
-    def update_kubeconfig(cluster_name:, resource_group_name:, kubeconfig: '/tmp/kubeconfig')
+    def update_kubeconfig(cluster:, resource_group:, kubeconfig: '/tmp/kubeconfig')
       self.execute(
         %W(
           aks get-credentials
-          --name #{cluster_name}
-          --resource-group #{resource_group_name}
+          --name #{cluster}
+          --resource-group #{resource_group}
           --admin
           --file #{kubeconfig}
           --overwrite-existing
