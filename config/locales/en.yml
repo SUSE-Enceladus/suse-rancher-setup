@@ -224,6 +224,17 @@ en:
         using: "Your cluster will be deployed in '%{region}'."
 
     rancher_on_aks:
+      fqdn:
+        title: "Rancher URL"
+        form_caption: "What is the Fully Qualified Domain Name (*FQDN*) where
+          Rancher will be served? This forms the URL you will enter into your
+          web browser to access Rancher.
+
+
+          The subdomain containing this *FQDN* _must be preconfigured as an
+          Azure DNS zone_. For example, if the *FQDN* is
+          `rancher.example.com`, then `example.com` must be an Azure DNS
+          zone, and Rancher will be served at `https://rancher.example.com` ."
       steps:
         title: "Deploy Rancher on AKS"
         form_caption: "Okay, we have everything we need. It's time to deploy
