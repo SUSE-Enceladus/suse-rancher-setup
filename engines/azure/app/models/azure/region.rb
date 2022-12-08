@@ -8,7 +8,7 @@ module Azure
 
     def self.load
       new(
-        value: KeyValue.get(:azure_region, 'eastus')
+        value: KeyValue.get(:azure_region)
       )
     end
 
