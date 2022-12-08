@@ -2,11 +2,20 @@ module Azure
   class ResourceGroup < AzureResource
     attr_accessor :name
 
+    def self.load(name:)
+      instance = self.new(name: name)
+      instance.id = name
+      instance.refresh()
+      instance
+    end
+
     def to_s
       @name
     end
 
     def azure_create()
+      return if @cli.group_exists?(name: @name)
+
       self.creation_attributes = {
         name: @name
       }

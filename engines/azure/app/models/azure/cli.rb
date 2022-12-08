@@ -77,6 +77,13 @@ module Azure
       )
     end
 
+    def group_exists?(name:)
+      response = self.execute(
+        %W(group exists --name #{name})
+      )
+      response.strip == 'true'
+    end
+
     def describe_resource_group(name:)
       self.execute(
         %W(group show --name #{name})
