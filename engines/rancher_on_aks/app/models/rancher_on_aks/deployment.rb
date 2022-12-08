@@ -88,6 +88,14 @@ module RancherOnAks
         @public_ip.save
         @public_ip
       end
+      step(6) do
+        @fqdn = RancherOnAks::Fqdn.load()
+        @dns_record = Azure::DnsRecord.create(
+          fqdn: @fqdn,
+          target: @public_ip,
+          record_type: 'A'
+        )
+      end
       Rails.configuration.lasso_deploy_complete = true
     end
   end

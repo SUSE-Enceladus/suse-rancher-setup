@@ -151,5 +151,54 @@ module Azure
         %W(network public-ip show --ids #{id})
       )
     end
+
+    def find_resource_group_for_dns_zone(zone:)
+      response = JSON.parse(
+        self.execute(
+          %W(network dns zone list)
+        )
+      )
+      begin
+        response.select{ |resource| resource['name'] == zone }.first['resourceGroup']
+      rescue NoMethodError
+        nil
+      end
+    end
+
+    def create_dns_record(resource_group:, record_type:, record:, domain:, target:)
+      args = %W(
+        network dns record-set #{record_type.downcase} add-record
+        --resource-group #{resource_group}
+        --record-set-name #{record}
+        --zone-name #{domain}
+      )
+      case record_type
+      when 'A'
+        args.push('--ipv4-address', target)
+      end
+      self.execute(args)
+    end
+
+    def describe_dns_record(resource_group:, record_type:, record:, domain:)
+      self.execute(
+        %W(
+          network dns record-set #{record_type.downcase} show
+          --resource-group #{resource_group}
+          --name #{record}
+          --zone-name #{domain}
+        )
+      )
+    end
+
+    def destroy_dns_record(resource_group:, record_type:, record:, domain:)
+      self.execute(
+        %W(
+          network dns record-set #{record_type.downcase} delete
+          --resource-group #{resource_group}
+          --name #{record}
+          --zone-name #{domain}
+        )
+      )
+    end
   end
 end
