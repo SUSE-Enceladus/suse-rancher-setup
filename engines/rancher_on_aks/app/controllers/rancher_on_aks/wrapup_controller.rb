@@ -6,7 +6,7 @@ module RancherOnAks
       @password = Helm::Rancher.last.initial_password
       @resource_group = Azure::ResourceGroup.first
       @cluster = Azure::Cluster.last
-      @resources = Resource.all
+      @resources = Resource.where.associated(:steps)
     end
   end
 end

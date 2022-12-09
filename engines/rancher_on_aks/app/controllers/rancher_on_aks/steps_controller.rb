@@ -7,7 +7,7 @@ module RancherOnAks
       redirect_to(rancher_on_aks.wrapup_path) if @complete
 
       @deployable = Step.deployable?
-      @resources = Resource.all
+      @resources = Resource.where.associated(:steps)
 
       if Rails.configuration.lasso_error != "" && Rails.configuration.lasso_error != "error-cleanup"
         flash.now[:danger] = Rails.configuration.lasso_error
