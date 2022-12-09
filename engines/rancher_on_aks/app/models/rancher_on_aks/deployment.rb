@@ -78,7 +78,7 @@ module RancherOnAks
       end
       step(4) do
         @ingress = Helm::IngressController.create()
-        @ingress.wait_until(:deployed)
+        @ingress.ready!
       end
       step(5) do
         @load_balancer = Azure::LoadBalancer.load(
@@ -95,6 +95,16 @@ module RancherOnAks
           target: @public_ip,
           record_type: 'A'
         )
+      end
+      step(7) do
+        @cert_manager = Helm::CertManager.create()
+        @cert_manager.ready!
+      end
+      step(8) do
+        @rancher = Helm::Rancher.create(
+          fqdn: @fqdn
+        )
+        @rancher.ready!
       end
       Rails.configuration.lasso_deploy_complete = true
     end
