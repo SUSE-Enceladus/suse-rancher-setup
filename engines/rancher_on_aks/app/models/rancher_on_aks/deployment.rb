@@ -86,7 +86,7 @@ module RancherOnAks
         )
         @public_ip = @load_balancer.public_ip
         @public_ip.save
-        @public_ip
+        nil
       end
       step(6) do
         @fqdn = RancherOnAks::Fqdn.load()
