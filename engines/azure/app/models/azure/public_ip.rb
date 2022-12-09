@@ -1,6 +1,5 @@
 module Azure
   class PublicIp < AzureResource
-    attr_accessor :id
 
     def self.load(id:)
       instance = self.new(id: id)
@@ -22,7 +21,7 @@ module Azure
     end
 
     def describe_resource
-      @cli.describe_public_ip(id: @id)
+      @cli.describe_public_ip(id: self.id)
     end
 
     def state_attribute()
