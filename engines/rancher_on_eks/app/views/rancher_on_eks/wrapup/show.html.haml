@@ -45,14 +45,8 @@
         %i.eos-icons article
         = t('engines.rancher_on_eks.wrapup.generate_clean_resources_commands')
   -unless @resources_deleted
-    %h3= t('engines.rancher_on_eks.wrapup.resources.subtitle')
-    %p= t('engines.rancher_on_eks.resources.caption')
-  %ul
-    - @resources.each do |resource|
-      %li
-        = friendly_type(resource.type)
-        = resource.id
-    -# end
+    = render('layouts/steps/resource_list', resources: @resources, title: t('engines.rancher_on_eks.wrapup.resources.subtitle'), caption: t('resources.caption'))
+
   -unless @resources_deleted
     %div.float-left.btn-group.steps-container.form_container.container
       - if @downloading

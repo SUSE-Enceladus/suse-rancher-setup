@@ -46,6 +46,9 @@ en:
     login_required: "You must log in first."
     not_authorized: "You cannot perform this step yet."
 
+  resources:
+    caption: "The following resources were created as part of your deployment:"
+
   login:
     content: "Please log in to continue.
       The credentials are based on data about this instance."
@@ -245,8 +248,6 @@ en:
         title: "Congratulations!"
         caption: "Nothing happened yet ;-)"
     rancher_on_eks:
-      resources:
-        caption: "The following resources were created as part of your deployment:"
       steps:
         title: "Deploy Rancher on AWS EKS"
         form_caption: "Okay, we have everything we need. It's time to deploy
