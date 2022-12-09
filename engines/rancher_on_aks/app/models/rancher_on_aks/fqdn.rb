@@ -28,6 +28,10 @@ module RancherOnAks
       @value.partition('.').last
     end
 
+    def to_s
+      @value
+    end
+
     def zone_resource_group
       @zone_resource_group ||=
         @cli.find_resource_group_for_dns_zone(zone: self.domain)

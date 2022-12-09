@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RancherOnEks::Rancher, :type => :model do
+RSpec.describe Helm::Rancher, :type => :model do
   let(:mock_fqdn) { 'rancher.example.com' }
   let(:expected_namespace) { 'cattle-system' }
   let(:expected_repo_name) { 'rancher-stable' }

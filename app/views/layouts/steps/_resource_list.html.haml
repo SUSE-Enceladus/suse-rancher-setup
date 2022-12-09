@@ -1,6 +1,9 @@
 - if resources.length > 0
   %hr
-  %p= caption
+  - if defined?(title)
+    %h3= title
+  - if defined?(caption)
+    %p= caption
   %ul
     - resources.each do |resource|
       %li

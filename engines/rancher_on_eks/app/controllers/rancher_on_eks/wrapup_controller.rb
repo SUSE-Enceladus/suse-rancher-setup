@@ -12,7 +12,7 @@ module RancherOnEks
       @cluster_name = Resource.find_by(type: 'AWS::Cluster')
       @cluster_name = @cluster_name.id unless @cluster_name.nil?
       @password = nil if @in_process
-      @password = RancherOnEks::Rancher.last&.initial_password unless @in_process
+      @password = Helm::Rancher.last&.initial_password unless @in_process
       @resources = Resource.all
       # do not show any text if cleaning up
       @cleaning_up = params[:deleting]

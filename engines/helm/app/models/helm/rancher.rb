@@ -1,5 +1,5 @@
-module RancherOnEks
-  class Rancher < Helm::HelmResource
+module Helm
+  class Rancher < HelmResource
     NAMESPACE = 'cattle-system'
 
     attr_accessor :fqdn, :repo_name, :repo_url, :chart, :release_name, :version
@@ -39,14 +39,11 @@ module RancherOnEks
       @helm.install(@release_name, @chart, NAMESPACE, args)
       self.id = @release_name
       self.refresh()
-      # self.wait_until(:deployed)
+      #
     end
 
     def helm_destroy
       @helm.delete_deployment(self.id, NAMESPACE)
-      throw(:abort) unless Rails.configuration.lasso_run.present?
-
-      # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource

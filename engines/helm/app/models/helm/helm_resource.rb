@@ -6,6 +6,11 @@ module Helm
 
     attr_reader :helm, :kubectl
 
+    def ready!
+      self.wait_until(:deployed)
+      self
+    end
+
     private
 
     def set_cli

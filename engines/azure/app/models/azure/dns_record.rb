@@ -3,7 +3,7 @@ module Azure
     attr_accessor :fqdn, :target, :record_type
 
     def azure_create()
-      @zone_resource_group = Azure::ResourceGroup.load(
+      @zone_resource_group = Azure::ResourceGroup.create(
         name: @cli.find_resource_group_for_dns_zone(zone: @fqdn.domain)
       )
       self.creation_attributes = {
