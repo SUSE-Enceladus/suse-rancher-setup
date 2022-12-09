@@ -245,8 +245,26 @@ en:
           start, just click **Next**, and sit back. Your Rancher server will
           be ready in about 20 minutes, and we'll tell you how to access it."
       wrapup:
-        title: "Congratulations!"
-        caption: "Nothing happened yet ;-)"
+        title: "Congratulations - your Rancher server is ready!"
+        caption: "**It's done! Your Rancher server, deployed on a dedicated
+          AKS cluster, is ready and waiting to manage the rest of your container
+          workloads.**"
+        url: "You can browse to your Rancher server at
+          [%{fqdn}](https://%{fqdn})."
+        password: "The initial password is: `%{password}` . You will be prompted
+          to change it when you first log in."
+        more_info: "In case you need to manage the Rancher cluster, you can
+          generate your kubeconfig file using the command:
+          `az aks get-credentials --resource-group %{resource_group} --name %{cluster}` .
+          For more details see the
+          [Azure documentation](https://learn.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials).
+
+
+          When you are ready to upgrade your Rancher instance, please see the
+          [Rancher documentation](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades)
+          for details."
+        resources:
+          subtitle: "Azure Resources"
     rancher_on_eks:
       steps:
         title: "Deploy Rancher on AWS EKS"
