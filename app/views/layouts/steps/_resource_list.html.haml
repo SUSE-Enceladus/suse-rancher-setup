@@ -3,7 +3,7 @@
   - if defined?(title)
     %h3= title
   - if defined?(caption)
-    %p= caption
+    = markdown(caption)
   %ul
     - resources.each do |resource|
       %li

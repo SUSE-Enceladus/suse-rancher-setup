@@ -29,7 +29,8 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
-# Markdown is supported for most fields! Please be aware of the following settings:
+# Markdown is supported for all captions and content, but not for titles,
+# field names or flash messages. Please be aware of the following settings:
 # * Inline HTML is not supported
 # * Line breaks in a multiline string will be interpreted as hard breaks "<br>"
 # * Images are supported, but the must be placed in the 'public' path
