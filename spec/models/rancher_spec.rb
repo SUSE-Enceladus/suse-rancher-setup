@@ -1,4 +1,4 @@
-require 'rails_helper'
+return unless defined?(Helm::Engine)
 
 RSpec.describe Helm::Rancher, :type => :model do
   let(:mock_fqdn) { 'rancher.example.com' }
@@ -16,25 +16,25 @@ RSpec.describe Helm::Rancher, :type => :model do
       # mock out things we're not testing
       subject.fqdn = mock_fqdn
       allow(subject).to receive(:refresh)
+
+      @mock_kubectl = double
+      subject.instance_variable_set(:@kubectl, @mock_kubectl)
+      # create the namespace via kubectl
+      expect(@mock_kubectl)
+        .to receive(:create_namespace).with(expected_namespace)
+        .and_return(true)
+
+      @mock_helm = double
+      subject.instance_variable_set(:@helm, @mock_helm)
+      # add the helm repo
+      expect(@mock_helm)
+        .to receive(:add_repo).with(expected_repo_name, expected_repo_url)
+        .and_return(true)
     end
 
     it 'delegates the expected calls' do
-      # create the namespace via kubectl
-      mock_kubectl = double
-      expect(mock_kubectl)
-        .to receive(:create_namespace).with(expected_namespace)
-        .and_return(true)
-      subject.instance_variable_set(:@kubectl, mock_kubectl)
-
-      # add the helm repo
-      mock_helm = double
-      expect(mock_helm)
-        .to receive(:add_repo).with(expected_repo_name, expected_repo_url)
-        .and_return(true)
-      subject.instance_variable_set(:@helm, mock_helm)
-
       # install rancher via helm
-      expect(mock_helm)
+      expect(@mock_helm)
         .to receive(:install)
         .with(
           expected_release_name,
@@ -64,22 +64,8 @@ RSpec.describe Helm::Rancher, :type => :model do
       end
 
       it 'delegates the expected calls' do
-        # create the namespace via kubectl
-        mock_kubectl = double
-        expect(mock_kubectl)
-          .to receive(:create_namespace).with(expected_namespace)
-          .and_return(true)
-        subject.instance_variable_set(:@kubectl, mock_kubectl)
-
-        # add the helm repo
-        mock_helm = double
-        expect(mock_helm)
-          .to receive(:add_repo).with(expected_repo_name, expected_repo_url)
-          .and_return(true)
-        subject.instance_variable_set(:@helm, mock_helm)
-
         # install rancher via helm
-        expect(mock_helm)
+        expect(@mock_helm)
           .to receive(:install)
           .with(
             expected_release_name,
@@ -103,89 +89,31 @@ RSpec.describe Helm::Rancher, :type => :model do
         subject.save!
       end
     end
-
-    context 'custom install' do
-      let(:custom_config) do
-        cc = RancherOnEks::CustomConfig.new(
-          repo_name: 'mock-repo-name',
-          repo_url: 'mock-repo-url',
-          chart: 'mock-chart',
-          release_name: 'mock-release-name',
-          version: 'mock-version'
-        )
-        cc.save
-        return cc
-      end
-
-      it 'delegates with custom attributes' do
-        # create the namespace via kubectl
-        mock_kubectl = double
-        expect(mock_kubectl)
-          .to receive(:create_namespace).with(expected_namespace)
-          .and_return(true)
-        subject.instance_variable_set(:@kubectl, mock_kubectl)
-
-        # add the helm repo
-        mock_helm = double
-        expect(mock_helm)
-          .to receive(:add_repo).with(custom_config.repo_name, custom_config.repo_url)
-          .and_return(true)
-        subject.instance_variable_set(:@helm, mock_helm)
-
-        # install rancher via helm
-        expect(mock_helm)
-          .to receive(:install)
-          .with(
-            custom_config.release_name,
-            custom_config.chart,
-            expected_namespace,
-            [
-              '--set',
-              'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
-              '--set-string',
-              'extraEnv[0].value=true',
-              '--set',
-              "hostname=#{mock_fqdn}",
-              '--set',
-              'replicas=3',
-              '--version',
-              custom_config.version
-            ]
-          ).and_return(true)
-
-        # do it already
-        subject.repo_name = custom_config.repo_name
-        subject.repo_url = custom_config.repo_url
-        subject.chart = custom_config.chart
-        subject.release_name = custom_config.release_name
-        subject.version = custom_config.version
-        subject.save!
-      end
-    end
   end
 
   context 'internal functions' do
     before do
       subject.id = expected_release_name
+
+      @mock_kubectl = double
+      subject.instance_variable_set(:@kubectl, @mock_kubectl)
+
+      @mock_helm = double
+      subject.instance_variable_set(:@helm, @mock_helm)
     end
 
     it 'gets the expected helm status as describe_resource' do
-      mock_helm = double
-      expect(mock_helm)
+      expect(@mock_helm)
         .to receive(:status).with(expected_release_name, expected_namespace)
         .and_return(true)
-      subject.instance_variable_set(:@helm, mock_helm)
-
 
       subject.send(:describe_resource)
     end
 
     it 'gets the expected kubectl status as state_attribute' do
-      mock_kubectl = double
-      expect(mock_kubectl)
+      expect(@mock_kubectl)
         .to receive(:status).with(expected_release_name, expected_namespace)
         .and_return(true)
-      subject.instance_variable_set(:@kubectl, mock_kubectl)
 
       subject.send(:state_attribute)
     end

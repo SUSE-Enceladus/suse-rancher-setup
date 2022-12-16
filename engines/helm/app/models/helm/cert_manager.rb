@@ -16,7 +16,7 @@ module Helm
 
     def helm_create
       @kubectl.create_namespace(NAMESPACE)
-      @kubectl.update_cdr()
+      @kubectl.update_crds(version: VERSION)
       @helm.add_repo(REPO_NAME, REPO_URL)
       args = %W(--version #{VERSION})
       @helm.install(RELEASE_NAME, CHART, NAMESPACE, args)
