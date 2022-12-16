@@ -1,8 +1,16 @@
 module Helm
   class Rancher < HelmResource
+    include ActiveModel::Validations
+
     NAMESPACE = 'cattle-system'
 
     attr_accessor :fqdn, :repo_name, :repo_url, :chart, :release_name, :version
+
+    attr_accessor :tls_source
+    validates :tls_source, allow_nil: true, inclusion: {
+      in: %w(rancher letsEncrypt secret),
+      message: "'%{value}' is not valid."
+    }
 
     def initial_password
       args = %W(
@@ -35,6 +43,9 @@ module Helm
       unless @version.blank?
         args << '--version'
         args << @version
+      end
+      if @tls_source
+        args.push(*%W(--set ingress.tls.source=#{@tls_source}))
       end
       @helm.install(@release_name, @chart, NAMESPACE, args)
       self.id = @release_name

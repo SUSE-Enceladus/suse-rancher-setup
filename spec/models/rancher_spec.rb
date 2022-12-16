@@ -20,14 +20,14 @@ RSpec.describe Helm::Rancher, :type => :model do
       @mock_kubectl = double
       subject.instance_variable_set(:@kubectl, @mock_kubectl)
       # create the namespace via kubectl
-      expect(@mock_kubectl)
+      allow(@mock_kubectl)
         .to receive(:create_namespace).with(expected_namespace)
         .and_return(true)
 
       @mock_helm = double
       subject.instance_variable_set(:@helm, @mock_helm)
       # add the helm repo
-      expect(@mock_helm)
+      allow(@mock_helm)
         .to receive(:add_repo).with(expected_repo_name, expected_repo_url)
         .and_return(true)
     end
@@ -87,6 +87,48 @@ RSpec.describe Helm::Rancher, :type => :model do
 
         # do it already
         subject.save!
+      end
+    end
+
+    context 'with a TLS source' do
+      let(:valid_tls_source) { 'rancher' }
+      let(:invalid_tls_source) { 'foo' }
+      let(:lets_encrypt_tls_source) { 'letsEncrypt' }
+
+      it 'accepts a valid TLS source' do
+        # install rancher via helm
+        expect(@mock_helm)
+          .to receive(:install)
+          .with(
+            expected_release_name,
+            expected_chart,
+            expected_namespace,
+            [
+              '--set',
+              'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
+              '--set-string',
+              'extraEnv[0].value=true',
+              '--set',
+              "hostname=#{mock_fqdn}",
+              '--set',
+              'replicas=3',
+              '--set',
+              "ingress.tls.source=#{valid_tls_source}"
+            ]
+          ).and_return(true)
+
+        # do it already
+        subject.tls_source = valid_tls_source
+        subject.save!
+      end
+
+      it 'rejects an invalid TLS source' do
+        subject.tls_source = invalid_tls_source
+        expect { subject.save! }
+          .to raise_error(
+            ActiveRecord::RecordInvalid,
+            "Validation failed: Tls source '#{invalid_tls_source}' is not valid."
+          )
       end
     end
   end
