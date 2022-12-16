@@ -38,10 +38,17 @@ module SUSERancherSetup
     begin
       # Engines to load
       # The order determines the menu order - engines with no UI should be last
-      config.workflow = config_for(:config)[:workflow]
+      config.workflow = ENV['LASSO_WORKFLOW'] || config_for(:config)[:workflow]
+      puts("config.worflow: #{config.workflow}")
       # prefix for common translation keys
       config.workflow_translation_prefix = "workflow.#{config.workflow.underscore}."
-      config.engines = config_for(:config)[:engines]
+
+      engines = nil
+      if ENV['LASSO_ENGINES'].present?
+        engines = ENV['LASSO_ENGINES'].split(',')
+      end
+      config.engines = engines || config_for(:config)[:engines]
+      puts("config.engines: #{config.engines}")
 
       # Rancher source - for _helm_
       config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
@@ -54,7 +61,7 @@ module SUSERancherSetup
       config.x.rancher = nil
       config.x.rancher_on_eks = nil
     end
-end
+  end
 end
 
 # Engine loading mechanism
