@@ -1,7 +1,5 @@
 module Helm
   class Rancher < HelmResource
-    include ActiveModel::Validations
-
     NAMESPACE = 'cattle-system'
 
     attr_accessor :fqdn, :repo_name, :repo_url, :chart, :release_name, :version
