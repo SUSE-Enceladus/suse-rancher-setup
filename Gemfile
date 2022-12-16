@@ -83,4 +83,6 @@ group :test do
 
   gem 'simplecov'
   gem 'simplecov-json'
+
+  gem 'faker'
 end

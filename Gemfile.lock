@@ -98,6 +98,8 @@ GEM
     email_validator (2.2.4)
       activemodel
     erubi (1.11.0)
+    faker (3.0.0)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -271,6 +273,7 @@ DEPENDENCIES
   cheetah
   debug
   email_validator
+  faker
   haml-rails
   importmap-rails
   jbuilder
