@@ -95,9 +95,9 @@ module K8s
       return stdout
     end
 
-    def update_cdr
+    def update_crds(version:)
       args = %W(
-        apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
+        apply -f https://github.com/jetstack/cert-manager/releases/download/v#{version}/cert-manager.crds.yaml
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
