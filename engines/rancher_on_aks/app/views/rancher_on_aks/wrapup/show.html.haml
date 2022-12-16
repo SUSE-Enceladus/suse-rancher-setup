@@ -1,8 +1,8 @@
 = page_header(t('engines.rancher_on_aks.wrapup.title'))
 -# body
-%p= markdown(t('engines.rancher_on_aks.wrapup.caption'))
-%p= markdown(t('engines.rancher_on_aks.wrapup.url', fqdn: @fqdn))
-%p= markdown(t('engines.rancher_on_aks.wrapup.password', password: @password))
-%p= markdown(t('engines.rancher_on_aks.wrapup.more_info', resource_group: @resource_group, cluster: @cluster))
+= markdown(t('engines.rancher_on_aks.wrapup.caption'))
+= markdown(t('engines.rancher_on_aks.wrapup.url', fqdn: @fqdn))
+= markdown(t('engines.rancher_on_aks.wrapup.password', password: @password))
+= markdown(t('engines.rancher_on_aks.wrapup.more_info', resource_group: @resource_group, cluster: @cluster))
 
 = render('layouts/steps/resource_list', resources: @resources, title: t('engines.rancher_on_aks.wrapup.resources.subtitle'), caption: t('resources.caption'))

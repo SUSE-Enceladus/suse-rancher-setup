@@ -4,20 +4,22 @@ module ApplicationHelper
     return '' if text.blank?
 
     markdown_options = {
-      autolink:            true,
-      space_after_headers: true,
-      no_intra_emphasis:   true,
-      fenced_code_blocks:  true,
-      strikethrough:       true,
-      superscript:         true,
-      underline:           true,
-      highlight:           true,
-      quote:               true
+      autolink:                      true,
+      space_after_headers:           true,
+      no_intra_emphasis:             true,
+      fenced_code_blocks:            true,
+      disabled_indented_code_blocks: true,
+      strikethrough:                 true,
+      superscript:                   true,
+      underline:                     true,
+      highlight:                     true,
+      quote:                         true
     }
     render_options = {
-      filter_html: false,
+      filter_html: true,
       no_images:   false,
-      no_styles:   true
+      no_styles:   true,
+      hard_wrap:   true
     }
     render_options[:escape_html] = true if escape_html
 

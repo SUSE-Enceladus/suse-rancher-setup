@@ -1,15 +1,15 @@
 - if @failed && !@cleaning_up
   = page_header(t('engines.rancher_on_eks.wrapup.failed_title'))
   -# body
-  %p= markdown(t('engines.rancher_on_eks.wrapup.failed_caption'))
-  %p= markdown(t('engines.rancher_on_eks.wrapup.failed_info'))
+  = markdown(t('engines.rancher_on_eks.wrapup.failed_caption'))
+  = markdown(t('engines.rancher_on_eks.wrapup.failed_info'))
 - elsif !@cleaning_up
   = page_header(t('engines.rancher_on_eks.wrapup.title'))
   -# body
-  %p= markdown(t('engines.rancher_on_eks.wrapup.caption'))
-  %p= markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
-  %p= markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
-  %p= markdown(t('engines.rancher_on_eks.wrapup.more_info', region: @region, cluster_name: @cluster_name))
+  = markdown(t('engines.rancher_on_eks.wrapup.caption'))
+  = markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
+  = markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
+  = markdown(t('engines.rancher_on_eks.wrapup.more_info', region: @region, cluster_name: @cluster_name))
 -# end
 %hr
 
