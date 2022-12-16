@@ -130,6 +130,50 @@ RSpec.describe Helm::Rancher, :type => :model do
             "Validation failed: Tls source '#{invalid_tls_source}' is not valid."
           )
       end
+
+      context 'lets-encrypt' do
+        let(:mock_email_address) { 'nobody@nowhere.net' }
+
+        before do
+          subject.tls_source = lets_encrypt_tls_source
+        end
+
+        it 'accepts an email address' do
+          # install rancher via helm
+          expect(@mock_helm)
+            .to receive(:install)
+            .with(
+              expected_release_name,
+              expected_chart,
+              expected_namespace,
+              [
+                '--set',
+                'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
+                '--set-string',
+                'extraEnv[0].value=true',
+                '--set',
+                "hostname=#{mock_fqdn}",
+                '--set',
+                'replicas=3',
+                '--set',
+                "ingress.tls.source=#{lets_encrypt_tls_source}",
+                '--set',
+                "letsEncrypt.email=#{mock_email_address}"
+              ]
+            ).and_return(true)
+
+          subject.email_address = mock_email_address
+          subject.save!
+        end
+
+        it 'rejects a missing email for lets-encrypt' do
+          expect {subject.save! }
+            .to raise_error(
+              ActiveRecord::RecordInvalid,
+              "Validation failed: Email address can't be blank, Email address is invalid"
+            )
+        end
+      end
     end
   end
 

@@ -95,6 +95,8 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    email_validator (2.2.4)
+      activemodel
     erubi (1.11.0)
     ffi (1.15.5)
     globalid (1.0.0)
@@ -268,6 +270,7 @@ DEPENDENCIES
   capybara
   cheetah
   debug
+  email_validator
   haml-rails
   importmap-rails
   jbuilder

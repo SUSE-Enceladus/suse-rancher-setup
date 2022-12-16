@@ -6,11 +6,17 @@ module Helm
 
     attr_accessor :fqdn, :repo_name, :repo_url, :chart, :release_name, :version
 
-    attr_accessor :tls_source
+    # https://ranchermanager.docs.rancher.com/pages-for-subheaders/install-upgrade-on-a-kubernetes-cluster#5-install-rancher-with-helm-and-your-chosen-certificate-option
+    attr_accessor :tls_source, :email_address
     validates :tls_source, allow_nil: true, inclusion: {
       in: %w(rancher letsEncrypt secret),
       message: "'%{value}' is not valid."
     }
+    with_options if: -> { tls_source == 'letsEncrypt' } do |instance|
+      instance.validates :email_address, presence: true
+      instance.validates :email_address, email: true
+    end
+
 
     def initial_password
       args = %W(
@@ -47,10 +53,12 @@ module Helm
       if @tls_source
         args.push(*%W(--set ingress.tls.source=#{@tls_source}))
       end
+      if @tls_source == 'letsEncrypt'
+        args.push(*%W(--set letsEncrypt.email=#{@email_address}))
+      end
       @helm.install(@release_name, @chart, NAMESPACE, args)
       self.id = @release_name
       self.refresh()
-      #
     end
 
     def helm_destroy
