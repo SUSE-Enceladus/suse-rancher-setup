@@ -29,7 +29,7 @@ class TlsSource
 
   def source_options
     [
-      ["Rancher self-signed certificate", 'rancher', ],
+      ["Rancher self-signed certificate", 'rancher'],
       ["Let's Encrypt certificate", 'letsEncrypt']
     ]
   end

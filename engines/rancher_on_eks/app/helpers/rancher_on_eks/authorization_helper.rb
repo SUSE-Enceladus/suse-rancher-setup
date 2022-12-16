@@ -22,8 +22,10 @@ module RancherOnEks
         valid_login? && region_set?
       when rancher_on_eks.edit_fqdn_path, rancher_on_eks.fqdn_path
         valid_login? && region_set?
-      when rancher_on_eks.steps_path, rancher_on_eks.deploy_steps_path
+      when rancher_on_eks.edit_security_path, rancher_on_eks.security_path
         valid_login? && fqdn_set?
+      when rancher_on_eks.steps_path, rancher_on_eks.deploy_steps_path
+        valid_login? && security_set?
       when rancher_on_eks.wrapup_path
         valid_login? && setup_done?
       else
@@ -39,6 +41,10 @@ module RancherOnEks
     def fqdn_set?
       fqdn = RancherOnEks::Fqdn.load
       fqdn.value.present?
+    end
+
+    def security_set?
+      TlsSource.load.source.present?
     end
 
     def current_user
