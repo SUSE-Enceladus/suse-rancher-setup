@@ -1,8 +1,6 @@
 return unless defined?(Helm::Engine)
 return unless defined?(RancherOnEks::Engine)
 
-require 'rails_helper'
-
 RSpec.describe Helm::Rancher, :type => :model do
   let(:mock_fqdn) { 'rancher.example.com' }
   let(:expected_namespace) { 'cattle-system' }
