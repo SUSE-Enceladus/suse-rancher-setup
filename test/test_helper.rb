@@ -1,7 +1,9 @@
 ENV["RAILS_ENV"] ||= "test"
+require 'simplecov'
 require_relative "../config/environment"
 require "rails/test_help"
 
+SimpleCov.command_name("test #{ENV['LASSO_WORKFLOW']}")
 class ActiveSupport::TestCase
   # Run tests in parallel with specified workers
   parallelize(workers: :number_of_processors)
