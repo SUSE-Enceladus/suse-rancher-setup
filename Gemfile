@@ -50,6 +50,9 @@ gem 'active_link_to'
 # zip files
 gem 'rubyzip', require: 'zip'
 
+# email address validation
+gem 'email_validator'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -80,4 +83,6 @@ group :test do
 
   gem 'simplecov'
   gem 'simplecov-json'
+
+  gem 'faker'
 end

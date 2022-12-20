@@ -58,6 +58,7 @@ en:
     using_fqdn: "Rancher will be served at 'https://%{fqdn}'."
     login_required: "You must log in first."
     not_authorized: "You cannot perform this step yet."
+    tls_source: "Rancher will use '%{source}' as the TLS certificate source."
 
   resources:
     caption: "The following resources were created as part of your deployment:"
@@ -78,6 +79,10 @@ en:
           attributes:
             base:
               invalid: "Credentials are not valid."
+    attributes:
+      tls_source:
+        source: "TLS certificate source"
+        email_address: "Email address for certificate management (Let's Encrypt only)"
 
   workflow:
     rancher_on_aks:
@@ -221,6 +226,16 @@ en:
 
 
           The subdomain containing this *FQDN* _must be preconfigured as an AWS Route53 hosted zone_. For example, if the *FQDN* is `rancher.example.com`, then `example.com` must be a Route53 hosted zone, and Rancher will be served at `https://rancher.example.com` .
+      security:
+        title: "Security options"
+        form_caption: |-
+          The Rancher management server is designed to be secure by default and requires SSL/TLS configuration.
+
+
+          You can choose to use a self-signed TLS certificate provided by the Rancher server, or you may choose to have a [Let's Encrypt](https://letsencrypt.org/) certificate generated for to it.
+
+
+          **NOTE:** *In order for Let's Encrypt to generate a TLS certificate, your Rancher server must be accessible via the Internet at the FQDN provided over TCP port 80 (http), and you must supply an email address for future management.*
       wrapup:
         title: "Congratulations - your Rancher server is ready!"
         failed_title: "Oh no! Your Rancher deployment has failed!"

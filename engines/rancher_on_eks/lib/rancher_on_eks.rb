@@ -4,9 +4,10 @@ require "rancher_on_eks/engine"
 module RancherOnEks
   def self.menu_entries
     [
-      { caption: 'Domain Name', icon: 'read_more', target: '/deploy/fqdn/edit'},
-      { caption: 'Deploy', icon: 'deploy', target: '/deploy/steps'},
-      { caption: 'Next Steps', icon: 'enhancement', target: '/deploy/wrapup'}
+      { caption: 'Domain Name', icon: 'read_more', target: '/deploy/fqdn/edit' },
+      { caption: 'Security Options', icon: 'lock', target: '/deploy/security/edit' },
+      { caption: 'Deploy', icon: 'deploy', target: '/deploy/steps' },
+      { caption: 'Next Steps', icon: 'enhancement', target: '/deploy/wrapup' }
     ]
   end
 end

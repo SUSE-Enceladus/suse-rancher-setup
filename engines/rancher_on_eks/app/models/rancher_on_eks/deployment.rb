@@ -285,13 +285,16 @@ module RancherOnEks
       step(24) do
         @fqdn_record ||= Step.find_by_rank(22).resource
         @custom_config = RancherOnEks::CustomConfig.load
+        @tls_source = TlsSource.load()
         @rancher = Helm::Rancher.create(
           fqdn: @fqdn_record.id,
           repo_name: @custom_config.repo_name,
           repo_url: @custom_config.repo_url,
           chart: @custom_config.chart,
           release_name: @custom_config.release_name,
-          version: @custom_config.version
+          version: @custom_config.version,
+          tls_source: @tls_source.source,
+          email_address: @tls_source.email_address
         )
         @type = @rancher.type
         @rancher.wait_until(:deployed)

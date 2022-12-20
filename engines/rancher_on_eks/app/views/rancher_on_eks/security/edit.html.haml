@@ -1,0 +1,13 @@
+= page_header(t('engines.rancher_on_eks.security.title'))
+-# body
+= form_with(model: @tls_source, url: rancher_on_eks.security_path, method: 'put') do |form|
+  = markdown(t('engines.rancher_on_eks.security.form_caption'))
+  %div.form-group
+    = form.label(:source, TlsSource.human_attribute_name(:source))
+    = form.select(:source, @tls_source.source_options, {}, { class: 'custom-select' })
+  %div.form-group
+    = form.label(:email_address, TlsSource.human_attribute_name(:email_address))
+    = form.email_field(:email_address, class: 'form-control')
+  = render('layouts/navigation_buttons') do
+    = previous_step_button()
+    = form.submit t('actions.next'), class: 'btn btn-primary'
