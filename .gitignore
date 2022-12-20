@@ -43,3 +43,6 @@ public/localhost.*
 
 # Ignore instance-specific config
 /config/config.yml
+
+# Ignore coverage reports
+/coverage
