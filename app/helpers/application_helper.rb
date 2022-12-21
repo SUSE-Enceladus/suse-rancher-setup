@@ -77,7 +77,7 @@ module ApplicationHelper
     flash.collect do |context, message|
       # Skip empty messages
       next if message.blank?
-      message_sections = message.split("\n")
+      message_sections = message.to_s.split("\n")
       title = message_sections[0]
       body = if message_sections.length > 1
         message_sections[1..].join("\n")
