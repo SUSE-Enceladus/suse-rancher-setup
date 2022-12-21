@@ -15,7 +15,7 @@ module AWS
 
     def execute(*args)
       stdout, stderr = Cheetah.run(
-        ['aws', *args],
+        ['aws', *args.flatten],
         stdout: :capture,
         stderr: :capture,
         env: {
@@ -70,10 +70,10 @@ module AWS
     def describe_instance_type_offerings(region, instance_types)
       args = %W(
         ec2 describe-instance-type-offerings
+        --region #{region}
         --location-type availability-zone
         --filters Name=instance-type,Values=#{instance_types}
         --query InstanceTypeOfferings[].InstanceType
-        --region #{region}
       )
       stdout = execute(*args)
       JSON.parse(stdout)
@@ -122,7 +122,6 @@ module AWS
         --filters Name=instance-type,Values=#{instance_type}
       )
       stdout = execute(*args)
-
       zones = JSON.parse(stdout)['InstanceTypeOfferings'].collect do |offering|
         offering['Location']
       end.sort!
@@ -541,7 +540,8 @@ module AWS
     end
 
     def simulate_principal_policy(arn, *actions)
-      args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names #{actions})
+      args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names)
+      args.push(*actions)
       handle_command(args)
     end
 
