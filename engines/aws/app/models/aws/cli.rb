@@ -338,7 +338,8 @@ module AWS
 
     def create_role(name, target)
       role_name = "#{@tag_scope}-#{name}"
-      policy_doc = "file://#{File.dirname(__FILE__)}/#{target}-role-trust-policy.json"
+      FileUtils.cp("#{File.dirname(__FILE__)}/#{target}-role-trust-policy.json", "/tmp/#{target}-role-trust-policy.json")
+      policy_doc = "file:///tmp/#{target}-role-trust-policy.json"
       args = %W(
         iam create-role
         --role-name #{role_name}
