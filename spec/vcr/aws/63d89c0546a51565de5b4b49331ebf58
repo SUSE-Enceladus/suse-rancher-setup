@@ -1,0 +1,26 @@
+{
+    "HostedZones": [
+        {
+            "Id": "/hostedzone/Z02789583EHHMJ1NWHJKM",
+            "Name": "aws.bear454.com.",
+            "CallerReference": "06dc94f8-7c7a-4eab-9e60-6625afc9be0b",
+            "Config": {
+                "Comment": "",
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 3
+        },
+        {
+            "Id": "/hostedzone/Z0787079247TTSL1W47B0",
+            "Name": "jesus.hosted.zone.com.",
+            "CallerReference": "jesus_hosted_zone",
+            "Config": {
+                "PrivateZone": false
+            },
+            "ResourceRecordSetCount": 3
+        }
+    ],
+    "DNSName": "aws.bear454.com",
+    "IsTruncated": false,
+    "MaxItems": "100"
+}
