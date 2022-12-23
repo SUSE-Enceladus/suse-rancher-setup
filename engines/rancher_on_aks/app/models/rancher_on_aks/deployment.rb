@@ -51,8 +51,19 @@ module RancherOnAks
     def deploy()
       step(0, force: true) do
         KeyValue.set('tag_scope', "suse-rancher-setup-#{self.random_num()}")
+
+        @cluster_size = RancherOnAks::ClusterSize.new
         @prefix = KeyValue.get('tag_scope')
         @cli = Azure::Cli.load()
+
+        zones = %w(1 2 3) # FIXME - Azure CLI command to look up zones (https://github.com/MicrosoftDocs/azure-docs/issues/40477)
+        if zones.length >= @cluster_size.zones_count
+          @zones = zones.sample(@cluster_size.zones_count)
+        else
+          # if we have less than the required zone choices, use what's available
+          @zones = zones
+        end
+        @fqdn = RancherOnAks::Fqdn.load()
         nil
       end
       step(1) do
@@ -64,10 +75,13 @@ module RancherOnAks
           name: "#{@prefix}_cluster",
           resource_group: @resource_group,
           k8s_version: Rails.configuration.x.rancher_on_aks.k8s_version,
-          vm_size: "Standard_D2_v3",
-          node_resource_group: "#{@prefix}_nodes"
+          vm_size: @cluster_size.instance_type,
+          node_count: @cluster_size.instance_count,
+          node_resource_group: "#{@prefix}_nodes",
+          zones: @zones
         )
         @cluster.ready!
+        nil
       end
       step(3) do
         @cli.update_kubeconfig(
@@ -79,6 +93,7 @@ module RancherOnAks
       step(4) do
         @ingress = Helm::IngressController.create()
         @ingress.ready!
+        nil
       end
       step(5) do
         @load_balancer = Azure::LoadBalancer.load(
@@ -89,7 +104,6 @@ module RancherOnAks
         nil
       end
       step(6) do
-        @fqdn = RancherOnAks::Fqdn.load()
         @dns_record = Azure::DnsRecord.create(
           fqdn: @fqdn,
           target: @public_ip,
@@ -99,12 +113,14 @@ module RancherOnAks
       step(7) do
         @cert_manager = Helm::CertManager.create()
         @cert_manager.ready!
+        nil
       end
       step(8) do
         @rancher = Helm::Rancher.create(
           fqdn: @fqdn
         )
         @rancher.ready!
+        nil
       end
       Rails.configuration.lasso_deploy_complete = true
     end

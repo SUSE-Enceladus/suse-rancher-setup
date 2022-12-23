@@ -20,7 +20,9 @@ shared:
   # workflow: RancherOnAks
   # engines:
   #   - Azure
+  #   - ShirtSize
   #   - RancherOnAks
+  #   - Helm
 
   # Where are we installing Rancher from? (passed to _helm_)
   rancher:

@@ -12,7 +12,7 @@ task :coverage do
 
   ENV['RAILS_ENV'] = 'test'
   ENV['LASSO_WORKFLOW'] = 'RancherOnAks'
-  ENV['LASSO_ENGINES'] = 'Azure,RancherOnAks,Helm'
+  ENV['LASSO_ENGINES'] = 'Azure,ShirtSize,RancherOnAks,Helm'
   Rake::Task['test'].execute
   Rake::Task['spec'].execute
 end
