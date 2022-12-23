@@ -100,7 +100,7 @@ module Azure
       )
     end
 
-    def create_cluster(name:, resource_group:, k8s_version:, vm_size:, node_resource_group:)
+    def create_cluster(name:, resource_group:, k8s_version:, vm_size:, node_count: 3, node_resource_group:, zones: %w(1 2 3))
       self.execute(
         %W(
           aks create
@@ -109,11 +109,11 @@ module Azure
           --generate-ssh-keys
           --kubernetes-version #{k8s_version}
           --load-balancer-sku standard
-          --node-count 3
+          --node-count #{node_count}
           --node-vm-size #{vm_size}
           --node-resource-group #{node_resource_group}
-          --zones 1 2 3
-        )
+          --zones
+        ).push(zones)
       )
     end
 

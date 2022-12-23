@@ -1,6 +1,6 @@
 module Azure
   class Cluster < AzureResource
-    attr_accessor :name, :resource_group, :k8s_version, :vm_size, :node_resource_group
+    attr_accessor :name, :resource_group, :k8s_version, :vm_size, :node_count, :node_resource_group, :zones
 
     def to_s
       @name
