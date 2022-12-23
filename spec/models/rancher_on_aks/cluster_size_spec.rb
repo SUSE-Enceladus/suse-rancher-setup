@@ -3,20 +3,22 @@ return unless defined?(ShirtSize::Engine)
 
 RSpec.describe RancherOnAks::ClusterSize, type: :model do
 
-  if ENV['SLOW']
-    Azure::Region.load().options.each do |option|
-      Sizeable::TYPES.each do |size|
-        context "region: #{option.last}" do
-          context "size: #{size}" do
-            before(:each) do
-              # TODO Use Cheetah VCR here
-              KeyValue.set(:azure_region, option.last)
-              KeyValue.set('cluster_size', size)
-            end
+  Azure::Region.load().options.each do |option|
+    Sizeable::TYPES.each do |size|
+      context "region: #{option.last}" do
+        context "size: #{size}" do
+          before(:each) do
+            # TODO Use Cheetah VCR here
+            KeyValue.set(:azure_region, option.last)
+            KeyValue.set('cluster_size', size)
+          end
 
-            it 'has an instance type' do
-              expect(RancherOnAks::ClusterSize.new.instance_type).to be
-            end
+          before(:example) do
+            cheetah_vcr()
+          end
+
+          it 'has an instance type' do
+            expect(RancherOnAks::ClusterSize.new.instance_type).to be
           end
         end
       end
