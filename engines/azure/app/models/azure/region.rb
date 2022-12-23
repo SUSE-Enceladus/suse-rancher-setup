@@ -13,7 +13,7 @@ module Azure
     end
 
     def options
-      # https://learn.microsoft.com/en-us/azure/aks/availability-zones#limitations-and-region-availability
+      # https://learn.microsoft.com/en-us/azure/reliability/availability-zones-service-support#azure-regions-with-availability-zone-support
       [
         ['Australia East', 'australiaeast'],
         ['Brazil South', 'brazilsouth'],
@@ -29,13 +29,14 @@ module Azure
         ['Korea Central', 'koreacentral'],
         ['North Europe', 'northeurope'],
         ['Norway East', 'norwayeast'],
+        ['Qatar Central', 'qatarcentral'],
         ['Southeast Asia', 'southeastasia'],
         ['South Africa North', 'southafricanorth'],
         ['South Central US', 'southcentralus'],
         ['Sweden Central', 'swedencentral'],
         ['Switzerland North', 'switzerlandnorth'],
+        ['UAE North', 'uaenorth'],
         ['UK South', 'uksouth'],
-        ['US Gov Virginia', 'usgovvirginia'],
         ['West Europe', 'westeurope'],
         ['West US 2', 'westus2'],
         ['West US 3', 'westus3']
