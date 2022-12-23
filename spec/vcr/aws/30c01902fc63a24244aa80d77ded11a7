@@ -1,0 +1,39 @@
+{
+    "nodegroup": {
+        "nodegroupName": "suse-rancher-setup-1327-cluster-nodegroup",
+        "nodegroupArn": "arn:aws:eks:us-west-2:810320120389:nodegroup/suse-rancher-setup-1327-cluster/suse-rancher-setup-1327-cluster-nodegroup/aac299d5-9d76-c038-99cd-619ca81e4f6f",
+        "clusterName": "suse-rancher-setup-1327-cluster",
+        "version": "1.22",
+        "releaseVersion": "1.22.15-20221112",
+        "createdAt": "2022-12-20T23:52:19.262000-08:00",
+        "modifiedAt": "2022-12-20T23:52:19.262000-08:00",
+        "status": "CREATING",
+        "capacityType": "ON_DEMAND",
+        "scalingConfig": {
+            "minSize": 2,
+            "maxSize": 4,
+            "desiredSize": 3
+        },
+        "instanceTypes": [
+            "m5a.large"
+        ],
+        "subnets": [
+            "subnet-0e279f06d9fed9185",
+            "subnet-0305b24279be6126f",
+            "subnet-0cf18dc644de564aa"
+        ],
+        "amiType": "AL2_x86_64",
+        "nodeRole": "arn:aws:iam::810320120389:role/suse-rancher-setup-1327-nodegroup-role",
+        "labels": {
+            "role": "suse-rancher-setup-1327-cluster-general-worker"
+        },
+        "diskSize": 20,
+        "health": {
+            "issues": []
+        },
+        "updateConfig": {
+            "maxUnavailable": 1
+        },
+        "tags": {}
+    }
+}

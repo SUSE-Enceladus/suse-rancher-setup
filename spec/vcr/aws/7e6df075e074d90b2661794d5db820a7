@@ -1,0 +1,7 @@
+{
+    "PublicIp": "44.237.16.181",
+    "AllocationId": "eipalloc-0a223195049f54a27",
+    "PublicIpv4Pool": "amazon",
+    "NetworkBorderGroup": "us-west-2",
+    "Domain": "vpc"
+}

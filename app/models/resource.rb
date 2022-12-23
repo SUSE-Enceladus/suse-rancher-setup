@@ -25,6 +25,7 @@ class Resource < ApplicationRecord
       begin
         self.refresh()
         status = self.state_attribute()
+        return self if status == desired_status.to_s
         if status.downcase.include? 'failed'
           @failed = true
           message = "Status of #{ApplicationController.helpers.friendly_type(self.type)} #{self.id} failed, deployment interrupted. Please, go to the next page\n"
@@ -37,7 +38,7 @@ class Resource < ApplicationRecord
         Rails.logger.error "An error happened while getting the status of #{ApplicationController.helpers.friendly_type(self.type)} #{self.id}"
         status = 'nope'
       end
-      sleep(10) if status != desired_status
+      sleep(10) if status != desired_status.to_s
     end
     self
   end
