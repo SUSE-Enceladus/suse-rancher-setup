@@ -200,5 +200,13 @@ module Azure
         )
       )
     end
+
+    def list_sizes(region:)
+      self.execute(
+        %W(
+          vm list-sizes --location #{region}
+        )
+      )
+    end
   end
 end

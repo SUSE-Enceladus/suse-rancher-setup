@@ -43,9 +43,19 @@ module Azure
       ]
     end
 
+    def cli
+      @cli ||= Azure::Cli.load
+    end
+
     def save!
       KeyValue.set(:azure_region, @value)
-      Azure::Cli.load.set_default_region(@value)
+      self.cli.set_default_region(@value)
+    end
+
+    def available_instance_types
+      JSON.parse(self.cli.list_sizes(region: @value)).collect{ |i| i['name'] }.sort
+    rescue
+      []
     end
   end
 end
