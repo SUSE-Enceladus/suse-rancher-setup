@@ -54,7 +54,7 @@ en:
 
   flash:
     no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."
-    duplicate_record: The FQDN '%{fqdn}' already has a DNS record in this zone. Please select a new FQDN or delete that record."
+    duplicate_record: "The FQDN '%{fqdn}' already has a DNS record in this zone. Please select a new FQDN or delete that record."
     using_fqdn: "Rancher will be served at 'https://%{fqdn}'."
     login_required: "You must log in first."
     not_authorized: "You cannot perform this step yet."
