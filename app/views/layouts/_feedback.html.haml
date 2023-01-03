@@ -1,0 +1,15 @@
+%div.modal.fade#feedbackModal
+  %div.modal-dialog.modal-dialog-centered
+    %div.modal-content
+      %div.modal-header
+        %h5.modal-title= t('feedback.caption')
+        %button.close{ data: { dismiss: 'modal' } }
+          %i.eos-icons.eos-18{ 'aria-hidden' => 'true' } close
+      %div.modal-body
+        %ul
+          %li.discussion
+            %b= t('feedback.discussion.title')
+            = markdown(t('feedback.discussion.content'))
+          %li.issues
+            %b= t('feedback.issues.title')
+            = markdown(t('feedback.issues.content'))
