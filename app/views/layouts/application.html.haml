@@ -29,10 +29,7 @@
               = render 'layouts/menu_item', menu_entry
             = yield "menu"
       %footer.footer-side-menu
-        %ul.footer-list
-          %li.footer-list-item.ml-auto
-            %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
-              = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
+        = render('layouts/footer')
     %nav.mobile-menu.js-mobile-menu{"aria-label" => "Mobile Navigation"}
       %header
         %a{href: "#"}
@@ -54,8 +51,5 @@
         = alerts()
         = yield
     %footer.footer-content.js-footer-content
-      %ul.footer-list
-        %li.footer-list-item.ml-auto
-          %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
-            = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
+      = render('layouts/footer')
   = javascript_importmap_tags
