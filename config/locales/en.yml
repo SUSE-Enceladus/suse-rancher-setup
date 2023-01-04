@@ -54,7 +54,7 @@ en:
 
   flash:
     no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."
-    duplicate_record: The FQDN '%{fqdn}' already has a DNS record in this zone. Please select a new FQDN or delete that record."
+    duplicate_record: "The FQDN '%{fqdn}' already has a DNS record in this zone. Please select a new FQDN or delete that record."
     using_fqdn: "Rancher will be served at 'https://%{fqdn}'."
     login_required: "You must log in first."
     not_authorized: "You cannot perform this step yet."
@@ -71,6 +71,18 @@ en:
     azure:
       username: "Virtual Machine Name"
       password: "Subscription ID"
+
+  feedback:
+    title: "Feedback"
+    caption: "We would appreciate hearing from you!"
+    discussion:
+      title: "Questions or Comments?"
+      content: |-
+        Please post a topic in our [feedback forum](https://forums.rancher.com/c/rancher-2x/rancher-setup/129).
+    issues:
+      title: "Bug or Feature Request?"
+      content: |-
+        Please post an issue in our [code repository](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues).
 
   activemodel:
     errors:

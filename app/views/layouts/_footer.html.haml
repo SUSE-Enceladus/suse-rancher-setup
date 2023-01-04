@@ -1,0 +1,8 @@
+%ul.footer-list
+  %li.footer-list-item.ml-auto{ data: { toggle: 'modal', target: '#feedbackModal'} }
+    %a.footer-link
+      %i.eos-icons.eos-18.align-middle{ title: t('feedback.title') } feedback
+      = t('feedback.title')
+  %li.footer-list-item.ml-auto
+    %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
+      = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
