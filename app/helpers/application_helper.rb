@@ -98,10 +98,10 @@ module ApplicationHelper
   end
 
   def access_menu?(target)
-    login_access = (target != '/' && valid_login? || target == '/' && !valid_login?)
-    access_and_not_failed = (can(target) && !@deploy_failed)
+    login_access = ((target != '/' && valid_login?) || (target == '/' && !valid_login?))
+    access_and_not_done = (can(target) && !setup_done?)
     deployment_failed = (target.include?('wrapup') && @deploy_failed)
-    return (access_and_not_failed || deployment_failed) && !@refresh_timer && login_access
+    return (access_and_not_done || deployment_failed) && !@refresh_timer && login_access
   end
 
   def selected_class(target)

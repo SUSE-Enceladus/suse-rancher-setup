@@ -89,4 +89,11 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
     end
     expect(page).to have_current_path(rancher_on_eks.wrapup_path)
   end
+
+  it 'does not re-enable sidebar items' do
+    visit(rancher_on_eks.wrapup_path)
+    all('.menu-title').each do |menu_entry|
+      expect(menu_entry[:class]).to include('disabled')
+    end
+  end
 end
