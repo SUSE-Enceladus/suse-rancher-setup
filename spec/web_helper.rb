@@ -6,6 +6,10 @@ def t(key, **args)
   I18n.translate!(key, **args).split("\n").first
 end
 
+Capybara.configure do |config|
+  config.automatic_label_click = true
+end
+
 def cheetah_vcr(force_recording: false)
   allow(Cheetah).to receive(:run).and_wrap_original do |method, *args|
     cli_args = args.first
