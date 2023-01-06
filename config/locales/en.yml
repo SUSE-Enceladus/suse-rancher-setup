@@ -59,6 +59,7 @@ en:
     login_required: "You must log in first."
     not_authorized: "You cannot perform this step yet."
     tls_source: "Rancher will use '%{source}' as the TLS certificate source."
+    missing_instance_profile: "No instance profile was detected!"
 
   resources:
     caption: "The following resources were created as part of your deployment:"
@@ -152,6 +153,11 @@ en:
         caption: "We're using the [AWS Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) to verify that all the necessary permissions are in place in `%{arn}`."
         arn: "The"
         passed: "Nice work, the application has all the required permissions!"
+        missing_instance_profile: |-
+          The Instance Profile could not be detected.
+
+          Please ensure this instance has access to [IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) and that an *IAM Instance Profile* is associate with this instance, with the [required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/aws-iam/iam_role.json).
+          [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
         missing: "It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
         retest: "Check again"
       region:
