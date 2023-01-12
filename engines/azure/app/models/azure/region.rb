@@ -8,7 +8,7 @@ module Azure
 
     def self.load
       new(
-        value: KeyValue.get(:azure_region)
+        value: KeyValue.get(:region)
       )
     end
 
@@ -48,7 +48,7 @@ module Azure
     end
 
     def save!
-      KeyValue.set(:azure_region, @value)
+      KeyValue.set(:region, @value)
       self.cli.set_default_region(@value)
     end
 
