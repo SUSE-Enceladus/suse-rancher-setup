@@ -72,14 +72,23 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
     expect(find('.alert-success')).to have_content(t('flash.using_fqdn', fqdn: test_fqdn))
   end
 
-  it 'selects a certificate source and presents the deploy page' do
+  it 'selects a certificate source and presents the pre-flight checks page' do
     visit(rancher_on_eks.edit_security_path)
     within 'select#tls_source_source' do
       find("option[value='#{test_tls_source}']").select_option
     end
+    perform_enqueued_jobs do # need to handle the jobs automatically started by pre-flight checks
+      click_on(t('actions.next'))
+    end
+    expect(page).to have_current_path(pre_flight.checks_path)
+    expect(find('.alert-success')).to have_content(t('flash.tls_source', source: test_tls_source))
+  end
+
+  it 'runs the pre-flight checks and presents the deploy page' do
+    visit(pre_flight.checks_path)
+    expect(page).to have_content(t('engines.pre-flight.checks.all_passed'))
     click_on(t('actions.next'))
     expect(page).to have_current_path(rancher_on_eks.steps_path)
-    expect(find('.alert-success')).to have_content(t('flash.tls_source', source: test_tls_source))
   end
 
   it 'deploys the cluster and presents the next steps page' do

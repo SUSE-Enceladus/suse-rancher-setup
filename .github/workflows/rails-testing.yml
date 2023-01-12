@@ -10,7 +10,7 @@ jobs:
     env:
       RAILS_ENV: test
       LASSO_WORKFLOW: RancherOnEks
-      LASSO_ENGINES: AWS,ShirtSize,RancherOnEks,Helm
+      LASSO_ENGINES: AWS,ShirtSize,PreFlight,RancherOnEks,Helm
     steps:
       - name: Checkout code
         uses: actions/checkout@v3

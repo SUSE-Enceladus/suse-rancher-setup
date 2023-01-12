@@ -6,7 +6,7 @@ desc 'Run all tests & specs for all workflows and aggregate coverage'
 task :coverage do
   ENV['RAILS_ENV'] = 'test'
   ENV['LASSO_WORKFLOW'] = 'RancherOnEks'
-  ENV['LASSO_ENGINES'] = 'AWS,ShirtSize,RancherOnEks,Helm'
+  ENV['LASSO_ENGINES'] = 'AWS,ShirtSize,PreFlight,RancherOnEks,Helm'
   Rake::Task['test'].execute
   Rake::Task['spec'].execute
 
