@@ -307,3 +307,11 @@ en:
           small:  "SMALL - up to 35 nodes"
           medium: "MEDIUM - up to 75 nodes"
           large:  "LARGE - up to 125 nodes"
+
+    pre-flight:
+      checks:
+        title: 'Pre-Flight Checks'
+        caption: |-
+          Before starting the deployment, there are some common problems we can check for:
+        all_passed: "Congrats - no problems were detected!"
+        any_failed: "It looks like we've found something that needs your attention. Please check the messages below, and after you have corrected them, click 'Check Again'."
