@@ -51,6 +51,7 @@ en:
     save: "Save"
     close: "Close"
     login: "Login"
+    retest: "Check again"
 
   flash:
     no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."
@@ -159,7 +160,6 @@ en:
           Please ensure this instance has access to [IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) and that an *IAM Instance Profile* is associate with this instance, with the [required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/aws-iam/iam_role.json).
           [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
         missing: "It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
-        retest: "Check again"
       region:
         title: "AWS Region"
         form_caption: |-
