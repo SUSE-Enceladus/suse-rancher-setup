@@ -3,7 +3,7 @@ require 'web_helper'
 return unless defined?(RancherOnEks::Engine)
 
 RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
-  let(:test_region) { 'us-west-2' }
+  let(:test_region) { 'us-west-1' }
   let(:test_shirt_size) { 'small' }
   let(:test_fqdn) { "rancher-setup-test.aws.bear454.com" }
   let(:test_tls_source) { "rancher" }
