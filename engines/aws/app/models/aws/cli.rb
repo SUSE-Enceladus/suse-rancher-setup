@@ -98,6 +98,11 @@ module AWS
       handle_command(args)
     end
 
+    def list_vpc_ids()
+      args = %W(ec2 describe-vpcs --no-paginate --query Vpcs[].VpcId)
+      handle_command(args)
+    end
+
     def describe_vpc(vpc_id)
       args = %W(ec2 describe-vpcs --vpc-ids #{vpc_id})
       get_description(
@@ -543,6 +548,11 @@ module AWS
     def simulate_principal_policy(arn, *actions)
       args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names)
       args.push(*actions)
+      handle_command(args)
+    end
+
+    def get_quota(service:, code:)
+      args = %W(service-quotas get-service-quota --service-code #{service} --quota-code #{code})
       handle_command(args)
     end
 

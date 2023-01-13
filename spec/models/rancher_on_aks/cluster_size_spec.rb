@@ -9,7 +9,7 @@ RSpec.describe RancherOnAks::ClusterSize, type: :model do
         context "size: #{size}" do
           before(:each) do
             # TODO Use Cheetah VCR here
-            KeyValue.set(:azure_region, option.last)
+            KeyValue.set(:region, option.last)
             KeyValue.set('cluster_size', size)
           end
 

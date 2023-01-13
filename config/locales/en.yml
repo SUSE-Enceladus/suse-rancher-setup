@@ -51,6 +51,7 @@ en:
     save: "Save"
     close: "Close"
     login: "Login"
+    retest: "Check again"
 
   flash:
     no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."
@@ -159,7 +160,6 @@ en:
           Please ensure this instance has access to [IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) and that an *IAM Instance Profile* is associate with this instance, with the [required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/aws-iam/iam_role.json).
           [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
         missing: "It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
-        retest: "Check again"
       region:
         title: "AWS Region"
         form_caption: |-
@@ -307,3 +307,17 @@ en:
           small:  "SMALL - up to 35 nodes"
           medium: "MEDIUM - up to 75 nodes"
           large:  "LARGE - up to 125 nodes"
+
+    pre-flight:
+      checks:
+        title: 'Pre-Flight Checks'
+        caption: |-
+          Before starting the deployment, there are some common problems we can check for:
+        all_passed: "Congrats - no problems were detected!"
+        any_failed: "It looks like we've found something that needs your attention. Please check the messages below, and after you have corrected them, click 'Check Again'."
+        aws_vpc_quota:
+          title: "AWS VPC Quota"
+          passed: "You have room in your quota for Rancher's VPC."
+          failed: |-
+            You have insufficient quota to create the VPC required for Rancher. Please [remove a VPC](https://%{region}.console.aws.amazon.com/vpc/home?region=%{region}) from the `%{region}` region, switch to a different region, or [request a quota increase](https://%{region}.console.aws.amazon.com/servicequotas/home/services/vpc/quotas/L-F678F1CE).
+            [More Info](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)

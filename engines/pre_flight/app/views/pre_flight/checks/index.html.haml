@@ -1,0 +1,21 @@
+= page_header(t('engines.pre-flight.checks.title'))
+-# body
+= markdown(t('engines.pre-flight.checks.caption'))
+- @checks.each do |check|
+  - locals = { check: check, region: @region }
+  %p.icon-container
+    - if check.pending?
+      = render('pre_flight/checks/pending', **locals)
+    - elsif check.passed?
+      = render('pre_flight/checks/passed', **locals)
+    - elsif check.failed?
+      = render('pre_flight/checks/failed', **locals)
+    - else
+      = render('pre_flight/checks/inactive', **locals)
+-# end
+= render('layouts/navigation_buttons') do
+  = previous_step_button()
+  - if @all_passed
+    = next_step_button()
+  - elsif @any_failed
+    = link_to(t('actions.retest'), pre_flight.retry_checks_path, class: 'btn btn-primary')
