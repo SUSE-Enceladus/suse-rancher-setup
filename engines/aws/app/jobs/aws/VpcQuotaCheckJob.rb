@@ -1,3 +1,5 @@
+return unless defined?(PreFlight::Engine)
+
 module AWS
   class VpcQuotaCheckJob < ApplicationJob
     queue_as :default
