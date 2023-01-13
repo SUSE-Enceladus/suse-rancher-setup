@@ -20,8 +20,10 @@ module RancherOnAks
         valid_login? && region_set?
       when rancher_on_aks.edit_fqdn_path, rancher_on_aks.fqdn_path
         valid_login? && region_set?
-      when rancher_on_aks.steps_path, rancher_on_aks.deploy_steps_path
+      when pre_flight.checks_path, pre_flight.retry_checks_path
         valid_login? && fqdn_set?
+      when rancher_on_aks.steps_path, rancher_on_aks.deploy_steps_path
+        valid_login? && all_checks_passed?
       when rancher_on_aks.wrapup_path
         valid_login? && setup_done?
       else
@@ -43,6 +45,10 @@ module RancherOnAks
 
     def fqdn_set?
       RancherOnAks::Fqdn.load.value.present?
+    end
+
+    def all_checks_passed?
+      PreFlight::Check.all_passed?
     end
 
     def setup_done?
