@@ -2,5 +2,5 @@
   %div.float-left
     %i.eos-icons-outlined.text-success check_circle
   %p.ml-5
-    %b= t("engines.pre-flight.checks.#{check.name}.title", **local_assigns)
-  %div.ml-5= markdown(t("engines.pre-flight.checks.#{check.name}.passed", **local_assigns))
+    %b= t("engines.pre-flight.checks.#{check.name}.title")
+  %div.ml-5= markdown(t("engines.pre-flight.checks.#{check.name}.passed", **check.view_data))

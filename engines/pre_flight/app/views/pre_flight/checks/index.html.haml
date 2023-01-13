@@ -2,16 +2,15 @@
 -# body
 = markdown(t('engines.pre-flight.checks.caption'))
 - @checks.each do |check|
-  - locals = { check: check, region: @region }
   %p.icon-container
     - if check.pending?
-      = render('pre_flight/checks/pending', **locals)
+      = render('pre_flight/checks/pending', check: check)
     - elsif check.passed?
-      = render('pre_flight/checks/passed', **locals)
+      = render('pre_flight/checks/passed', check: check)
     - elsif check.failed?
-      = render('pre_flight/checks/failed', **locals)
+      = render('pre_flight/checks/failed', check: check)
     - else
-      = render('pre_flight/checks/inactive', **locals)
+      = render('pre_flight/checks/inactive', check: check)
 -# end
 = render('layouts/navigation_buttons') do
   = previous_step_button()

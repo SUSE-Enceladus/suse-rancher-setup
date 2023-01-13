@@ -3,7 +3,6 @@ module PreFlight
     def index
       workflow.load_pre_flight_checks!
       @checks = PreFlight::Check.all
-      @region = KeyValue.get(:region)
 
       @all_complete = PreFlight::Check.all_complete?
       @all_passed = PreFlight::Check.all_passed?
