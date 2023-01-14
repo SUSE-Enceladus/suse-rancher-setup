@@ -224,5 +224,13 @@ module Azure
         )
       )
     end
+
+    def list_network_usage(value:)
+      self.execute(
+        %W(
+          network list-usages --query [?name.value=='#{value}']
+        )
+      )
+    end
   end
 end
