@@ -1,7 +1,10 @@
 module AWS
-  class Quota
-    def cli
-      @cli ||= AWS::Cli.load()
+  class Quota < Quota
+
+    private
+
+    def set_cli()
+      @cli = AWS::Cli.load()
     end
   end
 end

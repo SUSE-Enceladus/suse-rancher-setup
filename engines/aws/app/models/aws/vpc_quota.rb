@@ -1,15 +1,19 @@
 module AWS
-  class VpcQuota < Quota
+  class VpcQuota < AWS::Quota
+    # https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html
+    SERVICE = 'vpc'
+    CODE = 'L-F678F1CE'
+
     def limit
-      JSON.parse(self.cli.get_quota(service: 'vpc', code: 'L-F678F1CE'))['Quota']['Value']
+      JSON.parse(@cli.get_quota(service: SERVICE, code: CODE))['Quota']['Value'].to_i
     end
 
     def usage
-      JSON.parse(self.cli.list_vpc_ids()).length
+      JSON.parse(@cli.list_vpc_ids()).length
     end
 
-    def availability
-      self.limit - self.usage
+    def required_availability
+      1 # We need 1 VPC
     end
   end
 end
