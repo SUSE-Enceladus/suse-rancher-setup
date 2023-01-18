@@ -24,6 +24,7 @@ module RancherOnEks
         @commands = get_commands
       end
       @failed = true if Rails.configuration.lasso_error != ""
+      @cleaning_up = false if Rails.configuration.lasso_error != ""
     end
 
     def destroy
