@@ -1,5 +1,5 @@
 module Azure
-  class VcpuQuota < Quota
+  class VcpuQuota < Azure::Quota
     attr_accessor :instance_type, :quantity
 
     def instance_family
