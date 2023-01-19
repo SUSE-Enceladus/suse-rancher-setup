@@ -209,6 +209,16 @@ en:
 
 
           The subdomain containing this *FQDN* _must be preconfigured as an Azure DNS zone_. For example, if the *FQDN* is `rancher.example.com`, then `example.com` must be an Azure DNS zone, and Rancher will be served at `https://rancher.example.com` .
+      security:
+        title: "Security options"
+        form_caption: |-
+          The Rancher management server is designed to be secure by default and requires SSL/TLS configuration.
+
+
+          You can choose to use a self-signed TLS certificate provided by the Rancher server, or you may choose to have a [Let's Encrypt](https://letsencrypt.org/) certificate generated for to it.
+
+
+          **NOTE:** *In order for Let's Encrypt to generate a TLS certificate, your Rancher server must be accessible via the Internet at the FQDN provided over TCP port 80 (http), and you must supply an email address for future management.*
       steps:
         title: "Deploy Rancher on AKS"
         form_caption: "Okay, we have everything we need. It's time to deploy your Rancher server on a dedicated AKS cluster. When you're ready to start, just click **Next**, and sit back. Your Rancher server will be ready in about 20 minutes, and we'll tell you how to access it."

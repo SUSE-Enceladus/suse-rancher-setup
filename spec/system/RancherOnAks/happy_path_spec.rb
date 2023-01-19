@@ -10,7 +10,7 @@ RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
   # Actual password required for re-recording
   let(:test_password) { ENV['PASSWORD'] || 'password' }
   let(:test_tenant) { '0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f' }
-  # let(:test_tls_source) { 'rancher' }
+  let(:test_tls_source) { 'rancher' }
 
   before(:all) do
     driven_by(:rack_test)
@@ -83,12 +83,22 @@ RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
     expect(find('.alert-success')).to have_content(t('engines.shirt_size.sizes.using', size: test_shirt_size))
   end
 
-  it 'sets the FQDN and presents the pre-flight checks page' do
+  it 'sets the FQDN and presents the security page' do
     visit(rancher_on_aks.edit_fqdn_path)
     fill_in('fqdn_value', with: test_fqdn)
     click_on(t('actions.next'))
-    expect(page).to have_current_path(pre_flight.checks_path)
+    expect(page).to have_current_path(rancher_on_aks.edit_security_path)
     expect(find('.alert-success')).to have_content(t('flash.using_fqdn', fqdn: test_fqdn))
+  end
+
+  it 'selects a certificate source and presents the pre-flight checks page' do
+    visit(rancher_on_aks.edit_security_path)
+    within 'select#tls_source_source' do
+      find("option[value='#{test_tls_source}']").select_option
+    end
+    click_on(t('actions.next'))
+    expect(page).to have_current_path(pre_flight.checks_path)
+    expect(find('.alert-success')).to have_content(t('flash.tls_source', source: test_tls_source))
   end
 
   it 'runs the pre-flight checks and presents the deploy page' do
