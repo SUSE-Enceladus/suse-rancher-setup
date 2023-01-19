@@ -8,7 +8,7 @@ module RancherOnEks
     end
 
     def perform(*args)
-      RancherOnEks::Deployment.rollback
+      RancherOnEks::Deployment.new.rollback
     end
   end
 end

@@ -8,7 +8,7 @@ module AWS
 
     def self.load
       new(
-        value: KeyValue.get(:aws_region, 'us-east-1')
+        value: KeyValue.get(:region, 'us-east-1')
       )
     end
 
@@ -17,7 +17,7 @@ module AWS
     end
 
     def save!
-      KeyValue.set(:aws_region, @value)
+      KeyValue.set(:region, @value)
     end
 
     def supported_instance_types

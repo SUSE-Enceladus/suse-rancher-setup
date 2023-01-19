@@ -1,6 +1,8 @@
 require 'cheetah'
 
 module AWS
+  class MissingInstanceProfile < StandardError; end
+
   class Metadata
     include ActiveModel::Model
 
@@ -34,7 +36,11 @@ module AWS
     end
 
     def iam_info
-      JSON.parse(self.execute('--info'))
+      begin
+        JSON.parse(self.execute('--iam-info'))
+      rescue
+        JSON.parse(self.execute('--info'))
+      end
     end
 
     def instance_profile_arn
@@ -44,10 +50,13 @@ module AWS
 
     def iam_role_name
       arn = instance_profile_arn()
+      return unless arn
+
       arn.split('/')[-1]
     end
 
     def policy_source_arn
+      raise MissingInstanceProfile unless (self.account_id() && self.iam_role_name())
       "arn:aws:iam::#{self.account_id()}:role/#{self.iam_role_name()}"
     end
   end

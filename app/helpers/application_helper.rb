@@ -4,20 +4,22 @@ module ApplicationHelper
     return '' if text.blank?
 
     markdown_options = {
-      autolink:            true,
-      space_after_headers: true,
-      no_intra_emphasis:   true,
-      fenced_code_blocks:  true,
-      strikethrough:       true,
-      superscript:         true,
-      underline:           true,
-      highlight:           true,
-      quote:               true
+      autolink:                      true,
+      space_after_headers:           true,
+      no_intra_emphasis:             true,
+      fenced_code_blocks:            true,
+      disabled_indented_code_blocks: true,
+      strikethrough:                 true,
+      superscript:                   true,
+      underline:                     true,
+      highlight:                     true,
+      quote:                         true
     }
     render_options = {
-      filter_html: false,
+      filter_html: true,
       no_images:   false,
-      no_styles:   true
+      no_styles:   true,
+      hard_wrap:   true
     }
     render_options[:escape_html] = true if escape_html
 
@@ -75,7 +77,7 @@ module ApplicationHelper
     flash.collect do |context, message|
       # Skip empty messages
       next if message.blank?
-      message_sections = message.split("\n")
+      message_sections = message.to_s.split("\n")
       title = message_sections[0]
       body = if message_sections.length > 1
         message_sections[1..].join("\n")
@@ -96,10 +98,10 @@ module ApplicationHelper
   end
 
   def access_menu?(target)
-    login_access = (target != '/' && valid_login? || target == '/' && !valid_login?)
-    access_and_not_failed = (can(target) && !@deploy_failed)
+    login_access = ((target != '/' && valid_login?) || (target == '/' && !valid_login?))
+    access_and_not_done = (can(target) && !setup_done?)
     deployment_failed = (target.include?('wrapup') && @deploy_failed)
-    return (access_and_not_failed || deployment_failed) && !@refresh_timer && login_access
+    return (access_and_not_done || deployment_failed) && !@refresh_timer && login_access
   end
 
   def selected_class(target)
@@ -108,5 +110,16 @@ module ApplicationHelper
 
   def disabled_class(target)
     'disabled' unless access_menu?(target)
+  end
+
+  def csp_key()
+    'aws' if defined?(AWS::Engine)
+    'azure' if defined?(Azure::Engine)
+  end
+
+  def wt(key)
+    # workflow translation
+    prefix = Rails.configuration.workflow_translation_prefix
+    t("#{prefix}#{key}")
   end
 end

@@ -24,13 +24,11 @@ module Helm
       @helm.install_load_balancer(RELEASE_NAME, CHART, NAMESPACE, VERSION)
       self.id = RELEASE_NAME
       self.refresh()
-      # self.wait_until(:deployed)
     end
 
     def helm_destroy
       @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
       throw(:abort) unless Rails.configuration.lasso_run.present?
-      # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource

@@ -1,0 +1,43 @@
+{
+    "ResourceRecordSets": [
+        {
+            "Name": "aws.bear454.com.",
+            "Type": "NS",
+            "TTL": 172800,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-578.awsdns-08.net."
+                },
+                {
+                    "Value": "ns-1103.awsdns-09.org."
+                },
+                {
+                    "Value": "ns-429.awsdns-53.com."
+                },
+                {
+                    "Value": "ns-1555.awsdns-02.co.uk."
+                }
+            ]
+        },
+        {
+            "Name": "aws.bear454.com.",
+            "Type": "SOA",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "ns-578.awsdns-08.net. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"
+                }
+            ]
+        },
+        {
+            "Name": "rancher-setup-test.aws.bear454.com.",
+            "Type": "CNAME",
+            "TTL": 900,
+            "ResourceRecords": [
+                {
+                    "Value": "a0d25b214fb174d958979a147bf71fcd-1247531381.us-west-2.elb.amazonaws.com"
+                }
+            ]
+        }
+    ]
+}

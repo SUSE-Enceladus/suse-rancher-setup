@@ -1,0 +1,1204 @@
+{
+    "EvaluationResults": [
+        {
+            "EvalActionName": "ec2:AllocateAddress",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:AssociateRouteTable",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:AttachInternetGateway",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateInternetGateway",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateNatGateway",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateRoute",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateRouteTable",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateSecurityGroup",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateSubnet",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateTags",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:CreateVpc",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteInternetGateway",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteNatGateway",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteRoute",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteRouteTable",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteSecurityGroup",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteSubnet",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DeleteVpc",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeAddresses",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeClassicLinkInstances",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeImages",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInstanceAttribute",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInstanceCreditSpecifications",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInstances",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInstanceStatus",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInstanceTypeOfferings",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInstanceTypes",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeInternetGateways",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeNatGateways",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeNetworkInterfaces",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeRegions",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeRouteTables",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeSecurityGroups",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeSubnets",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeTags",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DescribeVpcs",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DetachInternetGateway",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DisassociateAddress",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:DisassociateRouteTable",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:ModifySubnetAttribute",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:ModifyVpcAttribute",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "ec2:ReleaseAddress",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "eks:CreateCluster",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "eks:CreateNodegroup",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "eks:DeleteCluster",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "eks:DeleteNodegroup",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "eks:DescribeCluster",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "eks:DescribeNodegroup",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:AttachRolePolicy",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:CreateRole",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:CreateServiceLinkedRole",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:DeleteRole",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:DetachRolePolicy",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:GetRole",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:ListAttachedRolePolicies",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:PassRole",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "iam:SimulatePrincipalPolicy",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "route53:ChangeResourceRecordSets",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "route53:ListHostedZonesByName",
+            "EvalResourceName": "arn:aws:route53::810320120389:hostedzone/*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        },
+        {
+            "EvalActionName": "route53:ListResourceRecordSets",
+            "EvalResourceName": "*",
+            "EvalDecision": "allowed",
+            "MatchedStatements": [
+                {
+                    "SourcePolicyId": "lasso-test",
+                    "SourcePolicyType": "IAM Policy",
+                    "StartPosition": {
+                        "Line": 3,
+                        "Column": 19
+                    },
+                    "EndPosition": {
+                        "Line": 70,
+                        "Column": 10
+                    }
+                }
+            ],
+            "MissingContextValues": []
+        }
+    ]
+}

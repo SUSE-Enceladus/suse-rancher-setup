@@ -4,14 +4,26 @@
 
 shared:
 
+  # Which workflow is running?
   # Which engines are loaded for this workflow?
   # * Order determines menu order
   # * Engines without UI components should be last
+
+  # Rancher on EKS workflow
+  workflow: RancherOnEks
   engines:
     - AWS
     - ShirtSize
+    - PreFlight
     - RancherOnEks
     - Helm
+  # Rancher on AKS workflow
+  # workflow: RancherOnAks
+  # engines:
+  #   - Azure
+  #   - ShirtSize
+  #   - RancherOnAks
+  #   - Helm
 
   # Where are we installing Rancher from? (passed to _helm_)
   rancher:
@@ -22,5 +34,8 @@ shared:
     version:
 
   # What version of kubernetes will be deployed?
+  # https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-6-9/
   rancher_on_eks:
     k8s_version: 1.22
+  rancher_on_aks:
+    k8s_version: 1.24.3
