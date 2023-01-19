@@ -208,5 +208,29 @@ module Azure
         )
       )
     end
+
+    def describe_instance_type(instance_type)
+      self.execute(
+        %W(
+          vm list-skus --size #{instance_type}
+        )
+      )
+    end
+
+    def list_vcpu_usage(family:)
+      self.execute(
+        %W(
+          vm list-usage --query [?name.value=='#{family}']
+        )
+      )
+    end
+
+    def list_network_usage(value:)
+      self.execute(
+        %W(
+          network list-usages --query [?name.value=='#{value}']
+        )
+      )
+    end
   end
 end

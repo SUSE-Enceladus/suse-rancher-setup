@@ -319,5 +319,17 @@ en:
           title: "AWS VPC Quota"
           passed: "You have room in your quota for Rancher's VPC."
           failed: |-
-            You have insufficient quota to create the VPC required for Rancher. Please [remove a VPC](https://%{region}.console.aws.amazon.com/vpc/home?region=%{region}) from the `%{region}` region, switch to a different region, or [request a quota increase](https://%{region}.console.aws.amazon.com/servicequotas/home/services/vpc/quotas/L-F678F1CE).
+            You have insufficient quota to create the VPC required for Rancher. Please [remove a VPC](https://%{region}.console.aws.amazon.com/vpc/home?region=%{region}) from the *%{region}* region, switch to a different region, or [request a quota increase](https://%{region}.console.aws.amazon.com/servicequotas/home/services/vpc/quotas/L-F678F1CE).
             [More Info](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)
+        azure_vcpu_quota:
+          title: "Azure vCPU Quota"
+          passed: "You have room in your quota for launching Rancher's cluster nodes."
+          failed: |-
+            You do not have enough vCPU quota to launch Rancher's cluster in the *%{region}* region. Please request a quota increase of %{vcpu_count} vCPUs for *%{instance_family}*.
+            [More Info](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests#request-an-increase-for-adjustable-quotas)
+        azure_public_ip_address_quota:
+          title: "Azure Public IP Address Quota"
+          passed: "You have room in your quota for Rancher's public IP address."
+          failed: |-
+            You do not have a public ip address available in the *%{region}* region. Please release a public IP address, switch to a different region, or request a quota increase.
+            [More Info](https://learn.microsoft.com/en-us/azure/quotas/networking-quota-requests)

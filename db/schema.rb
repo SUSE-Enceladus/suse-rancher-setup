@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_11_191543) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_222137) do
   create_table "key_values", force: :cascade do |t|
     t.string "key", null: false
     t.text "value"
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_191543) do
     t.datetime "job_completed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "view_data"
   end
 
   create_table "resources", id: :string, force: :cascade do |t|

@@ -1,5 +1,6 @@
 module PreFlight
   class Check < ApplicationRecord
+    serialize :view_data
 
     scope :not_submitted, -> { where(job_submitted_at: nil) }
     scope :pending, -> { where(job_completed_at: nil).where.not(job_submitted_at: nil) }

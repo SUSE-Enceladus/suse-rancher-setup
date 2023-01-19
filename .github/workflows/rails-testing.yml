@@ -32,7 +32,7 @@ jobs:
     env:
       RAILS_ENV: test
       LASSO_WORKFLOW: RancherOnAks
-      LASSO_ENGINES: Azure,ShirtSize,RancherOnAks,Helm
+      LASSO_ENGINES: Azure,ShirtSize,PreFlight,RancherOnAks,Helm
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
