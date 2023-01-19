@@ -10,6 +10,11 @@
   = markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
   = markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
   = markdown(t('engines.rancher_on_eks.wrapup.more_info', region: @region, cluster_name: @cluster_name))
+- elsif @failed
+  = page_header(t('engines.rancher_on_eks.wrapup.failed_wrapup_title'))
+  -# body
+  = markdown(t('engines.rancher_on_eks.wrapup.failed_wrapup_caption', error: @failed_error))
+  = markdown(t('engines.rancher_on_eks.wrapup.failed_wrapup_info'))
 -# end
 %hr
 
@@ -21,7 +26,7 @@
         = t('engines.rancher_on_eks.wrapup.clean_resources')
     - else
       - if @resources_deleted
-        = button_to wrapup_path(run: true), method: :delete, disabled: true, class: "btn btn-danger", id: "destroy", title: t('engines.rancher_on_eks.wrapup.resources_cleaned')  do
+        = button_to wrapup_path(run: nil), method: :delete, disabled: true, class: "btn btn-danger", id: "destroy", title: t('engines.rancher_on_eks.wrapup.resources_cleaned')  do
           %i.eos-icons-outlined check_circle
           = t('engines.rancher_on_eks.wrapup.resources_cleaned')
       - elsif @in_process
