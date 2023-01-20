@@ -1,1 +1,136 @@
-{"apiVersion":"v1","items":[{"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"meta.helm.sh/release-name":"ingress-nginx","meta.helm.sh/release-namespace":"ingress-nginx"},"creationTimestamp":"2022-12-21T07:54:37Z","finalizers":["service.kubernetes.io/load-balancer-cleanup"],"labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/part-of":"ingress-nginx","app.kubernetes.io/version":"1.5.1","helm.sh/chart":"ingress-nginx-4.4.0"},"name":"ingress-nginx-controller","namespace":"ingress-nginx","resourceVersion":"1935","uid":"0d25b214-fb17-4d95-8979-a147bf71fcd8"},"spec":{"allocateLoadBalancerNodePorts":true,"clusterIP":"10.100.40.45","clusterIPs":["10.100.40.45"],"externalTrafficPolicy":"Cluster","internalTrafficPolicy":"Cluster","ipFamilies":["IPv4"],"ipFamilyPolicy":"SingleStack","ports":[{"name":"http","nodePort":31460,"port":80,"protocol":"TCP","targetPort":"http"},{"name":"https","nodePort":32725,"port":443,"protocol":"TCP","targetPort":"https"}],"selector":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/name":"ingress-nginx"},"sessionAffinity":"None","type":"LoadBalancer"},"status":{"loadBalancer":{"ingress":[{"hostname":"a0d25b214fb174d958979a147bf71fcd-1247531381.us-west-2.elb.amazonaws.com"}]}}},{"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"meta.helm.sh/release-name":"ingress-nginx","meta.helm.sh/release-namespace":"ingress-nginx"},"creationTimestamp":"2022-12-21T07:54:37Z","labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/part-of":"ingress-nginx","app.kubernetes.io/version":"1.5.1","helm.sh/chart":"ingress-nginx-4.4.0"},"name":"ingress-nginx-controller-admission","namespace":"ingress-nginx","resourceVersion":"1877","uid":"34692690-14a0-49ac-9844-ef00ec9327a0"},"spec":{"clusterIP":"10.100.37.21","clusterIPs":["10.100.37.21"],"internalTrafficPolicy":"Cluster","ipFamilies":["IPv4"],"ipFamilyPolicy":"SingleStack","ports":[{"name":"https-webhook","port":443,"protocol":"TCP","targetPort":"webhook"}],"selector":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"ingress-nginx","app.kubernetes.io/name":"ingress-nginx"},"sessionAffinity":"None","type":"ClusterIP"},"status":{"loadBalancer":{}}}],"kind":"List","metadata":{"resourceVersion":"","selfLink":""}}
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "meta.helm.sh/release-name": "ingress-nginx",
+                    "meta.helm.sh/release-namespace": "ingress-nginx"
+                },
+                "creationTimestamp": "2023-01-21T04:06:51Z",
+                "finalizers": [
+                    "service.kubernetes.io/load-balancer-cleanup"
+                ],
+                "labels": {
+                    "app.kubernetes.io/component": "controller",
+                    "app.kubernetes.io/instance": "ingress-nginx",
+                    "app.kubernetes.io/managed-by": "Helm",
+                    "app.kubernetes.io/name": "ingress-nginx",
+                    "app.kubernetes.io/part-of": "ingress-nginx",
+                    "app.kubernetes.io/version": "1.1.2",
+                    "helm.sh/chart": "ingress-nginx-4.0.18"
+                },
+                "name": "ingress-nginx-controller",
+                "namespace": "ingress-nginx",
+                "resourceVersion": "1904",
+                "uid": "faee6f4f-f5d7-4bd3-96d3-ff0797abf19d"
+            },
+            "spec": {
+                "allocateLoadBalancerNodePorts": true,
+                "clusterIP": "10.100.78.171",
+                "clusterIPs": [
+                    "10.100.78.171"
+                ],
+                "externalTrafficPolicy": "Local",
+                "healthCheckNodePort": 31712,
+                "internalTrafficPolicy": "Cluster",
+                "ipFamilies": [
+                    "IPv4"
+                ],
+                "ipFamilyPolicy": "SingleStack",
+                "ports": [
+                    {
+                        "name": "http",
+                        "nodePort": 31515,
+                        "port": 80,
+                        "protocol": "TCP",
+                        "targetPort": "http"
+                    },
+                    {
+                        "name": "https",
+                        "nodePort": 32494,
+                        "port": 443,
+                        "protocol": "TCP",
+                        "targetPort": "https"
+                    }
+                ],
+                "selector": {
+                    "app.kubernetes.io/component": "controller",
+                    "app.kubernetes.io/instance": "ingress-nginx",
+                    "app.kubernetes.io/name": "ingress-nginx"
+                },
+                "sessionAffinity": "None",
+                "type": "LoadBalancer"
+            },
+            "status": {
+                "loadBalancer": {
+                    "ingress": [
+                        {
+                            "hostname": "afaee6f4ff5d74bd396d3ff0797abf19-2127731316.us-west-2.elb.amazonaws.com"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Service",
+            "metadata": {
+                "annotations": {
+                    "meta.helm.sh/release-name": "ingress-nginx",
+                    "meta.helm.sh/release-namespace": "ingress-nginx"
+                },
+                "creationTimestamp": "2023-01-21T04:06:51Z",
+                "labels": {
+                    "app.kubernetes.io/component": "controller",
+                    "app.kubernetes.io/instance": "ingress-nginx",
+                    "app.kubernetes.io/managed-by": "Helm",
+                    "app.kubernetes.io/name": "ingress-nginx",
+                    "app.kubernetes.io/part-of": "ingress-nginx",
+                    "app.kubernetes.io/version": "1.1.2",
+                    "helm.sh/chart": "ingress-nginx-4.0.18"
+                },
+                "name": "ingress-nginx-controller-admission",
+                "namespace": "ingress-nginx",
+                "resourceVersion": "1848",
+                "uid": "1f636ea6-7fc6-42d3-8760-bf2880ffead3"
+            },
+            "spec": {
+                "clusterIP": "10.100.2.106",
+                "clusterIPs": [
+                    "10.100.2.106"
+                ],
+                "internalTrafficPolicy": "Cluster",
+                "ipFamilies": [
+                    "IPv4"
+                ],
+                "ipFamilyPolicy": "SingleStack",
+                "ports": [
+                    {
+                        "name": "https-webhook",
+                        "port": 443,
+                        "protocol": "TCP",
+                        "targetPort": "webhook"
+                    }
+                ],
+                "selector": {
+                    "app.kubernetes.io/component": "controller",
+                    "app.kubernetes.io/instance": "ingress-nginx",
+                    "app.kubernetes.io/name": "ingress-nginx"
+                },
+                "sessionAffinity": "None",
+                "type": "ClusterIP"
+            },
+            "status": {
+                "loadBalancer": {}
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}

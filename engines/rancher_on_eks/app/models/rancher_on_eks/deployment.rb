@@ -117,7 +117,9 @@ module RancherOnEks
 
     def deploy
       step(0, force: true) do
-        KeyValue.set('tag_scope', "suse-rancher-setup-#{self.random_num()}")
+        tag_random_id = self.random_num()
+        Rails.logger.debug("TAG RANDOM ID: #{tag_random_id}")
+        KeyValue.set('tag_scope', "suse-rancher-setup-#{tag_random_id}")
 
         @cluster_size = RancherOnEks::ClusterSize.new
         @cli = AWS::Cli.load
@@ -310,6 +312,7 @@ module RancherOnEks
           selected_zones << available_zones.sample()
         end
       end
+      Rails.logger.debug("SELECTED ZONES: #{selected_zones}")
       return selected_zones
     end
   end

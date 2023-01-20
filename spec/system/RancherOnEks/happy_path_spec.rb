@@ -3,7 +3,7 @@ require 'web_helper'
 return unless defined?(RancherOnEks::Engine)
 
 RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
-  let(:test_region) { 'us-west-1' }
+  let(:test_region) { 'us-west-2' }
   let(:test_shirt_size) { 'small' }
   let(:test_fqdn) { "rancher-setup-test.aws.bear454.com" }
   let(:test_tls_source) { "rancher" }
@@ -13,9 +13,26 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
   end
 
   before(:example) do
-    allow_any_instance_of(Deployable).to receive(:random_num).and_return(1327)
+    if ENV['RERECORD']
+      # Send argument cheetah_vcr(force_recording: true) to force a new recording
+      cheetah_vcr(force_recording: true)
+   else
+      # The 4-digit random number needs to match the last recording, and this stub
+      # should be disabled when re-recording. Reset with value from:
+      #
+      # grep 'TAG RANDOM ID' log/test.log
+      allow_any_instance_of(RancherOnEks::Deployment).to receive(:random_num).and_return(3784)
+
+      # Selected AZs need to match the last recording, and this stub should be
+      # disabled when re-recording. Reset with value from
+      #
+      # grep 'SELECTED ZONES' log/test.log
+      allow_any_instance_of(RancherOnEks::Deployment).to receive(:select_zones).and_return(
+        %w(us-west-2b us-west-2c us-west-2d)
+      )
+      cheetah_vcr()
+    end
     allow_any_instance_of(RancherOnEks::Fqdn).to receive(:dns_record_exist?).and_return(false)
-    cheetah_vcr()
   end
 
   it 'prompts for login before the welcome page' do
@@ -92,9 +109,10 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
   end
 
   it 'deploys the cluster and presents the next steps page' do
+    RancherOnEks::Deployment.new.deploy if ENV['RERECORD']
     perform_enqueued_jobs do
       visit(rancher_on_eks.steps_path)
-      click_on(t('actions.next'))
+      click_on(t('actions.next')) unless ENV['RERECORD']
     end
     expect(page).to have_current_path(rancher_on_eks.wrapup_path)
   end
