@@ -3,8 +3,6 @@ module RancherOnEks
     before_action :load_steps
 
     def index
-      redirect_to("/") unless ApplicationController.helpers.valid_login?
-
       @deployable = Step.deployable?
       @complete = Step.all_complete?
       @resources = Resource.all

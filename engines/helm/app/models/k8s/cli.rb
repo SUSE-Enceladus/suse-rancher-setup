@@ -9,22 +9,25 @@ module K8s
 
     def self.load
       new(
-        region: AWS::Region.load().value,
+        region: (AWS::Region.load().value if defined?(AWS::Engine)),
         kubeconfig: '/tmp/kubeconfig'
       )
     end
 
     def execute(*args)
+      env = {
+        'KUBECONFIG' => @kubeconfig
+      }
+      if defined?(AWS::Engine)
+        env['AWS_REGION'] = @region
+        env['AWS_DEFAULT_REGION'] = @region
+        env['AWS_DEFAULT_OUTPUT'] = 'json'
+      end
       stdout, stderr = Cheetah.run(
         ['kubectl', *args],
         stdout: :capture,
         stderr: :capture,
-        env: {
-          'AWS_REGION' => @region,
-          'AWS_DEFAULT_REGION' => @region,
-          'AWS_DEFAULT_OUTPUT' => 'json',
-          'KUBECONFIG' => @kubeconfig
-        },
+        env: env,
         logger: Logger.new(Rails.configuration.cli_log)
       )
     end
@@ -92,9 +95,9 @@ module K8s
       return stdout
     end
 
-    def update_cdr
+    def update_crds(version:)
       args = %W(
-        apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
+        apply -f https://github.com/jetstack/cert-manager/releases/download/v#{version}/cert-manager.crds.yaml
       )
       stdout, stderr = execute(*args)
       return stderr if stderr.present?

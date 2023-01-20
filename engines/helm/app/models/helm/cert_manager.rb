@@ -16,19 +16,17 @@ module Helm
 
     def helm_create
       @kubectl.create_namespace(NAMESPACE)
-      @kubectl.update_cdr()
+      @kubectl.update_crds(version: VERSION)
       @helm.add_repo(REPO_NAME, REPO_URL)
       args = %W(--version #{VERSION})
       @helm.install(RELEASE_NAME, CHART, NAMESPACE, args)
       self.id = RELEASE_NAME
       self.refresh()
-      # self.wait_until(:deployed)
     end
 
     def helm_destroy
       @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
       throw(:abort) unless Rails.configuration.lasso_run.present?
-      # @kubectl.delete_namespace(NAMESPACE) # This never completes :(
     end
 
     def describe_resource

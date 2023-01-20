@@ -2,24 +2,24 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title= t('product_brand.title')
+    %title= wt('product_brand.title')
     %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
     %meta{:content => "ie=edge", "http-equiv" => "X-UA-Compatible"}/
     - if @refresh_timer
       %meta{"http-equiv" => "refresh", :content => @refresh_timer}/
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application"
     = stylesheet_link_tag "bootstrap.min"
-    = stylesheet_link_tag "eos-style"
     = stylesheet_link_tag "eos-icons"
     = stylesheet_link_tag "eos-icons-outlined"
+    = stylesheet_link_tag "eos-style"
+    = stylesheet_link_tag "application"
   %body
     %nav.main-menu.js-main-menu{"aria-label" => "Site Navigation"}
       %div.mm-navigation-container
         %header
           %a.hide-collapsed{href: "#"}
-            = image_tag 'product-brand.svg', alt: t('product_brand.title'), title: t('product_brand.title'), class: 'ds-logo'
+            = image_tag 'product-brand.svg', alt: wt('product_brand.title'), title: wt('product_brand.title'), class: 'ds-logo'
           %button.mm-navigation-close.js-sidebar-toggle
             %i.eos-icons-outlined.js-sidebar-tooltip.js-tooltip{"data-placement" => "bottom", title: "Toggle collapsible menu", "aria-hidden" => "true"} menu
             %span.sr-only Toggle collapsible menu
@@ -29,14 +29,11 @@
               = render 'layouts/menu_item', menu_entry
             = yield "menu"
       %footer.footer-side-menu
-        %ul.footer-list
-          %li.footer-list-item.ml-auto
-            %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
-              = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
+        = render('layouts/footer')
     %nav.mobile-menu.js-mobile-menu{"aria-label" => "Mobile Navigation"}
       %header
         %a{href: "#"}
-          = image_tag 'suse-product-brand.svg', alt: 'SUSE product brand logotype', class: 'ds-logo'
+          = image_tag 'product-brand.svg', alt: wt('product_brand.title'), title: wt('product_brand.title'), class: 'ds-logo'
         %div.burger-menu.js-burger-menu
           %button.btn-unstyled
             %i.eos-icons-outlined{"aria-hidden" => "true"} menu
@@ -54,8 +51,6 @@
         = alerts()
         = yield
     %footer.footer-content.js-footer-content
-      %ul.footer-list
-        %li.footer-list-item.ml-auto
-          %a.footer-link{:href => "https://www.suse.com/", :target => "_blank", :rel => "noreferrer nonopener", :data => {"event-category" => "External link", "event-action" => "Link SUSE website", "event-label" => "Footer"}}
-            = image_tag 'suse-logo-footer.svg', alt: 'SUSE logotype', class: 'js-tooltip', title: 'Visit the SUSE website', "data-toggle" => "tooltip", "data-html" => "true"
-= javascript_importmap_tags
+      = render('layouts/footer')
+  = render('layouts/feedback')
+  = javascript_importmap_tags

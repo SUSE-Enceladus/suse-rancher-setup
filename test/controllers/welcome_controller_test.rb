@@ -6,13 +6,7 @@ class WelcomeControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get greeting" do
-
-    mock_login
     get welcome_url
     assert_response :success
-  end
-
-  teardown do
-    clear_login
   end
 end

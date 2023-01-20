@@ -1,0 +1,59 @@
+{
+    "RouteTables": [
+        {
+            "Associations": [
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-08204184005edf4f9",
+                    "RouteTableId": "rtb-0606b9a86dd748bc0",
+                    "SubnetId": "subnet-0cf18dc644de564aa",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                },
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0fbee3e3aaafb6c69",
+                    "RouteTableId": "rtb-0606b9a86dd748bc0",
+                    "SubnetId": "subnet-0e279f06d9fed9185",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                },
+                {
+                    "Main": false,
+                    "RouteTableAssociationId": "rtbassoc-0114038dace8d8bd9",
+                    "RouteTableId": "rtb-0606b9a86dd748bc0",
+                    "SubnetId": "subnet-0305b24279be6126f",
+                    "AssociationState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "PropagatingVgws": [],
+            "RouteTableId": "rtb-0606b9a86dd748bc0",
+            "Routes": [
+                {
+                    "DestinationCidrBlock": "192.168.0.0/16",
+                    "GatewayId": "local",
+                    "Origin": "CreateRouteTable",
+                    "State": "active"
+                },
+                {
+                    "DestinationCidrBlock": "0.0.0.0/0",
+                    "GatewayId": "igw-0ef7e098de18fbce5",
+                    "Origin": "CreateRoute",
+                    "State": "active"
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "suse-rancher-setup-1327/"
+                }
+            ],
+            "VpcId": "vpc-0479ccc264f1e04a0",
+            "OwnerId": "810320120389"
+        }
+    ]
+}

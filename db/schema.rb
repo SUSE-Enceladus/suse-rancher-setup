@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_24_022910) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_222137) do
   create_table "key_values", force: :cascade do |t|
     t.string "key", null: false
     t.text "value"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_key_values_on_key", unique: true
+  end
+
+  create_table "pre_flight_checks", force: :cascade do |t|
+    t.string "name"
+    t.boolean "passed"
+    t.string "job"
+    t.datetime "job_submitted_at"
+    t.datetime "job_completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "view_data"
   end
 
   create_table "resources", id: :string, force: :cascade do |t|
