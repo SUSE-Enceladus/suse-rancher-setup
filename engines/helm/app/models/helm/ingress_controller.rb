@@ -4,7 +4,7 @@ module Helm
     REPO_URL = 'https://kubernetes.github.io/ingress-nginx'
     RELEASE_NAME = 'ingress-nginx'
     CHART = 'ingress-nginx/ingress-nginx'
-    VERSION = '4'
+    VERSION = '4.0.18'
     NAMESPACE = 'ingress-nginx'
     DEPLOYMENT = 'ingress-nginx-controller'
 

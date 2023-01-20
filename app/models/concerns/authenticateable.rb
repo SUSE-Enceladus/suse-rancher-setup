@@ -13,17 +13,19 @@ module Authenticateable
     salt = salted_password.split("$")[2]
 
     salted_password == salt_password(salt, password)
-  rescue StandardError, Cheetah::ExecutionFailed
+  rescue StandardError, Cheetah::ExecutionFailed => e
     return false
   end
 
   private
 
   def salt_password(salt, password)
-    Cheetah.run(
+    stdout, stderr = Cheetah.run(
       %W(openssl passwd -apr1 -salt #{salt} #{password}),
       stdout: :capture,
+      stderr: :capture,
       logger: Logger.new(Rails.configuration.cli_log)
-    ).strip
+    )
+    stdout.strip
   end
 end

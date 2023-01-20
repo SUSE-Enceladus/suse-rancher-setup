@@ -54,6 +54,8 @@ module SUSERancherSetup
       config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
       # kubernetes version
       config.x.rancher_on_eks = OpenStruct.new(config_for(:config)[:rancher_on_eks])
+      config.x.rancher_on_aks = OpenStruct.new(config_for(:config)[:rancher_on_aks])
+
     rescue Exception
       # don't crash if a config isn't present (necessary for packaging)
       puts("WARNING: config.yml not present - the application will not be usable without it.")

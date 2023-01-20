@@ -63,7 +63,7 @@ module Helm
         %W(
           --version #{version}
           --set controller.service.type=LoadBalancer
-          --set controller.watchIngressWithoutClass=true
+          --set controller.service.externalTrafficPolicy=Local
         )
       )
     end
