@@ -11,10 +11,10 @@
   = markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
   = markdown(t('engines.rancher_on_eks.wrapup.more_info', region: @region, cluster_name: @cluster_name))
 - elsif @failed
-  = page_header(t('engines.rancher_on_eks.wrapup.failed_wrapup_title'))
+  = page_header(t('engines.rancher_on_eks.wrapup.failed_cleanup_title'))
   -# body
-  = markdown(t('engines.rancher_on_eks.wrapup.failed_wrapup_caption', error: @failed_error))
-  = markdown(t('engines.rancher_on_eks.wrapup.failed_wrapup_info'))
+  = markdown(t('engines.rancher_on_eks.wrapup.failed_cleanup_caption', error: @failed_error))
+  = markdown(t('engines.rancher_on_eks.wrapup.failed_cleanup_info'))
 -# end
 %hr
 

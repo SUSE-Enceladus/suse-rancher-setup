@@ -257,7 +257,7 @@ en:
       wrapup:
         title: "Congratulations - your Rancher server is ready!"
         failed_title: "Oh no! Your Rancher deployment has failed!"
-        failed_wrapup_title: "Oh no! Your Rancher cleanup has failed!"
+        failed_cleanup_title: "Oh no! Rancher cleanup has failed!"
         caption: "**It's done! Your Rancher server, deployed on a dedicated EKS cluster, is ready and waiting to manage the rest of your container workloads.**"
         more_info: |-
           In case you need to manage the Rancher cluster, you can  generate your kubeconfig file using the command:
@@ -269,8 +269,8 @@ en:
           for details.
         failed_caption: "**Deployment failed. Something went wrong during the deployment.**"
         failed_info: "The resources created should be cleaned up, if any. Retry another deployment once the issue has been resolved."
-        failed_wrapup_caption: "**Cleaning up the resources failed. Something went wrong: %{error}**"
-        failed_wrapup_info: "The resources created should be cleaned up manually, if any."
+        failed_cleanup_caption: "**Cleaning up the resources failed: %{error}.**"
+        failed_cleanup_info: "The resources created should be cleaned up manually, if any."
 
         url: "You can browse to your Rancher server at [%{fqdn}](https://%{fqdn})."
         password: |-
