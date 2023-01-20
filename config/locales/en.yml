@@ -236,7 +236,7 @@ en:
           Okay, we have everything we need. It's time to deploy your Rancher server on a dedicated EKS cluster. When you're ready to start, just click **Next**, and sit back. Your Rancher server will be ready in about 20 minutes, and we'll tell you how to access it.
 
 
-          Along the way, we'll be sure to show you exactly what we're doing, so there are no surpises, and when we're done we'll also give you a list of all the AWS resources that were created to support your Rancher server.
+          Along the way, we'll be sure to show you exactly what we're doing, so there are no surprises, and when we're done we'll also give you a list of all the AWS resources that were created to support your Rancher server.
       fqdn:
         title: "Rancher URL"
         form_caption: |-
