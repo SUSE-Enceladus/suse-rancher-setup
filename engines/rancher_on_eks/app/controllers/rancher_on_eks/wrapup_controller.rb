@@ -19,11 +19,13 @@ module RancherOnEks
       # keep showing the buttons after cleaning up
       @resources_created = @resources.length > 0 || params[:deleting]
       @downloading = ["running"].include? Rails.configuration.lasso_commands
+      @failed = true if Rails.configuration.lasso_error != ""
+      @failed_error = Rails.configuration.lasso_error.strip
+      @in_process = nil if @failed
       @refresh_timer = 15 if @in_process || @downloading
       if @lasso_commands && File.exist?(Rails.configuration.lasso_commands_file)
         @commands = get_commands
       end
-      @failed = true if Rails.configuration.lasso_error != ""
     end
 
     def destroy
