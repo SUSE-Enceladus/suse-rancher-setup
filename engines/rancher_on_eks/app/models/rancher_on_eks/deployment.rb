@@ -122,19 +122,7 @@ module RancherOnEks
         @cluster_size = RancherOnEks::ClusterSize.new
         @cli = AWS::Cli.load
 
-        zones = @cli.list_availability_zones_supporting_instance_type(
-          @cluster_size.instance_type
-        )
-        if zones.length >= @cluster_size.zones_count
-          @zones = zones.sample(@cluster_size.zones_count)
-        else
-          # if we have less than the required AZ choices, set up multiple
-          # subnets in the same AZ, randomly selected
-          @zones = zones
-          while @zones.length < @cluster_size.zones_count
-            @zones << zones.sample()
-          end
-        end
+        @zones = self.select_zones()
         @fqdn = RancherOnEks::Fqdn.load()
         nil
       end
@@ -305,6 +293,24 @@ module RancherOnEks
       Rails.configuration.lasso_deploy_complete = true
       # in case Rancher create command gets failed status
       raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
+    end
+
+    def select_zones(
+        instance_type: @cluster_size.instance_type,
+        count:         @cluster_size.zones_count,
+        region:        AWS::Region.load().value
+      )
+      available_zones = @cli.list_availability_zones_supporting_instance_type(instance_type)
+      available_zones.select! {|az| az =~ /#{region}[a-z]/ }
+      if available_zones.length >= count
+        selected_zones = available_zones.sample(count)
+      else
+        selected_zones = available_zones
+        while selected_zones.length < count
+          selected_zones << available_zones.sample()
+        end
+      end
+      return selected_zones
     end
   end
 end
