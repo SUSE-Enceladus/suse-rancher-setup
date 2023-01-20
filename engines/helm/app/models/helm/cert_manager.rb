@@ -4,7 +4,7 @@ module Helm
     REPO_URL = 'https://charts.jetstack.io'
     RELEASE_NAME = 'cert-manager'
     CHART = 'jetstack/cert-manager'
-    VERSION = '1.5.1'
+    VERSION = '1.7.1'
     NAMESPACE = 'cert-manager'
     DEPLOYMENT = 'cert-manager'
 

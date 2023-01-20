@@ -6,7 +6,7 @@ RSpec.describe Helm::CertManager, type: :model do
   let(:expected_repo_url) { 'https://charts.jetstack.io' }
   let(:expected_release_name) { 'cert-manager' }
   let(:expected_chart) { 'jetstack/cert-manager' }
-  let(:expected_version) { '1.5.1' }
+  let(:expected_version) { '1.7.1' }
 
   context 'on create' do
     before do
