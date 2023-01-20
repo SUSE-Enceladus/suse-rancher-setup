@@ -30,6 +30,7 @@ RSpec.describe Helm::Rancher, :type => :model do
       allow(@mock_helm)
         .to receive(:add_repo).with(expected_repo_name, expected_repo_url)
         .and_return(true)
+      allow(Rails.configuration.x.rancher).to receive(:version).and_return(nil)
     end
 
     it 'delegates the expected calls' do
@@ -45,6 +46,10 @@ RSpec.describe Helm::Rancher, :type => :model do
             'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
             '--set-string',
             'extraEnv[0].value=true',
+            '--set',
+            'ingress.ingressClassName=nginx',
+            '--set',
+            'letsEncrypt.ingress.class=nginx',
             '--set',
             "hostname=#{mock_fqdn}",
             '--set',
@@ -77,6 +82,10 @@ RSpec.describe Helm::Rancher, :type => :model do
               '--set-string',
               'extraEnv[0].value=true',
               '--set',
+              'ingress.ingressClassName=nginx',
+              '--set',
+              'letsEncrypt.ingress.class=nginx',
+              '--set',
               "hostname=#{mock_fqdn}",
               '--set',
               'replicas=3',
@@ -108,6 +117,10 @@ RSpec.describe Helm::Rancher, :type => :model do
               'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
               '--set-string',
               'extraEnv[0].value=true',
+              '--set',
+              'ingress.ingressClassName=nginx',
+              '--set',
+              'letsEncrypt.ingress.class=nginx',
               '--set',
               "hostname=#{mock_fqdn}",
               '--set',
@@ -151,6 +164,10 @@ RSpec.describe Helm::Rancher, :type => :model do
                 'extraEnv[0].name=CATTLE_PROMETHEUS_METRICS',
                 '--set-string',
                 'extraEnv[0].value=true',
+                '--set',
+                'ingress.ingressClassName=nginx',
+                '--set',
+                'letsEncrypt.ingress.class=nginx',
                 '--set',
                 "hostname=#{mock_fqdn}",
                 '--set',

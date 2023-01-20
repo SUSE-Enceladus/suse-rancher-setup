@@ -63,7 +63,6 @@ module Helm
         %W(
           --version #{version}
           --set controller.service.type=LoadBalancer
-          --set controller.watchIngressWithoutClass=true
         )
       )
     end

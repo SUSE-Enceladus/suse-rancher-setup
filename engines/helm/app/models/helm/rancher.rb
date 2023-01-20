@@ -41,6 +41,8 @@ module Helm
       args = %W(
         --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS
         --set-string extraEnv[0].value=true
+        --set ingress.ingressClassName=nginx
+        --set letsEncrypt.ingress.class=nginx
         --set hostname=#{@fqdn}
         --set replicas=3
       )
