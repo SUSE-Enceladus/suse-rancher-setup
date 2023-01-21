@@ -32,7 +32,7 @@ shared:
     repo_url: https://releases.rancher.com/server-charts/stable
     chart: rancher-stable/rancher
     release_name: rancher-stable
-    version:
+    version: 2.6.9
 
   # What version of kubernetes will be deployed?
   # https://www.suse.com/suse-rancher/support-matrix/all-supported-versions/rancher-v2-6-9/

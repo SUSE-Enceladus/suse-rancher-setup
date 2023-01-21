@@ -36,7 +36,7 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
 
 4.  Create a local config file
     ```
-    cp config/config.yml.example config/config.yml
+    cp config/exampl_econfig.yml config/config.yml
     ```
     Only an example config is included in the project for reference. Your working config is not included in the source repository.
 

@@ -43,18 +43,25 @@ module SUSERancherSetup
       # prefix for common translation keys
       config.workflow_translation_prefix = "workflow.#{config.workflow.underscore}."
 
+      yaml_config = case Rails.env || ENV['RAILS_ENV']
+      when 'test'
+        config_for(:example_config)
+      else
+        config_for(:config)
+      end
+
       engines = nil
       if ENV['LASSO_ENGINES'].present?
         engines = ENV['LASSO_ENGINES'].split(',')
       end
-      config.engines = engines || config_for(:config)[:engines]
+      config.engines = engines || yaml_config[:engines]
       puts("config.engines: #{config.engines}")
 
       # Rancher source - for _helm_
-      config.x.rancher = OpenStruct.new(config_for(:config)[:rancher])
+      config.x.rancher = OpenStruct.new(yaml_config[:rancher])
       # kubernetes version
-      config.x.rancher_on_eks = OpenStruct.new(config_for(:config)[:rancher_on_eks])
-      config.x.rancher_on_aks = OpenStruct.new(config_for(:config)[:rancher_on_aks])
+      config.x.rancher_on_eks = OpenStruct.new(yaml_config[:rancher_on_eks])
+      config.x.rancher_on_aks = OpenStruct.new(yaml_config[:rancher_on_aks])
 
     rescue Exception
       # don't crash if a config isn't present (necessary for packaging)
@@ -62,6 +69,7 @@ module SUSERancherSetup
       config.engines = []
       config.x.rancher = nil
       config.x.rancher_on_eks = nil
+      config.x.rancher_on_aks = nil
     end
   end
 end
