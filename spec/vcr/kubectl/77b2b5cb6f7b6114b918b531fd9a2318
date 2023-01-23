@@ -1,1 +1,136 @@
-{"apiVersion":"v1","items":[{"apiVersion":"v1","kind":"Namespace","metadata":{"creationTimestamp":"2022-12-21T07:47:59Z","labels":{"kubernetes.io/metadata.name":"default"},"name":"default","resourceVersion":"200","uid":"9292db93-3e7a-46fa-a92a-215b3aed1778"},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}},{"apiVersion":"v1","kind":"Namespace","metadata":{"creationTimestamp":"2022-12-21T07:47:57Z","labels":{"kubernetes.io/metadata.name":"kube-node-lease"},"name":"kube-node-lease","resourceVersion":"35","uid":"6a761222-0566-4353-b408-7c39cc007dcc"},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}},{"apiVersion":"v1","kind":"Namespace","metadata":{"creationTimestamp":"2022-12-21T07:47:57Z","labels":{"kubernetes.io/metadata.name":"kube-public"},"name":"kube-public","resourceVersion":"33","uid":"02d46cd8-cf71-4894-96c6-edd899ae5273"},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}},{"apiVersion":"v1","kind":"Namespace","metadata":{"creationTimestamp":"2022-12-21T07:47:57Z","labels":{"kubernetes.io/metadata.name":"kube-system"},"name":"kube-system","resourceVersion":"12","uid":"2c3e0be8-18f2-4a78-b419-7c1b6657c181"},"spec":{"finalizers":["kubernetes"]},"status":{"phase":"Active"}}],"kind":"List","metadata":{"resourceVersion":"","selfLink":""}}
+{
+    "apiVersion": "v1",
+    "items": [
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2023-01-21T04:07:21Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "cert-manager"
+                },
+                "name": "cert-manager",
+                "resourceVersion": "2039",
+                "uid": "6557a278-5e84-44c7-8e9e-15f8eda60c58"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2023-01-21T04:00:24Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "default"
+                },
+                "name": "default",
+                "resourceVersion": "200",
+                "uid": "5f7217fc-3f56-4b26-89ae-5427411b94d5"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2023-01-21T04:06:38Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "ingress-nginx"
+                },
+                "name": "ingress-nginx",
+                "resourceVersion": "1749",
+                "uid": "f5159ac6-01d8-4b5f-88b6-4c7f5703f038"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2023-01-21T04:00:22Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "kube-node-lease"
+                },
+                "name": "kube-node-lease",
+                "resourceVersion": "31",
+                "uid": "c4e006a5-35dc-4589-af4a-018cc95abdbe"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2023-01-21T04:00:22Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "kube-public"
+                },
+                "name": "kube-public",
+                "resourceVersion": "30",
+                "uid": "b0ba7679-c6e1-425e-8227-294b50658a38"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        },
+        {
+            "apiVersion": "v1",
+            "kind": "Namespace",
+            "metadata": {
+                "creationTimestamp": "2023-01-21T04:00:22Z",
+                "labels": {
+                    "kubernetes.io/metadata.name": "kube-system"
+                },
+                "name": "kube-system",
+                "resourceVersion": "28",
+                "uid": "a2bc4706-d063-43de-9090-f08621c70e66"
+            },
+            "spec": {
+                "finalizers": [
+                    "kubernetes"
+                ]
+            },
+            "status": {
+                "phase": "Active"
+            }
+        }
+    ],
+    "kind": "List",
+    "metadata": {
+        "resourceVersion": "",
+        "selfLink": ""
+    }
+}
