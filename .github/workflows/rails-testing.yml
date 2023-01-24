@@ -64,6 +64,6 @@ jobs:
         run: bin/rails coverage
       - uses: joshmfrankel/simplecov-check-action@main
         with:
-          minimum_suite_coverage: 75
+          minimum_suite_coverage: 80
           minimum_file_coverage: 0
           github_token: ${{ secrets.GITHUB_TOKEN }}

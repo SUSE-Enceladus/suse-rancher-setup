@@ -1,0 +1,16 @@
+[
+  {
+    "cloudName": "AzureCloud",
+    "homeTenantId": "0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f",
+    "id": "ce73a2b0-d2e7-4ff6-b987-b32d6908de4e",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure RD",
+    "state": "Enabled",
+    "tenantId": "0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f",
+    "user": {
+      "name": "fd728d26-aaff-4d13-8da0-30a6a37d1c4b",
+      "type": "servicePrincipal"
+    }
+  }
+]

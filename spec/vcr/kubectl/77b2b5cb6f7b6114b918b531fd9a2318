@@ -5,13 +5,13 @@
             "apiVersion": "v1",
             "kind": "Namespace",
             "metadata": {
-                "creationTimestamp": "2023-01-21T04:07:21Z",
+                "creationTimestamp": "2023-01-23T23:59:27Z",
                 "labels": {
                     "kubernetes.io/metadata.name": "cert-manager"
                 },
                 "name": "cert-manager",
-                "resourceVersion": "2039",
-                "uid": "6557a278-5e84-44c7-8e9e-15f8eda60c58"
+                "resourceVersion": "1665",
+                "uid": "0596a289-7d45-4df2-a6a3-d0fb79cc33da"
             },
             "spec": {
                 "finalizers": [
@@ -26,13 +26,13 @@
             "apiVersion": "v1",
             "kind": "Namespace",
             "metadata": {
-                "creationTimestamp": "2023-01-21T04:00:24Z",
+                "creationTimestamp": "2023-01-23T23:56:36Z",
                 "labels": {
                     "kubernetes.io/metadata.name": "default"
                 },
                 "name": "default",
-                "resourceVersion": "200",
-                "uid": "5f7217fc-3f56-4b26-89ae-5427411b94d5"
+                "resourceVersion": "196",
+                "uid": "eb5c6335-8707-4127-b024-fe423d58611d"
             },
             "spec": {
                 "finalizers": [
@@ -47,13 +47,13 @@
             "apiVersion": "v1",
             "kind": "Namespace",
             "metadata": {
-                "creationTimestamp": "2023-01-21T04:06:38Z",
+                "creationTimestamp": "2023-01-23T23:58:42Z",
                 "labels": {
                     "kubernetes.io/metadata.name": "ingress-nginx"
                 },
                 "name": "ingress-nginx",
-                "resourceVersion": "1749",
-                "uid": "f5159ac6-01d8-4b5f-88b6-4c7f5703f038"
+                "resourceVersion": "1347",
+                "uid": "eba003e5-2479-4a07-b723-112cc4bbabaf"
             },
             "spec": {
                 "finalizers": [
@@ -68,13 +68,13 @@
             "apiVersion": "v1",
             "kind": "Namespace",
             "metadata": {
-                "creationTimestamp": "2023-01-21T04:00:22Z",
+                "creationTimestamp": "2023-01-23T23:56:34Z",
                 "labels": {
                     "kubernetes.io/metadata.name": "kube-node-lease"
                 },
                 "name": "kube-node-lease",
-                "resourceVersion": "31",
-                "uid": "c4e006a5-35dc-4589-af4a-018cc95abdbe"
+                "resourceVersion": "45",
+                "uid": "55e76eb7-85c9-4f46-9f96-67ca966822f7"
             },
             "spec": {
                 "finalizers": [
@@ -89,13 +89,13 @@
             "apiVersion": "v1",
             "kind": "Namespace",
             "metadata": {
-                "creationTimestamp": "2023-01-21T04:00:22Z",
+                "creationTimestamp": "2023-01-23T23:56:34Z",
                 "labels": {
                     "kubernetes.io/metadata.name": "kube-public"
                 },
                 "name": "kube-public",
-                "resourceVersion": "30",
-                "uid": "b0ba7679-c6e1-425e-8227-294b50658a38"
+                "resourceVersion": "35",
+                "uid": "2daece3e-9ebe-4747-a979-990134e51f73"
             },
             "spec": {
                 "finalizers": [
@@ -110,13 +110,19 @@
             "apiVersion": "v1",
             "kind": "Namespace",
             "metadata": {
-                "creationTimestamp": "2023-01-21T04:00:22Z",
+                "annotations": {
+                    "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"labels\":{\"addonmanager.kubernetes.io/mode\":\"Reconcile\",\"control-plane\":\"true\",\"kubernetes.io/cluster-service\":\"true\"},\"name\":\"kube-system\"}}\n"
+                },
+                "creationTimestamp": "2023-01-23T23:56:34Z",
                 "labels": {
+                    "addonmanager.kubernetes.io/mode": "Reconcile",
+                    "control-plane": "true",
+                    "kubernetes.io/cluster-service": "true",
                     "kubernetes.io/metadata.name": "kube-system"
                 },
                 "name": "kube-system",
-                "resourceVersion": "28",
-                "uid": "a2bc4706-d063-43de-9090-f08621c70e66"
+                "resourceVersion": "548",
+                "uid": "f306ee18-760c-4566-aa2d-48c1c3c5e026"
             },
             "spec": {
                 "finalizers": [
