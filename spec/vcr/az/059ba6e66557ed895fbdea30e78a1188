@@ -1,0 +1,12 @@
+[
+  {
+    "currentValue": 3,
+    "id": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/providers/Microsoft.Network/locations/westus2/usages/PublicIPAddresses",
+    "limit": 50,
+    "name": {
+      "localizedValue": "Public IP Addresses",
+      "value": "PublicIPAddresses"
+    },
+    "unit": "Count"
+  }
+]
