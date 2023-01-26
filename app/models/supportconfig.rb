@@ -30,9 +30,14 @@ class Supportconfig
     !!@generated_at
   end
 
-  def download_path()
+  def output_filename()
     raise NotGeneratedError unless @generated_at
-    @dir + '/' + 'scc_' + self.filename_element + '.' + self.extension
+    'scc_' + self.filename_element + '.' + self.extension
+  end
+
+  def output_path()
+    raise NotGeneratedError unless @generated_at
+    Pathname.new(@dir).join(self.output_filename)
   end
 
   private
