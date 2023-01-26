@@ -1,0 +1,52 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title= wt('product_brand.title')
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %meta{:content => "ie=edge", "http-equiv" => "X-UA-Compatible"}/
+    - if @refresh_timer
+      %meta{"http-equiv" => "refresh", :content => @refresh_timer}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "bootstrap.min"
+    = stylesheet_link_tag "eos-icons"
+    = stylesheet_link_tag "eos-icons-outlined"
+    = stylesheet_link_tag "eos-style"
+    = stylesheet_link_tag "application"
+  %body
+    %nav.main-menu.js-main-menu{"aria-label" => "Site Navigation"}
+      %div.mm-navigation-container
+        %header
+          %a.hide-collapsed{href: "#"}
+            = image_tag 'product-brand.svg', alt: wt('product_brand.title'), title: wt('product_brand.title'), class: 'ds-logo'
+          %button.mm-navigation-close.js-sidebar-toggle
+            %i.eos-icons-outlined.js-sidebar-tooltip.js-tooltip{"data-placement" => "bottom", title: "Toggle collapsible menu", "aria-hidden" => "true"} menu
+            %span.sr-only Toggle collapsible menu
+        %div.nav-wrap.menu-togglable
+          %ul.no-list-style
+      %footer.footer-side-menu
+        = render('layouts/footer')
+    %nav.mobile-menu.js-mobile-menu{"aria-label" => "Mobile Navigation"}
+      %header
+        %a{href: "#"}
+          = image_tag 'product-brand.svg', alt: wt('product_brand.title'), title: wt('product_brand.title'), class: 'ds-logo'
+        %div.burger-menu.js-burger-menu
+          %button.btn-unstyled
+            %i.eos-icons-outlined{"aria-hidden" => "true"} menu
+            %span.sr-only Toggle collapsible menu
+      %nav.display-nav.js-display-nav
+        %div.nav-wrap.menu-togglable
+          %ul.no-list-style
+    %section.content
+      %article.container
+        %h1
+          %i.eos-icons.eos-48.align-middle.text-danger dangerous
+          = response.response_code
+          = response.status_message.upcase
+        %hr
+        = yield
+    %footer.footer-content.js-footer-content
+      = render('layouts/footer')
+  = render('layouts/feedback')
+  = javascript_importmap_tags
