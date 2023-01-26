@@ -67,7 +67,7 @@ end
 def cheetah_vcr(force_recording: false)
   allow(Cheetah).to receive(:run).and_wrap_original do |method, *args|
     cli_args = args.first
-    fixture_dir = Rails.root.join('spec', 'vcr', cli_args.first)
+    fixture_dir = Rails.root.join('spec', 'vcr', cli_args.first.rpartition('/').last)
     filename = Digest::MD5.hexdigest(cli_args.flatten.join(' '))
     fixture_path = fixture_dir.join(filename)
     FileUtils.mkdir_p(fixture_dir)

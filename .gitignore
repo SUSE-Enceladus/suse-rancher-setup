@@ -46,3 +46,6 @@ public/localhost.*
 
 # Ignore coverage reports
 /coverage
+
+# Supportconfig files
+public/scc_*

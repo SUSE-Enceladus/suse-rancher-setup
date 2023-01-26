@@ -86,6 +86,28 @@ en:
       content: |-
         Please post an issue in our [code repository](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues).
 
+  errors:
+    bad_request:
+      Your input was not acceptable. Care to try that again?
+    conflict:
+      Sorry, I had an internal conflict. Please refresh to try again.
+    internal_server_error: |-
+      Sorry about that, something unexpected went wrong. We've prepared a [supportconfig](https://en.opensuse.org/Supportutils) bundle you can download, this includes the application logs, some information about the public cloud environment, and some basics about this instance.
+
+      Please check out our [issue tracker](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues) to see if this is a known problem, and file an issue if you can't find anything related.
+    method_not_allowed: |-
+      I'm sorry, Dave. I'm afraid I can't do that.
+    not_acceptable: |-
+      Your input was not acceptable. Care to try that again?
+    not_found: |-
+      Sorry, but '%{path}' does not exist on this server.
+    not_implemented: |-
+      That is not implemented. Want to request a [new feature](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues)?
+    unprocessable_entity: |-
+      Your request was not processable. Please [go back to the beginning](/) and try again.
+    supportconfig:
+      download: "Download the supportconfig bundle."
+
   activemodel:
     errors:
       models:
