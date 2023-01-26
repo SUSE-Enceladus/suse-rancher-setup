@@ -13,7 +13,8 @@ class Supportconfig
   def generate()
     stdout, stderr = Cheetah.run(
       %W(
-        supportconfig -Q -g -k
+        #{Rails.configuration.supportconfig_bin} -Q -g
+        -i psuse_public_cloud,psuse_rancher_setup
         -B #{self.filename_element}
         -R #{@dir}
       ),

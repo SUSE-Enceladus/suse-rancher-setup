@@ -59,6 +59,9 @@ group :development, :test do
 
   # Use Sass to process CSS
   gem "sassc-rails"
+
+  # CLI parser for mock binaries
+  gem 'docopt'
 end
 
 group :development do

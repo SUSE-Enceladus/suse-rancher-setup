@@ -1,0 +1,40 @@
+#! /usr/bin/env ruby
+
+require 'docopt'
+require 'pathname'
+require 'fileutils'
+
+doc = <<EOD
+Mock binary for supportconfig. An empty file will be generated at the expected
+destination.
+
+Usage:
+  #{__FILE__ } -B=<filename> -R=<path> [-i=<modules>] [-Q] [-g]
+  #{__FILE__} -h | --help
+
+Options:
+  -h --help     Show this screen.
+  -B=<filename> Base name of generated file
+  -R=<path>     Directory to generate output in
+  -i=<modules>  List of modules to run (ignored)
+  -Q            Be quiet (ignored)
+  -g            Output as a gzipped tarball (.tgz)
+
+EOD
+
+begin
+  docopt = Docopt::docopt(doc)
+
+  extension = case
+  when docopt['-g']
+    'tgz'
+  else
+    'txz'
+  end
+  filename = 'scc_' + docopt['-B'] + '.' + extension
+  full_path = Pathname.new(docopt['-R']).join(filename)
+
+  FileUtils.touch(full_path)
+rescue Docopt::Exit => e
+  puts e.message
+end

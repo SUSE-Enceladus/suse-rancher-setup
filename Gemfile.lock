@@ -95,6 +95,7 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     docile (1.4.0)
+    docopt (0.6.1)
     email_validator (2.2.4)
       activemodel
     erubi (1.11.0)
@@ -280,6 +281,7 @@ DEPENDENCIES
   capybara
   cheetah
   debug
+  docopt
   email_validator
   faker
   haml-rails
