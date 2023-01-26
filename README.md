@@ -9,7 +9,7 @@ Simple, usable web application for deploying complex applications to the cloud; 
 *suse-rancher-setup* depends on, primarily:
 
 * Ruby 3.1 (currently 3.1.2)
-* Rails 7.0
+* Rails 7.1
 * Sqlite 3
 * AWS-CLI (v1 or v2)
 * [ec2metadata](https://github.com/SUSE-Enceladus/ec2metadata)

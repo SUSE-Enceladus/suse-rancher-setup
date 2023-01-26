@@ -1,4 +1,21 @@
 -------------------------------------------------------------------
+Thu Jan 26 23:02:32 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 1.2.0
+  - Moved user authorization token to user session (#132)
+  - Flatten translation files (#135)
+  - Fix branding in mobile view (#145)
+  - Enable Let's Encrypt for Rancher TLS certificate (#118)
+  - Add a feedback dialog (#120)
+  - Properly handle new versions of ec2metadata (#129)
+  - Report cleanup exceptions to the end user (#121)
+  - Check for available AWS VPC quota before deployment (#117)
+  - Limit AWS AZ selection (#172)
+  - Custom error handling (#178)
+  - Generate a supportconfig on application error (#119)
+  - Update Rancher dependencies per documentation
+
+-------------------------------------------------------------------
 Thu Oct  6 17:15:43 UTC 2022 - James Mason <jmason@suse.com>
 
 - version 1.1.2
