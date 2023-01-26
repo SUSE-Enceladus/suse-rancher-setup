@@ -1,0 +1,50 @@
+{
+    "cluster": {
+        "name": "suse-rancher-setup-3784-cluster",
+        "arn": "arn:aws:eks:us-west-2:810320120389:cluster/suse-rancher-setup-3784-cluster",
+        "createdAt": "2023-01-20T19:54:24.841000-08:00",
+        "version": "1.23",
+        "roleArn": "arn:aws:iam::810320120389:role/suse-rancher-setup-3784-cluster-role",
+        "resourcesVpcConfig": {
+            "subnetIds": [
+                "subnet-0bc67472e407ec219",
+                "subnet-02619e5fdd3f8c1fc",
+                "subnet-03c727309e014d45b",
+                "subnet-0fe1d336407dec4d6",
+                "subnet-0b03ac75b6f5560ac",
+                "subnet-0327c4de9f2d01fa6"
+            ],
+            "securityGroupIds": [
+                "sg-03e0bfe8b0ec54aff"
+            ],
+            "vpcId": "vpc-065dc78f07a74a2f1",
+            "endpointPublicAccess": true,
+            "endpointPrivateAccess": false,
+            "publicAccessCidrs": [
+                "0.0.0.0/0"
+            ]
+        },
+        "kubernetesNetworkConfig": {
+            "serviceIpv4Cidr": "10.100.0.0/16",
+            "ipFamily": "ipv4"
+        },
+        "logging": {
+            "clusterLogging": [
+                {
+                    "types": [
+                        "api",
+                        "audit",
+                        "authenticator",
+                        "controllerManager",
+                        "scheduler"
+                    ],
+                    "enabled": false
+                }
+            ]
+        },
+        "status": "CREATING",
+        "certificateAuthority": {},
+        "platformVersion": "eks.9",
+        "tags": {}
+    }
+}
