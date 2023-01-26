@@ -1,13 +1,9 @@
 class ExceptionsApp < Rambulance::ExceptionsApp
   before_action :set_locals
 
-  def bad_request
-    render :generic
-  end
+  def bad_request; end
 
-  def conflict
-    render :generic
-  end
+  def conflict; end
 
   def internal_server_error
     supportconfig = Supportconfig.new(dir: Rails.root.join('public'))
@@ -21,13 +17,9 @@ class ExceptionsApp < Rambulance::ExceptionsApp
     render :total_fail
   end
 
-  def method_not_allowed
-    render :generic
-  end
+  def method_not_allowed; end
 
-  def not_acceptable
-    render :generic
-  end
+  def not_acceptable; end
 
   def not_found
     @locals = {
@@ -35,9 +27,7 @@ class ExceptionsApp < Rambulance::ExceptionsApp
     }
   end
 
-  def not_implemented
-    render :generic
-  end
+  def not_implemented; end
 
   def unprocessable_entity; end
 
