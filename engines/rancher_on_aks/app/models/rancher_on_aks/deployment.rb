@@ -64,6 +64,7 @@ module RancherOnAks
           @zones = zones
         end
         @fqdn = RancherOnAks::Fqdn.load()
+        @tls_source = TlsSource.load()
         nil
       end
       step(1) do
@@ -117,7 +118,9 @@ module RancherOnAks
       end
       step(8) do
         @rancher = Helm::Rancher.create(
-          fqdn: @fqdn
+          fqdn: @fqdn,
+          tls_source: @tls_source.source,
+          email_address: @tls_source.email_address
         )
         @rancher.ready!
         nil
