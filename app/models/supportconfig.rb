@@ -32,11 +32,13 @@ class Supportconfig
 
   def output_filename()
     raise NotGeneratedError unless @generated_at
+
     'scc_' + self.filename_element + '.' + self.extension
   end
 
   def output_path()
     raise NotGeneratedError unless @generated_at
+
     Pathname.new(@dir).join(self.output_filename)
   end
 
