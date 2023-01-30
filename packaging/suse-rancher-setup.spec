@@ -41,6 +41,8 @@ Requires:       helm
 Requires:       nginx
 Requires:       openssl
 Requires:       python3-cloudinstancecredentials
+Requires:       python3-ec2metadata
+Requires:       supportutils-plugin-suse-rancher-setup
 Requires:       suse-rancher-setup-config
 
 # Does not build for i586, s390, aarch64 and is not supported on those architectures
