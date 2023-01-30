@@ -1,7 +1,13 @@
 -------------------------------------------------------------------
+Mon Jan 30 23:30:15 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 1.2.1
+  - Add an additional required IAM permission 
+
+-------------------------------------------------------------------
 Thu Jan 26 23:02:32 UTC 2023 - James Mason <jmason@suse.com>
 
-- version 1.2.0
+- version 1.2.0 (bsc#1207774)
   - Moved user authorization token to user session (#132)
   - Flatten translation files (#135)
   - Fix branding in mobile view (#145)
