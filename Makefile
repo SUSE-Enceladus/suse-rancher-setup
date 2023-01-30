@@ -38,6 +38,9 @@ dist: clean
 	# don't bundle external config
 	@rm -f $(NAME)-$(VERSION)/config/config.yml
 
+	# don't bundle supportconfig files
+	@rm -f $(NAME)-$(VERSION)/public/scc_*
+
 	# don't package engine bin directory, specs (no need) and .gitignore (OBS complains)
 	@rm -rf $(NAME)-$(VERSION)/engines/*/bin
 	@rm -rf $(NAME)-$(VERSION)/engines/*/test

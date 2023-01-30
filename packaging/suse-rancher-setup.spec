@@ -66,6 +66,8 @@ sed -i '/BUNDLED WITH/{N;d;}' Gemfile.lock
 bundle.%{ruby_version} config build.nio4r --with-cflags='%{optflags} -Wno-return-type'
 bundle.%{ruby_version} config set deployment 'true'
 bundle.%{ruby_version} config set without 'test development'
+bundle config set force_ruby_platform true
+bundle config build.sqlite3 --enable-system-libraries
 bundle.%{ruby_version} install --local
 
 %install
