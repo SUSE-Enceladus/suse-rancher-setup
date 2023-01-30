@@ -12,18 +12,20 @@ module RancherOnEks
       @cluster_name = Resource.find_by(type: 'AWS::Cluster')
       @cluster_name = @cluster_name.id unless @cluster_name.nil?
       @password = nil if @in_process
-      @password = RancherOnEks::Rancher.last&.initial_password unless @in_process
+      @password = Helm::Rancher.last&.initial_password unless @in_process
       @resources = Resource.all
       # do not show any text if cleaning up
       @cleaning_up = params[:deleting]
       # keep showing the buttons after cleaning up
       @resources_created = @resources.length > 0 || params[:deleting]
       @downloading = ["running"].include? Rails.configuration.lasso_commands
+      @failed = true if Rails.configuration.lasso_error != ""
+      @failed_error = Rails.configuration.lasso_error.strip
+      @in_process = nil if @failed
       @refresh_timer = 15 if @in_process || @downloading
       if @lasso_commands && File.exist?(Rails.configuration.lasso_commands_file)
         @commands = get_commands
       end
-      @failed = true if Rails.configuration.lasso_error != ""
     end
 
     def destroy

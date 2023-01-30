@@ -71,4 +71,7 @@ Rails.application.configure do
   config.nginx_pass_file = Rails.root.join('test', 'fixtures', 'files', 'cloudinstancecredentials')
   # username: username
   # password: password
+
+  # paths to binaries
+  config.supportconfig_bin = Rails.root.join('bin', 'supportconfig') # local mock for dev/test
 end

@@ -5,7 +5,48 @@ on:
   pull_request:
     branches: [ "main", "next"]
 jobs:
-  test:
+  rancher_on_eks:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      LASSO_WORKFLOW: RancherOnEks
+      LASSO_ENGINES: AWS,ShirtSize,PreFlight,RancherOnEks,Helm
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.1.2
+      - name: Set up database schema
+        run: bin/rails db:reset
+      - name: Run minitest
+        run: bin/rails test
+      - name: Run rspec
+        run: bin/rspec
+  rancher_on_aks:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+      LASSO_WORKFLOW: RancherOnAks
+      LASSO_ENGINES: Azure,ShirtSize,PreFlight,RancherOnAks,Helm
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Ruby and gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: 3.1.2
+      - name: Set up database schema
+        run: bin/rails db:reset
+      - name: Run minitest
+        run: bin/rails test
+      - name: Run rspec
+        run: bin/rspec
+  coverage:
+    needs: [rancher_on_aks, rancher_on_eks]
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
@@ -17,11 +58,12 @@ jobs:
         with:
           bundler-cache: true
           ruby-version: 3.1.2
-      - name: create test config
-        run: cp config/config.yml.example config/config.yml
       - name: Set up database schema
         run: bin/rails db:reset
-      - name: Run minitest
-        run: bin/rails test
-      - name: Run rspec
-        run: bundle exec rspec
+      - name: Run coverage suite
+        run: bin/rails coverage
+      - uses: joshmfrankel/simplecov-check-action@main
+        with:
+          minimum_suite_coverage: 80
+          minimum_file_coverage: 0
+          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -29,6 +29,20 @@
 # To learn more, please read the Rails Internationalization guide
 # available at https://guides.rubyonrails.org/i18n.html.
 
+# Markdown is supported for all captions and content, but not for titles,
+# field names or flash messages. Please be aware of the following settings:
+# * Inline HTML is not supported
+# * Line breaks in a multiline string will be interpreted as hard breaks "<br>"
+# * Images are supported, but the must be placed in the 'public' path
+#
+# Use the "|-" constructor for multiline strings, and start indented on the next line.
+# example: |-
+#   This is an example
+#   of a multiline string.
+#
+# Use quotation marks around single-line strings, to avoid parsing issues with
+# inline substitutions and punctuation.
+
 en:
   actions:
     exec: "Execute"
@@ -37,17 +51,62 @@ en:
     save: "Save"
     close: "Close"
     login: "Login"
+    retest: "Check again"
 
   flash:
-    no_hosted_zone: "The subdomain is not a route 53 hosted zone: "
-    duplicated_record: "The FQDN is already a DNS record: "
-    new_record: "Please, introduce a new FQDN or delete that record."
+    no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."
+    duplicate_record: "The FQDN '%{fqdn}' already has a DNS record in this zone. Please select a new FQDN or delete that record."
+    using_fqdn: "Rancher will be served at 'https://%{fqdn}'."
     login_required: "You must log in first."
     not_authorized: "You cannot perform this step yet."
+    tls_source: "Rancher will use '%{source}' as the TLS certificate source."
+    missing_instance_profile: "No instance profile was detected!"
+
+  resources:
+    caption: "The following resources were created as part of your deployment:"
 
   login:
-    content: "Please log in to continue.
-      The credentials are based on data about this instance."
+    content: "Please log in to continue. The credentials are based on data about this instance."
+    aws:
+      username: "EC2 Instance ID"
+      password: "AWS Account ID (without '-')"
+    azure:
+      username: "Virtual Machine Name"
+      password: "Subscription ID"
+
+  feedback:
+    title: "Feedback"
+    caption: "We would appreciate hearing from you!"
+    discussion:
+      title: "Questions or Comments?"
+      content: |-
+        Please post a topic in our [feedback forum](https://forums.rancher.com/c/rancher-2x/rancher-setup/129).
+    issues:
+      title: "Bug or Feature Request?"
+      content: |-
+        Please post an issue in our [code repository](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues).
+
+  errors:
+    bad_request:
+      Your input was not acceptable. Care to try that again?
+    conflict:
+      Sorry, I had an internal conflict. Please refresh to try again.
+    internal_server_error: |-
+      Sorry about that, something unexpected went wrong. We've prepared a [supportconfig](https://en.opensuse.org/Supportutils) bundle you can download, this includes the application logs, some information about the public cloud environment, and some basics about this instance.
+
+      Please check out our [issue tracker](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues) to see if this is a known problem, and file an issue if you can't find anything related.
+    method_not_allowed: |-
+      I'm sorry, Dave. I'm afraid I can't do that.
+    not_acceptable: |-
+      Your input was not acceptable. Care to try that again?
+    not_found: |-
+      Sorry, but '%{path}' does not exist on this server.
+    not_implemented: |-
+      That is not implemented. Want to request a [new feature](https://github.com/SUSE-Enceladus/suse-rancher-setup/issues)?
+    unprocessable_entity: |-
+      Your request was not processable. Please [go back to the beginning](/) and try again.
+    supportconfig:
+      download: "Download the supportconfig bundle."
 
   activemodel:
     errors:
@@ -56,3 +115,257 @@ en:
           attributes:
             base:
               invalid: "Credentials are not valid."
+    attributes:
+      tls_source:
+        source: "TLS certificate source"
+        email_address: "Email address for certificate management (Let's Encrypt only)"
+
+  workflow:
+    rancher_on_aks:
+      product_brand:
+        title: "SUSE Rancher Setup"
+      greeting:
+        content: |-
+          This tool is designed to automate the deployment of Rancher Manager in your Azure subscription. At the end of this process, you should have a highly-available instance of Rancher running on AKS. To get the most out of your Rancher experience, we recommend you familiarize yourself with the product documentation:
+          [Rancher Docs](https://rancher.com/docs/)
+
+          You shouldn't have to be an expert in container management to run Rancher. **SUSE Rancher Setup** will make the process as easy as we can make it… you’ll just need to provide a few things to deploy Rancher on a dedicated AKS cluster, sized just right for your needs.
+
+          ### What we need from you
+          1. **Azure service principal**.
+          In order to perform the set up for you, this application needs to access Azure - service principal credentials need to be provided, with persmission to create and modify AKS clusters and nodegroups, and Azure DNS Zone records in an existing hosted zone.
+          [More Info](https://learn.microsoft.com/en-us/azure/active-directory/develop/app-objects-and-service-principals)
+
+          2. **An Azure DNS Zone.**
+          We need to give your Rancher server a domain name,. To do so, the subdomain we use needs to be configured as an Azure DNS Zone. We'll take care of the DNS record for Rancher, and make sure it's all properly routed, you just need to give us a place to work. It can be a public zone or a private zone, as long as it is resolvable by this virtual machine and your PC, and the *Azure service principal* you provide has rights to edit the zone.
+
+          ### Let's go
+          When you have that ready, click the big, orange **Next** button to get started, and go ahead and brew a cup of coffee or tea... *the full deployment will take about 20 minutes.*
+
+    rancher_on_eks:
+      product_brand:
+        title: "SUSE Rancher Setup"
+      greeting:
+        content: |-
+          This tool is designed to automate the deployment of Rancher Manager in your AWS account. At the end of this process, you should have a highly-available instance of Rancher running on EKS. To get the most out of your Rancher experience, we recommend you familiarize yourself with the product documentation:
+          [Rancher Docs](https://rancher.com/docs/)
+
+
+          You shouldn't have to be an expert in container management to run Rancher. **SUSE Rancher Setup** tool will make the process as easy as we can make it… you’ll just need to provide a few things to deploy Rancher on a dedicated AWS EKS cluster, sized just right for your needs.
+
+
+          ### What we need from you
+          1. **AWS permissions**
+          In order to perform the set up for you, this application needs to access AWS - this virtual machine must have an *associated IAM instance profile* with persmission to create and modify EKS clusters and nodegroups, VPCs, subnets, routes, Internet Gateways, NATs, elastic IP addresses, EC2 instances and auto-scaling groups, and Route53 records in an existing hosted zone.
+          [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role) | [Required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/aws-iam/iam_role.json)
+
+          2. **A Route53 Hosted Zone.**
+          We need to give your Rancher server a domain name, and to do so, the subdomain we use needs to be configured as an AWS Route53 hosted zone. We'll take care of the DNS record for Rancher, and make sure it's all properly routed, you just need to give us a place to work. It can be a public zone or a private zone, as long as it is resolvable by this virtual machine and your PC, and the *AWS credentials* you provide have rights to edit the zone.
+          [More Info](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/CreatingHostedZone.html)
+
+          ### Let's go
+          When you have that ready, click the big, orange **Next** button to get started, and go ahead and brew a cup of coffee or tea… the full deployment will take about 20 minutes.*
+
+  engines:
+    aws:
+      cli:
+        title: "Run an AWS-CLI command"
+        form_caption: "CLI Arguments"
+      permissions:
+        title: "Checking AWS IAM Permissions"
+        caption: "We're using the [AWS Policy Simulator](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html) to verify that all the necessary permissions are in place in `%{arn}`."
+        arn: "The"
+        passed: "Nice work, the application has all the required permissions!"
+        missing_instance_profile: |-
+          The Instance Profile could not be detected.
+
+          Please ensure this instance has access to [IMDSv2](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-instance-metadata-service.html) and that an *IAM Instance Profile* is associate with this instance, with the [required permissions](https://raw.githubusercontent.com/SUSE-Enceladus/suse-rancher-setup/main/aws-iam/iam_role.json).
+          [More Info](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#launch-instance-with-role)
+        missing: "It looks like you missed something. Please add the following permissions to this EC2 instance, then click the 'Check again' button:"
+      region:
+        title: "AWS Region"
+        form_caption: |-
+          Which AWS Region do you want your Rancher server to be deployed in? Any region will do, it's just a matter of what's best for you.
+
+
+          The list below includes all the regions you have access to. **Please select one:**
+        using: "Your cluster will be deployed in '%{region}'."
+        not_available: "Region '%{region}' does not support the selected instance types."
+      steps:
+        title: "AWS Actions"
+        form_caption: "Select an action to execute:"
+        labels:
+          version: "Show the version of the CLI"
+          regions: "List available regions (opt-in not required and opted-in)"
+          create_vpc: "Create a new VPC"
+
+    azure:
+      login:
+        title: "Azure Login"
+        form_caption: |-
+          Please provide the credentials for the Azure *service principal* that will be used to set up your Rancher server. If you do not already have a *service principal* ready, you can create one using the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli) or [Azure Portal](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal).
+
+
+          The *service principal* must have a password, and permissions to create and manage an AKS cluster and nodegroups, and manage the Azure DNS zone that includes the Rancher server's FQDN. We recommend simply assigning the _Contributor_ role on your subscription.
+        app_id: "App ID"
+        password: "Password"
+        tenant: "Tenant"
+        success: "Successfully authenticated as service principal '%{service_principal}'"
+        failure: |-
+          Unable to authenticate:
+          %{message}
+      region:
+        title: "Azure Location"
+        form_caption: |-
+          Which Azure Location do you want your Rancher server to be deployed in? Any region will do, it's just a matter of what's best for you.
+
+
+          The list below includes all the regions that support AKS zones. **Please select one:**
+        using: "Your cluster will be deployed in '%{region}'."
+
+    rancher_on_aks:
+      fqdn:
+        title: "Rancher URL"
+        form_caption: |-
+          What is the Fully Qualified Domain Name (*FQDN*) where Rancher will be served? This forms the URL you will enter into your web browser to access Rancher.
+
+
+          The subdomain containing this *FQDN* _must be preconfigured as an Azure DNS zone_. For example, if the *FQDN* is `rancher.example.com`, then `example.com` must be an Azure DNS zone, and Rancher will be served at `https://rancher.example.com` .
+      security:
+        title: "Security options"
+        form_caption: |-
+          The Rancher management server is designed to be secure by default and requires SSL/TLS configuration.
+
+
+          You can choose to use a self-signed TLS certificate provided by the Rancher server, or you may choose to have a [Let's Encrypt](https://letsencrypt.org/) certificate generated for to it.
+
+
+          **NOTE:** *In order for Let's Encrypt to generate a TLS certificate, your Rancher server must be accessible via the Internet at the FQDN provided over TCP port 80 (http), and you must supply an email address for future management.*
+      steps:
+        title: "Deploy Rancher on AKS"
+        form_caption: "Okay, we have everything we need. It's time to deploy your Rancher server on a dedicated AKS cluster. When you're ready to start, just click **Next**, and sit back. Your Rancher server will be ready in about 20 minutes, and we'll tell you how to access it."
+      wrapup:
+        title: "Congratulations - your Rancher server is ready!"
+        caption: "**It's done! Your Rancher server, deployed on a dedicated AKS cluster, is ready and waiting to manage the rest of your container workloads.**"
+        url: "You can browse to your Rancher server at [%{fqdn}](https://%{fqdn})."
+        password: |-
+          The initial password is:
+          `%{password}`
+          You will be prompted to change it when you first log in.
+        more_info: |-
+          In case you need to manage the Rancher cluster, you can generate your kubeconfig file using the command:
+          `az aks get-credentials --resource-group %{resource_group} --name %{cluster}`
+          For more details see the [Azure docs](https://learn.microsoft.com/en-us/cli/azure/aks?view=azure-cli-latest#az-aks-get-credentials).
+
+
+          When you are ready to upgrade your Rancher instance, please see the [Rancher docs](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades) for details.
+        resources:
+          subtitle: "Azure Resources"
+    rancher_on_eks:
+      steps:
+        title: "Deploy Rancher on AWS EKS"
+        form_caption: |-
+          Okay, we have everything we need. It's time to deploy your Rancher server on a dedicated EKS cluster. When you're ready to start, just click **Next**, and sit back. Your Rancher server will be ready in about 20 minutes, and we'll tell you how to access it.
+
+
+          Along the way, we'll be sure to show you exactly what we're doing, so there are no surprises, and when we're done we'll also give you a list of all the AWS resources that were created to support your Rancher server.
+      fqdn:
+        title: "Rancher URL"
+        form_caption: |-
+          What is the Fully Qualified Domain Name (*FQDN*) where Rancher will be served? This forms the URL you will enter into your web browser to access Rancher.
+
+
+          The subdomain containing this *FQDN* _must be preconfigured as an AWS Route53 hosted zone_. For example, if the *FQDN* is `rancher.example.com`, then `example.com` must be a Route53 hosted zone, and Rancher will be served at `https://rancher.example.com` .
+      security:
+        title: "Security options"
+        form_caption: |-
+          The Rancher management server is designed to be secure by default and requires SSL/TLS configuration.
+
+
+          You can choose to use a self-signed TLS certificate provided by the Rancher server, or you may choose to have a [Let's Encrypt](https://letsencrypt.org/) certificate generated for to it.
+
+
+          **NOTE:** *In order for Let's Encrypt to generate a TLS certificate, your Rancher server must be accessible via the Internet at the FQDN provided over TCP port 80 (http), and you must supply an email address for future management.*
+      wrapup:
+        title: "Congratulations - your Rancher server is ready!"
+        failed_title: "Oh no! Your Rancher deployment has failed!"
+        failed_cleanup_title: "Oh no! Your Rancher resources cleanup has failed!"
+        caption: "**It's done! Your Rancher server, deployed on a dedicated EKS cluster, is ready and waiting to manage the rest of your container workloads.**"
+        more_info: |-
+          In case you need to manage the Rancher cluster, you can  generate your kubeconfig file using the command:
+          `aws eks update-kubeconfig --region %{region} --name %{cluster_name}`
+          For more details see the [AWS documentation](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+
+
+          When you are ready to upgrade your Rancher instance, please see the [Rancher docs](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades)
+          for details.
+        failed_caption: "**Deployment failed. Something went wrong during the deployment.**"
+        failed_info: "The resources created should be cleaned up, if any. Retry another deployment once the issue has been resolved."
+        failed_cleanup_caption: "**Cleaning up the resources failed: %{error}.**"
+        failed_cleanup_info: "The resources created should be cleaned up manually, if any."
+
+        url: "You can browse to your Rancher server at [%{fqdn}](https://%{fqdn})."
+        password: |-
+          The initial password is:
+          `%{password}`
+          You will be prompted to change it when you first log in.
+        resources:
+          subtitle: "AWS Resources"
+        resources_not_created: "No resources were created."
+        commands:
+          subtitle: "AWS Clean Resources Commands"
+          caption: |-
+            The following commands clean up the resources created, please, apply in that order. Make sure to run those commands with your credentials available in the env, i.e.
+            `AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar aws ec2 command --options`
+            or download the commands:
+        clean_resources_file: 'clean_resources_commands'
+        clean_resources_commands: 'Clean resources commands'
+        clean_resources: 'Clean resources'
+        cleaning_resources: 'Cleaning resources'
+        resources_cleaned: 'Resources cleaned'
+        generate_clean_resources_commands: 'Generate clean resources commands'
+        generating_clean_resources_commands: 'Generating clean resources commands'
+      custom_configs:
+        title: 'Install Rancher from a customized location'
+        success: 'Rancher will be installed from the specified sources.'
+
+    shirt_size:
+      sizes:
+        title: "Size your cluster"
+        form_caption:
+          We don't expect you to know *exactly* what you're going to manage with your Rancher server, but we also don't want you to waste resources on capacity you don't need. We just need a general idea of what your plans are, and we'll set things up accordingly. Think of it as finding the 'shirt size' for your deployment.
+
+
+          The measurement we use is the number of kubernetes nodes that will be managed by your Rancher server.
+        using: "You're building a %{size} cluster."
+        failed: "The cluster size was not saved. Please try again."
+        labels:
+          small:  "SMALL - up to 35 nodes"
+          medium: "MEDIUM - up to 75 nodes"
+          large:  "LARGE - up to 125 nodes"
+
+    pre-flight:
+      checks:
+        title: 'Pre-Flight Checks'
+        caption: |-
+          Before starting the deployment, there are some common problems we can check for:
+        all_passed: "Congrats - no problems were detected!"
+        any_failed: "It looks like we've found something that needs your attention. Please check the messages below, and after you have corrected them, click 'Check Again'."
+        aws_vpc_quota:
+          title: "AWS VPC Quota"
+          passed: "You have room in your quota for Rancher's VPC."
+          failed: |-
+            You have insufficient quota to create the VPC required for Rancher. Please [remove a VPC](https://%{region}.console.aws.amazon.com/vpc/home?region=%{region}) from the *%{region}* region, switch to a different region, or [request a quota increase](https://%{region}.console.aws.amazon.com/servicequotas/home/services/vpc/quotas/L-F678F1CE).
+            [More Info](https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html)
+        azure_vcpu_quota:
+          title: "Azure vCPU Quota"
+          passed: "You have room in your quota for launching Rancher's cluster nodes."
+          failed: |-
+            You do not have enough vCPU quota to launch Rancher's cluster in the *%{region}* region. Please request a quota increase of %{vcpu_count} vCPUs for *%{instance_family}*.
+            [More Info](https://learn.microsoft.com/en-us/azure/quotas/per-vm-quota-requests#request-an-increase-for-adjustable-quotas)
+        azure_public_ip_address_quota:
+          title: "Azure Public IP Address Quota"
+          passed: "You have room in your quota for Rancher's public IP address."
+          failed: |-
+            You do not have a public ip address available in the *%{region}* region. Please release a public IP address, switch to a different region, or request a quota increase.
+            [More Info](https://learn.microsoft.com/en-us/azure/quotas/networking-quota-requests)

@@ -2,7 +2,7 @@
 -# body
 = form_with url: aws.cli_path, method: 'post' do |form|
   %div.form-group
-    = form.label :arguments, t('engines.aws.cli.form_caption')
+    = form.label :arguments, markdown(t('engines.aws.cli.form_caption'))
     %div.input-group
       %div.input-group-prepend
         %span{style: 'margin-top: -4px;'} aws

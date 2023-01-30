@@ -6,7 +6,11 @@ class ApplicationController < ActionController::Base
   before_action :authorize
 
   def current_user
-    @current_user ||= User.load
+    @current_user ||= User.load(session[:authorized_at])
+  end
+
+  def workflow
+    Rails.configuration.workflow.constantize
   end
 
   def authorize

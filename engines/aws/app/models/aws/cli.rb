@@ -15,7 +15,7 @@ module AWS
 
     def execute(*args)
       stdout, stderr = Cheetah.run(
-        ['aws', *args],
+        ['aws', *args.flatten],
         stdout: :capture,
         stderr: :capture,
         env: {
@@ -70,10 +70,10 @@ module AWS
     def describe_instance_type_offerings(region, instance_types)
       args = %W(
         ec2 describe-instance-type-offerings
+        --region #{region}
         --location-type availability-zone
         --filters Name=instance-type,Values=#{instance_types}
         --query InstanceTypeOfferings[].InstanceType
-        --region #{region}
       )
       stdout = execute(*args)
       JSON.parse(stdout)
@@ -95,6 +95,11 @@ module AWS
         --vpc-id #{vpc_id}
         #{attribute}
       )
+      handle_command(args)
+    end
+
+    def list_vpc_ids()
+      args = %W(ec2 describe-vpcs --no-paginate --query Vpcs[].VpcId)
       handle_command(args)
     end
 
@@ -122,7 +127,6 @@ module AWS
         --filters Name=instance-type,Values=#{instance_type}
       )
       stdout = execute(*args)
-
       zones = JSON.parse(stdout)['InstanceTypeOfferings'].collect do |offering|
         offering['Location']
       end.sort!
@@ -339,7 +343,8 @@ module AWS
 
     def create_role(name, target)
       role_name = "#{@tag_scope}-#{name}"
-      policy_doc = "file://#{File.dirname(__FILE__)}/#{target}-role-trust-policy.json"
+      FileUtils.cp("#{File.dirname(__FILE__)}/#{target}-role-trust-policy.json", "/tmp/#{target}-role-trust-policy.json")
+      policy_doc = "file:///tmp/#{target}-role-trust-policy.json"
       args = %W(
         iam create-role
         --role-name #{role_name}
@@ -541,7 +546,13 @@ module AWS
     end
 
     def simulate_principal_policy(arn, *actions)
-      args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names #{actions})
+      args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names)
+      args.push(*actions)
+      handle_command(args)
+    end
+
+    def get_quota(service:, code:)
+      args = %W(service-quotas get-service-quota --service-code #{service} --quota-code #{code})
       handle_command(args)
     end
 

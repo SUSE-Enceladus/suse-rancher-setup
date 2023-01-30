@@ -9,7 +9,7 @@ Simple, usable web application for deploying complex applications to the cloud; 
 *suse-rancher-setup* depends on, primarily:
 
 * Ruby 3.1 (currently 3.1.2)
-* Rails 7.0
+* Rails 7.1
 * Sqlite 3
 * AWS-CLI (v1 or v2)
 * [ec2metadata](https://github.com/SUSE-Enceladus/ec2metadata)
@@ -36,7 +36,7 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
 
 4.  Create a local config file
     ```
-    cp config/config.yml.example config/config.yml
+    cp config/example_config.yml config/config.yml
     ```
     Only an example config is included in the project for reference. Your working config is not included in the source repository.
 
@@ -64,11 +64,6 @@ the Installer to load only the needed components.
 
 * Remove the `Gemfile`, `*.gemspec`, `lib/$ENGINE_NAME/version.rb`
 * Remove `require '$ENGINE_NAME/version'` from `lib/$ENGINE_NAME.rb`
-* Add the following to the _ApplicationController_ class `application_controller.rb`:
-  ```
-  helper Rails.application.helpers
-  layout 'layouts/application'
-  ```
 * Remove any unnecessary components, if desired (mailers, jobs, assets)
 * Edit `config/routes.rb` to include a route for the engine, conditioned on the engine being loaded.
 

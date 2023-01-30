@@ -43,3 +43,9 @@ public/localhost.*
 
 # Ignore instance-specific config
 /config/config.yml
+
+# Ignore coverage reports
+/coverage
+
+# Supportconfig files
+public/scc_*

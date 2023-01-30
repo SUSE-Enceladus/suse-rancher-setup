@@ -1,0 +1,22 @@
+{
+    "ClientToken": "b65abde7-5c9b-4e6c-8c31-e5d88814e4c9",
+    "NatGateway": {
+        "CreateTime": "2023-01-21T03:52:05+00:00",
+        "NatGatewayAddresses": [
+            {
+                "AllocationId": "eipalloc-00c169a20c62feec3"
+            }
+        ],
+        "NatGatewayId": "nat-0f947bfd1b01843b9",
+        "State": "pending",
+        "SubnetId": "subnet-0bc67472e407ec219",
+        "VpcId": "vpc-065dc78f07a74a2f1",
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "suse-rancher-setup-3784/nat-gateway"
+            }
+        ],
+        "ConnectivityType": "public"
+    }
+}

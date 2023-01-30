@@ -61,4 +61,26 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+  config.include ActiveJob::TestHelper
 end
+
+def cheetah_vcr(force_recording: false)
+  allow(Cheetah).to receive(:run).and_wrap_original do |method, *args|
+    cli_args = args.first
+    fixture_dir = Rails.root.join('spec', 'vcr', cli_args.first.rpartition('/').last)
+    filename = Digest::MD5.hexdigest(cli_args.flatten.join(' '))
+    fixture_path = fixture_dir.join(filename)
+    FileUtils.mkdir_p(fixture_dir)
+    puts("Using #{fixture_path} for args '#{cli_args.join(' ')}'") if ENV['DEBUG']
+    if File.exists?(fixture_path) && !force_recording
+      File.read(fixture_path)
+    else
+      puts("Writing #{fixture_path} from args '#{cli_args.join(' ')}'")
+      stdout, stderr = method.call(*args)
+      File.open(fixture_path, 'w') { |file| file.print(stdout) }
+      [stdout, stderr]
+    end
+  end
+end
+
+puts("rails_helper loaded")

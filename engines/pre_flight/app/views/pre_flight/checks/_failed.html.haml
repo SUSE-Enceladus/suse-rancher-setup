@@ -1,0 +1,6 @@
+%div.clearfix
+  %div.float-left
+    %i.eos-icons-outlined.text-danger error
+  %p.ml-5
+    %b= t("engines.pre-flight.checks.#{check.name}.title")
+  %div.ml-5= markdown(t("engines.pre-flight.checks.#{check.name}.failed", **check.view_data))
