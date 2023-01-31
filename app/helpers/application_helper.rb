@@ -113,8 +113,8 @@ module ApplicationHelper
   end
 
   def csp_key()
-    'aws' if defined?(AWS::Engine)
-    'azure' if defined?(Azure::Engine)
+    return 'aws' if defined?(AWS::Engine)
+    return 'azure' if defined?(Azure::Engine)
   end
 
   def wt(key)
