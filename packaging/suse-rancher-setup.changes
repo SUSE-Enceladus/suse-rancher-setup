@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Tue Jan 31 16:19:05 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 1.2.2
+  - Fix an issue with login instructions
+  - Remove an unnecessary warning from logs 
+
+-------------------------------------------------------------------
 Mon Jan 30 23:30:15 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 1.2.1
