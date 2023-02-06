@@ -3,5 +3,4 @@
 VC_REALNAME=`git config --get user.name`
 VC_MAILADDR=`git config --get user.email`
 
-cd ./packaging
-/usr/lib/build/vc suse-rancher-setup.changes $@
+/usr/lib/build/vc packaging/suse-rancher-setup.changes $@
