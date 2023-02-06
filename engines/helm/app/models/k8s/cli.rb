@@ -64,7 +64,7 @@ module K8s
       service['metadata']['name']
     end
 
-    def get_load_balancer_hostname(release_name, namespace)
+    def get_load_balancer(release_name, namespace)
       service_name = self.get_service_name(release_name, namespace)
       args = %W(
         get service #{service_name}
@@ -74,7 +74,12 @@ module K8s
       stdout, stderr = execute(*args)
       return stderr if stderr.present?
 
-      JSON.parse(stdout)['status']['loadBalancer']['ingress'][0]['hostname']
+      JSON.parse(stdout)
+    end
+
+    def get_load_balancer_hostname(release_name, namespace)
+      response = self.get_load_balancer(release_name, namespace)
+      response['status']['loadBalancer']['ingress'][0]['hostname']
     end
 
     def get_namespaces
