@@ -82,6 +82,11 @@ module K8s
       response['status']['loadBalancer']['ingress'][0]['hostname']
     end
 
+    def get_load_balancer_ip_address(release_name, namespace)
+      response = self.get_load_balancer(release_name, namespace)
+      response['status']['loadBalancer']['ingress'][0]['ip']
+    end
+
     def get_namespaces
       args = %W(get namespaces --output json)
       stdout, stderr = execute(*args)
