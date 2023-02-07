@@ -65,7 +65,8 @@
         "loadBalancer": {
             "ingress": [
                 {
-                    "hostname": "afaee6f4ff5d74bd396d3ff0797abf19-2127731316.us-west-2.elb.amazonaws.com"
+                    "hostname": "afaee6f4ff5d74bd396d3ff0797abf19-2127731316.us-west-2.elb.amazonaws.com",
+                    "ip": "20.80.142.105"
                 }
             ]
         }

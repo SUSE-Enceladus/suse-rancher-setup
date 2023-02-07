@@ -6,10 +6,11 @@
             "kind": "Service",
             "metadata": {
                 "annotations": {
+                    "field.cattle.io/publicEndpoints": "[{\"addresses\":[\"20.80.142.105\"],\"port\":80,\"protocol\":\"TCP\",\"serviceName\":\"ingress-nginx:ingress-nginx-controller\",\"allNodes\":false},{\"addresses\":[\"20.80.142.105\"],\"port\":443,\"protocol\":\"TCP\",\"serviceName\":\"ingress-nginx:ingress-nginx-controller\",\"allNodes\":false}]",
                     "meta.helm.sh/release-name": "ingress-nginx",
                     "meta.helm.sh/release-namespace": "ingress-nginx"
                 },
-                "creationTimestamp": "2023-01-21T04:06:51Z",
+                "creationTimestamp": "2023-02-06T19:42:42Z",
                 "finalizers": [
                     "service.kubernetes.io/load-balancer-cleanup"
                 ],
@@ -24,17 +25,17 @@
                 },
                 "name": "ingress-nginx-controller",
                 "namespace": "ingress-nginx",
-                "resourceVersion": "1904",
-                "uid": "faee6f4f-f5d7-4bd3-96d3-ff0797abf19d"
+                "resourceVersion": "3702",
+                "uid": "bf6d2b98-c199-48cb-aa7a-e91d2865d107"
             },
             "spec": {
                 "allocateLoadBalancerNodePorts": true,
-                "clusterIP": "10.100.78.171",
+                "clusterIP": "10.0.63.79",
                 "clusterIPs": [
-                    "10.100.78.171"
+                    "10.0.63.79"
                 ],
                 "externalTrafficPolicy": "Local",
-                "healthCheckNodePort": 31712,
+                "healthCheckNodePort": 30923,
                 "internalTrafficPolicy": "Cluster",
                 "ipFamilies": [
                     "IPv4"
@@ -42,15 +43,17 @@
                 "ipFamilyPolicy": "SingleStack",
                 "ports": [
                     {
+                        "appProtocol": "http",
                         "name": "http",
-                        "nodePort": 31515,
+                        "nodePort": 31273,
                         "port": 80,
                         "protocol": "TCP",
                         "targetPort": "http"
                     },
                     {
+                        "appProtocol": "https",
                         "name": "https",
-                        "nodePort": 32494,
+                        "nodePort": 31346,
                         "port": 443,
                         "protocol": "TCP",
                         "targetPort": "https"
@@ -68,7 +71,7 @@
                 "loadBalancer": {
                     "ingress": [
                         {
-                            "hostname": "afaee6f4ff5d74bd396d3ff0797abf19-2127731316.us-west-2.elb.amazonaws.com"
+                            "ip": "20.80.142.105"
                         }
                     ]
                 }
@@ -82,7 +85,7 @@
                     "meta.helm.sh/release-name": "ingress-nginx",
                     "meta.helm.sh/release-namespace": "ingress-nginx"
                 },
-                "creationTimestamp": "2023-01-21T04:06:51Z",
+                "creationTimestamp": "2023-02-06T19:42:42Z",
                 "labels": {
                     "app.kubernetes.io/component": "controller",
                     "app.kubernetes.io/instance": "ingress-nginx",
@@ -94,13 +97,13 @@
                 },
                 "name": "ingress-nginx-controller-admission",
                 "namespace": "ingress-nginx",
-                "resourceVersion": "1848",
-                "uid": "1f636ea6-7fc6-42d3-8760-bf2880ffead3"
+                "resourceVersion": "1609",
+                "uid": "4077cf2c-f64a-4275-8dad-8e667fb0bcd3"
             },
             "spec": {
-                "clusterIP": "10.100.2.106",
+                "clusterIP": "10.0.97.242",
                 "clusterIPs": [
-                    "10.100.2.106"
+                    "10.0.97.242"
                 ],
                 "internalTrafficPolicy": "Cluster",
                 "ipFamilies": [
@@ -109,6 +112,7 @@
                 "ipFamilyPolicy": "SingleStack",
                 "ports": [
                     {
+                        "appProtocol": "https",
                         "name": "https-webhook",
                         "port": 443,
                         "protocol": "TCP",

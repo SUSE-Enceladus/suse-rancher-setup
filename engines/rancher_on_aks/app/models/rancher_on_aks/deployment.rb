@@ -97,11 +97,7 @@ module RancherOnAks
         nil
       end
       step(5) do
-        @load_balancer = Azure::LoadBalancer.load(
-          resource_group: @cluster.creation_attributes[:node_resource_group]
-        )
-        @public_ip = @load_balancer.public_ip
-        @public_ip.save
+        @public_ip = @ingress.external_ip_address
         nil
       end
       step(6) do

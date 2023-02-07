@@ -1,0 +1,22 @@
+{
+  "aRecords": [
+    {
+      "ipv4Address": "20.252.58.171"
+    },
+    {
+      "ipv4Address": "20.80.142.105"
+    }
+  ],
+  "etag": "3eec3b82-e8e5-4480-ba49-a684dba59510",
+  "fqdn": "rancher-setup-test.azure.bear454.com.",
+  "id": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/resourceGroups/jmason-dns/providers/Microsoft.Network/dnszones/azure.bear454.com/A/rancher-setup-test",
+  "metadata": null,
+  "name": "rancher-setup-test",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "jmason-dns",
+  "targetResource": {
+    "id": null
+  },
+  "ttl": 3600,
+  "type": "Microsoft.Network/dnszones/A"
+}
