@@ -37,18 +37,18 @@ module SUSERancherSetup
     # External configs: config.yml
     begin
       # Engines to load
-      # The order determines the menu order - engines with no UI should be last
-      config.workflow = ENV['LASSO_WORKFLOW'] || config_for(:config)[:workflow]
-      puts("config.worflow: #{config.workflow}")
-      # prefix for common translation keys
-      config.workflow_translation_prefix = "workflow.#{config.workflow.underscore}."
-
       yaml_config = case Rails.env || ENV['RAILS_ENV']
       when 'test'
         config_for(:example_config)
       else
         config_for(:config)
       end
+
+      # The order determines the menu order - engines with no UI should be last
+      config.workflow = ENV['LASSO_WORKFLOW'] || yaml_config[:workflow]
+      puts("config.worflow: #{config.workflow}")
+      # prefix for common translation keys
+      config.workflow_translation_prefix = "workflow.#{config.workflow.underscore}."
 
       engines = nil
       if ENV['LASSO_ENGINES'].present?
