@@ -1,18 +1,5 @@
-require 'cheetah'
-require 'json'
-
 module K8s
-  class Cli
-    include ActiveModel::Model
-
-    attr_accessor :region
-
-    def self.load
-      new(
-        region: (AWS::Region.load().value if defined?(AWS::Engine))
-      )
-    end
-
+  class Cli < Executable
     def environment()
       env = {
         'KUBECONFIG' => Rails.configuration.kubeconfig
@@ -27,16 +14,6 @@ module K8s
 
     def command()
       'kubectl'
-    end
-
-    def execute(*args)
-      stdout, stderr = Cheetah.run(
-        ['kubectl', *args],
-        stdout: :capture,
-        stderr: :capture,
-        env: self.environment,
-        logger: Logger.new(Rails.configuration.cli_log)
-      )
     end
 
     def status(service_name, namespace)

@@ -1,16 +1,5 @@
-require 'cheetah'
-
 module Helm
-  class Cli
-    include ActiveModel::Model
-    attr_accessor :region
-
-    def self.load
-      new(
-        region: (AWS::Region.load().value if defined?(AWS::Engine))
-      )
-    end
-
+  class Cli < Executable
     def environment()
       env = {
         'KUBECONFIG' => Rails.configuration.kubeconfig
@@ -25,16 +14,6 @@ module Helm
 
     def command()
       'helm'
-    end
-
-    def execute(*args)
-      stdout, stderr = Cheetah.run(
-        [self.command, *args.flatten],
-        stdout: :capture,
-        stderr: :capture,
-        env: self.environment,
-        logger: Logger.new(Rails.configuration.cli_log)
-      )
     end
 
     def status(name, namespace)

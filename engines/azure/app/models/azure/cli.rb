@@ -1,19 +1,5 @@
-require 'cheetah'
-
 module Azure
-  class Cli
-    class CliError < StandardError; end
-
-    include ActiveModel::Model
-
-    attr_accessor(:tag_scope)
-
-    def self.load()
-      new(
-        tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
-      )
-    end
-
+  class Cli < Executable
     def initialize(**args)
       super(**args)
       set_defaults()
@@ -25,24 +11,6 @@ module Azure
 
     def command()
       'az'
-    end
-
-    def execute(args)
-      args.unshift(self.command).flatten!
-      stdout, stderr = Cheetah.run(
-        args,
-        stdout: :capture,
-        stderr: :capture,
-        logger: Logger.new(Rails.configuration.cli_log)
-      )
-      stdout
-    rescue Cheetah::ExecutionFailed => e
-      Rails.logger.error(
-        "Exit status:     #{e.status.exitstatus}\n" \
-        "Standard output: #{e.stdout}\n" \
-        "Error output:    #{e.stderr}"
-      )
-      raise CliError.new(e.stderr)
     end
 
     def set_config(key:, value:)
