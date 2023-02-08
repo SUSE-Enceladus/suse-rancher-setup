@@ -91,7 +91,8 @@ module RancherOnEks
       Step.create!(
         rank: 20,
         duration: 1,
-        action: 'Fetch the kubeconfig for the EKS cluster'
+        action: 'Fetch the kubeconfig for the EKS cluster',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 21,
@@ -106,12 +107,14 @@ module RancherOnEks
       Step.create!(
         rank: 23,
         duration: 50,
-        action: 'Deploy the certificate manager'
+        action: 'Deploy the certificate manager',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 24,
         duration: 18,
-        action: 'Deploy Rancher'
+        action: 'Deploy Rancher',
+        cleanup_resource: false
       )
     end
 
@@ -256,7 +259,6 @@ module RancherOnEks
         @ingress = Helm::IngressController.create()
         @type = @ingress.type
         @ingress.wait_until(:deployed)
-        nil
       end
       step(22) do
         @ingress ||= Step.find_by_rank(21).resource
@@ -272,7 +274,6 @@ module RancherOnEks
         @cert_manager = Helm::CertManager.create()
         @type = @cert_manager.type
         @cert_manager.wait_until(:deployed)
-        nil
       end
       step(24) do
         @fqdn_record ||= Step.find_by_rank(22).resource
@@ -290,7 +291,6 @@ module RancherOnEks
         )
         @type = @rancher.type
         @rancher.wait_until(:deployed)
-        nil
       end
       Rails.configuration.lasso_deploy_complete = true
       # in case Rancher create command gets failed status

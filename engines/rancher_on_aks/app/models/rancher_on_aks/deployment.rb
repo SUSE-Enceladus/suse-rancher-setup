@@ -4,7 +4,8 @@ module RancherOnAks
       Step.create!(
         rank: 0,
         duration: 1,
-        action: 'Prep'
+        action: 'Prep',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 1,
@@ -14,22 +15,26 @@ module RancherOnAks
       Step.create!(
         rank: 2,
         duration: 280,
-        action: 'Create an AKS cluster'
+        action: 'Create an AKS cluster',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 3,
         duration: 1,
-        action: 'Fetch the kubeconfig for the AKS cluster'
+        action: 'Fetch the kubeconfig for the AKS cluster',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 4,
         duration: 50,
-        action: 'Deploy the ingress controller'
+        action: 'Deploy the ingress controller',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 5,
         duration: 3,
-        action: 'Find the IP address of the load balancer'
+        action: 'Find the IP address of the load balancer',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 6,
@@ -39,12 +44,14 @@ module RancherOnAks
       Step.create!(
         rank: 7,
         duration: 50,
-        action: 'Deploy the certificate manager'
+        action: 'Deploy the certificate manager',
+        cleanup_resource: false
       )
       Step.create!(
         rank: 8,
         duration: 180,
-        action: 'Deploy Rancher'
+        action: 'Deploy Rancher',
+        cleanup_resource: false
       )
     end
 
@@ -82,7 +89,6 @@ module RancherOnAks
           zones: @zones
         )
         @cluster.ready!
-        nil
       end
       step(3) do
         @cli.update_kubeconfig(
@@ -94,7 +100,6 @@ module RancherOnAks
       step(4) do
         @ingress = Helm::IngressController.create()
         @ingress.ready!
-        nil
       end
       step(5) do
         @public_ip = @ingress.external_ip_address
@@ -110,7 +115,6 @@ module RancherOnAks
       step(7) do
         @cert_manager = Helm::CertManager.create()
         @cert_manager.ready!
-        nil
       end
       step(8) do
         @rancher = Helm::Rancher.create(
@@ -119,7 +123,6 @@ module RancherOnAks
           email_address: @tls_source.email_address
         )
         @rancher.ready!
-        nil
       end
       Rails.configuration.lasso_deploy_complete = true
     end
