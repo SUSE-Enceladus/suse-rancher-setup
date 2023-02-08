@@ -3,18 +3,17 @@ require 'cheetah'
 module Helm
   class Cli
     include ActiveModel::Model
-    attr_accessor(:region, :kubeconfig)
+    attr_accessor :region
 
     def self.load
       new(
-        region: (AWS::Region.load().value if defined?(AWS::Engine)),
-        kubeconfig: '/tmp/kubeconfig'
+        region: (AWS::Region.load().value if defined?(AWS::Engine))
       )
     end
 
     def execute(*args)
       env = {
-        'KUBECONFIG' => @kubeconfig
+        'KUBECONFIG' => Rails.configuration.kubeconfig
       }
       if defined?(AWS::Engine)
         env['AWS_REGION'] = @region
@@ -94,7 +93,7 @@ module Helm
         return stdout
       else
         File.open(Rails.configuration.lasso_commands_file, 'a') do |f|
-          envs = "KUBECONFIG=#{@kubeconfig}"
+          envs = "KUBECONFIG=#{Rails.configuration.kubeconfig}"
           f.write "#{envs} helm #{args.join(' ')} --region #{@region} --output json\n"
         end
       end

@@ -5,18 +5,17 @@ module K8s
   class Cli
     include ActiveModel::Model
 
-    attr_accessor(:kubeconfig, :region)
+    attr_accessor :region
 
     def self.load
       new(
-        region: (AWS::Region.load().value if defined?(AWS::Engine)),
-        kubeconfig: '/tmp/kubeconfig'
+        region: (AWS::Region.load().value if defined?(AWS::Engine))
       )
     end
 
     def execute(*args)
       env = {
-        'KUBECONFIG' => @kubeconfig
+        'KUBECONFIG' => Rails.configuration.kubeconfig
       }
       if defined?(AWS::Engine)
         env['AWS_REGION'] = @region

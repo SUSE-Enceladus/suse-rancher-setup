@@ -123,7 +123,7 @@ module Azure
       )
     end
 
-    def update_kubeconfig(cluster:, resource_group:, kubeconfig: '/tmp/kubeconfig')
+    def update_kubeconfig(cluster:, resource_group:, kubeconfig: Rails.configuration.kubeconfig)
       self.execute(
         %W(
           aks get-credentials

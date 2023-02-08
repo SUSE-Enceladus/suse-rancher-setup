@@ -407,7 +407,7 @@ module AWS
       handle_command(args)
     end
 
-    def update_kube_config(cluster_name, kubeconfig="/tmp/kubeconfig")
+    def update_kube_config(cluster_name, kubeconfig=Rails.configuration.kubeconfig)
       FileUtils.rm_f(kubeconfig)
       args = %W(
         eks update-kubeconfig

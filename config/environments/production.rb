@@ -94,6 +94,9 @@ Rails.application.configure do
   # Don't complain about using SQLite
   config.active_record.sqlite3_production_warning = false
 
+  # temp file for kubeconfig
+  config.kubeconfig = Rails.root.join('tmp', 'kubeconfig')
+
   # paths to binaries
   config.supportconfig_bin = 'supportconfig' # should be installed system-wide
 end
