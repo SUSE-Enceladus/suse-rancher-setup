@@ -9,15 +9,26 @@ module Azure
     attr_accessor(:tag_scope)
 
     def self.load()
-      cli = new(
+      new(
         tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
       )
-      cli.set_defaults()
-      return cli
+    end
+
+    def initialize(**args)
+      super(**args)
+      set_defaults()
+    end
+
+    def environment()
+      {}
+    end
+
+    def command()
+      'az'
     end
 
     def execute(args)
-      args.unshift('az').flatten!
+      args.unshift(self.command).flatten!
       stdout, stderr = Cheetah.run(
         args,
         stdout: :capture,

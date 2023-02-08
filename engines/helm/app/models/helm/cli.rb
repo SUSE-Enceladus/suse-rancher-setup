@@ -11,7 +11,7 @@ module Helm
       )
     end
 
-    def execute(*args)
+    def environment()
       env = {
         'KUBECONFIG' => Rails.configuration.kubeconfig
       }
@@ -20,11 +20,19 @@ module Helm
         env['AWS_DEFAULT_REGION'] = @region
         env['AWS_DEFAULT_OUTPUT'] = 'json'
       end
+      return env
+    end
+
+    def command()
+      'helm'
+    end
+
+    def execute(*args)
       stdout, stderr = Cheetah.run(
-        ['helm', *args],
+        [self.command, *args.flatten],
         stdout: :capture,
         stderr: :capture,
-        env: env,
+        env: self.environment,
         logger: Logger.new(Rails.configuration.cli_log)
       )
     end

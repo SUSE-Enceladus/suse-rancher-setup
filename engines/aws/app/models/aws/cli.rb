@@ -13,16 +13,24 @@ module AWS
       )
     end
 
+    def environment()
+      {
+        'AWS_REGION' => @region,
+        'AWS_DEFAULT_REGION' => @region,
+        'AWS_DEFAULT_OUTPUT' => 'json'
+      }
+    end
+
+    def command()
+      'aws'
+    end
+
     def execute(*args)
       stdout, stderr = Cheetah.run(
-        ['aws', *args.flatten],
+        [self.command, *args.flatten],
         stdout: :capture,
         stderr: :capture,
-        env: {
-          'AWS_REGION' => @region,
-          'AWS_DEFAULT_REGION' => @region,
-          'AWS_DEFAULT_OUTPUT' => 'json'
-        },
+        env: self.environment,
         logger: Logger.new(Rails.configuration.cli_log)
       )
       raise StandardError.new(stderr) if stderr.present?

@@ -13,7 +13,7 @@ module K8s
       )
     end
 
-    def execute(*args)
+    def environment()
       env = {
         'KUBECONFIG' => Rails.configuration.kubeconfig
       }
@@ -22,11 +22,19 @@ module K8s
         env['AWS_DEFAULT_REGION'] = @region
         env['AWS_DEFAULT_OUTPUT'] = 'json'
       end
+      return env
+    end
+
+    def command()
+      'kubectl'
+    end
+
+    def execute(*args)
       stdout, stderr = Cheetah.run(
         ['kubectl', *args],
         stdout: :capture,
         stderr: :capture,
-        env: env,
+        env: self.environment,
         logger: Logger.new(Rails.configuration.cli_log)
       )
     end
