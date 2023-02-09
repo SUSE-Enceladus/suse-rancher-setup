@@ -32,13 +32,29 @@ class Executable
       env: self.environment,
       logger: Logger.new(Rails.configuration.cli_log)
     )
+    if stderr.present?
+      self.log_entry(
+        retcode: 0,
+        stdout: stdout,
+        stderr: stderr
+      )
+      raise CliError.new(e.stderr)
+    end
     return stdout
   rescue Cheetah::ExecutionFailed => e
-    Rails.logger.error(
-      "Exit status:     #{e.status.exitstatus}\n" \
-      "Standard output: #{e.stdout}\n" \
-      "Error output:    #{e.stderr}"
+    self.log_entry(
+      retcode: e.status.exitstatus,
+      stdout: e.stdout,
+      stderr: e.stderr
     )
     raise CliError.new(e.stderr)
+  end
+
+  def log_entry(retcode:, stdout:, stderr:)
+    Rails.logger.error(
+      "Exit status:     #{retcode}\n" \
+      "Standard output: #{stdout}\n" \
+      "Error output:    #{stderr}"
+    )
   end
 end
