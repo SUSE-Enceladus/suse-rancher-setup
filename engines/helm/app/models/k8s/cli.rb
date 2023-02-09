@@ -2,7 +2,7 @@ module K8s
   class Cli < Executable
     def environment()
       env = {
-        'KUBECONFIG' => Rails.configuration.kubeconfig
+        'KUBECONFIG' => Rails.configuration.kubeconfig.to_s
       }
       if defined?(AWS::Engine)
         env['AWS_REGION'] = @region

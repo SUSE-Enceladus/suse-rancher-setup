@@ -22,19 +22,9 @@ module AWS
       end
     end
 
-    def handle_command(args)
-      if Rails.configuration.lasso_run.present?
-        execute(*args)
-      else
-        File.open(Rails.configuration.lasso_commands_file, 'a') do |f|
-          f.write "aws #{args.join(' ')} --region #{@region} --output json\n"
-        end
-      end
-    end
-
     def version
       args = ['--version']
-      handle_command(args)
+      execute(args)
     end
 
     def regions
@@ -67,7 +57,7 @@ module AWS
         --cidr-block #{cidr_block}
         --tag-specifications #{tag}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def modify_vpc_attribute(vpc_id, attribute)
@@ -76,12 +66,12 @@ module AWS
         --vpc-id #{vpc_id}
         #{attribute}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def list_vpc_ids()
       args = %W(ec2 describe-vpcs --no-paginate --query Vpcs[].VpcId)
-      handle_command(args)
+      execute(args)
     end
 
     def describe_vpc(vpc_id)
@@ -93,7 +83,7 @@ module AWS
 
     def delete_vpc(vpc_id)
       args = %W(ec2 delete-vpc --vpc-id #{vpc_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_subnet(subnet_id)
@@ -135,7 +125,7 @@ module AWS
         --vpc-id #{vpc_id}
         --tag-specifications #{tag_name}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def get_availability_zones
@@ -155,12 +145,12 @@ module AWS
         --subnet-id #{subnet_id}
         --map-public-ip-on-launch
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_subnet(subnet_id)
       args = %W(ec2 delete-subnet --subnet-id #{subnet_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_internet_gateway(igw_id)
@@ -177,7 +167,7 @@ module AWS
         ec2 create-internet-gateway
         --tag-specifications #{tag}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def attach_internet_gateway(vpc_id, ig_id)
@@ -186,7 +176,7 @@ module AWS
         --vpc-id #{vpc_id}
         --internet-gateway-id #{ig_id}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def detach_internet_gateway(vpc_id, igw_id)
@@ -195,12 +185,12 @@ module AWS
         --internet-gateway-id #{igw_id}
         --vpc-id #{vpc_id}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_internet_gateway(ig_id)
       args = %W(ec2 delete-internet-gateway --internet-gateway-id #{ig_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_allocation_address(eip_id)
@@ -211,17 +201,17 @@ module AWS
     def allocate_address(name='elastic-ip')
       tag = "ResourceType=elastic-ip,Tags=[{Key=Name,Value=#{self.tag_scope}/#{name}}]"
       args = %W(ec2 allocate-address --domain vpc --tag-specifications #{tag})
-      handle_command(args)
+      execute(args)
     end
 
     def release_address(allocation_address_id)
       args = %W(ec2 release-address --allocation-id #{allocation_address_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_nat_gateway(nat_id)
       args = %W(ec2 describe-nat-gateways --nat-gateway-ids #{nat_id})
-      handle_command(args)
+      execute(args)
     end
 
     def create_nat_gateway(subnet_id, allocation_id, name='nat-gateway')
@@ -233,12 +223,12 @@ module AWS
         --tag-specifications #{tag}
         --allocation-id #{allocation_id}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_nat_gateway(natgw_id)
       args = %W(ec2 delete-nat-gateway --nat-gateway-id #{natgw_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_route_table(route_table_id)
@@ -253,7 +243,7 @@ module AWS
         --vpc-id #{vpc_id}
         --tag-specifications #{tag}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def associate_route_table(subnet_id, route_table_id)
@@ -262,7 +252,7 @@ module AWS
         --subnet-id #{subnet_id}
         --route-table-id #{route_table_id}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def disassociate_route_table(association_id)
@@ -270,7 +260,7 @@ module AWS
         ec2 disassociate-route-table
         --association-id #{association_id}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def create_route(route_table_id, gw_id)
@@ -280,12 +270,12 @@ module AWS
         --gateway-id #{gw_id}
         --destination-cidr-block 0.0.0.0/0
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_route_table(route_table_id)
       args = %W(ec2 delete-route-table --route-table-id #{route_table_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_security_group(group_id)
@@ -301,12 +291,12 @@ module AWS
         --group-name #{@tag_scope}-sg
         --description #{description}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_security_group(group_id)
       args = %W(ec2 delete-security-group --group-id #{group_id})
-      handle_command(args)
+      execute(args)
     end
 
     def describe_role(role_name)
@@ -319,7 +309,7 @@ module AWS
         iam list-attached-role-policies
         --role-name #{name}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def create_role(name, target)
@@ -331,7 +321,7 @@ module AWS
         --role-name #{role_name}
         --assume-role-policy-document #{policy_doc}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_role(name)
@@ -339,7 +329,7 @@ module AWS
         iam delete-role
         --role-name #{name}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def attach_role_policy(name, policy)
@@ -348,7 +338,7 @@ module AWS
         --role-name #{name}
         --policy-arn arn:aws:iam::aws:policy/#{policy}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def detach_role_policy(role_name, policy)
@@ -357,7 +347,7 @@ module AWS
         --role-name #{role_name}
         --policy-arn arn:aws:iam::aws:policy/#{policy}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def describe_cluster(cluster_name)
@@ -377,7 +367,7 @@ module AWS
         --role-arn #{role_arn}
         --resources-vpc-config subnetIds=#{subnets_ids},securityGroupIds=#{sg_id}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def delete_cluster(name)
@@ -385,7 +375,7 @@ module AWS
         eks delete-cluster
         --name #{name}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def update_kube_config(cluster_name, kubeconfig=Rails.configuration.kubeconfig)
@@ -395,7 +385,7 @@ module AWS
         --name #{cluster_name}
         --kubeconfig #{kubeconfig}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def describe_node_group(node_group_name, cluster_name)
@@ -430,7 +420,7 @@ module AWS
         --subnets
       )
       args << public_subnet_ids
-      handle_command(args)
+      execute(args)
     end
 
     def delete_node_group(node_group_name, cluster_name)
@@ -439,12 +429,12 @@ module AWS
         --nodegroup-name #{node_group_name}
         --cluster-name #{cluster_name}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def get_hosted_zones(dns_name)
       args = %W(route53 list-hosted-zones-by-name --dns-name #{dns_name})
-      handle_command(args)
+      execute(args)
     end
 
     def get_hosted_zone_id(domain)
@@ -476,7 +466,7 @@ module AWS
         --hosted-zone-id #{hosted_zone_id}
         --change-batch file://#{Rails.configuration.lasso_dns_json_path}
       )
-      output = handle_command(args)
+      output = execute(args)
       FileUtils.rm_f(Rails.configuration.lasso_dns_json_path)
       output
     end
@@ -518,23 +508,23 @@ module AWS
         --hosted-zone-id #{hosted_zone_id}
         --change-batch #{JSON.generate(change_batch)}
       )
-      handle_command(args)
+      execute(args)
     end
 
     def route53_get_change(id)
       args = %W(route53  get-change --id #{id})
-      handle_command(args)
+      execute(args)
     end
 
     def simulate_principal_policy(arn, *actions)
       args = %W(iam simulate-principal-policy --policy-source-arn #{arn} --action-names)
       args.push(*actions)
-      handle_command(args)
+      execute(args)
     end
 
     def get_quota(service:, code:)
       args = %W(service-quotas get-service-quota --service-code #{service} --quota-code #{code})
-      handle_command(args)
+      execute(args)
     end
 
     def steps

@@ -26,6 +26,8 @@ module SUSERancherSetup
     config.lasso_logged = false
     config.cli_log = 'log/cli.log'
     config.permissions_passed = false
+    # switch for recording vs. executing commands via CLI
+    config.record_commands = false
 
     ## Application-level menu entries - these come before Engine UIs
     config.menu_entries = [

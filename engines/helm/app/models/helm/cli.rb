@@ -2,7 +2,7 @@ module Helm
   class Cli < Executable
     def environment()
       env = {
-        'KUBECONFIG' => Rails.configuration.kubeconfig
+        'KUBECONFIG' => Rails.configuration.kubeconfig.to_s
       }
       if defined?(AWS::Engine)
         env['AWS_REGION'] = @region
@@ -70,20 +70,7 @@ module Helm
         uninstall #{name}
         --namespace #{namespace}
       )
-      handle_command(args)
-    end
-
-    def handle_command(args)
-      if Rails.configuration.lasso_run.present?
-        stdout, stderr = execute(*args)
-        return stderr if stderr.present?
-        return stdout
-      else
-        File.open(Rails.configuration.lasso_commands_file, 'a') do |f|
-          envs = "KUBECONFIG=#{Rails.configuration.kubeconfig}"
-          f.write "#{envs} helm #{args.join(' ')} --region #{@region} --output json\n"
-        end
-      end
+      execute(args)
     end
   end
 end
