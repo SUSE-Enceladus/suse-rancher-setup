@@ -13,7 +13,7 @@ module RancherOnEks
       @cluster_name = @cluster_name.id unless @cluster_name.nil?
       @password = nil if @in_process
       @password = Helm::Rancher.last&.initial_password unless @in_process
-      @resources = Resource.all
+      @resources = Resource.where.associated(:steps)
       # do not show any text if cleaning up
       @cleaning_up = params[:deleting]
       # keep showing the buttons after cleaning up
