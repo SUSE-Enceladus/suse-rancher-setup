@@ -1,7 +1,7 @@
 class Step < ApplicationRecord
   belongs_to :resource, optional: true
 
-  before_destroy :destroy_resource
+  before_destroy :remove_resource
 
   def self.deployable?
     Step.count > 0 && Step.where(started_at: nil).count == Step.count
@@ -35,7 +35,7 @@ class Step < ApplicationRecord
     !!self.completed_at
   end
 
-  def cleanup_resource
+  def remove_resource
     if self.cleanup_resource
       self.resource&.destroy
     else
