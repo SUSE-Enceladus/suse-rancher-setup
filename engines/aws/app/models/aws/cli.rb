@@ -1,43 +1,24 @@
-require 'cheetah'
-
 module AWS
-  class Cli
-    include ActiveModel::Model
-
-    attr_accessor(:region, :tag_scope)
-
-    def self.load
-      new(
-        region: Region.load().value,
-        tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
-      )
+  class Cli < Executable
+    def environment()
+      {
+        'AWS_REGION' => @region,
+        'AWS_DEFAULT_REGION' => @region,
+        'AWS_DEFAULT_OUTPUT' => 'json'
+      }
     end
 
-    def execute(*args)
-      stdout, stderr = Cheetah.run(
-        ['aws', *args.flatten],
-        stdout: :capture,
-        stderr: :capture,
-        env: {
-          'AWS_REGION' => @region,
-          'AWS_DEFAULT_REGION' => @region,
-          'AWS_DEFAULT_OUTPUT' => 'json'
-        },
-        logger: Logger.new(Rails.configuration.cli_log)
-      )
-      raise StandardError.new(stderr) if stderr.present?
-
-      stdout
+    def command()
+      'aws'
     end
 
     def get_description(args, not_found_exception, not_found_response)
       execute(*args)
-    rescue Cheetah::ExecutionFailed => err
-      Rails.logger.error err.stderr
-      if err.stderr.include?(not_found_exception)
+    rescue CliError => err
+      if err.include?(not_found_exception)
         not_found_response
       else
-        raise StandardError.new(err.stderr)
+        raise CliError.new(err.stderr)
       end
     end
 
@@ -407,7 +388,7 @@ module AWS
       handle_command(args)
     end
 
-    def update_kube_config(cluster_name, kubeconfig="/tmp/kubeconfig")
+    def update_kube_config(cluster_name, kubeconfig=Rails.configuration.kubeconfig)
       FileUtils.rm_f(kubeconfig)
       args = %W(
         eks update-kubeconfig

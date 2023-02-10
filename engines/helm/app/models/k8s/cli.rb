@@ -1,35 +1,19 @@
-require 'cheetah'
-require 'json'
-
 module K8s
-  class Cli
-    include ActiveModel::Model
-
-    attr_accessor(:kubeconfig, :region)
-
-    def self.load
-      new(
-        region: (AWS::Region.load().value if defined?(AWS::Engine)),
-        kubeconfig: '/tmp/kubeconfig'
-      )
-    end
-
-    def execute(*args)
+  class Cli < Executable
+    def environment()
       env = {
-        'KUBECONFIG' => @kubeconfig
+        'KUBECONFIG' => Rails.configuration.kubeconfig
       }
       if defined?(AWS::Engine)
         env['AWS_REGION'] = @region
         env['AWS_DEFAULT_REGION'] = @region
         env['AWS_DEFAULT_OUTPUT'] = 'json'
       end
-      stdout, stderr = Cheetah.run(
-        ['kubectl', *args],
-        stdout: :capture,
-        stderr: :capture,
-        env: env,
-        logger: Logger.new(Rails.configuration.cli_log)
-      )
+      return env
+    end
+
+    def command()
+      'kubectl'
     end
 
     def status(service_name, namespace)

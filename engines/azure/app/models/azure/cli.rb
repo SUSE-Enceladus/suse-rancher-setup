@@ -1,37 +1,16 @@
-require 'cheetah'
-
 module Azure
-  class Cli
-    class CliError < StandardError; end
-
-    include ActiveModel::Model
-
-    attr_accessor(:tag_scope)
-
-    def self.load()
-      cli = new(
-        tag_scope: KeyValue.get('tag_scope', 'suse-rancher-setup')
-      )
-      cli.set_defaults()
-      return cli
+  class Cli < Executable
+    def initialize(**args)
+      super(**args)
+      set_defaults()
     end
 
-    def execute(args)
-      args.unshift('az').flatten!
-      stdout, stderr = Cheetah.run(
-        args,
-        stdout: :capture,
-        stderr: :capture,
-        logger: Logger.new(Rails.configuration.cli_log)
-      )
-      stdout
-    rescue Cheetah::ExecutionFailed => e
-      Rails.logger.error(
-        "Exit status:     #{e.status.exitstatus}\n" \
-        "Standard output: #{e.stdout}\n" \
-        "Error output:    #{e.stderr}"
-      )
-      raise CliError.new(e.stderr)
+    def environment()
+      {}
+    end
+
+    def command()
+      'az'
     end
 
     def set_config(key:, value:)
@@ -123,7 +102,7 @@ module Azure
       )
     end
 
-    def update_kubeconfig(cluster:, resource_group:, kubeconfig: '/tmp/kubeconfig')
+    def update_kubeconfig(cluster:, resource_group:, kubeconfig: Rails.configuration.kubeconfig)
       self.execute(
         %W(
           aks get-credentials

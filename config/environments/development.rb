@@ -72,6 +72,9 @@ Rails.application.configure do
   # username: username
   # password: password
 
+  # temp file for kubeconfig
+  config.kubeconfig = Rails.root.join('tmp', 'kubeconfig')
+
   # paths to binaries
   config.supportconfig_bin = Rails.root.join('bin', 'supportconfig') # local mock for dev/test
 end
