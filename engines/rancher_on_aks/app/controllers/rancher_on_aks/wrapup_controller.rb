@@ -10,5 +10,19 @@ module RancherOnAks
 
       render(:success)
     end
+
+    def download
+      KeyValue.set(:azure_defaults_set, false) # force re-setting defaults for recording
+      RancherOnAks::Deployment.new.record_rollback()
+      @env_vars = KeyValue.get(:recorded_env_vars, {})
+      @commands = KeyValue.get(:recorded_commands, [])
+      filename = "#{helpers.wt('product_brand.title').parameterize}-cleanup-#{DateTime.now.iso8601}.txt"
+      send_data(
+        render_to_string(:download, layout: false),
+        filename: filename,
+        type: 'text/plain',
+        disposition: 'attachment'
+      )
+    end
   end
 end

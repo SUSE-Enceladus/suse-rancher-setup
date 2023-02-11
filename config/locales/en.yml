@@ -52,6 +52,7 @@ en:
     close: "Close"
     login: "Login"
     retest: "Check again"
+    download: "Download"
 
   flash:
     no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."

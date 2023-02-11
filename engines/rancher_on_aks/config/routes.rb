@@ -8,5 +8,7 @@ RancherOnAks::Engine.routes.draw do
       post 'deploy'
     end
   end
-  resource :wrapup, controller: 'wrapup', only: [:show, :destroy]
+  resource :wrapup, controller: 'wrapup', only: [:show] do
+    get 'download'
+  end
 end
