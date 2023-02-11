@@ -124,7 +124,6 @@ module RancherOnAks
         )
         @rancher.ready!
       end
-      Rails.configuration.lasso_deploy_complete = true
     end
   end
 end
