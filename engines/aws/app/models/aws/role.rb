@@ -19,9 +19,7 @@ module AWS
       @framework_attributes['Role']['Arn']
     end
 
-    private
-
-    def aws_create
+    def create_command
       name = "#{target}-role"
       response = @cli.create_role(name, target)
       self.id = JSON.parse(response)['Role']['RoleName']
@@ -31,7 +29,7 @@ module AWS
       end
     end
 
-    def aws_destroy
+    def destroy_command
       original_lasso_run = Rails.configuration.lasso_run
       Rails.configuration.lasso_run = "run"
       policies = JSON.parse(@cli.list_role_attached_policies(self.id))

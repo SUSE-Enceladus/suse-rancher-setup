@@ -7,16 +7,15 @@ module AWS
       end
       self.refresh()
     end
-    private
 
-    def aws_create
+    def create_command
       response = @cli.create_vpc()
       self.id = JSON.parse(response)['Vpc']['VpcId']
       self.refresh()
       # self.wait_until(:available)
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.delete_vpc(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 

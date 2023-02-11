@@ -5,9 +5,7 @@ module AWS
     attr_accessor :cluster_name, :role_arn, :subnet_ids,
                   :instance_type, :instance_count
 
-    private
-
-    def aws_create
+    def create_command
       self.creation_attributes = {
         cluster_name: @cluster_name,
         role_arn: @role_arn,
@@ -22,7 +20,7 @@ module AWS
       # self.wait_until(:ACTIVE)
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.delete_node_group(self.id, @cluster_name)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 

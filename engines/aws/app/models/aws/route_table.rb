@@ -2,19 +2,17 @@ module AWS
   class RouteTable < AWSResource
     attr_accessor :vpc_id, :name
 
-    private
-
     def set_cli
       @cli = AWS::Cli.load
     end
 
-    def aws_create
+    def create_command
       response = @cli.create_route_table(@vpc_id, @name)
       self.id = JSON.parse(response)['RouteTable']['RouteTableId']
       self.refresh()
     end
 
-    def aws_destroy
+    def destroy_command
       self.refresh()
       @framework_attributes['RouteTables'].first['Associations'].each do |association|
         @cli.disassociate_route_table(association['RouteTableAssociationId'])

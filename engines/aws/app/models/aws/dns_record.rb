@@ -7,9 +7,7 @@ module AWS
       fqdn.value.split('.')[1..].join('.')
     end
 
-    private
-
-    def aws_create
+    def create_command
       hosted_zone_id = @cli.get_hosted_zone_id(self.hosted_zone())
       response = @cli.create_dns_record(
         hosted_zone_id, @fqdn, @target, @record_type
@@ -18,7 +16,7 @@ module AWS
       self.refresh()
     end
 
-    def aws_destroy
+    def destroy_command
       hosted_zone_id = @cli.get_hosted_zone_id(self.hosted_zone())
       fqdn = RancherOnEks::Fqdn.load()
       hostname = Helm::IngressController.find(

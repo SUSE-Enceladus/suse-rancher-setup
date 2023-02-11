@@ -2,7 +2,7 @@ module Azure
   class DnsRecord < AzureResource
     attr_accessor :fqdn, :target, :record_type
 
-    def azure_create()
+    def create_command()
       @zone_resource_group = Azure::ResourceGroup.create(
         name: @cli.find_resource_group_for_dns_zone(zone: @fqdn.domain)
       )
@@ -23,7 +23,7 @@ module Azure
       self.refresh()
     end
 
-    def azure_destroy()
+    def destroy_command()
       @cli.destroy_dns_record(
         resource_group: @zone_resource_group,
         record_type: @record_type,

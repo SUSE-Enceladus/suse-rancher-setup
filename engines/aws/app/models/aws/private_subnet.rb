@@ -6,9 +6,7 @@ module AWS
       @cli.associate_route_table(self.id, route_table_id)
     end
 
-    private
-
-    def aws_create
+    def create_command
       self.creation_attributes = {
         vpc_id: @vpc_id,
         index: @index,
@@ -21,7 +19,7 @@ module AWS
       self.refresh()
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.delete_subnet(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 

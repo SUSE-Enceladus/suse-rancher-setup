@@ -6,15 +6,13 @@ module AWS
       self.refresh()
     end
 
-    private
-
-    def aws_create
+    def create_command
       response = @cli.create_internet_gateway
       self.id = JSON.parse(response)['InternetGateway']['InternetGatewayId']
       self.refresh()
     end
 
-    def aws_destroy
+    def destroy_command
       self.refresh()
       @framework_attributes['InternetGateways'].first['Attachments'].each do |attachment|
         @cli.detach_internet_gateway(attachment['VpcId'], self.id)

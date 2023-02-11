@@ -2,9 +2,7 @@ module AWS
   class NatGateway < AWSResource
     attr_accessor :subnet_id, :allocation_address_id, :internet_gateway_id
 
-    private
-
-    def aws_create
+    def create_command
       response = JSON.parse(
         @cli.describe_internet_gateway(@internet_gateway_id)
       )
@@ -22,7 +20,7 @@ module AWS
       # self.wait_until(:available)
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.delete_nat_gateway(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 

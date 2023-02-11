@@ -12,9 +12,7 @@ module Helm
       @kubectl.get_load_balancer_hostname(RELEASE_NAME, NAMESPACE)
     end
 
-    private
-
-    def helm_create
+    def create_command
       @kubectl.create_namespace(NAMESPACE)
       @kubectl.update_crds(version: VERSION)
       @helm.add_repo(REPO_NAME, REPO_URL)
@@ -24,7 +22,7 @@ module Helm
       self.refresh()
     end
 
-    def helm_destroy
+    def destroy_command
       @helm.delete_deployment(RELEASE_NAME, NAMESPACE)
       throw(:abort) unless Rails.configuration.lasso_run.present?
     end
