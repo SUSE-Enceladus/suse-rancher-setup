@@ -64,6 +64,8 @@ en:
 
   resources:
     caption: "The following resources were created as part of your deployment:"
+    cleanup:
+      caption: "If you don't need this cluster anymore, we can help you clean up. We can generate a list of commands you can run later to clean up, or it can be done automatically from this instance."
 
   login:
     content: "Please log in to continue. The credentials are based on data about this instance."
