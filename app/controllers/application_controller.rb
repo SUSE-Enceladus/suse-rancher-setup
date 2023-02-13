@@ -9,10 +9,6 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.load(session[:authorized_at])
   end
 
-  def workflow
-    Rails.configuration.workflow.constantize
-  end
-
   def authorize
     unless @current_user.is_authorized?
       flash[:danger] = t('flash.login_required')
