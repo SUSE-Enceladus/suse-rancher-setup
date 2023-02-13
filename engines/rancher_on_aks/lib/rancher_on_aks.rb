@@ -22,4 +22,8 @@ module RancherOnAks
       job: 'Azure::PublicIpAddressQuotaCheckJob'
     )
   end
+
+  def self.preflight_check_count
+    2
+  end
 end

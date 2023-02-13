@@ -7,7 +7,7 @@ module PreFlight
     scope :all_failed, -> { where.not(passed: true, job_completed_at: nil) }
 
     def self.all_passed?
-      where(passed: true).count == all.count
+      where(passed: true).count == Workflow.preflight_check_count
     end
 
     def self.all_complete?
