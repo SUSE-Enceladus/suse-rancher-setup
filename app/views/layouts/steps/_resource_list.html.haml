@@ -1,11 +1,13 @@
+%hr
+- if defined?(title)
+  %h3= title
+- if defined?(caption)
+  = markdown(caption)
 - if resources.length > 0
-  %hr
-  - if defined?(title)
-    %h3= title
-  - if defined?(caption)
-    = markdown(caption)
   %ul
     - resources.each do |resource|
       %li
         = friendly_type(resource.type)
         = resource.id
+- else
+  = markdown(t('resources.none'))
