@@ -4,17 +4,16 @@ module RancherOnAks
 
     def index
       @complete = Step.all_complete?
-      redirect_to(rancher_on_aks.wrapup_path) if @complete
-
       @deployable = Step.deployable?
       @resources = Resource.where.associated(:steps)
 
-      if Rails.configuration.lasso_error != "" && Rails.configuration.lasso_error != "error-cleanup"
-        flash.now[:danger] = Rails.configuration.lasso_error
-        @deploy_failed = true
+      if Rails.configuration.lasso_error.present?
+        flash[:danger] = Rails.configuration.lasso_error
         @complete = true
       end
-      @refresh_timer = 15 unless (@deployable || @complete)
+      redirect_to(rancher_on_aks.wrapup_path) and return if @complete
+
+      @refresh_timer = 15 unless @deployable
     end
 
     def deploy
