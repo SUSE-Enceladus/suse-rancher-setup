@@ -1,7 +1,6 @@
 module PreFlight
   class ChecksController < PreFlight::ApplicationController
     def index
-      workflow.load_pre_flight_checks!
       @checks = PreFlight::Check.all
 
       @all_complete = PreFlight::Check.all_complete?
