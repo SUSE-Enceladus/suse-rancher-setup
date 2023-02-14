@@ -27,9 +27,7 @@ module Helm
       stdout
     end
 
-    private
-
-    def helm_create
+    def create_command
       @repo_name ||= Rails.configuration.x.rancher.repo_name
       @repo_url ||= Rails.configuration.x.rancher.repo_url
       @chart ||= Rails.configuration.x.rancher.chart
@@ -61,7 +59,7 @@ module Helm
       self.refresh()
     end
 
-    def helm_destroy
+    def destroy_command
       @helm.delete_deployment(self.id, NAMESPACE)
     end
 

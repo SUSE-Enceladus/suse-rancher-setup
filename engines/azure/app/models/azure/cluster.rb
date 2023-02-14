@@ -6,7 +6,7 @@ module Azure
       @name
     end
 
-    def azure_create()
+    def create_command()
       self.creation_attributes = {
         name: @name,
         resource_group: @resource_group,
@@ -17,6 +17,10 @@ module Azure
       @cli.create_cluster(**self.creation_attributes)
       self.id = @name
       self.refresh()
+    end
+
+    def destroy_command()
+      # not implemented
     end
 
     def ready!

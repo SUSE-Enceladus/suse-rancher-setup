@@ -2,9 +2,7 @@ module AWS
   class Cluster < AWSResource
     attr_accessor :sg_id, :role_arn, :subnet_ids, :k8s_version
 
-    private
-
-    def aws_create
+    def create_command
       response = @cli.create_cluster(
         @role_arn,
         @subnet_ids.join(','),
@@ -15,7 +13,7 @@ module AWS
       # self.wait_until(:ACTIVE)
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.delete_cluster(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 

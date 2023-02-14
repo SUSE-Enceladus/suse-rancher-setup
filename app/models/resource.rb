@@ -1,13 +1,15 @@
 class Resource < ApplicationRecord
-  # because STI
+  before_create :create_command
+  after_find :setup
+  after_save :set_framework_attributes
+  before_destroy :destroy_command
+
+# because STI
   has_many :steps, foreign_key: 'resource_id', inverse_of: 'resource'
 
   serialize :creation_attributes
   attr_reader :response
   attr_reader :framework_attributes
-
-  after_find :setup
-  after_save :set_framework_attributes
 
   def refresh
     self.framework_raw_response = self.describe_resource()
@@ -43,7 +45,19 @@ class Resource < ApplicationRecord
     self
   end
 
-private
+  def create_command
+    # Call create functions in CLI
+    # must be implemented in child class
+    raise NotImplementedError
+  end
+
+  def destroy_command
+    # call cleanup and destroy functions in CLI
+    # must be implemented in child class
+    raise NotImplementedError
+  end
+
+  private
 
   def set_framework_attributes
     @framework_attributes = begin

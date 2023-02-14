@@ -2,14 +2,12 @@ module AWS
   class SecurityGroup < AWSResource
     attr_accessor :vpc_id
 
-    private
-
-    def aws_create
+    def create_command
       response = @cli.create_security_group(vpc_id)
       self.id = JSON.parse(response)['GroupId']
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.delete_security_group(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
     end

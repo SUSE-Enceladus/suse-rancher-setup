@@ -3,13 +3,13 @@ module AWS
 
     private
 
-    def aws_create
+    def create_command
       response = @cli.allocate_address
       self.id = JSON.parse(response)['AllocationId']
       self.refresh()
     end
 
-    def aws_destroy
+    def destroy_command
       @cli.release_address(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 

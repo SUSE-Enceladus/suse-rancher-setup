@@ -6,7 +6,7 @@ module Azure
       @name
     end
 
-    def azure_create()
+    def create_command()
       self.creation_attributes = {
         name: @name
       }
@@ -21,7 +21,7 @@ module Azure
       self.wait_until('Succeeded')
     end
 
-    def azure_destroy()
+    def destroy_command()
       @cli.destroy_resource_group(name: @name)
     end
 
