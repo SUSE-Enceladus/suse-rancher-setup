@@ -24,7 +24,6 @@ class Deployable
   end
 
   def rollback()
-    Rails.configuration.lasso_deploy_complete = true
     Step.all.order(rank: :desc).each do |step|
       step.destroy if Rails.configuration.lasso_run.present?
     end

@@ -58,7 +58,7 @@ module RancherOnAks
     end
 
     def setup_done?
-      Rails.configuration.lasso_deploy_complete || Rails.configuration.lasso_error.present?
+      Step.all_complete? || Rails.configuration.lasso_error.present?
     end
   end
 end

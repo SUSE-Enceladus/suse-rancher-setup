@@ -292,7 +292,6 @@ module RancherOnEks
         @type = @rancher.type
         @rancher.wait_until(:deployed)
       end
-      Rails.configuration.lasso_deploy_complete = true
       # in case Rancher create command gets failed status
       raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
     end
