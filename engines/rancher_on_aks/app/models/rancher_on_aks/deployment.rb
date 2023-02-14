@@ -53,6 +53,12 @@ module RancherOnAks
         action: 'Deploy Rancher',
         cleanup_resource: false
       )
+      Step.create!(
+        rank: 9,
+        duration: 1,
+        action: 'Store the kubeconfig',
+        cleanup_resource: true
+      )
     end
 
     def deploy()
@@ -91,7 +97,7 @@ module RancherOnAks
         @cluster.ready!
       end
       step(3) do
-        @cli.update_kubeconfig(
+        @kubeconfig = Azure::Kubeconfig.create(
           cluster: @cluster,
           resource_group: @resource_group
         )
@@ -123,6 +129,9 @@ module RancherOnAks
           email_address: @tls_source.email_address
         )
         @rancher.ready!
+      end
+      step(9) do
+        @kubeconfig # Attach at the end for easier cleanup
       end
     end
   end

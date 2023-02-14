@@ -116,6 +116,12 @@ module RancherOnEks
         action: 'Deploy Rancher',
         cleanup_resource: false
       )
+      Step.create!(
+        rank: 25,
+        duration: 1,
+        action: 'Store the kubeconfig',
+        cleanup_resource: true
+      )
     end
 
     def deploy
@@ -252,7 +258,7 @@ module RancherOnEks
         @nodegroup.wait_until(:ACTIVE)
       end
       step(20) do
-        @cli.update_kube_config(@cluster.id)
+        @kubeconfig = AWS::Kubeconfig.create(cluster: @cluster)
         nil
       end
       step(21) do
@@ -291,6 +297,9 @@ module RancherOnEks
         )
         @type = @rancher.type
         @rancher.wait_until(:deployed)
+      end
+      step(25) do
+        @kubeconfig # Attach at the end for easier cleanup
       end
       # in case Rancher create command gets failed status
       raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
