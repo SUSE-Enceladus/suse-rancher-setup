@@ -379,7 +379,7 @@ module AWS
     end
 
     def update_kube_config(cluster_name, kubeconfig=Rails.configuration.kubeconfig)
-      FileUtils.rm_f(kubeconfig)
+      FileUtils.rm_f(kubeconfig) unless Rails.configuration.record_commands
       args = %W(
         eks update-kubeconfig
         --name #{cluster_name}

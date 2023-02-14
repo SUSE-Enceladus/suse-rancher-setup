@@ -12,4 +12,5 @@
     = next_step_button()
   - else
     = previous_step_button()
-= render('layouts/steps/resource_list', resources: @resources, caption: t('resources.caption'))
+- if @resources.present?
+  = render('layouts/steps/resource_list', resources: @resources, caption: t('resources.caption'))

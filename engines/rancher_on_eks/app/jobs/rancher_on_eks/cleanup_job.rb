@@ -1,5 +1,5 @@
 module RancherOnEks
-  class DeployerJob < ApplicationJob
+  class CleanupJob < ApplicationJob
     queue_as :default
 
     discard_on(StandardError) do |job, error|
@@ -7,7 +7,7 @@ module RancherOnEks
     end
 
     def perform()
-      RancherOnEks::Deployment.new.deploy()
+      RancherOnEks::Deployment.new.rollback()
     end
   end
 end

@@ -171,11 +171,15 @@ module RancherOnEks
       step(6) do
         @public_route_table = AWS::RouteTable.create(vpc_id: @vpc.id)
         @type = @public_route_table.type
+        @public_route_table.wait_until(:available)
+
         @cli.create_route(@public_route_table.id, @gateway.id)
         @public_subnets.each do |public_subnet|
           public_subnet.set_route_table!(@public_route_table.id)
         end
-        @public_route_table.wait_until(:available)
+        @public_route_table.refresh()
+        @public_route_table.save()
+        @public_route_table
       end
 
       @private_subnets = []
@@ -217,10 +221,14 @@ module RancherOnEks
           private_subnet = @private_subnets[index]
           private_route_table = AWS::RouteTable.create(vpc_id: @vpc.id, name: "private-route-table-#{index}")
           @type = private_route_table.type
+          private_route_table.wait_until(:available)
+
           private_subnet.set_route_table!(private_route_table.id)
           @private_route_tables << private_route_table
           index += 1
-          private_route_table.wait_until(:available)
+          private_route_table.refresh()
+          private_route_table.save()
+          private_route_table
         end
       end
       step(15) do

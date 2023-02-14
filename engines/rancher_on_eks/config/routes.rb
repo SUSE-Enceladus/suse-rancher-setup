@@ -9,7 +9,13 @@ RancherOnEks::Engine.routes.draw do
     end
   end
 
-  resource :wrapup, controller: 'wrapup', only: [:show, :destroy]
+  resource :wrapup, controller: 'wrapup', only: [:show] do
+    get 'download'
+  end
+
+  resource :cleanup, controller: 'cleanup', only: [:show] do
+    post 'start'
+  end
 
   resource :custom_config, only: [:edit, :update]
 end

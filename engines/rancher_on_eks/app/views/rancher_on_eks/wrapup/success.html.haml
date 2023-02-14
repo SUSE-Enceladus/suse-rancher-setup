@@ -1,0 +1,7 @@
+= page_header(t('engines.rancher_on_eks.wrapup.title'))
+-# body
+= markdown(t('engines.rancher_on_eks.wrapup.caption'))
+= markdown(t('engines.rancher_on_eks.wrapup.url', fqdn: @fqdn))
+= markdown(t('engines.rancher_on_eks.wrapup.password', password: @password))
+= markdown(t('engines.rancher_on_eks.wrapup.more_info', region: @region, cluster_name: @cluster_name))
+= render('resource_cleanup', resources: @resources)

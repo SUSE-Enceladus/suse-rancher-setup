@@ -9,6 +9,12 @@ module AWS
 
     def create_command
       hosted_zone_id = @cli.get_hosted_zone_id(self.hosted_zone())
+      self.creation_attributes = {
+        hosted_zone_id: hosted_zone_id,
+        target: @target,
+        record_type: @record_type,
+        fqdn: @fqdn
+      }
       response = @cli.create_dns_record(
         hosted_zone_id, @fqdn, @target, @record_type
       )
@@ -17,15 +23,9 @@ module AWS
     end
 
     def destroy_command
-      hosted_zone_id = @cli.get_hosted_zone_id(self.hosted_zone())
-      fqdn = RancherOnEks::Fqdn.load()
-      hostname = Helm::IngressController.find(
-        Helm::IngressController.release_name()
-      ).hostname()
       @cli.delete_dns_record(
-        hosted_zone_id, fqdn.value, hostname, 'CNAME'
+        @hosted_zone_id, @fqdn, @target, @record_type
       )
-      throw(:abort) unless Rails.configuration.lasso_run.present?
     end
 
     def describe_resource

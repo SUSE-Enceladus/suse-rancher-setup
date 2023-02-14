@@ -3,16 +3,17 @@ module RancherOnEks
     before_action :load_steps
 
     def index
-      @deployable = Step.deployable?
       @complete = Step.all_complete?
+      @deployable = Step.deployable?
       @resources = Resource.where.associated(:steps)
-      redirect_to rancher_on_eks.wrapup_path if @complete
-      if Rails.configuration.lasso_error != "" && Rails.configuration.lasso_error != "error-cleanup"
-        flash.now[:danger] = Rails.configuration.lasso_error
-        @deploy_failed = true
+
+      if Rails.configuration.lasso_error.present?
+        flash[:danger] = Rails.configuration.lasso_error
         @complete = true
       end
-      @refresh_timer = 15 unless (@deployable || @complete)
+      redirect_to(rancher_on_eks.wrapup_path) and return if @complete
+
+      @refresh_timer = 15 unless @deployable
     end
 
     def deploy
@@ -20,7 +21,7 @@ module RancherOnEks
       Rails.configuration.lasso_commands = "nil"
       @steps.find_by_rank(0).start!
       RancherOnEks::DeployerJob.perform_later()
-      redirect_to rancher_on_eks.steps_path
+      redirect_to(rancher_on_eks.steps_path)
     end
 
     private
