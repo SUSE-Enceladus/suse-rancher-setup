@@ -18,4 +18,8 @@ module RancherOnEks
       job: 'AWS::VpcQuotaCheckJob'
     )
   end
+
+  def self.preflight_check_count
+    1
+  end
 end
