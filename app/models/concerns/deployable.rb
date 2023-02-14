@@ -1,6 +1,6 @@
 class Deployable
   def step(rank, force: false)
-    raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present? && Rails.configuration.lasso_error != "error-cleanup"
+    raise StandardError.new("Creating #{ApplicationController.helpers.friendly_type(@type)}: status failed") if Rails.configuration.lasso_error.present?
     step = Step.find_by(rank: rank)
     return if step.complete? && !force
 
