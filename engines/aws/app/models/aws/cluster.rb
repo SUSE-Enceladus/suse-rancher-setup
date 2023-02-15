@@ -21,6 +21,10 @@ module AWS
       self.wait_until(:not_found)
     end
 
+    def to_s
+      self.id
+    end
+
     def describe_resource
       @cli.describe_cluster(self.id)
     end
