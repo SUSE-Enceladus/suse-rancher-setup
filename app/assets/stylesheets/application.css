@@ -33,8 +33,7 @@
   pointer-events: none;
 }
 form.button_to {
-    width: 50% !important;
-    margin: 0 auto !important;
+  display: inline-block;
 }
 .container {
     width: 100%;

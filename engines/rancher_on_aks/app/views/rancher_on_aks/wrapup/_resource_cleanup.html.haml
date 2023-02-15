@@ -3,3 +3,7 @@
 = link_to(rancher_on_aks.download_wrapup_path, class: "btn btn-outline-primary") do
   %i.eos-icons-outlined cloud_download
   = t('actions.download')
+&nbsp;
+= button_to(rancher_on_aks.start_cleanup_path, class: "btn btn-danger", method: :post) do
+  %i.eos-icons-outlined cloud_off
+  = t('actions.cleanup')

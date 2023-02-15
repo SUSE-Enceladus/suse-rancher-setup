@@ -11,4 +11,8 @@ RancherOnAks::Engine.routes.draw do
   resource :wrapup, controller: 'wrapup', only: [:show] do
     get 'download'
   end
+
+  resource :cleanup, controller: 'cleanup', only: [:show] do
+    post 'start'
+  end
 end
