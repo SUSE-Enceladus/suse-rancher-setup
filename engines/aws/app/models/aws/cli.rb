@@ -14,8 +14,8 @@ module AWS
 
     def get_description(args, not_found_exception, not_found_response)
       execute(*args)
-    rescue CliError => err
-      if err.include?(not_found_exception)
+    rescue Executable::CliError => err
+      if err.message.include?(not_found_exception)
         not_found_response
       else
         raise CliError.new(err.stderr)
@@ -351,11 +351,11 @@ module AWS
       handle_command(args)
     end
 
-    def detach_role_policy(role_name, policy_arn)
+    def detach_role_policy(role_name, policy)
       args = %W(
         iam detach-role-policy
         --role-name #{role_name}
-        --policy-arn #{policy_arn}
+        --policy-arn arn:aws:iam::aws:policy/#{policy}
       )
       handle_command(args)
     end
