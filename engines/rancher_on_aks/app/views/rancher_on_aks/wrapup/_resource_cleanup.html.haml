@@ -1,0 +1,5 @@
+= render('layouts/steps/resource_list', resources: resources, title: t('engines.rancher_on_aks.wrapup.resources.subtitle'), caption: t('resources.caption'))
+= markdown(t('resources.cleanup.caption'))
+= link_to(rancher_on_aks.download_wrapup_path, class: "btn btn-outline-primary") do
+  %i.eos-icons-outlined cloud_download
+  = t('actions.download')
