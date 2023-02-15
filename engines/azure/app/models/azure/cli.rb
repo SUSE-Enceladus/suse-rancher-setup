@@ -211,5 +211,11 @@ module Azure
         )
       )
     end
+
+    def get_kubernetes_versions()
+      self.execute(
+        %w(aks get-versions --query orchestrators[].orchestratorVersion)
+      )
+    end
   end
 end
