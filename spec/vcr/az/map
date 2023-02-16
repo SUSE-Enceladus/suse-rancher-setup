@@ -1,0 +1,45 @@
+1355b2f48c758319ab6f6a3c75c67806	az config set core.output=json
+2ad22a926f05d9823f6abe8eadcf7d89	az config set core.disable_confirm_prompt=true
+7818b259582ab243f8d3416ab830c06c	az config set core.collect_telemetry=false
+b7141240f50fcfb415a70724b7663ec1	az config set core.only_show_errors=true
+7a9d5c7407a2edfa00c2691c40d4806f	az config set core.no_color=true
+ef0773e591e0873aa1ab863cf972b5ac	az vm list-sizes --location australiaeast
+9b5be60d907560441b6249f3533800c3	az vm list-sizes --location brazilsouth
+477c7881283b95b091601eb93c8a2e3e	az vm list-sizes --location canadacentral
+0bf2e8cd528884785f26f49ebeed20dc	az vm list-sizes --location centralindia
+a7c61b2d4cb92908afb0129c854ad60d	az vm list-sizes --location centralus
+3c865e051fb99ecbea9069227dbbf0b6	az vm list-sizes --location eastasia
+241c72c330ae73d551048566434bbc4c	az vm list-sizes --location eastus
+d9fc2467353ff0021f76cdef6ea68287	az vm list-sizes --location eastus2
+8023a27a7abe563e6016d5b24f66588c	az vm list-sizes --location francecentral
+c7b923e6948b393b5df3e0f1afc3021e	az vm list-sizes --location germanywestcentral
+cb6bb5c6a8e34cac5f130fa26283810f	az vm list-sizes --location japaneast
+645c697de85063d5d6d5aa88c2b8c49f	az vm list-sizes --location koreacentral
+73a863ff407877494e4022fa46989605	az vm list-sizes --location northeurope
+ca6dfee0d99a28abf8e4edc57e7ef305	az vm list-sizes --location norwayeast
+a340cf3d9e87f9d100a62484baf409d1	az vm list-sizes --location qatarcentral
+429e0ff0635e1b1f2067da7a3e626128	az vm list-sizes --location southeastasia
+4c0ce9ca01478ed4cf7936f30592f594	az vm list-sizes --location southafricanorth
+4a82a6bdcb5d071bb87f32631f577787	az vm list-sizes --location southcentralus
+8cc30952b6c6c7ff4646ae0e6ca16767	az vm list-sizes --location swedencentral
+19f5a7cda8fcc23afb34d92d7dadc2c6	az vm list-sizes --location switzerlandnorth
+d0bda037d4862f34b6ee7a5e479b7efe	az vm list-sizes --location uaenorth
+fb754357825299ddf79a84c1b8c23a28	az vm list-sizes --location uksouth
+f5f3b929224ae23ba43a28d41e14d748	az vm list-sizes --location westeurope
+956bf8716fd932688024c1d67ba3ef19	az vm list-sizes --location westus2
+e431570a5c85224a60452b6e13721a14	az vm list-sizes --location westus3
+7296cfca4d6c9f03fd5586d1e6bbde47	az login --service-principal -u fd728d26-aaff-4d13-8da0-30a6a37d1c4b -p=password --tenant 0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f
+0208e99ce83bce1e924db27a68691ca9	az config set defaults.location=westus2
+a024a02b0dece44354381e17d8123a14	az network dns zone list
+7d2b8164f21521a100ca48d73bac82e9	az vm list-skus --size Standard_D2as_v5
+fc3ef66ac696a42f3a9266e9a3027905	az vm list-usage --query [?name.value=='standardDASv5Family']
+059ba6e66557ed895fbdea30e78a1188	az network list-usages --query [?name.value=='PublicIPAddresses']
+070fa7b9aa9f1830ec533516eb671306	az group exists --name suse-rancher-setup-2014
+f24000b98acb6a0a3e66a64031858377	az group create --name suse-rancher-setup-2014
+f8ced794ee7da0251c481fd2c317ea6c	az group show --name suse-rancher-setup-2014
+e9138713dde9d255aadf860342d770c7	az aks create --resource-group suse-rancher-setup-2014 --name suse-rancher-setup-2014_cluster --generate-ssh-keys --kubernetes-version 1.24.3 --load-balancer-sku standard --node-count 3 --node-vm-size Standard_D2as_v5 --node-resource-group suse-rancher-setup-2014_nodes --zones 1 2 3
+8e7b5f568cb1e90e562180e6786111a9	az aks show --name suse-rancher-setup-2014_cluster --resource-group suse-rancher-setup-2014
+a36445eceff79dae3f25f7ac3c2e7697	az aks get-credentials --name suse-rancher-setup-2014_cluster --resource-group suse-rancher-setup-2014 --admin --file /tmp/kubeconfig --overwrite-existing
+d867d4987606d7a1ac8a0ada6131e1b4	az group exists --name jmason-dns
+e1a04d80b35f7d674e94f42813104922	az network dns record-set a add-record --resource-group jmason-dns --record-set-name rancher-setup-test --zone-name azure.bear454.com --ipv4-address 20.80.142.105
+f930fec87f6840d74abd295c35586331	az network dns record-set a show --resource-group jmason-dns --name rancher-setup-test --zone-name azure.bear454.com

@@ -1,0 +1,11 @@
+852e5b3e7e62b09e0e7b500b32b80dea	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+8e00ee7cb4604761a2258b9dcf882005	helm repo update
+98657bffccce9e780d3da69b9441ff49	helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --version 4.0.18 --set controller.service.type=LoadBalancer --set controller.service.externalTrafficPolicy=Local
+a08d18d2b4e898faadb87070309f1ea7	helm status ingress-nginx --namespace ingress-nginx --show-desc --output json
+566efc0fa13aeb3e47298a37a1a78311	helm repo add jetstack https://charts.jetstack.io
+f38bc324ffd0969471aaf73c763e25d6	helm install cert-manager jetstack/cert-manager --namespace cert-manager --version 1.7.1
+7849bfcdb1e3273102b850b9bf211011	helm status cert-manager --namespace cert-manager --show-desc --output json
+5a99aac9ce7c62be859e6cf3443e4331	helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+ec30a7c8288877b194833bfa1a23ba81	helm install rancher-stable rancher-stable/rancher --namespace cattle-system --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS --set-string extraEnv[0].value=true --set ingress.ingressClassName=nginx --set letsEncrypt.ingress.class=nginx --set hostname=rancher-setup-test.aws.bear454.com --set replicas=3 --version 2.6.10 --set ingress.tls.source=rancher
+5c4d425c4ed10b60ff6827a05ab0c1c5	helm status rancher-stable --namespace cattle-system --show-desc --output json
+c7cdbdf16cf6e515ef9d7e6c5512c0b3	helm install rancher-stable rancher-stable/rancher --namespace cattle-system --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS --set-string extraEnv[0].value=true --set ingress.ingressClassName=nginx --set letsEncrypt.ingress.class=nginx --set hostname=rancher-setup-test.azure.bear454.com --set replicas=3 --version 2.6.10 --set ingress.tls.source=rancher

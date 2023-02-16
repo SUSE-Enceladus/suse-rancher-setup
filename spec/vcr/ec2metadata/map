@@ -1,0 +1,2 @@
+496a0e3e407c23ec0675aa0e93d6e68c	ec2metadata --api 2021-07-15 --document
+3224ed807b6d3733d758d5a5137134b2	ec2metadata --api 2021-07-15 --iam-info
