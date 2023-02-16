@@ -6,6 +6,7 @@ require_relative '../config/environment'
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'fileutils'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -71,6 +72,7 @@ def cheetah_vcr(force_recording: false)
     filename = Digest::MD5.hexdigest(cli_args.flatten.join(' '))
     fixture_path = fixture_dir.join(filename)
     FileUtils.mkdir_p(fixture_dir)
+    update_vcr_map(fixture_dir: fixture_dir, digest: filename, cli_args: cli_args) unless ENV['CI']
     puts("Using #{fixture_path} for args '#{cli_args.join(' ')}'") if ENV['DEBUG']
     if File.exists?(fixture_path) && !force_recording
       File.read(fixture_path)
@@ -80,6 +82,19 @@ def cheetah_vcr(force_recording: false)
       File.open(fixture_path, 'w') { |file| file.print(stdout) }
       [stdout, stderr]
     end
+  end
+end
+
+def update_vcr_map(fixture_dir:, digest:, cli_args:)
+  map_filename = fixture_dir.join('map')
+  FileUtils.touch(map_filename)
+  File.foreach(map_filename) do |map_line|
+    stored_digest = map_line.split("\t").first
+    return if stored_digest == digest
+
+  end
+  File.open(map_filename, 'a') do |map|
+    map.write(digest, "\t", cli_args.join(' '), "\n")
   end
 end
 
