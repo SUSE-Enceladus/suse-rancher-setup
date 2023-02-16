@@ -11,6 +11,7 @@ jobs:
       RAILS_ENV: test
       LASSO_WORKFLOW: RancherOnEks
       LASSO_ENGINES: AWS,ShirtSize,PreFlight,RancherOnEks,Helm
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -31,6 +32,7 @@ jobs:
       RAILS_ENV: test
       LASSO_WORKFLOW: RancherOnAks
       LASSO_ENGINES: Azure,ShirtSize,PreFlight,RancherOnAks,Helm
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -50,6 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       RAILS_ENV: test
+      CI: true
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
