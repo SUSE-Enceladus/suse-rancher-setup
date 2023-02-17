@@ -1,0 +1,9 @@
+= page_header(t('engines.rancher_on_eks.cleanup.title'))
+-# body
+= markdown(t('engines.rancher_on_eks.cleanup.caption'))
+%p.icon-container
+  %i.eos-icons-outlined.eos-18
+    = image_tag 'rotating_gear.svg', alt: 'working...'
+  - resource = @resources[-1]
+  %i= t('engines.rancher_on_eks.cleanup.wip', resource_type: friendly_type(resource.type), resource_id: resource.id)
+= render('layouts/steps/resource_list', resources: @resources, title: t('engines.rancher_on_eks.wrapup.resources.subtitle'), caption: t('resources.caption'))

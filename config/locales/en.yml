@@ -52,6 +52,8 @@ en:
     close: "Close"
     login: "Login"
     retest: "Check again"
+    download: "Download"
+    cleanup: "Clean up"
 
   flash:
     no_hosted_zone: "The subdomain '%{domain}' is not a hosted zone."
@@ -67,6 +69,9 @@ en:
     cleanup:
       caption: |-
         If you don't need this cluster anymore, we can help you clean up all the resources that were created. We can generate a list of commands you can run later to clean everything up, or it can be done automatically from this instance.
+      failure:
+        title: "Clean up failed"
+        caption: "The following resources could not be removed due to an unexpected error. You will need to remove them manually."
     none: "No resources created."
 
   login:
@@ -265,6 +270,21 @@ en:
           When you are ready to upgrade your Rancher instance, please see the [Rancher docs](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades) for details.
         resources:
           subtitle: "Azure Resources"
+        failed:
+          title: "Oh no! Your Rancher deployment has failed!"
+          caption: |-
+            We recommend cleaning up any resources that were created, then trying another deployment after the issue has been resolved.
+      cleanup:
+        title: "Cleaning up"
+        caption: |-
+          It will take a few minutes to remove all the resources that were created. We will let you know when the process is complete.
+        wip: "Currently removing %{resource_type} %{resource_id}..."
+        success:
+          title: "Clean up complete"
+          caption: |-
+            All resources created by Rancher Setup have been removed.
+
+            We hope you try out Rancher again sometime!
     rancher_on_eks:
       steps:
         title: "Deploy Rancher on AWS EKS"
@@ -292,8 +312,6 @@ en:
           **NOTE:** *In order for Let's Encrypt to generate a TLS certificate, your Rancher server must be accessible via the Internet at the FQDN provided over TCP port 80 (http), and you must supply an email address for future management.*
       wrapup:
         title: "Congratulations - your Rancher server is ready!"
-        failed_title: "Oh no! Your Rancher deployment has failed!"
-        failed_cleanup_title: "Oh no! Your Rancher resources cleanup has failed!"
         caption: "**It's done! Your Rancher server, deployed on a dedicated EKS cluster, is ready and waiting to manage the rest of your container workloads.**"
         more_info: |-
           In case you need to manage the Rancher cluster, you can  generate your kubeconfig file using the command:
@@ -303,11 +321,6 @@ en:
 
           When you are ready to upgrade your Rancher instance, please see the [Rancher docs](https://docs.ranchermanager.rancher.io/getting-started/installation-and-upgrade/install-upgrade-on-a-kubernetes-cluster/upgrades)
           for details.
-        failed_caption: "**Deployment failed. Something went wrong during the deployment.**"
-        failed_info: "The resources created should be cleaned up, if any. Retry another deployment once the issue has been resolved."
-        failed_cleanup_caption: "**Cleaning up the resources failed: %{error}.**"
-        failed_cleanup_info: "The resources created should be cleaned up manually, if any."
-
         url: "You can browse to your Rancher server at [%{fqdn}](https://%{fqdn})."
         password: |-
           The initial password is:
@@ -315,20 +328,21 @@ en:
           You will be prompted to change it when you first log in.
         resources:
           subtitle: "AWS Resources"
-        resources_not_created: "No resources were created."
-        commands:
-          subtitle: "AWS Clean Resources Commands"
+        failed:
+          title: "Oh no! Your Rancher deployment has failed!"
           caption: |-
-            The following commands clean up the resources created, please, apply in that order. Make sure to run those commands with your credentials available in the env, i.e.
-            `AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar aws ec2 command --options`
-            or download the commands:
-        clean_resources_file: 'clean_resources_commands'
-        clean_resources_commands: 'Clean resources commands'
-        clean_resources: 'Clean resources'
-        cleaning_resources: 'Cleaning resources'
-        resources_cleaned: 'Resources cleaned'
-        generate_clean_resources_commands: 'Generate clean resources commands'
-        generating_clean_resources_commands: 'Generating clean resources commands'
+            We recommend cleaning up any resources that were created, then trying another deployment after the issue has been resolved.
+      cleanup:
+        title: "Cleaning up"
+        caption: |-
+          It will take a few minutes to remove all the resources that were created. We will let you know when the process is complete.
+        wip: "Currently removing %{resource_type} %{resource_id}..."
+        success:
+          title: "Clean up complete"
+          caption: |-
+            All resources created by Rancher Setup have been removed.
+
+            We hope you try out Rancher again sometime!
       custom_configs:
         title: 'Install Rancher from a customized location'
         success: 'Rancher will be installed from the specified sources.'

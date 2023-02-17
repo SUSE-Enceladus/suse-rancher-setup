@@ -28,8 +28,10 @@ module RancherOnEks
         valid_login? && security_set?
       when rancher_on_eks.steps_path, rancher_on_eks.deploy_steps_path
         valid_login? && all_checks_passed?
-      when rancher_on_eks.wrapup_path
+      when rancher_on_eks.wrapup_path, rancher_on_eks.download_wrapup_path, rancher_on_eks.start_cleanup_path
         valid_login? && setup_done?
+      when rancher_on_eks.cleanup_path
+        valid_login?
       else
         false
       end

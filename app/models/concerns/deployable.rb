@@ -23,6 +23,17 @@ class Deployable
     raise NotImplementedError
   end
 
+  def record_rollback()
+    KeyValue.set(:recorded_env_vars, {})
+    KeyValue.set(:recorded_commands, [])
+    Rails.configuration.record_commands = true
+    Step.all.order(rank: :desc).each do |step|
+      Rails.logger.debug("Step ##{step.rank}")
+      step.resource&.destroy_command if step.cleanup_resource
+    end
+    Rails.configuration.record_commands = false
+  end
+
   def rollback()
     Step.all.order(rank: :desc).each do |step|
       step.destroy if Rails.configuration.lasso_run.present?

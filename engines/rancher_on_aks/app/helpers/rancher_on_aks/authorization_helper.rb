@@ -26,8 +26,10 @@ module RancherOnAks
         valid_login? && security_set?
       when rancher_on_aks.steps_path, rancher_on_aks.deploy_steps_path
         valid_login? && all_checks_passed?
-      when rancher_on_aks.wrapup_path
+      when rancher_on_aks.wrapup_path, rancher_on_aks.download_wrapup_path, rancher_on_aks.start_cleanup_path
         valid_login? && setup_done?
+      when rancher_on_aks.cleanup_path
+        valid_login?
       else
         false
       end

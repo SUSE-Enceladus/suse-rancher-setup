@@ -22,8 +22,9 @@ module AWS
 
     def destroy_command
       @cli.delete_nat_gateway(self.id)
-      throw(:abort) unless Rails.configuration.lasso_run.present?
+    end
 
+    def wait_for_destroy_command
       self.wait_until(:deleted)
     end
 

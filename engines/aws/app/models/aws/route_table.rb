@@ -13,13 +13,13 @@ module AWS
     end
 
     def destroy_command
-      self.refresh()
       @framework_attributes['RouteTables'].first['Associations'].each do |association|
         @cli.disassociate_route_table(association['RouteTableAssociationId'])
       end
       @cli.delete_route_table(self.id)
-      throw(:abort) unless Rails.configuration.lasso_run.present?
+    end
 
+    def wait_for_destroy_command
       self.wait_until(:not_found)
     end
 

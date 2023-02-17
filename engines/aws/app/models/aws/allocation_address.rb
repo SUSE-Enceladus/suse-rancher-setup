@@ -1,8 +1,5 @@
 module AWS
   class AllocationAddress < AWSResource
-
-    private
-
     def create_command
       response = @cli.allocate_address
       self.id = JSON.parse(response)['AllocationId']
@@ -11,8 +8,9 @@ module AWS
 
     def destroy_command
       @cli.release_address(self.id)
-      throw(:abort) unless Rails.configuration.lasso_run.present?
+    end
 
+    def wait_for_destroy_command
       self.wait_until(:not_found)
     end
 

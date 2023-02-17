@@ -21,6 +21,9 @@ module AWS
 
     def create_command
       name = "#{target}-role"
+      self.creation_attributes = {
+        target: @target
+      }
       response = @cli.create_role(name, target)
       self.id = JSON.parse(response)['Role']['RoleName']
       self.wait_until(:available)
@@ -30,17 +33,13 @@ module AWS
     end
 
     def destroy_command
-      original_lasso_run = Rails.configuration.lasso_run
-      Rails.configuration.lasso_run = "run"
-      policies = JSON.parse(@cli.list_role_attached_policies(self.id))
-      Rails.configuration.lasso_run = original_lasso_run
-      policies['AttachedPolicies'].each do |policy|
-        @cli.detach_role_policy(self.id, policy['PolicyArn'])
+      POLICIES_FOR_TARGET[@target].each do |policy|
+        @cli.detach_role_policy(self.id, policy)
       end
       @cli.delete_role(self.id)
       throw(:abort) unless Rails.configuration.lasso_run.present?
 
-      self.wait_until(:not_found)
+      self.wait_until(:not_found) unless Rails.configuration.record_commands
     end
 
     def describe_resource

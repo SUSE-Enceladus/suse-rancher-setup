@@ -1,0 +1,6 @@
+<% @env_vars.each do |key, value| %>
+export <%=key %>='<%=value %>'
+<% end %>
+<% @commands.each do |command| %>
+<%= command.html_safe %>
+<% end %>

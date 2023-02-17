@@ -22,8 +22,9 @@ module AWS
 
     def destroy_command
       @cli.delete_node_group(self.id, @cluster_name)
-      throw(:abort) unless Rails.configuration.lasso_run.present?
+    end
 
+    def wait_for_destroy_command
       self.wait_until(:not_found)
     end
 
