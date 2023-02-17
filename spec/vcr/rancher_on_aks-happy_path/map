@@ -1,0 +1,44 @@
+0abd3fac4faa8f35b71b53c13ced65fe	openssl passwd -apr1 -salt salt password
+1355b2f48c758319ab6f6a3c75c67806	az config set core.output=json
+2ad22a926f05d9823f6abe8eadcf7d89	az config set core.disable_confirm_prompt=true
+7818b259582ab243f8d3416ab830c06c	az config set core.collect_telemetry=false
+b7141240f50fcfb415a70724b7663ec1	az config set core.only_show_errors=true
+7a9d5c7407a2edfa00c2691c40d4806f	az config set core.no_color=true
+7296cfca4d6c9f03fd5586d1e6bbde47	az login --service-principal -u fd728d26-aaff-4d13-8da0-30a6a37d1c4b -p=password --tenant 0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f
+0208e99ce83bce1e924db27a68691ca9	az config set defaults.location=westus2
+a024a02b0dece44354381e17d8123a14	az network dns zone list
+956bf8716fd932688024c1d67ba3ef19	az vm list-sizes --location westus2
+7d2b8164f21521a100ca48d73bac82e9	az vm list-skus --size Standard_D2as_v5
+fc3ef66ac696a42f3a9266e9a3027905	az vm list-usage --query [?name.value=='standardDASv5Family']
+059ba6e66557ed895fbdea30e78a1188	az network list-usages --query [?name.value=='PublicIPAddresses']
+b0f6ab80d749b3cb9cc1a24a05145747	az group exists --name suse-rancher-setup-6350
+8d8177945dda295a154410b2ffac88fb	az group create --name suse-rancher-setup-6350
+9439799e621dd02c757e850dd286859e	az group show --name suse-rancher-setup-6350
+4bfaf6ad62da4192c261a760452184bf	az aks get-versions --query orchestrators[].orchestratorVersion
+34d41d97b80d4de35e706735065d540e	az aks create --resource-group suse-rancher-setup-6350 --name suse-rancher-setup-6350_cluster --generate-ssh-keys --kubernetes-version 1.24.9 --load-balancer-sku standard --node-count 3 --node-vm-size Standard_D2as_v5 --node-resource-group suse-rancher-setup-6350_nodes --zones 1 2 3
+82c8390ac9bab8f62940d88fe2a986b1	az aks show --name suse-rancher-setup-6350_cluster --resource-group suse-rancher-setup-6350
+b05096da02baa0415b3c2bdb2bebe17f	az aks get-credentials --name suse-rancher-setup-6350_cluster --resource-group suse-rancher-setup-6350 --admin --file /tmp/kubeconfig --overwrite-existing
+77b2b5cb6f7b6114b918b531fd9a2318	kubectl get namespaces --output json
+852e5b3e7e62b09e0e7b500b32b80dea	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+8e00ee7cb4604761a2258b9dcf882005	helm repo update
+98657bffccce9e780d3da69b9441ff49	helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --version 4.0.18 --set controller.service.type=LoadBalancer --set controller.service.externalTrafficPolicy=Local
+a08d18d2b4e898faadb87070309f1ea7	helm status ingress-nginx --namespace ingress-nginx --show-desc --output json
+efbbb73070d71660443ed0b21fe3e118	kubectl rollout status deployment/ingress-nginx-controller --namespace ingress-nginx
+1ef9c2f42501bf68c44599174df5527c	kubectl get services --namespace ingress-nginx --output json
+b48b8a4a4334b093887a0600b98a79a5	kubectl get service ingress-nginx-controller --namespace ingress-nginx --output json
+d867d4987606d7a1ac8a0ada6131e1b4	az group exists --name jmason-dns
+9bec564d2d44b7955da39b9d86139c36	az network dns record-set a add-record --resource-group jmason-dns --record-set-name rancher-setup-test --zone-name azure.bear454.com --ipv4-address 40.64.103.169
+f930fec87f6840d74abd295c35586331	az network dns record-set a show --resource-group jmason-dns --name rancher-setup-test --zone-name azure.bear454.com
+7c23ec2fc27ae4193158d32e65c1de05	kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
+566efc0fa13aeb3e47298a37a1a78311	helm repo add jetstack https://charts.jetstack.io
+f38bc324ffd0969471aaf73c763e25d6	helm install cert-manager jetstack/cert-manager --namespace cert-manager --version 1.7.1
+7849bfcdb1e3273102b850b9bf211011	helm status cert-manager --namespace cert-manager --show-desc --output json
+43d58ef14613c09690cd1d5277049734	kubectl rollout status deployment/cert-manager --namespace cert-manager
+637c37a77cb665fec8d768c3a71e663d	kubectl create namespace cattle-system
+5a99aac9ce7c62be859e6cf3443e4331	helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+c7cdbdf16cf6e515ef9d7e6c5512c0b3	helm install rancher-stable rancher-stable/rancher --namespace cattle-system --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS --set-string extraEnv[0].value=true --set ingress.ingressClassName=nginx --set letsEncrypt.ingress.class=nginx --set hostname=rancher-setup-test.azure.bear454.com --set replicas=3 --version 2.6.10 --set ingress.tls.source=rancher
+5c4d425c4ed10b60ff6827a05ab0c1c5	helm status rancher-stable --namespace cattle-system --show-desc --output json
+ccc9e1bb11f341328377a5eac6c09c7b	kubectl rollout status deployment/rancher-stable --namespace cattle-system
+7793edfc5f5c08b5e751677e3ed34175	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}
+697022267ada4ec9d82529341ade8d9a	az network dns record-set a delete --resource-group jmason-dns --name rancher-setup-test --zone-name azure.bear454.com
+9e40a3ca3951232030e783cbdf17d0ff	az group delete --name suse-rancher-setup-6350 --force-deletion-types Microsoft.Compute/virtualMachines --force-deletion-types Microsoft.Compute/virtualMachineScaleSets

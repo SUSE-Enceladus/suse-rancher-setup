@@ -1,0 +1,13 @@
+{
+    "InternetGateway": {
+        "Attachments": [],
+        "InternetGatewayId": "igw-07f2d3b3c4174fee2",
+        "OwnerId": "810320120389",
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "suse-rancher-setup-2649/internet-gateway"
+            }
+        ]
+    }
+}

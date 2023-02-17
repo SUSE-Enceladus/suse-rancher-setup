@@ -26,7 +26,7 @@ RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
       # should be disabled when re-recording. Reset with value from:
       #
       # grep 'TAG RANDOM ID' log/test.log
-      allow_any_instance_of(RancherOnAks::Deployment).to receive(:random_num).and_return(2014)
+      allow_any_instance_of(RancherOnAks::Deployment).to receive(:random_num).and_return(6350)
 
       cheetah_vcr(context: 'rancher_on_aks-happy_path')
     end

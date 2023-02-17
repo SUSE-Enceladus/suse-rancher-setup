@@ -1,0 +1,21 @@
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "suse-rancher-setup-2649-cluster-role",
+        "RoleId": "AROA3ZKWXZJCUWPKZA2LN",
+        "Arn": "arn:aws:iam::810320120389:role/suse-rancher-setup-2649-cluster-role",
+        "CreateDate": "2023-02-17T20:30:37+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "eks.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}

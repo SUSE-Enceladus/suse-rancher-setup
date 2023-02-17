@@ -1,0 +1,73 @@
+{
+    "apiVersion": "v1",
+    "kind": "Service",
+    "metadata": {
+        "annotations": {
+            "meta.helm.sh/release-name": "ingress-nginx",
+            "meta.helm.sh/release-namespace": "ingress-nginx"
+        },
+        "creationTimestamp": "2023-02-17T20:44:08Z",
+        "finalizers": [
+            "service.kubernetes.io/load-balancer-cleanup"
+        ],
+        "labels": {
+            "app.kubernetes.io/component": "controller",
+            "app.kubernetes.io/instance": "ingress-nginx",
+            "app.kubernetes.io/managed-by": "Helm",
+            "app.kubernetes.io/name": "ingress-nginx",
+            "app.kubernetes.io/part-of": "ingress-nginx",
+            "app.kubernetes.io/version": "1.1.2",
+            "helm.sh/chart": "ingress-nginx-4.0.18"
+        },
+        "name": "ingress-nginx-controller",
+        "namespace": "ingress-nginx",
+        "resourceVersion": "1828",
+        "uid": "48ca60c3-6848-42a9-9bb7-98af313ce889"
+    },
+    "spec": {
+        "allocateLoadBalancerNodePorts": true,
+        "clusterIP": "10.100.105.204",
+        "clusterIPs": [
+            "10.100.105.204"
+        ],
+        "externalTrafficPolicy": "Local",
+        "healthCheckNodePort": 32457,
+        "internalTrafficPolicy": "Cluster",
+        "ipFamilies": [
+            "IPv4"
+        ],
+        "ipFamilyPolicy": "SingleStack",
+        "ports": [
+            {
+                "name": "http",
+                "nodePort": 31288,
+                "port": 80,
+                "protocol": "TCP",
+                "targetPort": "http"
+            },
+            {
+                "name": "https",
+                "nodePort": 31318,
+                "port": 443,
+                "protocol": "TCP",
+                "targetPort": "https"
+            }
+        ],
+        "selector": {
+            "app.kubernetes.io/component": "controller",
+            "app.kubernetes.io/instance": "ingress-nginx",
+            "app.kubernetes.io/name": "ingress-nginx"
+        },
+        "sessionAffinity": "None",
+        "type": "LoadBalancer"
+    },
+    "status": {
+        "loadBalancer": {
+            "ingress": [
+                {
+                    "hostname": "a48ca60c3684842a99bb798af313ce88-1627101184.us-west-2.elb.amazonaws.com"
+                }
+            ]
+        }
+    }
+}

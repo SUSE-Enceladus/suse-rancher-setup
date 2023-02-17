@@ -1,0 +1,46 @@
+{
+    "nodegroup": {
+        "nodegroupName": "suse-rancher-setup-2649-cluster-nodegroup",
+        "nodegroupArn": "arn:aws:eks:us-west-2:810320120389:nodegroup/suse-rancher-setup-2649-cluster/suse-rancher-setup-2649-cluster-nodegroup/fac3308e-176f-1367-ab57-239cb1555dfe",
+        "clusterName": "suse-rancher-setup-2649-cluster",
+        "version": "1.23",
+        "releaseVersion": "1.23.15-20230203",
+        "createdAt": "2023-02-17T12:41:24.522000-08:00",
+        "modifiedAt": "2023-02-17T12:43:43.816000-08:00",
+        "status": "ACTIVE",
+        "capacityType": "ON_DEMAND",
+        "scalingConfig": {
+            "minSize": 2,
+            "maxSize": 4,
+            "desiredSize": 3
+        },
+        "instanceTypes": [
+            "m5a.large"
+        ],
+        "subnets": [
+            "subnet-0367e0e150e21ebe7",
+            "subnet-0a3d7d57b9e05f4e8",
+            "subnet-0b9b3219501e4d0ea"
+        ],
+        "amiType": "AL2_x86_64",
+        "nodeRole": "arn:aws:iam::810320120389:role/suse-rancher-setup-2649-nodegroup-role",
+        "labels": {
+            "role": "suse-rancher-setup-2649-cluster-general-worker"
+        },
+        "resources": {
+            "autoScalingGroups": [
+                {
+                    "name": "eks-suse-rancher-setup-2649-cluster-nodegroup-fac3308e-176f-1367-ab57-239cb1555dfe"
+                }
+            ]
+        },
+        "diskSize": 20,
+        "health": {
+            "issues": []
+        },
+        "updateConfig": {
+            "maxUnavailable": 1
+        },
+        "tags": {}
+    }
+}

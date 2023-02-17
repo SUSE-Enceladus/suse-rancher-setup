@@ -1,0 +1,23 @@
+{
+    "RouteTable": {
+        "Associations": [],
+        "PropagatingVgws": [],
+        "RouteTableId": "rtb-06a641a75f613d846",
+        "Routes": [
+            {
+                "DestinationCidrBlock": "192.168.0.0/16",
+                "GatewayId": "local",
+                "Origin": "CreateRouteTable",
+                "State": "active"
+            }
+        ],
+        "Tags": [
+            {
+                "Key": "Name",
+                "Value": "suse-rancher-setup-2649/private-route-table-1"
+            }
+        ],
+        "VpcId": "vpc-07d7ddce89c988b1d",
+        "OwnerId": "810320120389"
+    }
+}

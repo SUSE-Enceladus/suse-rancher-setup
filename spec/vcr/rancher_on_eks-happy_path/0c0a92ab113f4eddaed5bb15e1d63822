@@ -1,0 +1,17 @@
+{
+    "Addresses": [
+        {
+            "PublicIp": "44.228.93.40",
+            "AllocationId": "eipalloc-070435e0c79757b78",
+            "Domain": "vpc",
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "suse-rancher-setup-2649/elastic-ip"
+                }
+            ],
+            "PublicIpv4Pool": "amazon",
+            "NetworkBorderGroup": "us-west-2"
+        }
+    ]
+}

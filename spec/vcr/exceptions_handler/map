@@ -1,0 +1,2 @@
+49fe542acccd715277b230e83ef05cbc	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnEks -R /home/jmason/projects/suse-rancher-setup/public
+ea3a4c3608de1e738649ea67c34b4d2d	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnAks -R /home/jmason/projects/suse-rancher-setup/public
