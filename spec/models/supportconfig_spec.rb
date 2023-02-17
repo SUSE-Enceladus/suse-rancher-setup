@@ -4,7 +4,7 @@ RSpec.describe Supportconfig, :type => :model do
   let(:expected_output_path) { "/tmp/scc_suse-rancher-setup_#{Rails.configuration.workflow}.tgz" }
 
   before(:example) do
-    cheetah_vcr()
+    cheetah_vcr(context: 'supportconfig')
   end
 
   it 'generates a supportconfig' do

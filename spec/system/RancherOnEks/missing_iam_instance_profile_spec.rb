@@ -9,7 +9,7 @@ RSpec::Steps.steps('RancherOnEks: missing IAM Instance Profile', type: :system) 
 
   before(:example) do
     allow_any_instance_of(AWS::Metadata).to receive(:instance_profile_arn).and_return(nil)
-    cheetah_vcr()
+    cheetah_vcr(context: 'missing_iam_instance_profile')
   end
 
   it 'shows an error message' do
