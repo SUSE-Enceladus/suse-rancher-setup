@@ -10,7 +10,7 @@
       ],
       "count": 3,
       "creationData": null,
-      "currentOrchestratorVersion": "1.24.3",
+      "currentOrchestratorVersion": "1.24.9",
       "enableAutoScaling": false,
       "enableEncryptionAtHost": false,
       "enableFips": false,
@@ -30,7 +30,7 @@
       "nodeLabels": null,
       "nodePublicIpPrefixId": null,
       "nodeTaints": null,
-      "orchestratorVersion": "1.24.3",
+      "orchestratorVersion": "1.24.9",
       "osDiskSizeGb": 128,
       "osDiskType": "Managed",
       "osSku": "Ubuntu",
@@ -39,7 +39,7 @@
       "powerState": {
         "code": "Running"
       },
-      "provisioningState": "Succeeded",
+      "provisioningState": "Provisioning",
       "proximityPlacementGroupId": null,
       "scaleDownMode": null,
       "scaleSetEvictionPolicy": null,
@@ -51,7 +51,6 @@
         "maxSurge": null
       },
       "vmSize": "Standard_D2as_v5",
-      "vnetSubnetId": null,
       "workloadRuntime": null
     }
   ],
@@ -59,7 +58,7 @@
   "autoScalerProfile": null,
   "autoUpgradeProfile": null,
   "azurePortalFqdn": "suse-ranch-suse-rancher-set-ce73a2-db379293.portal.hcp.westus2.azmk8s.io",
-  "currentKubernetesVersion": "1.24.3",
+  "currentKubernetesVersion": "1.24.9",
   "disableLocalAccounts": false,
   "diskEncryptionSetId": null,
   "dnsPrefix": "suse-ranch-suse-rancher-set-ce73a2",
@@ -83,7 +82,7 @@
       "resourceId": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/resourcegroups/suse-rancher-setup-2014_nodes/providers/Microsoft.ManagedIdentity/userAssignedIdentities/suse-rancher-setup-2014_cluster-agentpool"
     }
   },
-  "kubernetesVersion": "1.24.3",
+  "kubernetesVersion": "1.24.9",
   "linuxProfile": {
     "adminUsername": "azureuser",
     "ssh": {
@@ -154,8 +153,7 @@
     "defender": null
   },
   "servicePrincipalProfile": {
-    "clientId": "msi",
-    "secret": null
+    "clientId": "msi"
   },
   "sku": {
     "name": "Basic",
@@ -174,7 +172,6 @@
     }
   },
   "systemData": null,
-  "tags": null,
   "type": "Microsoft.ContainerService/ManagedClusters",
   "windowsProfile": null
 }

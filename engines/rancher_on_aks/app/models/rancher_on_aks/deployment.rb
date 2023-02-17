@@ -88,7 +88,7 @@ module RancherOnAks
         @cluster = Azure::Cluster.create(
           name: "#{@prefix}_cluster",
           resource_group: @resource_group,
-          k8s_version: Rails.configuration.x.rancher_on_aks.k8s_version,
+          k8s_version: Azure::KubernetesInfo.new.latest_matching_version,
           vm_size: @cluster_size.instance_type,
           node_count: @cluster_size.instance_count,
           node_resource_group: "#{@prefix}_nodes",
