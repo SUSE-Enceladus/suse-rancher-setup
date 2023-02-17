@@ -127,4 +127,19 @@ RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
       expect(menu_entry[:class]).to include('disabled')
     end
   end
+
+  it 'offers a download of cleanup commands' do
+    visit(rancher_on_aks.wrapup_path)
+    click_on(t('actions.download'))
+    expect(page.response_headers["Content-Disposition"]).to match('attachment; filename=\"suse-rancher-setup-cleanup-')
+  end
+
+  it 'cleans up the resources' do
+    visit(rancher_on_aks.wrapup_path)
+    perform_enqueued_jobs do
+      click_on(t('actions.cleanup'))
+    end
+    expect(page).to have_current_path(rancher_on_aks.cleanup_path)
+    expect(page).to have_content(t('engines.rancher_on_aks.cleanup.success.title'))
+  end
 end
