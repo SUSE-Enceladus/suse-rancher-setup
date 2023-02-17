@@ -18,7 +18,6 @@ module AWS
     end
 
     def wait_for_destroy_command
-      self.wait_until(:DELETING)
       self.wait_until(:not_found)
     end
 
