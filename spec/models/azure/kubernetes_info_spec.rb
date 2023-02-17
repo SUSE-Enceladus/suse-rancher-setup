@@ -25,7 +25,7 @@ RSpec.describe Azure::KubernetesInfo, type: :model do
 
   describe 'with versions from Azure CLI' do
     before do
-      cheetah_vcr()
+      cheetah_vcr(context: 'kubernetes_info')
     end
 
     it 'returns a list of supported k8s versions' do

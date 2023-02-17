@@ -15,8 +15,8 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
   before(:example) do
     if ENV['RERECORD']
       # Send argument cheetah_vcr(force_recording: true) to force a new recording
-      cheetah_vcr(force_recording: true)
-   else
+      cheetah_vcr(context: 'rancher_on_eks-happy_path', force_recording: true)
+    else
       # The 4-digit random number needs to match the last recording, and this stub
       # should be disabled when re-recording. Reset with value from:
       #
@@ -30,7 +30,7 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
       allow_any_instance_of(RancherOnEks::Deployment).to receive(:select_zones).and_return(
         %w(us-west-2b us-west-2c us-west-2d)
       )
-      cheetah_vcr()
+      cheetah_vcr(context: 'rancher_on_eks-happy_path')
     end
     allow_any_instance_of(RancherOnEks::Fqdn).to receive(:dns_record_exist?).and_return(false)
   end

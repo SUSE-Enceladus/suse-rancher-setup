@@ -8,7 +8,7 @@ RSpec.describe ExceptionsApp, type: :system do
 
   before(:example) do
     allow_any_instance_of(WelcomeController).to receive(:authorize).and_return(true)
-    cheetah_vcr()
+    cheetah_vcr(context: 'exceptions_handler')
   end
 
   @exceptions = {
