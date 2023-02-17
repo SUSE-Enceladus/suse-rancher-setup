@@ -63,7 +63,9 @@ module RancherOnAks
 
     def deploy()
       step(0, force: true) do
-        KeyValue.set('tag_scope', "suse-rancher-setup-#{self.random_num()}")
+        tag_random_id = self.random_num()
+        Rails.logger.debug("TAG RANDOM ID: #{tag_random_id}")
+        KeyValue.set('tag_scope', "suse-rancher-setup-#{tag_random_id}")
 
         @cluster_size = RancherOnAks::ClusterSize.new
         @prefix = KeyValue.get('tag_scope')
