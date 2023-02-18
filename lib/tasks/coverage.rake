@@ -4,6 +4,7 @@ RSpec::Core::RakeTask.new(:spec)
 
 desc 'Run all tests & specs for all workflows and aggregate coverage'
 task :coverage do
+  Rake::Task['vcr:clear_maps'].execute
   ENV['RAILS_ENV'] = 'test'
   ENV['LASSO_WORKFLOW'] = 'RancherOnEks'
   ENV['LASSO_ENGINES'] = 'AWS,ShirtSize,PreFlight,RancherOnEks,Helm'
