@@ -17,6 +17,11 @@ namespace :vcr do
       FileUtils.rm(f)
     end
   end
+
+  desc 'Generate the digest filename for a command'
+  task :digest, [:command] do |task, args|
+    puts(Digest::MD5.hexdigest(args[:command]) + '.yaml')
+  end
 end
 
 def unused()
