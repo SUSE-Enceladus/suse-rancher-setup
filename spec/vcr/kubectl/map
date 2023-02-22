@@ -1,9 +1,0 @@
-77b2b5cb6f7b6114b918b531fd9a2318	kubectl get namespaces --output json
-efbbb73070d71660443ed0b21fe3e118	kubectl rollout status deployment/ingress-nginx-controller --namespace ingress-nginx
-1ef9c2f42501bf68c44599174df5527c	kubectl get services --namespace ingress-nginx --output json
-b48b8a4a4334b093887a0600b98a79a5	kubectl get service ingress-nginx-controller --namespace ingress-nginx --output json
-7c23ec2fc27ae4193158d32e65c1de05	kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
-43d58ef14613c09690cd1d5277049734	kubectl rollout status deployment/cert-manager --namespace cert-manager
-637c37a77cb665fec8d768c3a71e663d	kubectl create namespace cattle-system
-ccc9e1bb11f341328377a5eac6c09c7b	kubectl rollout status deployment/rancher-stable --namespace cattle-system
-7793edfc5f5c08b5e751677e3ed34175	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}

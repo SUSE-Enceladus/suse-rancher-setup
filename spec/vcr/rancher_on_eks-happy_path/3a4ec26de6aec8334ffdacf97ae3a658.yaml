@@ -1,0 +1,33 @@
+---
+- |
+  {
+      "Subnet": {
+          "AvailabilityZone": "us-west-2d",
+          "AvailabilityZoneId": "usw2-az4",
+          "AvailableIpAddressCount": 8187,
+          "CidrBlock": "192.168.96.0/19",
+          "DefaultForAz": false,
+          "MapPublicIpOnLaunch": false,
+          "State": "available",
+          "SubnetId": "subnet-00f434e86e6383c30",
+          "VpcId": "vpc-0461282d9d6e5777c",
+          "OwnerId": "810320120389",
+          "AssignIpv6AddressOnCreation": false,
+          "Ipv6CidrBlockAssociationSet": [],
+          "Tags": [
+              {
+                  "Key": "Name",
+                  "Value": "suse-rancher-setup-4789/subnet_private_us-west-2d"
+              }
+          ],
+          "SubnetArn": "arn:aws:ec2:us-west-2:810320120389:subnet/subnet-00f434e86e6383c30",
+          "EnableDns64": false,
+          "Ipv6Native": false,
+          "PrivateDnsNameOptionsOnLaunch": {
+              "HostnameType": "ip-name",
+              "EnableResourceNameDnsARecord": false,
+              "EnableResourceNameDnsAAAARecord": false
+          }
+      }
+  }
+- ''

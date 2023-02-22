@@ -1,0 +1,16 @@
+---
+- |
+  {
+      "Quota": {
+          "ServiceCode": "vpc",
+          "ServiceName": "Amazon Virtual Private Cloud (Amazon VPC)",
+          "QuotaArn": "arn:aws:servicequotas:us-west-2:810320120389:vpc/L-F678F1CE",
+          "QuotaCode": "L-F678F1CE",
+          "QuotaName": "VPCs per Region",
+          "Value": 5.0,
+          "Unit": "None",
+          "Adjustable": true,
+          "GlobalQuota": false
+      }
+  }
+- ''

@@ -1,0 +1,49 @@
+---
+- |
+  {
+      "nodegroup": {
+          "nodegroupName": "suse-rancher-setup-4789-cluster-nodegroup",
+          "nodegroupArn": "arn:aws:eks:us-west-2:810320120389:nodegroup/suse-rancher-setup-4789-cluster/suse-rancher-setup-4789-cluster-nodegroup/96c33e04-3a1c-c2e1-6236-46a0ec8c1837",
+          "clusterName": "suse-rancher-setup-4789-cluster",
+          "version": "1.23",
+          "releaseVersion": "1.23.16-20230217",
+          "createdAt": "2023-02-22T18:09:35.702000-08:00",
+          "modifiedAt": "2023-02-22T18:15:27.933000-08:00",
+          "status": "DELETING",
+          "capacityType": "ON_DEMAND",
+          "scalingConfig": {
+              "minSize": 2,
+              "maxSize": 4,
+              "desiredSize": 3
+          },
+          "instanceTypes": [
+              "m5a.large"
+          ],
+          "subnets": [
+              "subnet-0c605cc770d55a0c5",
+              "subnet-0f8f892bc4e2e0fe3",
+              "subnet-0112b5f509844d430"
+          ],
+          "amiType": "AL2_x86_64",
+          "nodeRole": "arn:aws:iam::810320120389:role/suse-rancher-setup-4789-nodegroup-role",
+          "labels": {
+              "role": "suse-rancher-setup-4789-cluster-general-worker"
+          },
+          "resources": {
+              "autoScalingGroups": [
+                  {
+                      "name": "eks-suse-rancher-setup-4789-cluster-nodegroup-96c33e04-3a1c-c2e1-6236-46a0ec8c1837"
+                  }
+              ]
+          },
+          "diskSize": 20,
+          "health": {
+              "issues": []
+          },
+          "updateConfig": {
+              "maxUnavailable": 1
+          },
+          "tags": {}
+      }
+  }
+- ''

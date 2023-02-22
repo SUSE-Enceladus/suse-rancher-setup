@@ -1,0 +1,6 @@
+---
+- 'Added new context arn:aws:eks:us-west-2:810320120389:cluster/suse-rancher-setup-4789-cluster
+  to /tmp/kubeconfig
+
+  '
+- ''

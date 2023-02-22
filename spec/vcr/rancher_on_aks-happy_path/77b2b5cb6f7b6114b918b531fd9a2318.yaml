@@ -1,0 +1,145 @@
+---
+- |
+  {
+      "apiVersion": "v1",
+      "items": [
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-02-22T20:09:48Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "cert-manager"
+                  },
+                  "name": "cert-manager",
+                  "resourceVersion": "1702",
+                  "uid": "a8ac31f0-a44a-403c-a9f6-21c73cb4ad49"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-02-22T20:07:00Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "default"
+                  },
+                  "name": "default",
+                  "resourceVersion": "196",
+                  "uid": "6dafe0f2-9fc3-4a35-b842-a085d77d9d63"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-02-22T20:09:05Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "ingress-nginx"
+                  },
+                  "name": "ingress-nginx",
+                  "resourceVersion": "1394",
+                  "uid": "77a84d42-bb1f-4d91-a066-66f8f747510f"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-02-22T20:06:59Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "kube-node-lease"
+                  },
+                  "name": "kube-node-lease",
+                  "resourceVersion": "19",
+                  "uid": "fca46b59-92b2-40ba-9d12-8d42c9be2cf7"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-02-22T20:06:59Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "kube-public"
+                  },
+                  "name": "kube-public",
+                  "resourceVersion": "15",
+                  "uid": "64ae7194-5181-4937-a1b0-63ed076eb915"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "annotations": {
+                      "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Namespace\",\"metadata\":{\"annotations\":{},\"labels\":{\"addonmanager.kubernetes.io/mode\":\"Reconcile\",\"control-plane\":\"true\",\"kubernetes.io/cluster-service\":\"true\"},\"name\":\"kube-system\"}}\n"
+                  },
+                  "creationTimestamp": "2023-02-22T20:06:59Z",
+                  "labels": {
+                      "addonmanager.kubernetes.io/mode": "Reconcile",
+                      "control-plane": "true",
+                      "kubernetes.io/cluster-service": "true",
+                      "kubernetes.io/metadata.name": "kube-system"
+                  },
+                  "name": "kube-system",
+                  "resourceVersion": "483",
+                  "uid": "49e168d0-4abe-4996-a37e-c53c3ed057c5"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          }
+      ],
+      "kind": "List",
+      "metadata": {
+          "resourceVersion": "",
+          "selfLink": ""
+      }
+  }
+- ''

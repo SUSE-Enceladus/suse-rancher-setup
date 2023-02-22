@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (InvalidRouteTableID.NotFound) when calling the DescribeRouteTables operation: The routeTable ID 'rtb-00d88d1cc86c2867f' does not exist

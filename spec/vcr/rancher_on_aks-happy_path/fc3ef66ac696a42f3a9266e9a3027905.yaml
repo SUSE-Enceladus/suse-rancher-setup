@@ -1,0 +1,14 @@
+---
+- |
+  [
+    {
+      "currentValue": "0",
+      "limit": "50",
+      "localName": "Standard DASv5 Family vCPUs",
+      "name": {
+        "localizedValue": "Standard DASv5 Family vCPUs",
+        "value": "standardDASv5Family"
+      }
+    }
+  ]
+- ''

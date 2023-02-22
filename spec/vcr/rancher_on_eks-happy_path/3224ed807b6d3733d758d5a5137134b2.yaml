@@ -1,0 +1,7 @@
+---
+- |
+  {
+    "accountId": "810320120389",
+    "InstanceProfileArn": "arn:aws:iam::810320120389:instance-profile/lasso-test"
+  }
+- ''

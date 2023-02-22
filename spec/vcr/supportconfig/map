@@ -1,4 +1,2 @@
-fc26d063748c34825a53d3b01547d236	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnEks -R /tmp
-49fe542acccd715277b230e83ef05cbc	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnEks -R /home/jmason/projects/suse-rancher-setup/public
-24f4918ce125fbf8a9ff8bb93d70433c	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnAks -R /tmp
-ea3a4c3608de1e738649ea67c34b4d2d	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnAks -R /home/jmason/projects/suse-rancher-setup/public
+fc26d063748c34825a53d3b01547d236.yaml	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnEks -R /tmp
+24f4918ce125fbf8a9ff8bb93d70433c.yaml	/home/jmason/projects/suse-rancher-setup/bin/supportconfig -Q -g -i psuse_public_cloud,psuse_rancher_setup -B suse-rancher-setup_RancherOnAks -R /tmp

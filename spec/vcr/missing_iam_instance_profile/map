@@ -1,0 +1,2 @@
+0abd3fac4faa8f35b71b53c13ced65fe.yaml	openssl passwd -apr1 -salt salt password
+496a0e3e407c23ec0675aa0e93d6e68c.yaml	ec2metadata --api 2021-07-15 --document

@@ -1,0 +1,183 @@
+---
+- |
+  {
+    "aadProfile": null,
+    "addonProfiles": null,
+    "agentPoolProfiles": [
+      {
+        "availabilityZones": [
+          "1",
+          "2",
+          "3"
+        ],
+        "count": 3,
+        "creationData": null,
+        "currentOrchestratorVersion": "1.24.9",
+        "enableAutoScaling": false,
+        "enableEncryptionAtHost": false,
+        "enableFips": false,
+        "enableNodePublicIp": false,
+        "enableUltraSsd": false,
+        "gpuInstanceProfile": null,
+        "hostGroupId": null,
+        "kubeletConfig": null,
+        "kubeletDiskType": "OS",
+        "linuxOsConfig": null,
+        "maxCount": null,
+        "maxPods": 110,
+        "minCount": null,
+        "mode": "System",
+        "name": "nodepool1",
+        "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2023.02.09",
+        "nodeLabels": null,
+        "nodePublicIpPrefixId": null,
+        "nodeTaints": null,
+        "orchestratorVersion": "1.24.9",
+        "osDiskSizeGb": 128,
+        "osDiskType": "Managed",
+        "osSku": "Ubuntu",
+        "osType": "Linux",
+        "podSubnetId": null,
+        "powerState": {
+          "code": "Running"
+        },
+        "provisioningState": "Succeeded",
+        "proximityPlacementGroupId": null,
+        "scaleDownMode": null,
+        "scaleSetEvictionPolicy": null,
+        "scaleSetPriority": null,
+        "spotMaxPrice": null,
+        "tags": null,
+        "type": "VirtualMachineScaleSets",
+        "upgradeSettings": {
+          "maxSurge": null
+        },
+        "vmSize": "Standard_D2as_v5",
+        "workloadRuntime": null
+      }
+    ],
+    "apiServerAccessProfile": null,
+    "autoScalerProfile": null,
+    "autoUpgradeProfile": null,
+    "azurePortalFqdn": "suse-ranch-suse-rancher-set-ce73a2-6acabdf5.portal.hcp.westus2.azmk8s.io",
+    "currentKubernetesVersion": "1.24.9",
+    "disableLocalAccounts": false,
+    "diskEncryptionSetId": null,
+    "dnsPrefix": "suse-ranch-suse-rancher-set-ce73a2",
+    "enablePodSecurityPolicy": null,
+    "enableRbac": true,
+    "extendedLocation": null,
+    "fqdn": "suse-ranch-suse-rancher-set-ce73a2-6acabdf5.hcp.westus2.azmk8s.io",
+    "fqdnSubdomain": null,
+    "httpProxyConfig": null,
+    "id": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/resourcegroups/suse-rancher-setup-6413/providers/Microsoft.ContainerService/managedClusters/suse-rancher-setup-6413_cluster",
+    "identity": {
+      "principalId": "4596e62e-26cf-41bb-9c9e-e3d0f110a919",
+      "tenantId": "0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f",
+      "type": "SystemAssigned",
+      "userAssignedIdentities": null
+    },
+    "identityProfile": {
+      "kubeletidentity": {
+        "clientId": "debce0a5-18c1-4c93-9a8c-be6f6fd9ea8c",
+        "objectId": "d8208048-5003-44d1-bb59-137a6741e78a",
+        "resourceId": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/resourcegroups/suse-rancher-setup-6413_nodes/providers/Microsoft.ManagedIdentity/userAssignedIdentities/suse-rancher-setup-6413_cluster-agentpool"
+      }
+    },
+    "kubernetesVersion": "1.24.9",
+    "linuxProfile": {
+      "adminUsername": "azureuser",
+      "ssh": {
+        "publicKeys": [
+          {
+            "keyData": "ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA8wcUgMmKFBz9TEOpuBSC4S1o5OwJF6JPibZ/8IsuiJkM50tqTo1gTnvhVcVu+zkpJIqXn3yL4n01eKSSCAgGp/4r0p26C1Gj/jz5S4IACjxeaP/HN291+Ke52bSV8eSS79fV7/GJmjjhcD26hbuPE/+MSHn7/jvmGQtzok/sGJmfroDnTY5ODGv1H8jfU3N4vQR+IGQJ2saNV4pV6sZVp5NVQq0B+z0ndqQVUC6zc8fs5fidRW/og1BE7bntSyCknLeQy8UlXuGYw0k2jKndGCjQMpJUB8D7bUvpHqDsZzQXR1H9jLz62p4EQre1YB0owCg+2/sJgwhYUMqWXH3dAQ== jmason@suse.com"
+          }
+        ]
+      }
+    },
+    "location": "westus2",
+    "maxAgentPools": 100,
+    "name": "suse-rancher-setup-6413_cluster",
+    "networkProfile": {
+      "dnsServiceIp": "10.0.0.10",
+      "dockerBridgeCidr": "172.17.0.1/16",
+      "ipFamilies": [
+        "IPv4"
+      ],
+      "loadBalancerProfile": {
+        "allocatedOutboundPorts": null,
+        "effectiveOutboundIPs": [
+          {
+            "id": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/resourceGroups/suse-rancher-setup-6413_nodes/providers/Microsoft.Network/publicIPAddresses/6de11633-0ecb-48a7-bdd7-2d9f283c76b7",
+            "resourceGroup": "suse-rancher-setup-6413_nodes"
+          }
+        ],
+        "enableMultipleStandardLoadBalancers": null,
+        "idleTimeoutInMinutes": null,
+        "managedOutboundIPs": {
+          "count": 1,
+          "countIpv6": null
+        },
+        "outboundIPs": null,
+        "outboundIpPrefixes": null
+      },
+      "loadBalancerSku": "Standard",
+      "natGatewayProfile": null,
+      "networkMode": null,
+      "networkPlugin": "kubenet",
+      "networkPolicy": null,
+      "outboundType": "loadBalancer",
+      "podCidr": "10.244.0.0/16",
+      "podCidrs": [
+        "10.244.0.0/16"
+      ],
+      "serviceCidr": "10.0.0.0/16",
+      "serviceCidrs": [
+        "10.0.0.0/16"
+      ]
+    },
+    "nodeResourceGroup": "suse-rancher-setup-6413_nodes",
+    "oidcIssuerProfile": {
+      "enabled": false,
+      "issuerUrl": null
+    },
+    "podIdentityProfile": null,
+    "powerState": {
+      "code": "Running"
+    },
+    "privateFqdn": null,
+    "privateLinkResources": null,
+    "provisioningState": "Succeeded",
+    "publicNetworkAccess": null,
+    "resourceGroup": "suse-rancher-setup-6413",
+    "securityProfile": {
+      "azureKeyVaultKms": null,
+      "defender": null
+    },
+    "servicePrincipalProfile": {
+      "clientId": "msi"
+    },
+    "sku": {
+      "name": "Basic",
+      "tier": "Free"
+    },
+    "storageProfile": {
+      "blobCsiDriver": null,
+      "diskCsiDriver": {
+        "enabled": true
+      },
+      "fileCsiDriver": {
+        "enabled": true
+      },
+      "snapshotController": {
+        "enabled": true
+      }
+    },
+    "systemData": null,
+    "type": "Microsoft.ContainerService/ManagedClusters",
+    "windowsProfile": null,
+    "workloadAutoScalerProfile": {
+      "keda": null
+    }
+  }
+- ''

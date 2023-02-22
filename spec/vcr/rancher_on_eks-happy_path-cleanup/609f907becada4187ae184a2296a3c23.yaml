@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (InvalidVpcID.NotFound) when calling the DescribeVpcs operation: The vpc ID 'vpc-0461282d9d6e5777c' does not exist
