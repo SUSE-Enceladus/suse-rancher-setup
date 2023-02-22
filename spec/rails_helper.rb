@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'fileutils'
+require 'yaml'
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -69,18 +70,18 @@ def cheetah_vcr(context:, force_recording: false)
   allow(Cheetah).to receive(:run).and_wrap_original do |method, *args|
     cli_args = args.first
     fixture_dir = Rails.root.join('spec', 'vcr', context)
-    filename = Digest::MD5.hexdigest(cli_args.flatten.join(' '))
+    filename = Digest::MD5.hexdigest(cli_args.flatten.join(' ')) + '.yaml'
     fixture_path = fixture_dir.join(filename)
     FileUtils.mkdir_p(fixture_dir)
     update_vcr_map(fixture_dir: fixture_dir, digest: filename, cli_args: cli_args) unless ENV['CI']
     puts("Using #{fixture_path} for args '#{cli_args.join(' ')}'") if ENV['DEBUG']
     if File.exists?(fixture_path) && !force_recording
-      File.read(fixture_path)
+      YAML.load_file(fixture_path)
     else
-      stdout, stderr = method.call(*args)
-      puts("Writing #{fixture_path} from args '#{cli_args.join(' ')}'") unless stdout.blank?
-      File.open(fixture_path, 'w') { |file| file.print(stdout) }
-      [stdout, stderr]
+      result = method.call(*args)
+      puts("Writing #{fixture_path} from args '#{cli_args.join(' ')}'")
+      File.open(fixture_path, 'w') { |file| file.write(YAML.dump(result)) }
+      result
     end
   end
 end
