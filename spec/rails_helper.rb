@@ -78,9 +78,15 @@ def cheetah_vcr(context:, force_recording: false)
     if File.exists?(fixture_path) && !force_recording
       YAML.load_file(fixture_path)
     else
-      result = method.call(*args)
-      puts("Writing #{fixture_path} from args '#{cli_args.join(' ')}'")
-      File.open(fixture_path, 'w') { |file| file.write(YAML.dump(result)) }
+      begin
+        result = method.call(*args)
+      rescue Cheetah::ExecutionFailed => e
+        result = [e.stdout, e.stderr]
+        raise
+      ensure
+        puts("Writing #{fixture_path} from args '#{cli_args.join(' ')}'")
+        File.open(fixture_path, 'w') { |file| file.write(YAML.dump(result)) }
+      end
       result
     end
   end
