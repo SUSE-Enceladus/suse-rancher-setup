@@ -14,7 +14,7 @@ RSpec.describe RancherOnAks::ClusterSize, type: :model do
           end
 
           before(:example) do
-            cheetah_vcr()
+            cheetah_vcr(context: 'cluster_size')
           end
 
           it 'has an instance type' do

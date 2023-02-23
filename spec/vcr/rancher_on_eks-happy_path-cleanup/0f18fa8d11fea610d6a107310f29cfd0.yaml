@@ -1,0 +1,11 @@
+---
+- |
+  {
+      "ChangeInfo": {
+          "Id": "/change/C08292591FWXZ31IOPLG1",
+          "Status": "PENDING",
+          "SubmittedAt": "2023-02-23T02:15:23.830000+00:00",
+          "Comment": "Delete suse-rancher-setup record set"
+      }
+  }
+- ''

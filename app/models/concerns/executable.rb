@@ -56,7 +56,7 @@ class Executable
         stdout: stdout,
         stderr: stderr
       )
-      raise CliError.new(e.stderr)
+      raise CliError.new(stderr)
     end
     return stdout
   rescue Cheetah::ExecutionFailed => e

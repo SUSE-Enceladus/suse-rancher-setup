@@ -1,0 +1,31 @@
+---
+- |
+  {
+      "Vpcs": [
+          {
+              "CidrBlock": "192.168.0.0/16",
+              "DhcpOptionsId": "dopt-5b8e413e",
+              "State": "available",
+              "VpcId": "vpc-0461282d9d6e5777c",
+              "OwnerId": "810320120389",
+              "InstanceTenancy": "default",
+              "CidrBlockAssociationSet": [
+                  {
+                      "AssociationId": "vpc-cidr-assoc-0997b99f6008b98ab",
+                      "CidrBlock": "192.168.0.0/16",
+                      "CidrBlockState": {
+                          "State": "associated"
+                      }
+                  }
+              ],
+              "IsDefault": false,
+              "Tags": [
+                  {
+                      "Key": "Name",
+                      "Value": "suse-rancher-setup-4789/vpc"
+                  }
+              ]
+          }
+      ]
+  }
+- ''

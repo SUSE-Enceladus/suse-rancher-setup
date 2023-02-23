@@ -1,0 +1,38 @@
+---
+- |
+  {
+      "RouteTables": [
+          {
+              "Associations": [
+                  {
+                      "Main": false,
+                      "RouteTableAssociationId": "rtbassoc-0fb1afe3b231783c9",
+                      "RouteTableId": "rtb-00d88d1cc86c2867f",
+                      "SubnetId": "subnet-00f434e86e6383c30",
+                      "AssociationState": {
+                          "State": "associated"
+                      }
+                  }
+              ],
+              "PropagatingVgws": [],
+              "RouteTableId": "rtb-00d88d1cc86c2867f",
+              "Routes": [
+                  {
+                      "DestinationCidrBlock": "192.168.0.0/16",
+                      "GatewayId": "local",
+                      "Origin": "CreateRouteTable",
+                      "State": "active"
+                  }
+              ],
+              "Tags": [
+                  {
+                      "Key": "Name",
+                      "Value": "suse-rancher-setup-4789/private-route-table-0"
+                  }
+              ],
+              "VpcId": "vpc-0461282d9d6e5777c",
+              "OwnerId": "810320120389"
+          }
+      ]
+  }
+- ''

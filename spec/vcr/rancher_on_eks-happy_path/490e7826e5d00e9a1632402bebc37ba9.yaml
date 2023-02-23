@@ -1,0 +1,26 @@
+---
+- |
+  {
+      "Role": {
+          "Path": "/",
+          "RoleName": "suse-rancher-setup-4789-nodegroup-role",
+          "RoleId": "AROA3ZKWXZJCRVRW7V5TO",
+          "Arn": "arn:aws:iam::810320120389:role/suse-rancher-setup-4789-nodegroup-role",
+          "CreateDate": "2023-02-23T02:09:25+00:00",
+          "AssumeRolePolicyDocument": {
+              "Version": "2012-10-17",
+              "Statement": [
+                  {
+                      "Effect": "Allow",
+                      "Principal": {
+                          "Service": "ec2.amazonaws.com"
+                      },
+                      "Action": "sts:AssumeRole"
+                  }
+              ]
+          },
+          "MaxSessionDuration": 3600,
+          "RoleLastUsed": {}
+      }
+  }
+- ''

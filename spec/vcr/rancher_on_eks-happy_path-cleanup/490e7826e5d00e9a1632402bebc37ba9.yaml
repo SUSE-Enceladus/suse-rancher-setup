@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (NoSuchEntity) when calling the GetRole operation: The role with name suse-rancher-setup-4789-nodegroup-role cannot be found.

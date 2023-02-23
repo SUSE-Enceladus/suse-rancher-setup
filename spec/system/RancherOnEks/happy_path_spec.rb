@@ -15,22 +15,22 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
   before(:example) do
     if ENV['RERECORD']
       # Send argument cheetah_vcr(force_recording: true) to force a new recording
-      cheetah_vcr(force_recording: true)
-   else
+      cheetah_vcr(context: 'rancher_on_eks-happy_path', force_recording: true)
+    else
       # The 4-digit random number needs to match the last recording, and this stub
       # should be disabled when re-recording. Reset with value from:
       #
       # grep 'TAG RANDOM ID' log/test.log
-      allow_any_instance_of(RancherOnEks::Deployment).to receive(:random_num).and_return(3784)
+      allow_any_instance_of(RancherOnEks::Deployment).to receive(:random_num).and_return(4789)
 
       # Selected AZs need to match the last recording, and this stub should be
       # disabled when re-recording. Reset with value from
       #
       # grep 'SELECTED ZONES' log/test.log
       allow_any_instance_of(RancherOnEks::Deployment).to receive(:select_zones).and_return(
-        %w(us-west-2b us-west-2c us-west-2d)
+        ["us-west-2d", "us-west-2c", "us-west-2b"]
       )
-      cheetah_vcr()
+      cheetah_vcr(context: 'rancher_on_eks-happy_path')
     end
     allow_any_instance_of(RancherOnEks::Fqdn).to receive(:dns_record_exist?).and_return(false)
   end
@@ -122,5 +122,29 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
     all('.menu-title').each do |menu_entry|
       expect(menu_entry[:class]).to include('disabled')
     end
+  end
+
+  it 'offers a download of cleanup commands' do
+    visit(rancher_on_eks.wrapup_path)
+    click_on(t('actions.download'))
+    expect(page.response_headers["Content-Disposition"]).to match('attachment; filename=\"suse-rancher-setup-cleanup-')
+  end
+
+  it 'cleans up the resources' do
+    # we need a different context for the cleanup calls, as the same
+    # describe methods are used for both deploy & cleanup
+    if ENV['RERECORD']
+      # Send argument cheetah_vcr(force_recording: true) to force a new recording
+      cheetah_vcr(context: 'rancher_on_eks-happy_path-cleanup', force_recording: true)
+    else
+      cheetah_vcr(context: 'rancher_on_eks-happy_path-cleanup')
+    end
+
+    visit(rancher_on_eks.wrapup_path)
+    perform_enqueued_jobs do
+      click_on(t('actions.cleanup'))
+    end
+    expect(page).to have_current_path(rancher_on_eks.cleanup_path)
+    expect(page).to have_content(t('engines.rancher_on_eks.cleanup.success.title'))
   end
 end
