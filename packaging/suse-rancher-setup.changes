@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Feb 23 18:03:31 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 2.0.0
+  + Support for deploying on Azure AKS
+  + refactor of wrapup and cleanup
+
+-------------------------------------------------------------------
 Tue Jan 31 16:19:05 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 1.2.2
