@@ -1,6 +1,6 @@
 module Azure
   class Cluster < AzureResource
-    attr_accessor :name, :resource_group, :k8s_version, :vm_size, :node_count, :node_resource_group, :zones
+    attr_accessor :name, :resource_group, :k8s_version, :vm_size, :node_count, :zones
 
     def to_s
       @name
@@ -11,8 +11,7 @@ module Azure
         name: @name,
         resource_group: @resource_group,
         k8s_version: @k8s_version,
-        vm_size: @vm_size,
-        node_resource_group: @node_resource_group
+        vm_size: @vm_size
       }
       @cli.create_cluster(**self.creation_attributes)
       self.id = @name
