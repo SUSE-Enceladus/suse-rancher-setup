@@ -16,13 +16,19 @@ module K8s
       'kubectl'
     end
 
+    def prepare()
+      execute('version')
+    rescue CliError => e
+      # let kuberlr do its thing
+      raise unless e.message.include?('Right kubectl missing, downloading version')
+    end
+
     def status(service_name, namespace)
       args = %W(
         rollout status deployment/#{service_name}
         --namespace #{namespace}
       )
       stdout, stderr = execute(*args)
-      return stderr if stderr.present?
 
       response = if stdout.include?('successfully rolled out')
         'deployed'

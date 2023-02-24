@@ -53,12 +53,6 @@ module RancherOnAks
         action: 'Deploy Rancher',
         cleanup_resource: false
       )
-      Step.create!(
-        rank: 9,
-        duration: 1,
-        action: 'Store the kubeconfig',
-        cleanup_resource: true
-      )
     end
 
     def deploy()
@@ -131,9 +125,6 @@ module RancherOnAks
           email_address: @tls_source.email_address
         )
         @rancher.ready!
-      end
-      step(9) do
-        @kubeconfig # Attach at the end for easier cleanup
       end
     end
   end
