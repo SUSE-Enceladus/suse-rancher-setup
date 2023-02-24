@@ -76,8 +76,6 @@ module Azure
       self.execute(
         %W(
           group delete --name #{name}
-          --force-deletion-types Microsoft.Compute/virtualMachines
-          --force-deletion-types Microsoft.Compute/virtualMachineScaleSets
         )
       )
     end
