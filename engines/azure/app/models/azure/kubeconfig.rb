@@ -11,7 +11,9 @@ module Azure
         cluster: @cluster,
         resource_group: @resource_group
       )
+      K8s::Cli.new.prepare()
       self.id = 'kubeconfig'
+      self
     end
 
     def destroy_command()
