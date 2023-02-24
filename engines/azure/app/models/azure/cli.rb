@@ -17,6 +17,9 @@ module Azure
       self.execute(
         %W(config set #{key}=#{value})
       )
+    rescue CliError => e
+      # older CLI versions carried a warning, which we can ignore
+      raise unless e.message.include?("Command group 'config' is experimental and not covered by customer support. Please use with discretion.")
     end
 
     def get_config(key:)
@@ -73,13 +76,11 @@ module Azure
       self.execute(
         %W(
           group delete --name #{name}
-          --force-deletion-types Microsoft.Compute/virtualMachines
-          --force-deletion-types Microsoft.Compute/virtualMachineScaleSets
         )
       )
     end
 
-    def create_cluster(name:, resource_group:, k8s_version:, vm_size:, node_count: 3, node_resource_group:, zones: %w(1 2 3))
+    def create_cluster(name:, resource_group:, k8s_version:, vm_size:, node_count: 3, zones: %w(1 2 3))
       self.execute(
         %W(
           aks create
@@ -90,7 +91,6 @@ module Azure
           --load-balancer-sku standard
           --node-count #{node_count}
           --node-vm-size #{vm_size}
-          --node-resource-group #{node_resource_group}
           --zones
         ).push(zones)
       )

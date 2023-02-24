@@ -59,7 +59,7 @@ module RancherOnAks
       step(0, force: true) do
         tag_random_id = self.random_num()
         Rails.logger.debug("TAG RANDOM ID: #{tag_random_id}")
-        KeyValue.set('tag_scope', "suse-rancher-setup-#{tag_random_id}")
+        KeyValue.set('tag_scope', "rancher-#{tag_random_id}")
 
         @cluster_size = RancherOnAks::ClusterSize.new
         @prefix = KeyValue.get('tag_scope')
@@ -82,12 +82,11 @@ module RancherOnAks
       end
       step(2) do
         @cluster = Azure::Cluster.create(
-          name: "#{@prefix}_cluster",
+          name: "#{@prefix}-cluster",
           resource_group: @resource_group,
           k8s_version: Azure::KubernetesInfo.new.latest_matching_version,
           vm_size: @cluster_size.instance_type,
           node_count: @cluster_size.instance_count,
-          node_resource_group: "#{@prefix}_nodes",
           zones: @zones
         )
         @cluster.ready!
