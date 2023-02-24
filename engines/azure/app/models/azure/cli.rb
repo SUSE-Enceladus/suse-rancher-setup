@@ -17,6 +17,9 @@ module Azure
       self.execute(
         %W(config set #{key}=#{value})
       )
+    rescue CliError => e
+      # older CLI versions carried a warning, which we can ignore
+      raise unless e.message.include?("Command group 'config' is experimental and not covered by customer support. Please use with discretion.")
     end
 
     def get_config(key:)
