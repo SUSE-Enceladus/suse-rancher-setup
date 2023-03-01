@@ -11,7 +11,7 @@ module Azure
         cluster: @cluster,
         resource_group: @resource_group
       )
-      K8s::Cli.new.prepare()
+      K8s::Cli.load.prepare()
       self.id = 'kubeconfig'
       self
     end

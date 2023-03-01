@@ -17,7 +17,7 @@ module K8s
     end
 
     def prepare()
-      execute('version')
+      execute('cluster-info')
     rescue CliError => e
       # let kuberlr do its thing
       raise unless e.message.include?('Right kubectl missing, downloading version')

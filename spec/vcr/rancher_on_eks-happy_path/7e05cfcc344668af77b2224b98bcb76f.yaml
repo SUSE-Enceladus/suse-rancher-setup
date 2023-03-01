@@ -1,0 +1,9 @@
+---
+- |2
+
+  To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
+- |
+  W0228 17:40:55.972925  350959 loader.go:223] Config not found: /tmp/kubeconfig
+  I0228 17:40:55.973054  350959 versioner.go:58] invalid configuration: no configuration has been provided
+  W0228 17:40:56.037234  350959 loader.go:221] Config not found: /tmp/kubeconfig
+  The connection to the server localhost:8080 was refused - did you specify the right host or port?

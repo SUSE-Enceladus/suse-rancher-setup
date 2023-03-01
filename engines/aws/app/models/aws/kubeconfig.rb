@@ -7,6 +7,7 @@ module AWS
         cluster: @cluster
       }
       @cli.update_kube_config(@cluster)
+      K8s::Cli.load.prepare()
       self.id = 'kubeconfig'
     end
 
