@@ -68,7 +68,7 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
 
-  config.nginx_pass_file = Rails.root.join('test', 'fixtures', 'files', 'cloudinstancecredentials')
+  config.nginx_pass_file = Rails.root.join('spec', 'fixtures', 'cloudinstancecredentials')
   # username: username
   # password: password
 
