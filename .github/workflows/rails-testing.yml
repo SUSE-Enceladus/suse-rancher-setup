@@ -22,10 +22,8 @@ jobs:
           ruby-version: 3.1.2
       - name: Set up database schema
         run: bin/rails db:reset
-      - name: Run minitest
-        run: bin/rails test
       - name: Run rspec
-        run: bin/rspec
+        run: bin/rspec --format documentation
   rancher_on_aks:
     runs-on: ubuntu-latest
     env:
@@ -43,10 +41,8 @@ jobs:
           ruby-version: 3.1.2
       - name: Set up database schema
         run: bin/rails db:reset
-      - name: Run minitest
-        run: bin/rails test
       - name: Run rspec
-        run: bin/rspec
+        run: bin/rspec --format documentation
   coverage:
     needs: [rancher_on_aks, rancher_on_eks]
     runs-on: ubuntu-latest

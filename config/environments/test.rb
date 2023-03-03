@@ -58,7 +58,7 @@ Rails.application.configure do
   # Annotate rendered view with file names.
   # config.action_view.annotate_rendered_view_with_filenames = true
 
-  config.nginx_pass_file = Rails.root.join('test', 'fixtures', 'files', 'cloudinstancecredentials')
+  config.nginx_pass_file = Rails.root.join('spec', 'fixtures', 'cloudinstancecredentials')
   # username: username
   # password: password
 
