@@ -13,7 +13,9 @@ module AWS
     end
 
     def options
-      Cli.load.regions()
+      cli = Cli.load
+      cli.region = @value
+      cli.regions()
     end
 
     def save!
