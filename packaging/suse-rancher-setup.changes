@@ -1,4 +1,12 @@
 -------------------------------------------------------------------
+Thu Mar  9 20:54:29 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 2.0.2
+  + Handle issues with azure-cli v2.17
+  + Explicitly force kuberlr to download kubectl
+  + Set a default region in AWS (bsc#1209066)
+
+-------------------------------------------------------------------
 Thu Feb 23 18:03:31 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 2.0.0
