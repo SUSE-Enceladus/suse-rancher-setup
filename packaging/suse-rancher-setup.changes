@@ -1,4 +1,11 @@
 -------------------------------------------------------------------
+Thu Mar 16 02:23:04 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 2.0.3
+  - Exclude Azure regions without zone 3
+  - Update dependencies (CVE-2023-28120) 
+
+-------------------------------------------------------------------
 Thu Mar  9 20:54:29 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 2.0.2
