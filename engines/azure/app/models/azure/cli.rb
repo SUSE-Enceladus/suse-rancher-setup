@@ -19,7 +19,7 @@ module Azure
       )
     rescue CliError => e
       # older CLI versions carried a warning, which we can ignore
-      raise unless e.message.include?("Command group 'config' is experimental and not covered by customer support. Please use with discretion.")
+      raise unless e.message.include?("Command group 'config' is experimental")
     end
 
     def get_config(key:)
