@@ -8,7 +8,7 @@ module RancherOnEks
       @resources = Resource.where.associated(:steps)
 
       if Rails.configuration.lasso_error.present?
-        flash[:danger] = Rails.configuration.lasso_error
+        flash[:danger] = Rails.configuration.lasso_error.truncate(1000)
         @complete = true
       end
       redirect_to(rancher_on_eks.wrapup_path) and return if @complete
