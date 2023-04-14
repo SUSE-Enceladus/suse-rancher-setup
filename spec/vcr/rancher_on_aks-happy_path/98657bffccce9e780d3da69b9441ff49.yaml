@@ -1,7 +1,7 @@
 ---
 - |
   NAME: ingress-nginx
-  LAST DEPLOYED: Wed Feb 22 12:09:07 2023
+  LAST DEPLOYED: Fri Apr 14 12:33:42 2023
   NAMESPACE: ingress-nginx
   STATUS: deployed
   REVISION: 1

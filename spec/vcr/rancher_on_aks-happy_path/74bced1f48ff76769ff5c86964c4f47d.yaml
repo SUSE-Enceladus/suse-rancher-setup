@@ -1,0 +1,23 @@
+---
+- |
+  {
+    "id": "/subscriptions/5f40eec9-a9be-4851-90c1-621e6d65df81/resourceGroups/suse-rancher-setup-9165",
+    "location": "westus3",
+    "managedBy": null,
+    "name": "suse-rancher-setup-9165",
+    "properties": {
+      "provisioningState": "Succeeded"
+    },
+    "tags": {
+      "Cost Center": "110470250",
+      "Department": "bcl",
+      "Environment": "development",
+      "Finance Business Partner": "monika_d_bach",
+      "General Ledger Code": "200000119",
+      "Group": "cloud-solutions",
+      "Owner": "jgordon",
+      "Stakeholder": "dominic_d_vieira"
+    },
+    "type": "Microsoft.Resources/resourceGroups"
+  }
+- ''

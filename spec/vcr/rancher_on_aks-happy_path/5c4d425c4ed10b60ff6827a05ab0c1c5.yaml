@@ -1,5 +1,5 @@
 ---
-- '{"name":"rancher-stable","info":{"first_deployed":"2023-02-22T12:10:21.861569637-08:00","last_deployed":"2023-02-22T12:10:21.861569637-08:00","deleted":"","description":"Install
+- '{"name":"rancher-stable","info":{"first_deployed":"2023-04-14T12:35:04.72137124-07:00","last_deployed":"2023-04-14T12:35:04.72137124-07:00","deleted":"","description":"Install
   complete","status":"deployed","notes":"Rancher Server has been installed.\n\nNOTE:
   Rancher may take several minutes to fully initialize. Please standby while Certificates
   are being issued, Containers are started and the Ingress rule comes up.\n\nCheck

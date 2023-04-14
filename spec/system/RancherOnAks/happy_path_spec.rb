@@ -3,13 +3,13 @@ require 'web_helper'
 return unless defined?(RancherOnAks::Engine)
 
 RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
-  let(:test_region) { 'westus2' }
+  let(:test_region) { 'westus3' }
   let(:test_shirt_size) { 'small' }
   let(:test_fqdn) { 'rancher-setup-test.azure.bear454.com' }
-  let(:test_app_id) { 'fd728d26-aaff-4d13-8da0-30a6a37d1c4b' }
+  let(:test_app_id) { '783634be-af6f-4bf2-b03f-103caec2eae2' }
   # Actual password required for re-recording
   let(:test_password) { ENV['PASSWORD'] || 'password' }
-  let(:test_tenant) { '0ccfaef4-daa6-4918-8b2a-b9ca95f4a88f' }
+  let(:test_tenant) { 'fcf34994-aac4-4462-afaa-d83f87c5f51d' }
   let(:test_tls_source) { 'rancher' }
 
   before(:all) do
@@ -26,7 +26,7 @@ RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
       # should be disabled when re-recording. Reset with value from:
       #
       # grep 'TAG RANDOM ID' log/test.log
-      allow_any_instance_of(RancherOnAks::Deployment).to receive(:random_num).and_return(6413)
+      allow_any_instance_of(RancherOnAks::Deployment).to receive(:random_num).and_return(9165)
 
       cheetah_vcr(context: 'rancher_on_aks-happy_path')
     end
