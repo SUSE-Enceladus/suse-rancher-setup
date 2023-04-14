@@ -26,29 +26,35 @@ module RancherOnAks
       )
       Step.create!(
         rank: 4,
+        duration: 40,
+        action: 'Wait for system deployments to be ready',
+        cleanup_resource: false
+      )
+      Step.create!(
+        rank: 5,
         duration: 50,
         action: 'Deploy the ingress controller',
         cleanup_resource: false
       )
       Step.create!(
-        rank: 5,
+        rank: 6,
         duration: 3,
         action: 'Find the IP address of the load balancer',
         cleanup_resource: false
       )
       Step.create!(
-        rank: 6,
+        rank: 7,
         duration: 7,
         action: 'Create a DNS record for the Rancher server'
       )
       Step.create!(
-        rank: 7,
+        rank: 8,
         duration: 50,
         action: 'Deploy the certificate manager',
         cleanup_resource: false
       )
       Step.create!(
-        rank: 8,
+        rank: 9,
         duration: 180,
         action: 'Deploy Rancher',
         cleanup_resource: false
@@ -99,25 +105,28 @@ module RancherOnAks
         nil
       end
       step(4) do
+        @cluster.deployments_are_ready!
+      end
+      step(5) do
         @ingress = Helm::IngressController.create()
         @ingress.ready!
       end
-      step(5) do
+      step(6) do
         @public_ip = @ingress.external_ip_address
         nil
       end
-      step(6) do
+      step(7) do
         @dns_record = Azure::DnsRecord.create(
           fqdn: @fqdn,
           target: @public_ip,
           record_type: 'A'
         )
       end
-      step(7) do
+      step(8) do
         @cert_manager = Helm::CertManager.create()
         @cert_manager.ready!
       end
-      step(8) do
+      step(9) do
         @rancher = Helm::Rancher.create(
           fqdn: @fqdn,
           tls_source: @tls_source.source,
