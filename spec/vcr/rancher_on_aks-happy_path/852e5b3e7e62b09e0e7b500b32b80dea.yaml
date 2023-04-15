@@ -2,4 +2,6 @@
 - '"ingress-nginx" already exists with the same configuration, skipping
 
   '
-- ''
+- 'W0418 07:06:46.206126  142790 loader.go:222] Config not found: /tmp/kubeconfig
+
+  '

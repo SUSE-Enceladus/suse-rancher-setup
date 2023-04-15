@@ -21,28 +21,5 @@ a1a248e5f08e0f5940a92158f12477db.yaml	az aks create --resource-group suse-ranche
 7e05cfcc344668af77b2224b98bcb76f.yaml	kubectl cluster-info
 d534408991b171b4d06db428e7798c2c.yaml	kubectl get deploy --namespace kube-system --output json
 77b2b5cb6f7b6114b918b531fd9a2318.yaml	kubectl get namespaces --output json
-8c756c122e9b63f583880ba873c881a7.yaml	kubectl create namespace ingress-nginx
 852e5b3e7e62b09e0e7b500b32b80dea.yaml	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-8e00ee7cb4604761a2258b9dcf882005.yaml	helm repo update
-98657bffccce9e780d3da69b9441ff49.yaml	helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --version 4.0.18 --set controller.service.type=LoadBalancer --set controller.service.externalTrafficPolicy=Local
-a08d18d2b4e898faadb87070309f1ea7.yaml	helm status ingress-nginx --namespace ingress-nginx --show-desc --output json
-efbbb73070d71660443ed0b21fe3e118.yaml	kubectl rollout status deployment/ingress-nginx-controller --namespace ingress-nginx
-1ef9c2f42501bf68c44599174df5527c.yaml	kubectl get services --namespace ingress-nginx --output json
-b48b8a4a4334b093887a0600b98a79a5.yaml	kubectl get service ingress-nginx-controller --namespace ingress-nginx --output json
-5a3f36a007f991c91ee3f663b05463e4.yaml	az group exists --name jmason-lasso-testing
-889fd9b9e414214df3cb03b0a3ff8787.yaml	az network dns record-set a add-record --resource-group jmason-lasso-testing --record-set-name rancher-setup-test --zone-name azure.bear454.com --ipv4-address 20.14.28.102
-76a848b379855d2891f96c10af4c4143.yaml	az network dns record-set a show --resource-group jmason-lasso-testing --name rancher-setup-test --zone-name azure.bear454.com
-6324154e5104c0757a739350c2a775f6.yaml	kubectl create namespace cert-manager
-7c23ec2fc27ae4193158d32e65c1de05.yaml	kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
-566efc0fa13aeb3e47298a37a1a78311.yaml	helm repo add jetstack https://charts.jetstack.io
-f38bc324ffd0969471aaf73c763e25d6.yaml	helm install cert-manager jetstack/cert-manager --namespace cert-manager --version 1.7.1
-7849bfcdb1e3273102b850b9bf211011.yaml	helm status cert-manager --namespace cert-manager --show-desc --output json
-43d58ef14613c09690cd1d5277049734.yaml	kubectl rollout status deployment/cert-manager --namespace cert-manager
-637c37a77cb665fec8d768c3a71e663d.yaml	kubectl create namespace cattle-system
-5a99aac9ce7c62be859e6cf3443e4331.yaml	helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
-c7cdbdf16cf6e515ef9d7e6c5512c0b3.yaml	helm install rancher-stable rancher-stable/rancher --namespace cattle-system --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS --set-string extraEnv[0].value=true --set ingress.ingressClassName=nginx --set letsEncrypt.ingress.class=nginx --set hostname=rancher-setup-test.azure.bear454.com --set replicas=3 --version 2.6.10 --set ingress.tls.source=rancher
-5c4d425c4ed10b60ff6827a05ab0c1c5.yaml	helm status rancher-stable --namespace cattle-system --show-desc --output json
-ccc9e1bb11f341328377a5eac6c09c7b.yaml	kubectl rollout status deployment/rancher-stable --namespace cattle-system
-7793edfc5f5c08b5e751677e3ed34175.yaml	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}
-87146be344ba9204a6f5aa520d9c591d.yaml	az network dns record-set a delete --resource-group jmason-lasso-testing --name rancher-setup-test --zone-name azure.bear454.com
 a4b407814a71974a81cfa122a0bd62be.yaml	az group delete --name suse-rancher-setup-9165
