@@ -1,9 +1,22 @@
 -------------------------------------------------------------------
+Tue Apr 18 17:29:43 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 2.0.5
+  - Wait for base services to be available in AKS
+  - Update dependencies (CVE-2023-29469, CVE-2023-28484)
+
+-------------------------------------------------------------------
+Wed Apr  5 09:38:59 UTC 2023 - Jesús Bermúdez Velázquez <jesus.bv@suse.com>
+
+- version 2.0.4
+  - Handle (changed) warning message in azure-cli v2.36
+
+-------------------------------------------------------------------
 Thu Mar 16 02:23:04 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 2.0.3
   - Exclude Azure regions without zone 3
-  - Update dependencies (CVE-2023-28120) 
+  - Update dependencies (CVE-2023-28120)
 
 -------------------------------------------------------------------
 Thu Mar  9 20:54:29 UTC 2023 - James Mason <jmason@suse.com>
@@ -25,13 +38,13 @@ Tue Jan 31 16:19:05 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 1.2.2
   - Fix an issue with login instructions
-  - Remove an unnecessary warning from logs 
+  - Remove an unnecessary warning from logs
 
 -------------------------------------------------------------------
 Mon Jan 30 23:30:15 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 1.2.1
-  - Add an additional required IAM permission 
+  - Add an additional required IAM permission
 
 -------------------------------------------------------------------
 Thu Jan 26 23:02:32 UTC 2023 - James Mason <jmason@suse.com>
