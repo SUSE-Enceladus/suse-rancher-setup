@@ -149,6 +149,15 @@ When updating dependencies, add a categorized entry with a comment, in Gemfile.d
 
 _Please note any new external CLI dependencies in this documentation._
 
+Gems _must_ be included with the _ruby_ framework target; OBS will not accept prebuilt libraries included in gems (like _nokogiri_ and _sqlite3_ ). I recommend using the following _bundler_ config (`.bundle/config`):
+
+```
+---
+BUNDLE_BUILD__SQLITE3: "--enable-system-libraries"
+BUNDLE_FORCE_RUBY_PLATFORM: "true"
+BUNDLE_CACHE_ALL: "false"
+```
+
 ### Releases
 
 Update the [changelog](packaging/suse-rancher-setup.changes) for the expected release version, and stage it for _git_.
