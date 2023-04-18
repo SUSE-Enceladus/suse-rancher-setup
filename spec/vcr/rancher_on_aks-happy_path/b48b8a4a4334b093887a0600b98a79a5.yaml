@@ -8,7 +8,7 @@
               "meta.helm.sh/release-name": "ingress-nginx",
               "meta.helm.sh/release-namespace": "ingress-nginx"
           },
-          "creationTimestamp": "2023-02-22T20:09:18Z",
+          "creationTimestamp": "2023-04-14T19:33:58Z",
           "finalizers": [
               "service.kubernetes.io/load-balancer-cleanup"
           ],
@@ -23,17 +23,17 @@
           },
           "name": "ingress-nginx-controller",
           "namespace": "ingress-nginx",
-          "resourceVersion": "1601",
-          "uid": "28c022d0-9371-4307-a1db-4da5135ef5aa"
+          "resourceVersion": "1845",
+          "uid": "ab16e805-ae77-4e7f-b0b9-2c1098c6c677"
       },
       "spec": {
           "allocateLoadBalancerNodePorts": true,
-          "clusterIP": "10.0.214.0",
+          "clusterIP": "10.0.35.154",
           "clusterIPs": [
-              "10.0.214.0"
+              "10.0.35.154"
           ],
           "externalTrafficPolicy": "Local",
-          "healthCheckNodePort": 32765,
+          "healthCheckNodePort": 30609,
           "internalTrafficPolicy": "Cluster",
           "ipFamilies": [
               "IPv4"
@@ -43,7 +43,7 @@
               {
                   "appProtocol": "http",
                   "name": "http",
-                  "nodePort": 32456,
+                  "nodePort": 30094,
                   "port": 80,
                   "protocol": "TCP",
                   "targetPort": "http"
@@ -51,7 +51,7 @@
               {
                   "appProtocol": "https",
                   "name": "https",
-                  "nodePort": 31948,
+                  "nodePort": 31936,
                   "port": 443,
                   "protocol": "TCP",
                   "targetPort": "https"
@@ -69,7 +69,7 @@
           "loadBalancer": {
               "ingress": [
                   {
-                      "ip": "20.99.137.145"
+                      "ip": "20.14.28.102"
                   }
               ]
           }

@@ -2,23 +2,25 @@
 - |
   [
     {
-      "etag": "00000002-0000-0000-958d-042f38b7d801",
-      "id": "/subscriptions/ce73a2b0-d2e7-4ff6-b987-b32d6908de4e/resourceGroups/jmason-dns/providers/Microsoft.Network/dnszones/azure.bear454.com",
+      "etag": "00000002-0000-0000-7753-22023a6ed901",
+      "id": "/subscriptions/5f40eec9-a9be-4851-90c1-621e6d65df81/resourceGroups/jmason-lasso-testing/providers/Microsoft.Network/dnszones/azure.bear454.com",
       "location": "global",
       "maxNumberOfRecordSets": 10000,
       "maxNumberOfRecordsPerRecordSet": null,
       "name": "azure.bear454.com",
       "nameServers": [
-        "ns1-02.azure-dns.com.",
-        "ns2-02.azure-dns.net.",
-        "ns3-02.azure-dns.org.",
-        "ns4-02.azure-dns.info."
+        "ns1-04.azure-dns.com.",
+        "ns2-04.azure-dns.net.",
+        "ns3-04.azure-dns.org.",
+        "ns4-04.azure-dns.info."
       ],
       "numberOfRecordSets": 2,
       "registrationVirtualNetworks": null,
       "resolutionVirtualNetworks": null,
-      "resourceGroup": "jmason-dns",
-      "tags": {},
+      "resourceGroup": "jmason-lasso-testing",
+      "tags": {
+        "Owner": "jmason@suse.com"
+      },
       "type": "Microsoft.Network/dnszones",
       "zoneType": "Public"
     }

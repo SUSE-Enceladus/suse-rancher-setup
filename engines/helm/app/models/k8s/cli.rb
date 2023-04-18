@@ -54,6 +54,19 @@ module K8s
       service['metadata']['name']
     end
 
+    def deployments_are_ready?(namespace:)
+      args = %W(get deploy --namespace #{namespace} --output json)
+      begin
+        stdout, stderr = execute(*args)
+      rescue CliError => e
+        return false
+      end
+      deployments = JSON.parse(stdout)['items']
+      deployments.all? do |deployment|
+        deployment['status']['availableReplicas'] == deployment['spec']['replicas']
+      end
+    end
+
     def get_load_balancer(release_name, namespace)
       service_name = self.get_service_name(release_name, namespace)
       args = %W(

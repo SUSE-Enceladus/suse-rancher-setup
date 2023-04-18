@@ -26,6 +26,17 @@ module Azure
       self.wait_until('Succeeded')
     end
 
+    def deployments_are_ready!
+      deployments_are_ready = false
+      kubectl = K8s::Cli.load
+
+      while !deployments_are_ready
+        logger.info "#{self.type} #{self.id} waiting for deployments_are_ready..."
+        deployments_are_ready = kubectl.deployments_are_ready?(namespace: 'kube-system')
+        sleep(10) unless deployments_are_ready
+      end
+    end
+
     def describe_resource()
       @cli.describe_cluster(
         name: @name,
