@@ -14,7 +14,7 @@ class LoginController < ApplicationController
     session[:authorized_at] = user.authorize
     redirect_path = helpers.next_step_path(login_path)
     unless user.is_authorized?
-      flash[:danger] = user.errors.full_messages.join("\n")
+      flash[:danger] = user.errors.full_messages.join("\n").truncate(1000)
       redirect_path = root_path
     end
     redirect_to(redirect_path)

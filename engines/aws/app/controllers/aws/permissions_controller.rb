@@ -12,7 +12,7 @@ module AWS
     rescue AWS::MissingInstanceProfile
       flash[:danger] = t('flash.missing_instance_profile')
     rescue StandardError => error
-      flash[:danger] = t('error', message: error.message)
+      flash[:danger] = t('error', message: error.message).truncate(1000)
     end
   end
 end
