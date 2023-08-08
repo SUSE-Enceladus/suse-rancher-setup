@@ -11,7 +11,9 @@ module Azure
         name: @name,
         resource_group: @resource_group,
         k8s_version: @k8s_version,
-        vm_size: @vm_size
+        vm_size: @vm_size,
+        node_count: @node_count,
+        zones: @zones
       }
       @cli.create_cluster(**self.creation_attributes)
       self.id = @name
