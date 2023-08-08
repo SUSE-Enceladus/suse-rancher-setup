@@ -16,11 +16,11 @@ module Azure
     private
 
     def instance_type_description
-      @instance_type_description ||= JSON.parse(@cli.describe_instance_type(@instance_type)).first
+      @instance_type_description ||= @cli.describe_instance_type(@instance_type)
     end
 
     def usage_report
-      @usage_report ||= JSON.parse(@cli.list_vcpu_usage(family: self.instance_family)).first
+      @usage_report ||= @cli.list_vcpu_usage(family: self.instance_family)
     end
   end
 end

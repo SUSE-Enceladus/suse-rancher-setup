@@ -8,7 +8,7 @@ module PreFlight
       @all_passed = PreFlight::Check.all_passed?
       @any_failed = @all_complete && !@all_passed
       @any_pending = PreFlight::Check.pending.count > 0
-      @refresh_timer = 5 unless @all_complete
+      @refresh_timer = 10 unless @all_complete
 
       @in_progress = @checks.not_submitted.first if !@all_complete && !@any_pending
       @in_progress&.submit!
