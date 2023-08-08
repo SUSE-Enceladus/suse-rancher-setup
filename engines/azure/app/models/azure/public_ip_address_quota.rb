@@ -9,7 +9,7 @@ module Azure
     private
 
     def usage_report
-      @usage_report ||= JSON.parse(@cli.list_network_usage(value: VALUE)).first
+      @usage_report ||= @cli.list_network_usage(value: VALUE)
     end
   end
 end

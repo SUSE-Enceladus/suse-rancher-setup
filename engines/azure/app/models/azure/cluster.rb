@@ -45,7 +45,7 @@ module Azure
     end
 
     def state_attribute()
-      @framework_attributes['provisioningState']
+      @framework_attributes['properties']['provisioningState']
     end
   end
 end

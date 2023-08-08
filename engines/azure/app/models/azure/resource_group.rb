@@ -11,7 +11,7 @@ module Azure
         name: @name
       }
       self.id = @name
-      return if @cli.group_exists?(name: @name)
+      return if @cli.resource_group_exists?(name: @name)
 
       @cli.create_resource_group(name: @name)
       self.refresh()
