@@ -96,4 +96,7 @@ group :test do
   gem 'simplecov-json'
 
   gem 'faker'
+
+  gem 'vcr'
+  gem 'webmock'
 end
