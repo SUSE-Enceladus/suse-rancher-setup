@@ -2,35 +2,29 @@ require 'web_helper'
 
 return unless defined?(RancherOnAks::Engine)
 
-RSpec::Steps.steps('RancherOnAks: small cluster', type: :system) do
+RSpec::Steps.steps('RancherOnAks: small cluster', type: :system, vcr: true) do
   let(:test_region) { 'westus3' }
   let(:test_shirt_size) { 'small' }
   let(:test_fqdn) { 'rancher-setup-test.azure.bear454.com' }
-  let(:test_app_id) { '783634be-af6f-4bf2-b03f-103caec2eae2' }
-  # Actual password required for re-recording
-  let(:test_password) { ENV['PASSWORD'] || 'password' }
-  let(:test_tenant) { 'fcf34994-aac4-4462-afaa-d83f87c5f51d' }
+  let(:test_app_id) { $app_id }
+  let(:test_password) { $password }
+  let(:test_tenant) { $tenant }
   let(:test_tls_source) { 'rancher' }
 
   before(:all) do
     driven_by(:rack_test)
-    # driven_by(:selenium)
   end
 
   before(:example) do
-    if ENV['RERECORD']
-      # Send argument cheetah_vcr(force_recording: true) to force a new recording
-      cheetah_vcr(context: 'rancher_on_aks-happy_path', force_recording: true)
-   else
+    unless ENV['RERECORD']
       # The 4-digit random number needs to match the last recording, and this stub
       # should be disabled when re-recording. Reset with value from:
       #
       # grep 'TAG RANDOM ID' log/test.log
       allow_any_instance_of(RancherOnAks::Deployment).to receive(:random_num).and_return(9165)
-
-      cheetah_vcr(context: 'rancher_on_aks-happy_path')
     end
     allow_any_instance_of(RancherOnAks::Fqdn).to receive(:dns_record_exist?).and_return(false)
+    allow(Azure::Metadata).to receive(:get_subscription).and_return($subscription)
   end
 
   it 'prompts for login before the welcome page' do
