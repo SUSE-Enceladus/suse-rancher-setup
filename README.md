@@ -50,6 +50,11 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
     rails server -b localhost -p 3000
     ````
 
+6.  If running the Azure engine, the active subscription ID is detected via IMDS (e.g., the suse-rancher-setup instance must run in the subscription where it will deploy). When developing locally, the subscription must be set via the `rails console` instead, before interacting with the Azure API:
+    ```
+    Azure::Subscription.new(value: "YOUR SUBSCRIPTION UUID").save
+    ```
+
 Please be sure to include a screenshot with any view or style changes.
 
 ## Testing
