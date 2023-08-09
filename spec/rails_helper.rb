@@ -66,6 +66,65 @@ RSpec.configure do |config|
   config.include ActiveJob::TestHelper
 end
 
+def azure_test_credentials
+  $app_id ||= ENV['APP_ID'] || Faker::Internet.uuid
+  $password ||= ENV['PASSWORD'] || 'password'
+  $tenant ||= ENV['TENANT'] || Faker::Internet.uuid
+  $subscription ||= ENV['SUBSCRIPTION'] || Faker::Internet.uuid
+
+  [
+    $app_id,
+    $password,
+    $tenant,
+    $subscription
+  ]
+end
+
+def mock_azure_login(credentials=azure_test_credentials())
+  app_id, password, tenant, subscription = credentials
+  Azure::Credential.new(
+    app_id: app_id,
+    password: password,
+    tenant: tenant
+  ).save(validate: false)
+  Azure::Subscription.new(value: subscription).save
+end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "#{::Rails.root}/spec/vcr"
+  config.hook_into :webmock
+  config.ignore_localhost = true
+  config.ignore_hosts '127.0.0.1'
+  config.default_cassette_options = {
+    match_requests_on: [:method, :host, :path],
+    decode_compressed_response: true,
+    record: :new_episodes
+  }
+  app_id, password, tenant, subscription = azure_test_credentials()
+  config.filter_sensitive_data("[app_id]") { app_id }
+  config.filter_sensitive_data("[password]") { password }
+  config.filter_sensitive_data("[password_encoded]") { URI.encode_www_form_component(password) }
+  config.filter_sensitive_data("[tenant]") { tenant }
+  config.filter_sensitive_data("[subscription]") { subscription }
+
+  config.filter_sensitive_data('[token]') do |interaction|
+    begin
+      JSON.parse(interaction.response.body)['access_token']
+    rescue StandardError
+      nil
+    end
+  end
+  config.filter_sensitive_data('[token]') do |interaction|
+    begin
+      interaction.request.headers['Authorization'].first
+    rescue StandardError
+      nil
+    end
+  end
+
+  config.configure_rspec_metadata!
+end
+
 def cheetah_vcr(context:, force_recording: false)
   allow(Cheetah).to receive(:run).and_wrap_original do |method, *args|
     cli_args = args.first
