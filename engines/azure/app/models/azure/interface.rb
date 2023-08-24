@@ -4,8 +4,7 @@ module Azure
   class Interface
     class LoginError < StandardError; end
 
-    RESOURCE = 'https://management.azure.com/'
-    HOST = 'https://management.azure.com'
+    HOST = 'https://management.azure.com/'
 
     attr_accessor(:credential, :subscription, :region, :token)
 
@@ -44,7 +43,7 @@ module Azure
           'grant_type' => 'client_credentials',
           'client_id' => app_id,
           'client_secret' => password,
-          'resource' => RESOURCE
+          'resource' => HOST
         },
         {
           accept: :json
@@ -71,7 +70,7 @@ module Azure
       self.login() if @token.blank?
       response = api_exception_trap(capture_exception) do
         RestClient.get(
-          HOST + "/subscriptions/#{@subscription.value}" + path,
+          HOST + "subscriptions/#{@subscription.value}" + path,
           {
             params: {
               'api-version' => '2023-07-01',
@@ -88,7 +87,7 @@ module Azure
       self.login() if @token.blank?
       api_exception_trap(capture_exception) do
         RestClient.head(
-          HOST + "/subscriptions/#{@subscription.value}" + path,
+          HOST + "subscriptions/#{@subscription.value}" + path,
           {
             params: {
               'api-version' => '2023-07-01',
@@ -104,7 +103,7 @@ module Azure
       self.login() if @token.blank?
       response = api_exception_trap(capture_exception) do
         RestClient.post(
-          HOST + "/subscriptions/#{ @subscription.value }" + path,
+          HOST + "subscriptions/#{ @subscription.value }" + path,
           body,
           {
             params: {
@@ -123,7 +122,7 @@ module Azure
       self.login() if @token.blank?
       response = api_exception_trap(capture_exception) do
         RestClient.put(
-          HOST + "/subscriptions/#{ @subscription.value }" + path,
+          HOST + "subscriptions/#{ @subscription.value }" + path,
           body,
           {
             params: {
@@ -142,7 +141,7 @@ module Azure
       self.login() if @token.blank?
       api_exception_trap(capture_exception) do
         RestClient.delete(
-          HOST + "/subscriptions/#{ @subscription.value }" + path,
+          HOST + "subscriptions/#{ @subscription.value }" + path,
           {
             params: {
               'api-version' => '2023-07-01',
@@ -323,7 +322,7 @@ module Azure
       self.login() if @token.blank?
       response = api_exception_trap(true) do
         RestClient.get(
-          HOST + "/subscriptions/#{@subscription.value}/providers/Microsoft.Compute/skus",
+          HOST + "subscriptions/#{@subscription.value}/providers/Microsoft.Compute/skus",
           {
             params: {
               'api-version' => '2023-07-01',
