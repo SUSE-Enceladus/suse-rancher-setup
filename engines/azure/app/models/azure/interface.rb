@@ -6,6 +6,15 @@ module Azure
 
     HOST = 'https://management.azure.com/'
 
+    # Most calls use the current API version as of development
+    DEFAULT_API_VERSION = '2023-07-01'
+    # Some APIs respond inconsistently wiht docs using the current API version,
+    # so we use the documented API version for those calls.
+    DNS_API_VERSION = '2018-05-01'
+    AKS_API_VERSION = '2023-05-01'
+    VM_SIZES_API_VERSION = '2023-03-01'
+    NETWORK_API_VERSION = '2023-02-01'
+
     attr_accessor(:credential, :subscription, :region, :token)
 
     def self.load
@@ -53,6 +62,12 @@ module Azure
       JSON.parse(response)['access_token']
     end
 
+    def build_params(additional_params={}, api_version: DEFAULT_API_VERSION)
+      {
+        'api-version' => api_version,
+      }.merge(additional_params)
+    end
+
     def tenant_oauth_token_url(tenant:)
       "https://login.microsoftonline.com/#{ tenant }/oauth2/token"
     end
@@ -66,15 +81,13 @@ module Azure
 
     # REST wrappers
 
-    def api_get(path:, params: {}, capture_exception: false)
+    def api_get(path:, params: {}, capture_exception: false, api_version: DEFAULT_API_VERSION)
       self.login() if @token.blank?
       response = api_exception_trap(capture_exception) do
         RestClient.get(
           HOST + "subscriptions/#{@subscription.value}" + path,
           {
-            params: {
-              'api-version' => '2023-07-01',
-            }.merge(params),
+            params: build_params(params, api_version: api_version),
             Authorization: "Bearer #{ @token }",
             accept: :json
           }
@@ -83,15 +96,13 @@ module Azure
       response.body
     end
 
-    def api_head(path:, params: {}, capture_exception: true)
+    def api_head(path:, params: {}, capture_exception: true, api_version: DEFAULT_API_VERSION)
       self.login() if @token.blank?
       api_exception_trap(capture_exception) do
         RestClient.head(
           HOST + "subscriptions/#{@subscription.value}" + path,
           {
-            params: {
-              'api-version' => '2023-07-01',
-            }.merge(params),
+            params: build_params(params, api_version: api_version),
             Authorization: "Bearer #{ @token }",
             accept: :json
           }
@@ -99,16 +110,14 @@ module Azure
       end
     end
 
-    def api_post(path:, params: {}, body: '{}', capture_exception: false)
+    def api_post(path:, params: {}, body: '{}', capture_exception: false, api_version: DEFAULT_API_VERSION)
       self.login() if @token.blank?
       response = api_exception_trap(capture_exception) do
         RestClient.post(
           HOST + "subscriptions/#{ @subscription.value }" + path,
           body,
           {
-            params: {
-              'api-version' => '2023-07-01',
-            }.merge(params),
+            params: build_params(params, api_version: api_version),
             Authorization: "Bearer #{ @token }",
             content_type: :json,
             accept: :json
@@ -118,16 +127,14 @@ module Azure
       response.body
     end
 
-    def api_put(path:, params: {}, body: '{}', capture_exception: false)
+    def api_put(path:, params: {}, body: '{}', capture_exception: false, api_version: DEFAULT_API_VERSION)
       self.login() if @token.blank?
       response = api_exception_trap(capture_exception) do
         RestClient.put(
           HOST + "subscriptions/#{ @subscription.value }" + path,
           body,
           {
-            params: {
-              'api-version' => '2023-07-01',
-            }.merge(params),
+            params: build_params(params, api_version: api_version),
             Authorization: "Bearer #{ @token }",
             content_type: :json,
             accept: :json
@@ -137,15 +144,13 @@ module Azure
       response.body
     end
 
-    def api_delete(path:, params: {}, capture_exception: true)
+    def api_delete(path:, params: {}, capture_exception: true, api_version: DEFAULT_API_VERSION)
       self.login() if @token.blank?
       api_exception_trap(capture_exception) do
         RestClient.delete(
           HOST + "subscriptions/#{ @subscription.value }" + path,
           {
-            params: {
-              'api-version' => '2023-07-01',
-            }.merge(params),
+            params: build_params(params, api_version: api_version),
             Authorization: "Bearer #{ @token }",
             accept: :json
           }
@@ -220,10 +225,8 @@ module Azure
             }
           }
         }.to_json,
-        params: {
-          'api-version' => '2023-05-01'
-        },
-        capture_exception: true
+        capture_exception: true,
+        api_version: AKS_API_VERSION
       )
     end
 
@@ -246,9 +249,7 @@ module Azure
     def find_resource_group_for_dns_zone(zone:)
       response = api_get(
         path: '/providers/Microsoft.Network/dnszones',
-        params: {
-          'api-version' => '2018-05-01'
-        }
+        api_version: DNS_API_VERSION
       )
       id = JSON.parse(response)['value'].find{|resource| resource['name'] == zone }['id']
       id.match(/resourceGroups\/(?<resourcegroup>.+)\/providers/)[:resourcegroup]
@@ -270,9 +271,7 @@ module Azure
             ]
           }
         }.to_json,
-        params: {
-          'api-version' => '2018-05-01'
-        }
+        api_version: DNS_API_VERSION
       )
     end
 
@@ -291,18 +290,14 @@ module Azure
     def describe_dns_record(resource_group:, record_type:, record:, domain:)
       api_get(
         path: "/resourceGroups/#{ resource_group }/providers/Microsoft.Network/dnsZones/#{ domain }/#{ record_type }/#{ record }",
-        params: {
-          'api-version' => '2018-05-01'
-        }
+        api_version: DNS_API_VERSION
       )
     end
 
     def destroy_dns_record(resource_group:, record_type:, record:, domain:)
       api_delete(
         path: "/resourceGroups/#{ resource_group }/providers/Microsoft.Network/dnsZones/#{ domain }/#{ record_type }/#{ record }",
-        params: {
-          'api-version' => '2018-05-01'
-        }
+        api_version: DNS_API_VERSION
       )
     end
 
@@ -311,9 +306,7 @@ module Azure
     def list_sizes(region: @region)
       response = api_get(
         path: "/providers/Microsoft.Compute/locations/#{ region }/vmSizes",
-        params: {
-          'api-version' => '2023-03-01'
-        }
+        api_version: VM_SIZES_API_VERSION
       )
       JSON.parse(response)['value']
     end
@@ -325,7 +318,7 @@ module Azure
           HOST + "subscriptions/#{@subscription.value}/providers/Microsoft.Compute/skus",
           {
             params: {
-              'api-version' => '2023-07-01',
+              'api-version' => DEFAULT_API_VERSION,
               '$filter' => "location eq '#{ @region }'"
             },
             Authorization: "Bearer #{ @token }",
@@ -347,9 +340,7 @@ module Azure
     def list_network_usage(value:)
       response = api_get(
         path: "/providers/Microsoft.Network/locations/#{ @region }/usages",
-        params: {
-          'api-version' => '2023-02-01'
-        }
+        api_version: NETWORK_API_VERSION
       )
       JSON.parse(response)['value'].find{|r| r['name']['value'] == value }
     end
