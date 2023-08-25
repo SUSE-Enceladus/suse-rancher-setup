@@ -1,0 +1,208 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://login.microsoftonline.com/[tenant]/oauth2/token
+    body:
+      encoding: UTF-8
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux x86_64) ruby/3.1.2p20
+      Content-Length:
+      - '182'
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Host:
+      - login.microsoftonline.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store, no-cache
+      Pragma:
+      - no-cache
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      P3p:
+      - CP="DSP CUR OTPi IND OTRi ONL FIN"
+      X-Ms-Request-Id:
+      - a1d4ebf7-632c-4fa8-acbb-0b05307fa100
+      X-Ms-Ests-Server:
+      - 2.1.15984.6 - SEC ProdSlices
+      X-Xss-Protection:
+      - '0'
+      Set-Cookie:
+      - fpc=As0FwcvtVRZKqU-emtgn5WzQZtlFAQAAAMrvZNwOAAAA; expires=Fri, 08-Sep-2023
+        02:24:11 GMT; path=/; secure; HttpOnly; SameSite=None
+      - stsservicecookie=estsfd; path=/; secure; samesite=none; httponly
+      - x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly
+      Date:
+      - Wed, 09 Aug 2023 02:24:10 GMT
+      Content-Length:
+      - '1468'
+    body:
+      encoding: UTF-8
+      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1691551451","not_before":"1691547551","resource":"https://management.azure.com/","access_token":"[token]"}'
+  recorded_at: Wed, 09 Aug 2023 02:24:11 GMT
+- request:
+    method: get
+    uri: https://management.azure.com/subscriptions/[subscription]/providers/Microsoft.ContainerService/locations/westus3/kubernetesVersions?api-version=2023-07-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux x86_64) ruby/3.1.2p20
+      Authorization:
+      - "[token]"
+      Host:
+      - management.azure.com
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Transfer-Encoding:
+      - chunked
+      Content-Type:
+      - application/json
+      Expires:
+      - "-1"
+      Vary:
+      - Accept-Encoding
+      X-Ms-Ratelimit-Remaining-Subscription-Reads:
+      - '11999'
+      X-Ms-Correlation-Request-Id:
+      - 5be726d3-ac33-4ddf-9d82-e0f764677a3c
+      X-Ms-Request-Id:
+      - a733fe95-1f72-46d3-ac0a-8969792c3174
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - nginx
+      X-Ms-Routing-Request-Id:
+      - WESTUS2:20230809T022412Z:5be726d3-ac33-4ddf-9d82-e0f764677a3c
+      Date:
+      - Wed, 09 Aug 2023 02:24:11 GMT
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "values": [
+           {
+            "version": "1.27",
+            "capabilities": {
+             "supportPlan": [
+              "KubernetesOfficial",
+              "AKSLongTermSupport"
+             ]
+            },
+            "patchVersions": {
+             "1.27.1": {
+              "upgrades": [
+               "1.27.3"
+              ]
+             },
+             "1.27.3": {
+              "upgrades": []
+             }
+            }
+           },
+           {
+            "version": "1.24",
+            "capabilities": {
+             "supportPlan": [
+              "KubernetesOfficial"
+             ]
+            },
+            "patchVersions": {
+             "1.24.10": {
+              "upgrades": [
+               "1.24.15",
+               "1.25.6",
+               "1.25.11"
+              ]
+             },
+             "1.24.15": {
+              "upgrades": [
+               "1.25.6",
+               "1.25.11"
+              ]
+             }
+            }
+           },
+           {
+            "version": "1.25",
+            "capabilities": {
+             "supportPlan": [
+              "KubernetesOfficial"
+             ]
+            },
+            "patchVersions": {
+             "1.25.11": {
+              "upgrades": [
+               "1.26.3",
+               "1.26.6"
+              ]
+             },
+             "1.25.6": {
+              "upgrades": [
+               "1.25.11",
+               "1.26.3",
+               "1.26.6"
+              ]
+             }
+            }
+           },
+           {
+            "version": "1.26",
+            "capabilities": {
+             "supportPlan": [
+              "KubernetesOfficial"
+             ]
+            },
+            "patchVersions": {
+             "1.26.3": {
+              "upgrades": [
+               "1.27.3",
+               "1.26.6",
+               "1.27.1"
+              ]
+             },
+             "1.26.6": {
+              "upgrades": [
+               "1.27.3",
+               "1.27.1"
+              ]
+             }
+            }
+           }
+          ]
+         }
+    adapter_metadata:
+      vcr_decompressed: gzip
+  recorded_at: Wed, 09 Aug 2023 02:24:12 GMT
+recorded_with: VCR 6.1.0

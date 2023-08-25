@@ -12,7 +12,7 @@ module Azure
     private
 
     def set_cli()
-      @cli = Azure::Cli.load()
+      @cli = Azure::Interface.load()
     end
   end
 end

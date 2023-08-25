@@ -6,7 +6,7 @@ module Azure
 
     def update
       @credential = Azure::Credential.new(login_params)
-      if @credential.login
+      if @credential.save
         flash[:success] = t('engines.azure.login.success', service_principal: @credential.app_id)
         redirect_path = helpers.next_step_path(azure.edit_login_path)
       else

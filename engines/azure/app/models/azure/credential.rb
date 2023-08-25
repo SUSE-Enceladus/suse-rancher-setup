@@ -1,20 +1,35 @@
 module Azure
   # singular class for wrapping Azure CLI login
-  class Credential
-    include ActiveModel::Model
-
+  class Credential < AzureResource
     attr_accessor(:app_id, :password, :tenant)
 
-    def login
-      self.login!
-    rescue Azure::Cli::CliError => e
-      self.errors.add(:base, e.message)
-      return false
+    validate :can_login
+
+    def create_command()
+      self.creation_attributes = {
+        app_id: @app_id,
+        password: @password,
+        tenant: @tenant
+      }
+      self.id = @app_id
     end
 
-    def login!
-      @cli ||= Azure::Cli.load()
-      @cli.login(app_id: self.app_id, password: self.password, tenant: self.tenant)
+    def can_login
+      @api ||= Azure::Interface.new(
+        credential: self,
+        subscription: Azure::Subscription.load(),
+        region: Azure::Region.load()
+      )
+      begin
+        @api.login(credentials: {
+          app_id: @app_id, password: @password, tenant: @tenant
+        })
+      rescue Azure::Interface::LoginError => e
+        errors.add(:base, e.message)
+        return false
+      end
     end
+
+    def set_cli; end
   end
 end

@@ -1,20 +1,16 @@
 return unless defined?(RancherOnAks::Engine)
 return unless defined?(ShirtSize::Engine)
 
-RSpec.describe RancherOnAks::ClusterSize, type: :model do
+RSpec.describe RancherOnAks::ClusterSize, type: :model, vcr: true do
 
   Azure::Region.load().options.each do |option|
     Sizeable::TYPES.each do |size|
       context "region: #{option.last}" do
         context "size: #{size}" do
           before(:each) do
-            # TODO Use Cheetah VCR here
             KeyValue.set(:region, option.last)
             KeyValue.set('cluster_size', size)
-          end
-
-          before(:example) do
-            cheetah_vcr(context: 'cluster_size')
+            mock_azure_login()
           end
 
           it 'has an instance type' do

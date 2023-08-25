@@ -69,7 +69,6 @@ module RancherOnAks
 
         @cluster_size = RancherOnAks::ClusterSize.new
         @prefix = KeyValue.get('tag_scope')
-        @cli = Azure::Cli.load()
 
         zones = %w(1 2 3) # FIXME - Azure CLI command to look up zones (https://github.com/MicrosoftDocs/azure-docs/issues/40477)
         if zones.length >= @cluster_size.zones_count

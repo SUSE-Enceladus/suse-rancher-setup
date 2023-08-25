@@ -14,7 +14,7 @@ Simple, usable web application for deploying complex applications to the cloud; 
 * AWS-CLI (v1 or v2)
 * [ec2metadata](https://github.com/SUSE-Enceladus/ec2metadata)
 * helm ~3.4
-* [kuberlr](https://github.com/flavio/kuberlr) (or kubectl 1.22)
+* [kuberlr](https://github.com/flavio/kuberlr) (or kubectl 1.24)
 
 ## Contributing
 
@@ -50,7 +50,33 @@ This Ruby on Rails-bsed project uses [rvm](http://rvm.io/rvm/basics) to manage a
     rails server -b localhost -p 3000
     ````
 
+6.  If running the Azure engine, the active subscription ID is detected via IMDS (e.g., the suse-rancher-setup instance must run in the subscription where it will deploy). When developing locally, the subscription must be set via the `rails console` instead, before interacting with the Azure API:
+    ```
+    Azure::Subscription.new(value: "YOUR SUBSCRIPTION UUID").save
+    ```
+
 Please be sure to include a screenshot with any view or style changes.
+
+## Testing
+
+To run the full test suite using all avialable recordings, run `rails coverage`. Alternatively, specify a workflow and engine set, as would be defined in a production config, in environment variables, and only specs appropriate to that workflow will be run:
+
+* `LASSO_WORKFLOW` - name of the workflow engine
+* `LASSO_ENGINES` - comma-separated list of engines to load
+
+Example:
+```
+LASSO_WORKFLOW=RancherOnAks LASSO_ENGINES=Azure,ShirtSize,PreFlight,RancherOnAks,Helm rspec
+```
+
+### Azure
+
+The Azure interface uses the Azure REST API; test fixtures are recorded with VCR. To record new tests, delete the old recordings from `spec/vcr/$SPEC_NAME`, and set the following environment variables when running `rspec`:
+
+* `APP_ID` - The UUID of the Azure service principal
+* `PASSWORD` - the Azure service principal secret
+* `TENANT` - the Azure service principal tenant UUID
+* `SUBSCRIPTION` - the Azure subscription UUID where the application will be executed (SP must have permissions)
 
 ## Component Engine Architecture
 

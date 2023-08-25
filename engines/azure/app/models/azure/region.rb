@@ -45,18 +45,21 @@ module Azure
     end
 
     def cli
-      @cli ||= Azure::Cli.load
+      @cli ||= Azure::Interface.load
     end
 
     def save!
       KeyValue.set(:region, @value)
-      self.cli.set_default_region(@value)
     end
 
     def available_instance_types
-      JSON.parse(self.cli.list_sizes(region: @value)).collect{ |i| i['name'] }.sort
+      self.cli.list_sizes(region: @value).collect{ |i| i['name'] }.sort
     rescue
       []
+    end
+
+    def to_s
+      @value
     end
   end
 end

@@ -7,7 +7,7 @@ module RancherOnAks
 
     def initialize(args)
       super(**args)
-      @cli = Azure::Cli.load()
+      @cli = Azure::Interface.load()
     end
 
     def self.load
@@ -50,7 +50,7 @@ module RancherOnAks
         domain: self.domain
       )
       true
-    rescue Azure::Cli::CliError
+    rescue RestClient::NotFound
       false
     end
   end

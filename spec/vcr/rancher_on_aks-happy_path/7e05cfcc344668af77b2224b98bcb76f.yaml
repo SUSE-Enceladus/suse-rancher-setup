@@ -1,6 +1,0 @@
----
-- "\e[0;32mKubernetes control plane\e[0m is running at \e[0;33mhttps://suse-ranch-suse-rancher-set-5f40ee-3lxzablj.hcp.westus3.azmk8s.io:443\e[0m\n\e[0;32mCoreDNS\e[0m
-  is running at \e[0;33mhttps://suse-ranch-suse-rancher-set-5f40ee-3lxzablj.hcp.westus3.azmk8s.io:443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy\e[0m\n\e[0;32mMetrics-server\e[0m
-  is running at \e[0;33mhttps://suse-ranch-suse-rancher-set-5f40ee-3lxzablj.hcp.westus3.azmk8s.io:443/api/v1/namespaces/kube-system/services/https:metrics-server:/proxy\e[0m\n\nTo
-  further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.\n"
-- ''

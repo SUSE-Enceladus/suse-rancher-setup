@@ -1,6 +1,0 @@
-1355b2f48c758319ab6f6a3c75c67806.yaml	az config set core.output=json
-2ad22a926f05d9823f6abe8eadcf7d89.yaml	az config set core.disable_confirm_prompt=true
-7818b259582ab243f8d3416ab830c06c.yaml	az config set core.collect_telemetry=false
-b7141240f50fcfb415a70724b7663ec1.yaml	az config set core.only_show_errors=true
-7a9d5c7407a2edfa00c2691c40d4806f.yaml	az config set core.no_color=true
-4bfaf6ad62da4192c261a760452184bf.yaml	az aks get-versions --query orchestrators[].orchestratorVersion
