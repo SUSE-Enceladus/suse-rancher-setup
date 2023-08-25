@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Aug 25 16:26:57 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 2.0.6
+  - Use Azure REST API; no more dependency on azure-cli ('az')
+
+-------------------------------------------------------------------
 Tue Apr 18 17:29:43 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 2.0.5
