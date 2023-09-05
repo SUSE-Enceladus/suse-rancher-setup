@@ -7,8 +7,9 @@ module RancherOnAks
 
       @fqdn = RancherOnAks::Fqdn.load()
       @password = Helm::Rancher.last.initial_password
-      @resource_group = Azure::ResourceGroup.first
       @cluster = Azure::Cluster.last
+      @resource_group = @cluster.resource_group
+
 
       render(:success)
     end
