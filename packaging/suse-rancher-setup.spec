@@ -1,7 +1,7 @@
 #
 # spec file for package suse-rancher-setup
 #
-# Copyright (c) 2022 SUSE LLC
+# Copyright (c) 2023 SUSE LLC
 #
 # All modifications and additions to the file contributed by third parties
 # remain the property of their copyright owners, unless otherwise agreed
@@ -31,7 +31,9 @@ Source0:        %{name}-%{version}.tar.bz2
 Source1:        suse-rancher-setup.rpmlintrc
 BuildRequires:  %{ruby_version}-devel
 BuildRequires:  chrpath
-BuildRequires:  gcc
+BuildRequires:  fdupes
+BuildRequires:  gcc-c++
+BuildRequires:  libstdc++-devel
 BuildRequires:  nginx
 BuildRequires:  openssl
 BuildRequires:  sqlite3-devel
@@ -104,6 +106,9 @@ grep -rl '\/usr\/bin\/env ruby' %{buildroot}%{lib_dir}/vendor/bundle/ruby | xarg
     -e 's@\/usr\/bin\/env ruby@\/usr\/bin\/ruby\.%{ruby_version}@g'
 grep -rl '\/usr\/bin\/env bash' %{buildroot}%{lib_dir}/vendor/bundle/ruby | xargs \
     sed -i -e 's@\/usr\/bin\/env bash@\/bin\/bash@g'
+grep -rl '\/usr\/bin\/env rake' %{buildroot}%{lib_dir}/vendor/bundle/ruby | xargs \
+    sed -i -e 's@\/usr\/bin\/env rake@\/usr\/bin\/rake@g'
+
 
 # cleanup unneeded files
 find %{buildroot}%{lib_dir} "(" -name "*.c" -o -name "*.h" -o -name .keep ")" -delete
@@ -127,11 +132,12 @@ rm -f %{buildroot}%{lib_dir}/vendor/bundle/ruby/*/extensions/*/*/*/gem_make.out
 rm -f %{buildroot}%{lib_dir}/vendor/bundle/ruby/*/extensions/*/*/*/mkmf.log
 rm -rf %{buildroot}%{app_dir}/server-configs
 
-%fdupes %{buildroot}/%{app_dir}
-%fdupes %{buildroot}/%{lib_dir}
-
 # generate TLS self-signed cert for nginx
 cd %{buildroot}%{app_dir}/public/ && openssl req -new -newkey rsa:4096 -days 3650 -nodes -x509 -subj "/CN=localhost" -keyout suse-rancher-setup.key -out suse-rancher-setup.crt
+
+# clean up duplicates
+%fdupes %{buildroot}/%{app_dir}
+%fdupes -s %{buildroot}/%{lib_dir}
 
 %files
 %attr(-,root,root) %{app_dir}
