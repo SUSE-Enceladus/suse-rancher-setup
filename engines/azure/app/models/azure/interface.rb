@@ -254,7 +254,6 @@ module Azure
       id = JSON.parse(response)['value'].find{|resource| resource['name'] == zone }['id']
       id.match(/resourceGroups\/(?<resourcegroup>.+)\/providers/)[:resourcegroup]
     rescue RestClient::ExceptionWithResponse, NoMethodError
-      debugger
       nil
     end
 
