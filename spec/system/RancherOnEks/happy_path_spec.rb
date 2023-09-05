@@ -21,14 +21,14 @@ RSpec::Steps.steps('RancherOnEks: small cluster', type: :system) do
       # should be disabled when re-recording. Reset with value from:
       #
       # grep 'TAG RANDOM ID' log/test.log
-      allow_any_instance_of(RancherOnEks::Deployment).to receive(:random_num).and_return(4789)
+      allow_any_instance_of(RancherOnEks::Deployment).to receive(:random_num).and_return(8689)
 
       # Selected AZs need to match the last recording, and this stub should be
       # disabled when re-recording. Reset with value from
       #
       # grep 'SELECTED ZONES' log/test.log
       allow_any_instance_of(RancherOnEks::Deployment).to receive(:select_zones).and_return(
-        ["us-west-2d", "us-west-2c", "us-west-2b"]
+        ["us-west-2a", "us-west-2b", "us-west-2c"]
       )
       cheetah_vcr(context: 'rancher_on_eks-happy_path')
     end
