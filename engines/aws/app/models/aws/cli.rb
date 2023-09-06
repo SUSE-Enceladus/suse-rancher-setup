@@ -386,6 +386,7 @@ module AWS
         --kubeconfig #{kubeconfig}
       )
       execute(args)
+      FileUtils.chmod(0600, kubeconfig)
     end
 
     def describe_node_group(node_group_name, cluster_name)

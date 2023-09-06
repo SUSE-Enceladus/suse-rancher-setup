@@ -242,6 +242,7 @@ module Azure
         kubeconfig,
         Base64.decode64(JSON.parse(response)['kubeconfigs'].first['value'])
       )
+      FileUtils.chmod(0600, kubeconfig)
     end
 
     # DNS zones
