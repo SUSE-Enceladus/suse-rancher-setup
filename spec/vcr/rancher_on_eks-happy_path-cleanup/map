@@ -1,50 +1,53 @@
-a497aac7ad2b1b8b8b91f0159269a39c.yaml	aws eks delete-nodegroup --nodegroup-name suse-rancher-setup-4789-cluster-nodegroup --cluster-name suse-rancher-setup-4789-cluster
-b9239892c067db75c08e4c3f1c876849.yaml	aws eks describe-nodegroup --nodegroup-name suse-rancher-setup-4789-cluster-nodegroup --cluster-name suse-rancher-setup-4789-cluster
-7bd094f5266368bf686922330ff0def9.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
-1194a88f7cfd64ea6acdac76b1eff3b2.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-9e8704fa52fee35e49aa75a187e1ed52.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-1990218ace696177cc547fdee00911b5.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-6c522bd39f2f7d121cf5d69e918bcf4a.yaml	aws iam delete-role --role-name suse-rancher-setup-4789-nodegroup-role
-490e7826e5d00e9a1632402bebc37ba9.yaml	aws iam get-role --role-name suse-rancher-setup-4789-nodegroup-role
-9a638c714127de2ec719fda62fb5697b.yaml	aws eks delete-cluster --name suse-rancher-setup-4789-cluster
-f404659ca2cd40c4709b724d86638c6e.yaml	aws eks describe-cluster --name suse-rancher-setup-4789-cluster
-a3409b85f202838e58fbe4e6444fee85.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-4789-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
-8ea3f25dc1f0e54eeaba27f687bf0492.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-4789-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSVPCResourceController
-d619ad1daccc01a0b9081324328c52fc.yaml	aws iam delete-role --role-name suse-rancher-setup-4789-cluster-role
-801ef83f7c989fa322b30151c78359b0.yaml	aws iam get-role --role-name suse-rancher-setup-4789-cluster-role
-4abeca41f90b247f38c8e8c56b6a85c6.yaml	aws ec2 delete-security-group --group-id sg-018e05a7768f758ab
-17709b0df8f8989871f8fabfa9798c2c.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-074222e0890567e19
-4b8cd349d40838b2d8c76a91adc6cfb1.yaml	aws ec2 delete-route-table --route-table-id rtb-07c673a9a0c41ea65
-e7b45301836a58c256c9c9b43d0cb042.yaml	aws ec2 describe-route-tables --route-table-ids rtb-07c673a9a0c41ea65
-6d684e7a1f87f2a2ecaab80d92a6c3f7.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-0a1bd20253ff25b00
-42f45575ce02d55c6f96eeef0ea63b34.yaml	aws ec2 delete-route-table --route-table-id rtb-038b9cd4331ae2608
-f7f75e21fd4904796be4e87360fe833a.yaml	aws ec2 describe-route-tables --route-table-ids rtb-038b9cd4331ae2608
-1a2e9fcc8c63eade04bf9456cbee49c7.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-0fb1afe3b231783c9
-93a46c0b4802b697b65665792f435967.yaml	aws ec2 delete-route-table --route-table-id rtb-00d88d1cc86c2867f
-506e2ea9a7b87e9fd88367dcc645f682.yaml	aws ec2 describe-route-tables --route-table-ids rtb-00d88d1cc86c2867f
-33f5025fe08de8008ee5e13685ba89eb.yaml	aws ec2 delete-nat-gateway --nat-gateway-id nat-0efdfe1a7f0aead63
-4beb991664592209b2c5ab4a89451f7a.yaml	aws ec2 describe-nat-gateways --nat-gateway-ids nat-0efdfe1a7f0aead63
-c7f9eb30dcc10d910d0e0043c9afa439.yaml	aws ec2 release-address --allocation-id eipalloc-05171c912bd78b580
-317cb8555b97d56a70953e29c2ff7b01.yaml	aws ec2 describe-addresses --allocation-ids eipalloc-05171c912bd78b580
-2f8c75d7cac483b11932a297f7fd4dc1.yaml	aws ec2 delete-subnet --subnet-id subnet-00a5be365ebfbfed3
-ae4a5450f80922f5820bf7640b6df272.yaml	aws ec2 describe-subnets --subnet-ids subnet-00a5be365ebfbfed3
-14f32a404e9d5662e787ea661bceb394.yaml	aws ec2 delete-subnet --subnet-id subnet-0e82f9734622f0753
-05d0e3a7042e1caf6b7d84a055708f46.yaml	aws ec2 describe-subnets --subnet-ids subnet-0e82f9734622f0753
-8ab2c2c8918915e4ad5d7bc27d90db3b.yaml	aws ec2 delete-subnet --subnet-id subnet-00f434e86e6383c30
-60a7f403c3a8a64ecba2da45a629b9c5.yaml	aws ec2 describe-subnets --subnet-ids subnet-00f434e86e6383c30
-97992b6274b16f202145468a1af575a3.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-00d1d47ed95d5cb4a
-445477b4ea68cfed8210e4fc9bb60fc9.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-0a67b434a48315eae
-7416062882dbdb2d22851eb10726c6e9.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-048093dcd852e4b1a
-3b649f9fc7128fa1a6d379cd26f33add.yaml	aws ec2 delete-route-table --route-table-id rtb-06f5ce29943b5e061
-c80d7dc03476ffc5cce14d57bc3f2dcf.yaml	aws ec2 describe-route-tables --route-table-ids rtb-06f5ce29943b5e061
-912d5ba6ae9e2d4c7c7526729584a541.yaml	aws ec2 detach-internet-gateway --internet-gateway-id igw-07bf3277d1b21e66e --vpc-id vpc-0461282d9d6e5777c
-d3a19516ef534e2a68d112bd0a0cab5b.yaml	aws ec2 delete-internet-gateway --internet-gateway-id igw-07bf3277d1b21e66e
-a23d6c852363473414648239169e8f24.yaml	aws ec2 describe-internet-gateways --internet-gateway-ids igw-07bf3277d1b21e66e
-005f9a49d2ac0bdd1ad237788b220d7f.yaml	aws ec2 delete-subnet --subnet-id subnet-0112b5f509844d430
-5c036ada75968c4cbb4576bc2498dc87.yaml	aws ec2 describe-subnets --subnet-ids subnet-0112b5f509844d430
-91349b2fbf80b596e997f62be7a323ff.yaml	aws ec2 delete-subnet --subnet-id subnet-0f8f892bc4e2e0fe3
-51395f6a681544fae2901c5d7c45fc91.yaml	aws ec2 describe-subnets --subnet-ids subnet-0f8f892bc4e2e0fe3
-5c6d776dcf57ef451b3f285159e91acf.yaml	aws ec2 delete-subnet --subnet-id subnet-0c605cc770d55a0c5
-b6c78120dc7a4965d86852d1cd5abfe5.yaml	aws ec2 describe-subnets --subnet-ids subnet-0c605cc770d55a0c5
-dac5e721b5849474d0b3b75da0041607.yaml	aws ec2 delete-vpc --vpc-id vpc-0461282d9d6e5777c
-609f907becada4187ae184a2296a3c23.yaml	aws ec2 describe-vpcs --vpc-ids vpc-0461282d9d6e5777c
+7793edfc5f5c08b5e751677e3ed34175.yaml	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}
+d45b5ddfd6f5913a60655d4ebf33c4b7.yaml	aws route53 change-resource-record-sets --hosted-zone-id /hostedzone/Z02789583EHHMJ1NWHJKM --change-batch {"Comment":"Delete suse-rancher-setup record set","Changes":[{"Action":"DELETE","ResourceRecordSet":{"Name":"rancher-setup-test.aws.bear454.com","Type":"CNAME","TTL":900,"ResourceRecords":[{"Value":"aaf2688be10c84ca2a670766a27c578e-505904997.us-west-2.elb.amazonaws.com"}]}}]}
+b0857e16b4f72a10089c58ca375fe9e3.yaml	helm uninstall ingress-nginx --namespace ingress-nginx
+2c52d4c33b09df1d55524c892159756b.yaml	aws eks delete-nodegroup --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --cluster-name suse-rancher-setup-8689-cluster
+06dbf6e23352aa4be8fe40ec1d44e4ed.yaml	aws eks describe-nodegroup --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --cluster-name suse-rancher-setup-8689-cluster
+a006e848b5b28ec21ec05889391d5538.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+0e1b7aad32fa69f30432c8415cb3b4ca.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+ab7352ab516e5cea3ed5211012edcb95.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+349d5039a35423e8220953537f288bd6.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+956bc375a2738933ebb93edc12d3d490.yaml	aws iam delete-role --role-name suse-rancher-setup-8689-nodegroup-role
+86b5857f977620c4bd3b69ec29ba74f0.yaml	aws iam get-role --role-name suse-rancher-setup-8689-nodegroup-role
+fc44f01e3892e58edd575909d3310c82.yaml	aws eks delete-cluster --name suse-rancher-setup-8689-cluster
+c9de8f7bbdcecaea3354f857399aa0bc.yaml	aws eks describe-cluster --name suse-rancher-setup-8689-cluster
+27cad35a65fa628cb4f52e7f5b0cf268.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+6a3dd2799638f507b1fddfb57694eb43.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSVPCResourceController
+028f8c4f50658c72418fe784f540a406.yaml	aws iam delete-role --role-name suse-rancher-setup-8689-cluster-role
+73fa0fa152b5cc9dff4e0aa0bb334618.yaml	aws iam get-role --role-name suse-rancher-setup-8689-cluster-role
+8d04ddd385b1c8cbdb5e73785e5ea448.yaml	aws ec2 delete-security-group --group-id sg-07591bee5e4b34435
+622cd38a40b9e3784790de5c247c9e50.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-03182f8a774d90db3
+b03a60d92913e87e1ce520468e6c062d.yaml	aws ec2 delete-route-table --route-table-id rtb-00607ab2892c8fde5
+e521d8fa85e88eb15a96d0e16f32b77e.yaml	aws ec2 describe-route-tables --route-table-ids rtb-00607ab2892c8fde5
+c52258e673e6ad6d04b10bbf18e84800.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-0ca49f6495577c163
+580971e15d0380c66003728e001ce538.yaml	aws ec2 delete-route-table --route-table-id rtb-02dd293d86f563e2f
+0bbab84a6e059fbebf8d44cc10d48e32.yaml	aws ec2 describe-route-tables --route-table-ids rtb-02dd293d86f563e2f
+f160913f37b476d8fd910f0706b97822.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-08177dee60ad707bc
+6ae22b146093f0c6f691c8ff0f4af455.yaml	aws ec2 delete-route-table --route-table-id rtb-0f512fb412c355bb9
+56d79fc72b9a12e494331dec6a7a9f9a.yaml	aws ec2 describe-route-tables --route-table-ids rtb-0f512fb412c355bb9
+cc3184232b0f8a154faeac81b0712047.yaml	aws ec2 delete-nat-gateway --nat-gateway-id nat-016f49a7fe9427489
+6046290df749241f92df4ab2902814c9.yaml	aws ec2 describe-nat-gateways --nat-gateway-ids nat-016f49a7fe9427489
+010a202b5afcda5bde259cb6a2b8ad0d.yaml	aws ec2 release-address --allocation-id eipalloc-0ea8bdf29fbcddb61
+7485bf9cb144d9a237a9fbb90a6b613f.yaml	aws ec2 describe-addresses --allocation-ids eipalloc-0ea8bdf29fbcddb61
+fe0a85797182717cbba0c9856e19656a.yaml	aws ec2 delete-subnet --subnet-id subnet-06a297eba3f27b241
+c69a32a2416bf3c77cefacb713ad362d.yaml	aws ec2 describe-subnets --subnet-ids subnet-06a297eba3f27b241
+04ab1c8ec71b7c60e60cf81054a802d7.yaml	aws ec2 delete-subnet --subnet-id subnet-032f34a83d7591c2f
+66ae83ae70abe5b40ac33e591cbde110.yaml	aws ec2 describe-subnets --subnet-ids subnet-032f34a83d7591c2f
+9542a532c9d9bce12f03b63bb6f85f57.yaml	aws ec2 delete-subnet --subnet-id subnet-0b3e8297571a18046
+8a4bd47854eb329f68ce9e2945e5b2e8.yaml	aws ec2 describe-subnets --subnet-ids subnet-0b3e8297571a18046
+831657e5d0ff3f10e2d3bd52ca7c9537.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-07fdada632d3c1646
+617fe108633dedc6f7f572320ea244ba.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-0f445bcb7decb0462
+b03c00aaec9ee1331519bf0f7172e56d.yaml	aws ec2 disassociate-route-table --association-id rtbassoc-064123c56f28e8278
+71bc7c8655f024ba81f045ef75c7ba7a.yaml	aws ec2 delete-route-table --route-table-id rtb-09ad5a7c91f2711e5
+8c2e9147708d457e8f57f5f4fda4af51.yaml	aws ec2 describe-route-tables --route-table-ids rtb-09ad5a7c91f2711e5
+ff90ca58b90f762c4de1119758cb4b6b.yaml	aws ec2 detach-internet-gateway --internet-gateway-id igw-05bbb6de093dc3d4d --vpc-id vpc-077775ad628d471db
+831be1bde40d15915ded485adc51e8cf.yaml	aws ec2 delete-internet-gateway --internet-gateway-id igw-05bbb6de093dc3d4d
+9f4035cef2ab07f421168088076e2e46.yaml	aws ec2 describe-internet-gateways --internet-gateway-ids igw-05bbb6de093dc3d4d
+c3246ffccaac41904baff1f1803541f6.yaml	aws ec2 delete-subnet --subnet-id subnet-0748caf3ee03f51b0
+b8c269d7a92aade6206a846f58da0f73.yaml	aws ec2 describe-subnets --subnet-ids subnet-0748caf3ee03f51b0
+523dd47d835b94c9b10466a1ab20872b.yaml	aws ec2 delete-subnet --subnet-id subnet-0be509226f10f10ed
+082666c1dce428682670ffb456b876a5.yaml	aws ec2 describe-subnets --subnet-ids subnet-0be509226f10f10ed
+4dcf7f63253c045191a8e353ff4b3747.yaml	aws ec2 delete-subnet --subnet-id subnet-0f25ed15952bbdf05
+6b2e8d5431b58cae119333066c909ef7.yaml	aws ec2 describe-subnets --subnet-ids subnet-0f25ed15952bbdf05
+39001239219a58f80e49e5b45fb88849.yaml	aws ec2 delete-vpc --vpc-id vpc-077775ad628d471db
+2f137cdf747c4bb6b1d435cc79ff3d12.yaml	aws ec2 describe-vpcs --vpc-ids vpc-077775ad628d471db

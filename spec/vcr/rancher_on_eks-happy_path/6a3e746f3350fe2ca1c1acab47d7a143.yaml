@@ -1,0 +1,10 @@
+---
+- |
+  {
+      "PublicIp": "35.155.142.100",
+      "AllocationId": "eipalloc-0ea8bdf29fbcddb61",
+      "PublicIpv4Pool": "amazon",
+      "NetworkBorderGroup": "us-west-2",
+      "Domain": "vpc"
+  }
+- ''

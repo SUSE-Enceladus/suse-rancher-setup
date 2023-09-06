@@ -28,6 +28,11 @@
               "OptInStatus": "opted-in"
           },
           {
+              "Endpoint": "ec2.il-central-1.amazonaws.com",
+              "RegionName": "il-central-1",
+              "OptInStatus": "opted-in"
+          },
+          {
               "Endpoint": "ec2.ca-central-1.amazonaws.com",
               "RegionName": "ca-central-1",
               "OptInStatus": "opt-in-not-required"

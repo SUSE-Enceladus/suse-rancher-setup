@@ -7,61 +7,85 @@
 63d89c0546a51565de5b4b49331ebf58.yaml	aws route53 list-hosted-zones-by-name --dns-name aws.bear454.com
 39e8bf8f111c2d59e5311200689f3445.yaml	aws service-quotas get-service-quota --service-code vpc --quota-code L-F678F1CE
 9b4bb46598581d00efd6404765f33101.yaml	aws ec2 describe-vpcs --no-paginate --query Vpcs[].VpcId
-9e55ee8526ac5678b5ab2ec661cc0265.yaml	aws ec2 create-vpc --cidr-block 192.168.0.0/16 --tag-specifications ResourceType=vpc,Tags=[{Key=Name,Value="suse-rancher-setup-4789/vpc"}]
-609f907becada4187ae184a2296a3c23.yaml	aws ec2 describe-vpcs --vpc-ids vpc-0461282d9d6e5777c
-9af70bfe2365d14083e58a27fb6315d5.yaml	aws ec2 modify-vpc-attribute --vpc-id vpc-0461282d9d6e5777c --enable-dns-hostnames
-18786e8a13643f54b6f628fe4151dc4f.yaml	aws ec2 modify-vpc-attribute --vpc-id vpc-0461282d9d6e5777c --enable-dns-support
-94b5459241fa135f5b262484a18ed9c3.yaml	aws ec2 create-subnet --cidr-block 192.168.0.0/19 --availability-zone us-west-2d --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-4789/subnet_public_us-west-2d}]
-607a08da1c9d627a1a5866558c161067.yaml	aws ec2 modify-subnet-attribute --subnet-id subnet-0c605cc770d55a0c5 --map-public-ip-on-launch
-b6c78120dc7a4965d86852d1cd5abfe5.yaml	aws ec2 describe-subnets --subnet-ids subnet-0c605cc770d55a0c5
-4f85400243acbaab34c799efe4b7afed.yaml	aws ec2 create-subnet --cidr-block 192.168.32.0/19 --availability-zone us-west-2c --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-4789/subnet_public_us-west-2c}]
-9ff39e7c29f65fc309d33137d670c64a.yaml	aws ec2 modify-subnet-attribute --subnet-id subnet-0f8f892bc4e2e0fe3 --map-public-ip-on-launch
-51395f6a681544fae2901c5d7c45fc91.yaml	aws ec2 describe-subnets --subnet-ids subnet-0f8f892bc4e2e0fe3
-2330256ca6f3a98b01b0ad3685ce18ea.yaml	aws ec2 create-subnet --cidr-block 192.168.64.0/19 --availability-zone us-west-2b --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-4789/subnet_public_us-west-2b}]
-5dc17071ad593fe7274195ee8cb19d5a.yaml	aws ec2 modify-subnet-attribute --subnet-id subnet-0112b5f509844d430 --map-public-ip-on-launch
-5c036ada75968c4cbb4576bc2498dc87.yaml	aws ec2 describe-subnets --subnet-ids subnet-0112b5f509844d430
-695493bb3b6b25d6b438e0a40d64026f.yaml	aws ec2 create-internet-gateway --tag-specifications ResourceType=internet-gateway,Tags=[{Key=Name,Value=suse-rancher-setup-4789/internet-gateway}]
-a23d6c852363473414648239169e8f24.yaml	aws ec2 describe-internet-gateways --internet-gateway-ids igw-07bf3277d1b21e66e
-1eeb7df9f0d68514fb8fdab4a579a39a.yaml	aws ec2 attach-internet-gateway --vpc-id vpc-0461282d9d6e5777c --internet-gateway-id igw-07bf3277d1b21e66e
-bd8543fd40c4c7c01f418b09e6c25f67.yaml	aws ec2 create-route-table --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-4789/}]
-c80d7dc03476ffc5cce14d57bc3f2dcf.yaml	aws ec2 describe-route-tables --route-table-ids rtb-06f5ce29943b5e061
-1c0acc79af1f02612c6753c1beddefe8.yaml	aws ec2 create-route --route-table-id rtb-06f5ce29943b5e061 --gateway-id igw-07bf3277d1b21e66e --destination-cidr-block 0.0.0.0/0
-13ba9751b15bc70fadf6389e14a21f5e.yaml	aws ec2 associate-route-table --subnet-id subnet-0c605cc770d55a0c5 --route-table-id rtb-06f5ce29943b5e061
-8ad26486577ea36f90ef8ea3541ba5d7.yaml	aws ec2 associate-route-table --subnet-id subnet-0f8f892bc4e2e0fe3 --route-table-id rtb-06f5ce29943b5e061
-6e7c29c327f96dc5336aabc741917361.yaml	aws ec2 associate-route-table --subnet-id subnet-0112b5f509844d430 --route-table-id rtb-06f5ce29943b5e061
-3a4ec26de6aec8334ffdacf97ae3a658.yaml	aws ec2 create-subnet --cidr-block 192.168.96.0/19 --availability-zone us-west-2d --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-4789/subnet_private_us-west-2d}]
-60a7f403c3a8a64ecba2da45a629b9c5.yaml	aws ec2 describe-subnets --subnet-ids subnet-00f434e86e6383c30
-f17aa8910a827ebca1946be9432523ea.yaml	aws ec2 create-subnet --cidr-block 192.168.128.0/19 --availability-zone us-west-2c --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-4789/subnet_private_us-west-2c}]
-05d0e3a7042e1caf6b7d84a055708f46.yaml	aws ec2 describe-subnets --subnet-ids subnet-0e82f9734622f0753
-29d0c9d8f64c932cd190d30a20fc5437.yaml	aws ec2 create-subnet --cidr-block 192.168.160.0/19 --availability-zone us-west-2b --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-4789/subnet_private_us-west-2b}]
-ae4a5450f80922f5820bf7640b6df272.yaml	aws ec2 describe-subnets --subnet-ids subnet-00a5be365ebfbfed3
-7d5c7475d8078bdb9b88fede87fde4d9.yaml	aws ec2 allocate-address --domain vpc --tag-specifications ResourceType=elastic-ip,Tags=[{Key=Name,Value=suse-rancher-setup-4789/elastic-ip}]
-317cb8555b97d56a70953e29c2ff7b01.yaml	aws ec2 describe-addresses --allocation-ids eipalloc-05171c912bd78b580
-22b87cbb035c75298c33cba1ef70633a.yaml	aws ec2 create-nat-gateway --subnet-id subnet-0c605cc770d55a0c5 --connectivity-type public --tag-specifications ResourceType=natgateway,Tags=[{Key=Name,Value=suse-rancher-setup-4789/nat-gateway}] --allocation-id eipalloc-05171c912bd78b580
-4beb991664592209b2c5ab4a89451f7a.yaml	aws ec2 describe-nat-gateways --nat-gateway-ids nat-0efdfe1a7f0aead63
-d6d2beb788f2aab48fb6103f0065b5c2.yaml	aws ec2 create-route-table --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-4789/private-route-table-0}]
-506e2ea9a7b87e9fd88367dcc645f682.yaml	aws ec2 describe-route-tables --route-table-ids rtb-00d88d1cc86c2867f
-639fc10a3b5c2ce70a57beda34df803c.yaml	aws ec2 associate-route-table --subnet-id subnet-00f434e86e6383c30 --route-table-id rtb-00d88d1cc86c2867f
-83e941bdaa0cf30f4c6d0c4bf7d12d0e.yaml	aws ec2 create-route-table --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-4789/private-route-table-1}]
-f7f75e21fd4904796be4e87360fe833a.yaml	aws ec2 describe-route-tables --route-table-ids rtb-038b9cd4331ae2608
-627b09c728baeb1772574b5096840809.yaml	aws ec2 associate-route-table --subnet-id subnet-0e82f9734622f0753 --route-table-id rtb-038b9cd4331ae2608
-2ab9f581a2e978626891ab8d0c182e30.yaml	aws ec2 create-route-table --vpc-id vpc-0461282d9d6e5777c --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-4789/private-route-table-2}]
-e7b45301836a58c256c9c9b43d0cb042.yaml	aws ec2 describe-route-tables --route-table-ids rtb-07c673a9a0c41ea65
-d2e756e2f8ba4bccf6f078fa7d0cdba1.yaml	aws ec2 associate-route-table --subnet-id subnet-00a5be365ebfbfed3 --route-table-id rtb-07c673a9a0c41ea65
-ff08bdbc0b97284c8f496b0b39703179.yaml	aws ec2 create-security-group --vpc-id vpc-0461282d9d6e5777c --group-name suse-rancher-setup-4789-sg --description Security group for suse-rancher-setup-4789
-74eefdc8fdf421706942179b9feba57e.yaml	aws iam create-role --role-name suse-rancher-setup-4789-cluster-role --assume-role-policy-document file:///tmp/cluster-role-trust-policy.json
-801ef83f7c989fa322b30151c78359b0.yaml	aws iam get-role --role-name suse-rancher-setup-4789-cluster-role
-29f7df99616e6879e7a5bb13648cb97c.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-4789-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
-24d6d66bd8480c49a14599d62512ef62.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-4789-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSVPCResourceController
-03cfa0f589866ab53aa579a45294457e.yaml	aws eks create-cluster --name suse-rancher-setup-4789-cluster --kubernetes-version 1.23 --role-arn arn:aws:iam::810320120389:role/suse-rancher-setup-4789-cluster-role --resources-vpc-config subnetIds=subnet-0c605cc770d55a0c5,subnet-0f8f892bc4e2e0fe3,subnet-0112b5f509844d430,subnet-00f434e86e6383c30,subnet-0e82f9734622f0753,subnet-00a5be365ebfbfed3,securityGroupIds=sg-018e05a7768f758ab
-f404659ca2cd40c4709b724d86638c6e.yaml	aws eks describe-cluster --name suse-rancher-setup-4789-cluster
-1af518141193326dd7d9e6da10fb6a62.yaml	aws iam create-role --role-name suse-rancher-setup-4789-nodegroup-role --assume-role-policy-document file:///tmp/nodegroup-role-trust-policy.json
-490e7826e5d00e9a1632402bebc37ba9.yaml	aws iam get-role --role-name suse-rancher-setup-4789-nodegroup-role
-3cb4165fe14762358c64912a1f07d867.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
-7ecaaae8d462517fd8d94abfc5a27f25.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
-86f3f87157b74ad5f8cda107de44d821.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
-e1afcc5ce5beef2bf54caf537426b7d0.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-4789-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
-bf566d2ed4dd08fc5d6353eb53b6773b.yaml	aws eks create-nodegroup --cluster-name suse-rancher-setup-4789-cluster --nodegroup-name suse-rancher-setup-4789-cluster-nodegroup --scaling-config minSize=2,maxSize=4,desiredSize=3 --instance-types m5a.large --ami-type AL2_x86_64 --node-role arn:aws:iam::810320120389:role/suse-rancher-setup-4789-nodegroup-role --labels role=suse-rancher-setup-4789-cluster-general-worker --capacity-type ON_DEMAND --subnets subnet-0c605cc770d55a0c5 subnet-0f8f892bc4e2e0fe3 subnet-0112b5f509844d430
-b9239892c067db75c08e4c3f1c876849.yaml	aws eks describe-nodegroup --nodegroup-name suse-rancher-setup-4789-cluster-nodegroup --cluster-name suse-rancher-setup-4789-cluster
-77c86c2b23bffcceed5840697ae2b952.yaml	aws eks update-kubeconfig --name suse-rancher-setup-4789-cluster --kubeconfig /tmp/kubeconfig
-7e05cfcc344668af77b2224b98bcb76f.yaml	kubectl cluster-info
+1d6db4c04cdcec090c16f20b67ae72de.yaml	aws ec2 describe-instance-type-offerings --location-type availability-zone --filters Name=instance-type,Values=m5a.large
+6f395d4e3bedbd6ae62bd4aba7a88114.yaml	aws ec2 create-vpc --cidr-block 192.168.0.0/16 --tag-specifications ResourceType=vpc,Tags=[{Key=Name,Value="suse-rancher-setup-8689/vpc"}]
+2f137cdf747c4bb6b1d435cc79ff3d12.yaml	aws ec2 describe-vpcs --vpc-ids vpc-077775ad628d471db
+1fef9dfd295790326c1c92fdcc4e9128.yaml	aws ec2 modify-vpc-attribute --vpc-id vpc-077775ad628d471db --enable-dns-hostnames
+2910a95179aebe3d98425a7188497d03.yaml	aws ec2 modify-vpc-attribute --vpc-id vpc-077775ad628d471db --enable-dns-support
+60df35cd33d3e5e3d6237e48ac166964.yaml	aws ec2 create-subnet --cidr-block 192.168.0.0/19 --availability-zone us-west-2a --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-8689/subnet_public_us-west-2a}]
+d11f7511e7fc06b591014bcb345fb965.yaml	aws ec2 modify-subnet-attribute --subnet-id subnet-0f25ed15952bbdf05 --map-public-ip-on-launch
+6b2e8d5431b58cae119333066c909ef7.yaml	aws ec2 describe-subnets --subnet-ids subnet-0f25ed15952bbdf05
+4aef03bddf73bbb17dab7ac4fcaa8069.yaml	aws ec2 create-subnet --cidr-block 192.168.32.0/19 --availability-zone us-west-2b --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-8689/subnet_public_us-west-2b}]
+68c051f102a1011332de1ed5f77a58a0.yaml	aws ec2 modify-subnet-attribute --subnet-id subnet-0be509226f10f10ed --map-public-ip-on-launch
+082666c1dce428682670ffb456b876a5.yaml	aws ec2 describe-subnets --subnet-ids subnet-0be509226f10f10ed
+5dc8a763c69c44f4a0692d47a63e4310.yaml	aws ec2 create-subnet --cidr-block 192.168.64.0/19 --availability-zone us-west-2c --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-8689/subnet_public_us-west-2c}]
+19a20f8c7221247926b8b1307d23f30a.yaml	aws ec2 modify-subnet-attribute --subnet-id subnet-0748caf3ee03f51b0 --map-public-ip-on-launch
+b8c269d7a92aade6206a846f58da0f73.yaml	aws ec2 describe-subnets --subnet-ids subnet-0748caf3ee03f51b0
+6b6978f6feab5d1b62b727d6e4cb0257.yaml	aws ec2 create-internet-gateway --tag-specifications ResourceType=internet-gateway,Tags=[{Key=Name,Value=suse-rancher-setup-8689/internet-gateway}]
+9f4035cef2ab07f421168088076e2e46.yaml	aws ec2 describe-internet-gateways --internet-gateway-ids igw-05bbb6de093dc3d4d
+10540957e1859480b8c48d7ab9711c1c.yaml	aws ec2 attach-internet-gateway --vpc-id vpc-077775ad628d471db --internet-gateway-id igw-05bbb6de093dc3d4d
+7c6cb79e1c666d7207afeb6bd39fd9ee.yaml	aws ec2 create-route-table --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-8689/}]
+8c2e9147708d457e8f57f5f4fda4af51.yaml	aws ec2 describe-route-tables --route-table-ids rtb-09ad5a7c91f2711e5
+378036411f67aaaee1639e69e8712d0f.yaml	aws ec2 create-route --route-table-id rtb-09ad5a7c91f2711e5 --gateway-id igw-05bbb6de093dc3d4d --destination-cidr-block 0.0.0.0/0
+9bb9a3a5d6e74fd22d94fc3bdba8ca61.yaml	aws ec2 associate-route-table --subnet-id subnet-0f25ed15952bbdf05 --route-table-id rtb-09ad5a7c91f2711e5
+a0f1db9a54d84fce6db396f1ae39747e.yaml	aws ec2 associate-route-table --subnet-id subnet-0be509226f10f10ed --route-table-id rtb-09ad5a7c91f2711e5
+9c5980a38c9af16940441108bbb9aae0.yaml	aws ec2 associate-route-table --subnet-id subnet-0748caf3ee03f51b0 --route-table-id rtb-09ad5a7c91f2711e5
+8d4d8882652b348afcc32f50e7c75d65.yaml	aws ec2 create-subnet --cidr-block 192.168.96.0/19 --availability-zone us-west-2a --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-8689/subnet_private_us-west-2a}]
+8a4bd47854eb329f68ce9e2945e5b2e8.yaml	aws ec2 describe-subnets --subnet-ids subnet-0b3e8297571a18046
+d8bc178101cf5404346b89c476dfd266.yaml	aws ec2 create-subnet --cidr-block 192.168.128.0/19 --availability-zone us-west-2b --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-8689/subnet_private_us-west-2b}]
+66ae83ae70abe5b40ac33e591cbde110.yaml	aws ec2 describe-subnets --subnet-ids subnet-032f34a83d7591c2f
+3b4439344d7d1ef8cac794febaf71b26.yaml	aws ec2 create-subnet --cidr-block 192.168.160.0/19 --availability-zone us-west-2c --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=subnet,Tags=[{Key=Name,Value=suse-rancher-setup-8689/subnet_private_us-west-2c}]
+c69a32a2416bf3c77cefacb713ad362d.yaml	aws ec2 describe-subnets --subnet-ids subnet-06a297eba3f27b241
+6a3e746f3350fe2ca1c1acab47d7a143.yaml	aws ec2 allocate-address --domain vpc --tag-specifications ResourceType=elastic-ip,Tags=[{Key=Name,Value=suse-rancher-setup-8689/elastic-ip}]
+7485bf9cb144d9a237a9fbb90a6b613f.yaml	aws ec2 describe-addresses --allocation-ids eipalloc-0ea8bdf29fbcddb61
+ddcbf207785d2dcbe7c140ac8c83e6d8.yaml	aws ec2 create-nat-gateway --subnet-id subnet-0f25ed15952bbdf05 --connectivity-type public --tag-specifications ResourceType=natgateway,Tags=[{Key=Name,Value=suse-rancher-setup-8689/nat-gateway}] --allocation-id eipalloc-0ea8bdf29fbcddb61
+6046290df749241f92df4ab2902814c9.yaml	aws ec2 describe-nat-gateways --nat-gateway-ids nat-016f49a7fe9427489
+0c597f28a17e9843f63450f68fab24d8.yaml	aws ec2 create-route-table --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-8689/private-route-table-0}]
+56d79fc72b9a12e494331dec6a7a9f9a.yaml	aws ec2 describe-route-tables --route-table-ids rtb-0f512fb412c355bb9
+2c6f43d0d8eeed647683b0bba676ebe4.yaml	aws ec2 associate-route-table --subnet-id subnet-0b3e8297571a18046 --route-table-id rtb-0f512fb412c355bb9
+a390186bd4e97fc7783b0d912db99b67.yaml	aws ec2 create-route-table --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-8689/private-route-table-1}]
+0bbab84a6e059fbebf8d44cc10d48e32.yaml	aws ec2 describe-route-tables --route-table-ids rtb-02dd293d86f563e2f
+87ac4ec59fb8d5ad80bac2cb4c97cb77.yaml	aws ec2 associate-route-table --subnet-id subnet-032f34a83d7591c2f --route-table-id rtb-02dd293d86f563e2f
+e44c9ed588f60bd5077a114cb1eb3308.yaml	aws ec2 create-route-table --vpc-id vpc-077775ad628d471db --tag-specifications ResourceType=route-table,Tags=[{Key=Name,Value=suse-rancher-setup-8689/private-route-table-2}]
+e521d8fa85e88eb15a96d0e16f32b77e.yaml	aws ec2 describe-route-tables --route-table-ids rtb-00607ab2892c8fde5
+509b0b386150f90b220757ae56da7e75.yaml	aws ec2 associate-route-table --subnet-id subnet-06a297eba3f27b241 --route-table-id rtb-00607ab2892c8fde5
+8401e34acc74c9e3645e0c8eb4fe2409.yaml	aws ec2 create-security-group --vpc-id vpc-077775ad628d471db --group-name suse-rancher-setup-8689-sg --description Security group for suse-rancher-setup-8689
+5c6337cc56658ce8fe6c3ab3e12a509f.yaml	aws iam create-role --role-name suse-rancher-setup-8689-cluster-role --assume-role-policy-document file:///tmp/cluster-role-trust-policy.json
+73fa0fa152b5cc9dff4e0aa0bb334618.yaml	aws iam get-role --role-name suse-rancher-setup-8689-cluster-role
+751d7875109e0e139c228abb444a73ac.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSClusterPolicy
+477a89e0d29619dc545af31cf54a7a25.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-cluster-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSVPCResourceController
+40adf04da05ee8f0c7e057736d132caf.yaml	aws eks create-cluster --name suse-rancher-setup-8689-cluster --kubernetes-version 1.26 --role-arn arn:aws:iam::810320120389:role/suse-rancher-setup-8689-cluster-role --resources-vpc-config subnetIds=subnet-0f25ed15952bbdf05,subnet-0be509226f10f10ed,subnet-0748caf3ee03f51b0,subnet-0b3e8297571a18046,subnet-032f34a83d7591c2f,subnet-06a297eba3f27b241,securityGroupIds=sg-07591bee5e4b34435
+c9de8f7bbdcecaea3354f857399aa0bc.yaml	aws eks describe-cluster --name suse-rancher-setup-8689-cluster
+ffac40cde02bae6b850530ba84dd8231.yaml	aws iam create-role --role-name suse-rancher-setup-8689-nodegroup-role --assume-role-policy-document file:///tmp/nodegroup-role-trust-policy.json
+86b5857f977620c4bd3b69ec29ba74f0.yaml	aws iam get-role --role-name suse-rancher-setup-8689-nodegroup-role
+4b021720d0e83ea8c74341d0f05cbec8.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+f26081866093c74120448f31953485e3.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy
+6fe0f9f254acd3abcd43476e7bc86dc2.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+62bf15a8f26c682acbc467ecfe3acfa4.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
+342efafb146db95c66057078f18ced8b.yaml	aws eks create-nodegroup --cluster-name suse-rancher-setup-8689-cluster --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --scaling-config minSize=2,maxSize=4,desiredSize=3 --instance-types m5a.large --ami-type AL2_x86_64 --node-role arn:aws:iam::810320120389:role/suse-rancher-setup-8689-nodegroup-role --labels role=suse-rancher-setup-8689-cluster-general-worker --capacity-type ON_DEMAND --subnets subnet-0f25ed15952bbdf05 subnet-0be509226f10f10ed subnet-0748caf3ee03f51b0
+06dbf6e23352aa4be8fe40ec1d44e4ed.yaml	aws eks describe-nodegroup --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --cluster-name suse-rancher-setup-8689-cluster
+cad54a0267a6016885d0ba38d65bc24e.yaml	aws eks update-kubeconfig --name suse-rancher-setup-8689-cluster --kubeconfig /tmp/kubeconfig
+635e62cdc23854e4760fb40639d313a0.yaml	kubectl version --output=json
+77b2b5cb6f7b6114b918b531fd9a2318.yaml	kubectl get namespaces --output json
+8c756c122e9b63f583880ba873c881a7.yaml	kubectl create namespace ingress-nginx
+852e5b3e7e62b09e0e7b500b32b80dea.yaml	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+8e00ee7cb4604761a2258b9dcf882005.yaml	helm repo update
+98657bffccce9e780d3da69b9441ff49.yaml	helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --version 4.0.18 --set controller.service.type=LoadBalancer --set controller.service.externalTrafficPolicy=Local
+a08d18d2b4e898faadb87070309f1ea7.yaml	helm status ingress-nginx --namespace ingress-nginx --show-desc --output json
+efbbb73070d71660443ed0b21fe3e118.yaml	kubectl rollout status deployment/ingress-nginx-controller --namespace ingress-nginx
+1ef9c2f42501bf68c44599174df5527c.yaml	kubectl get services --namespace ingress-nginx --output json
+b48b8a4a4334b093887a0600b98a79a5.yaml	kubectl get service ingress-nginx-controller --namespace ingress-nginx --output json
+787e0d37d32a94516607ed6e23ed73a4.yaml	aws route53 change-resource-record-sets --hosted-zone-id /hostedzone/Z02789583EHHMJ1NWHJKM --change-batch file:///var/tmp/dns_record.json
+882c6d0cbb0f8cc6c6ebd54f485fdb67.yaml	aws route53 list-resource-record-sets --hosted-zone-id /hostedzone/Z02789583EHHMJ1NWHJKM
+6324154e5104c0757a739350c2a775f6.yaml	kubectl create namespace cert-manager
+7c23ec2fc27ae4193158d32e65c1de05.yaml	kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
+566efc0fa13aeb3e47298a37a1a78311.yaml	helm repo add jetstack https://charts.jetstack.io
+f38bc324ffd0969471aaf73c763e25d6.yaml	helm install cert-manager jetstack/cert-manager --namespace cert-manager --version 1.7.1
+7849bfcdb1e3273102b850b9bf211011.yaml	helm status cert-manager --namespace cert-manager --show-desc --output json
+43d58ef14613c09690cd1d5277049734.yaml	kubectl rollout status deployment/cert-manager --namespace cert-manager
+637c37a77cb665fec8d768c3a71e663d.yaml	kubectl create namespace cattle-system
+5a99aac9ce7c62be859e6cf3443e4331.yaml	helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
+3c345438158818589930cc80dbd8f1ca.yaml	helm install rancher-stable rancher-stable/rancher --namespace cattle-system --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS --set-string extraEnv[0].value=true --set ingress.ingressClassName=nginx --set letsEncrypt.ingress.class=nginx --set hostname=rancher-setup-test.aws.bear454.com --set replicas=3 --version 2.7.6 --set ingress.tls.source=rancher
+5c4d425c4ed10b60ff6827a05ab0c1c5.yaml	helm status rancher-stable --namespace cattle-system --show-desc --output json
+ccc9e1bb11f341328377a5eac6c09c7b.yaml	kubectl rollout status deployment/rancher-stable --namespace cattle-system
+7793edfc5f5c08b5e751677e3ed34175.yaml	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}

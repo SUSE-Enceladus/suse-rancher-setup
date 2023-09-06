@@ -1,0 +1,62 @@
+---
+- |
+  {
+      "RouteTables": [
+          {
+              "Associations": [
+                  {
+                      "Main": false,
+                      "RouteTableAssociationId": "rtbassoc-07fdada632d3c1646",
+                      "RouteTableId": "rtb-09ad5a7c91f2711e5",
+                      "SubnetId": "subnet-0be509226f10f10ed",
+                      "AssociationState": {
+                          "State": "associated"
+                      }
+                  },
+                  {
+                      "Main": false,
+                      "RouteTableAssociationId": "rtbassoc-0f445bcb7decb0462",
+                      "RouteTableId": "rtb-09ad5a7c91f2711e5",
+                      "SubnetId": "subnet-0748caf3ee03f51b0",
+                      "AssociationState": {
+                          "State": "associated"
+                      }
+                  },
+                  {
+                      "Main": false,
+                      "RouteTableAssociationId": "rtbassoc-064123c56f28e8278",
+                      "RouteTableId": "rtb-09ad5a7c91f2711e5",
+                      "SubnetId": "subnet-0f25ed15952bbdf05",
+                      "AssociationState": {
+                          "State": "associated"
+                      }
+                  }
+              ],
+              "PropagatingVgws": [],
+              "RouteTableId": "rtb-09ad5a7c91f2711e5",
+              "Routes": [
+                  {
+                      "DestinationCidrBlock": "192.168.0.0/16",
+                      "GatewayId": "local",
+                      "Origin": "CreateRouteTable",
+                      "State": "active"
+                  },
+                  {
+                      "DestinationCidrBlock": "0.0.0.0/0",
+                      "GatewayId": "igw-05bbb6de093dc3d4d",
+                      "Origin": "CreateRoute",
+                      "State": "active"
+                  }
+              ],
+              "Tags": [
+                  {
+                      "Key": "Name",
+                      "Value": "suse-rancher-setup-8689/"
+                  }
+              ],
+              "VpcId": "vpc-077775ad628d471db",
+              "OwnerId": "810320120389"
+          }
+      ]
+  }
+- ''

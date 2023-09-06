@@ -1,0 +1,12 @@
+---
+- |
+  Hang tight while we grab the latest from your chart repositories...
+  ...Successfully got an update from the "neuvector" chart repository
+  ...Successfully got an update from the "ingress-nginx" chart repository
+  ...Successfully got an update from the "jetstack" chart repository
+  ...Successfully got an update from the "rancher-latest" chart repository
+  ...Successfully got an update from the "rancher-stable" chart repository
+  ...Successfully got an update from the "external-dns" chart repository
+  ...Successfully got an update from the "bitnami" chart repository
+  Update Complete. ⎈Happy Helming!⎈
+- ''

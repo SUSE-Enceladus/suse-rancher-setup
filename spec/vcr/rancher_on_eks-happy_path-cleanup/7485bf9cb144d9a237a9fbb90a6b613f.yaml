@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (InvalidAllocationID.NotFound) when calling the DescribeAddresses operation: The allocation ID 'eipalloc-0ea8bdf29fbcddb61' does not exist

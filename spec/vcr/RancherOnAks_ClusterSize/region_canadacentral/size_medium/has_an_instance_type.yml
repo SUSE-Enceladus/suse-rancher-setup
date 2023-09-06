@@ -39,24 +39,24 @@ http_interactions:
       P3p:
       - CP="DSP CUR OTPi IND OTRi ONL FIN"
       X-Ms-Request-Id:
-      - 4bbe0209-0c5b-4382-a937-9d36d3487a00
+      - d060606b-4ee3-4a27-acfa-d5f66ef63e00
       X-Ms-Ests-Server:
-      - 2.1.15984.6 - NEULR1 ProdSlices
+      - 2.1.16150.3 - FRC ProdSlices
       X-Xss-Protection:
       - '0'
       Set-Cookie:
-      - fpc=AgG--xk0ST5DiCewlVGJLIbQZtlFAQAAAP_bZNwOAAAA; expires=Fri, 08-Sep-2023
-        00:59:43 GMT; path=/; secure; HttpOnly; SameSite=None
+      - fpc=Ag9rzZeNC6BGjpHvEiKtuyXQZtlFAQAAAPS4idwOAAAA; expires=Fri, 06-Oct-2023
+        00:04:04 GMT; path=/; secure; HttpOnly; SameSite=None
       - stsservicecookie=estsfd; path=/; secure; samesite=none; httponly
       - x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly
       Date:
-      - Wed, 09 Aug 2023 00:59:43 GMT
+      - Wed, 06 Sep 2023 00:04:03 GMT
       Content-Length:
       - '1468'
     body:
       encoding: UTF-8
-      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1691546383","not_before":"1691542483","resource":"https://management.azure.com/","access_token":"[token]"}'
-  recorded_at: Wed, 09 Aug 2023 00:59:43 GMT
+      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1693962244","not_before":"1693958344","resource":"https://management.azure.com/","access_token":"[token]"}'
+  recorded_at: Wed, 06 Sep 2023 00:04:04 GMT
 - request:
     method: get
     uri: https://management.azure.com/subscriptions/[subscription]/providers/Microsoft.Compute/locations/canadacentral/vmSizes?api-version=2023-03-01
@@ -84,30 +84,31 @@ http_interactions:
       Pragma:
       - no-cache
       Content-Length:
-      - '124101'
+      - '124726'
       Content-Type:
       - application/json; charset=utf-8
       Expires:
       - "-1"
       X-Ms-Ratelimit-Remaining-Resource:
-      - Microsoft.Compute/GetSubscriptionInfo3Min;357
+      - Microsoft.Compute/GetSubscriptionInfo3Min;358
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Ms-Request-Id:
-      - b28fea4c-a7f7-46c8-b720-b8e7b33f3f0f
-      Server:
-      - Microsoft-HTTPAPI/2.0
-      - Microsoft-HTTPAPI/2.0
+      - 415a4cf2-3c6b-42bf-9f58-219ca45fe1a5
       X-Ms-Ratelimit-Remaining-Subscription-Reads:
-      - '11997'
+      - '11999'
       X-Ms-Correlation-Request-Id:
-      - fcd7d4df-7787-40c4-ae75-4658ec591dcf
+      - 4bdcb24a-58f3-4d06-922a-704b477d971c
       X-Ms-Routing-Request-Id:
-      - WESTUS2:20230809T005943Z:fcd7d4df-7787-40c4-ae75-4658ec591dcf
+      - WESTUS2:20230906T000404Z:4bdcb24a-58f3-4d06-922a-704b477d971c
       X-Content-Type-Options:
       - nosniff
+      X-Cache:
+      - CONFIG_NOCACHE
+      X-Msedge-Ref:
+      - 'Ref A: 0AB4DC4409A749069CA065486EE3768A Ref B: CO6AA3150220029 Ref C: 2023-09-06T00:04:04Z'
       Date:
-      - Wed, 09 Aug 2023 00:59:43 GMT
+      - Wed, 06 Sep 2023 00:04:03 GMT
     body:
       encoding: UTF-8
       string: "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"Standard_B1ls\",\r\n
@@ -1760,6 +1761,15 @@ http_interactions:
         \   },\r\n    {\r\n      \"name\": \"Standard_NV32as_v4\",\r\n      \"numberOfCores\":
         32,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         720896,\r\n      \"memoryInMB\": 114688,\r\n      \"maxDataDiskCount\": 32\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NP10s\",\r\n      \"numberOfCores\":
+        10,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        753664,\r\n      \"memoryInMB\": 172032,\r\n      \"maxDataDiskCount\": 8\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NP20s\",\r\n      \"numberOfCores\":
+        20,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        1509376,\r\n      \"memoryInMB\": 344064,\r\n      \"maxDataDiskCount\": 16\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NP40s\",\r\n      \"numberOfCores\":
+        40,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        3018752,\r\n      \"memoryInMB\": 688128,\r\n      \"maxDataDiskCount\": 32\r\n
         \   },\r\n    {\r\n      \"name\": \"Standard_G1\",\r\n      \"numberOfCores\":
         2,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         393216,\r\n      \"memoryInMB\": 28672,\r\n      \"maxDataDiskCount\": 8\r\n
@@ -1902,5 +1912,5 @@ http_interactions:
         48,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         2457600,\r\n      \"memoryInMB\": 393216,\r\n      \"maxDataDiskCount\": 32\r\n
         \   }\r\n  ]\r\n}"
-  recorded_at: Wed, 09 Aug 2023 00:59:44 GMT
+  recorded_at: Wed, 06 Sep 2023 00:04:04 GMT
 recorded_with: VCR 6.1.0

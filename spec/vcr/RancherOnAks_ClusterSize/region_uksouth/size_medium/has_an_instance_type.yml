@@ -39,24 +39,24 @@ http_interactions:
       P3p:
       - CP="DSP CUR OTPi IND OTRi ONL FIN"
       X-Ms-Request-Id:
-      - 3324b9be-ab5f-483a-b34b-7e90de6cc500
+      - b1971819-766f-4a82-9c72-cdc1185ca301
       X-Ms-Ests-Server:
-      - 2.1.15984.6 - WEULR1 ProdSlices
+      - 2.1.16150.3 - SEC ProdSlices
       X-Xss-Protection:
       - '0'
       Set-Cookie:
-      - fpc=AtJFi3qwkp9LkNxmil-Ho0XQZtlFAQAAAC3cZNwOAAAA; expires=Fri, 08-Sep-2023
-        01:00:29 GMT; path=/; secure; HttpOnly; SameSite=None
+      - fpc=AqjRipGJ7whFqKsNCkExhh7QZtlFAQAAACG5idwOAAAA; expires=Fri, 06-Oct-2023
+        00:04:50 GMT; path=/; secure; HttpOnly; SameSite=None
       - stsservicecookie=estsfd; path=/; secure; samesite=none; httponly
       - x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly
       Date:
-      - Wed, 09 Aug 2023 01:00:29 GMT
+      - Wed, 06 Sep 2023 00:04:50 GMT
       Content-Length:
       - '1468'
     body:
       encoding: UTF-8
-      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1691546429","not_before":"1691542529","resource":"https://management.azure.com/","access_token":"[token]"}'
-  recorded_at: Wed, 09 Aug 2023 01:00:29 GMT
+      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1693962290","not_before":"1693958390","resource":"https://management.azure.com/","access_token":"[token]"}'
+  recorded_at: Wed, 06 Sep 2023 00:04:50 GMT
 - request:
     method: get
     uri: https://management.azure.com/subscriptions/[subscription]/providers/Microsoft.Compute/locations/uksouth/vmSizes?api-version=2023-03-01
@@ -77,39 +77,38 @@ http_interactions:
   response:
     status:
       code: 200
-      message: OK
+      message: ''
     headers:
       Cache-Control:
       - no-cache
       Pragma:
       - no-cache
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '140964'
       Content-Type:
       - application/json; charset=utf-8
       Expires:
       - "-1"
-      Vary:
-      - Accept-Encoding
       X-Ms-Ratelimit-Remaining-Resource:
       - Microsoft.Compute/GetSubscriptionInfo3Min;358
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Ms-Request-Id:
-      - d2e4061a-7a76-4899-8a6d-f78ace0cc666
-      Server:
-      - Microsoft-HTTPAPI/2.0
-      - Microsoft-HTTPAPI/2.0
+      - 72ef4833-150d-4fb2-8317-0b54ce66e25e
       X-Ms-Ratelimit-Remaining-Subscription-Reads:
-      - '11998'
+      - '11999'
       X-Ms-Correlation-Request-Id:
-      - cc3e6023-bfab-4992-af90-e8095a6721b2
+      - 97ee95d0-5d64-4633-a9e2-f097636659b6
       X-Ms-Routing-Request-Id:
-      - WESTUS2:20230809T010030Z:cc3e6023-bfab-4992-af90-e8095a6721b2
+      - WESTUS2:20230906T000450Z:97ee95d0-5d64-4633-a9e2-f097636659b6
       X-Content-Type-Options:
       - nosniff
+      X-Cache:
+      - CONFIG_NOCACHE
+      X-Msedge-Ref:
+      - 'Ref A: 1AD9AB4F0FEF4E82BA09FC23D93C2A74 Ref B: CO6AA3150219031 Ref C: 2023-09-06T00:04:50Z'
       Date:
-      - Wed, 09 Aug 2023 01:00:30 GMT
+      - Wed, 06 Sep 2023 00:04:50 GMT
     body:
       encoding: UTF-8
       string: "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"Standard_B1ls\",\r\n
@@ -1924,6 +1923,27 @@ http_interactions:
         \   },\r\n    {\r\n      \"name\": \"Standard_DC4s_v2\",\r\n      \"numberOfCores\":
         4,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         204800,\r\n      \"memoryInMB\": 16384,\r\n      \"maxDataDiskCount\": 4\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NV4as_v4\",\r\n      \"numberOfCores\":
+        4,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        90112,\r\n      \"memoryInMB\": 14336,\r\n      \"maxDataDiskCount\": 8\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NV8as_v4\",\r\n      \"numberOfCores\":
+        8,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        180224,\r\n      \"memoryInMB\": 28672,\r\n      \"maxDataDiskCount\": 16\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NV16as_v4\",\r\n      \"numberOfCores\":
+        16,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        360448,\r\n      \"memoryInMB\": 57344,\r\n      \"maxDataDiskCount\": 32\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NV32as_v4\",\r\n      \"numberOfCores\":
+        32,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        720896,\r\n      \"memoryInMB\": 114688,\r\n      \"maxDataDiskCount\": 32\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC24ads_A100_v4\",\r\n      \"numberOfCores\":
+        24,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        65536,\r\n      \"memoryInMB\": 225280,\r\n      \"maxDataDiskCount\": 8\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC48ads_A100_v4\",\r\n      \"numberOfCores\":
+        48,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        131072,\r\n      \"memoryInMB\": 450560,\r\n      \"maxDataDiskCount\": 16\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC96ads_A100_v4\",\r\n      \"numberOfCores\":
+        96,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        262144,\r\n      \"memoryInMB\": 901120,\r\n      \"maxDataDiskCount\": 32\r\n
         \   },\r\n    {\r\n      \"name\": \"Standard_L8s_v2\",\r\n      \"numberOfCores\":
         8,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         81920,\r\n      \"memoryInMB\": 65536,\r\n      \"maxDataDiskCount\": 16\r\n
@@ -1942,39 +1962,27 @@ http_interactions:
         \   },\r\n    {\r\n      \"name\": \"Standard_L80s_v2\",\r\n      \"numberOfCores\":
         80,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         819200,\r\n      \"memoryInMB\": 655360,\r\n      \"maxDataDiskCount\": 32\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC6s_v3\",\r\n      \"numberOfCores\":
-        6,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        344064,\r\n      \"memoryInMB\": 114688,\r\n      \"maxDataDiskCount\": 12\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC12s_v3\",\r\n      \"numberOfCores\":
-        12,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        688128,\r\n      \"memoryInMB\": 229376,\r\n      \"maxDataDiskCount\": 24\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC24rs_v3\",\r\n      \"numberOfCores\":
-        24,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        3018752,\r\n      \"memoryInMB\": 458752,\r\n      \"maxDataDiskCount\": 32\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC24s_v3\",\r\n      \"numberOfCores\":
-        24,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        1376256,\r\n      \"memoryInMB\": 458752,\r\n      \"maxDataDiskCount\": 32\r\n
         \   },\r\n    {\r\n      \"name\": \"Standard_M208ms_v2\",\r\n      \"numberOfCores\":
         208,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         4194304,\r\n      \"memoryInMB\": 5836800,\r\n      \"maxDataDiskCount\":
         64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M208s_v2\",\r\n      \"numberOfCores\":
         208,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         4194304,\r\n      \"memoryInMB\": 2918400,\r\n      \"maxDataDiskCount\":
-        64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416-208ms_v2\",\r\n      \"numberOfCores\":
-        416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        8388608,\r\n      \"memoryInMB\": 11673600,\r\n      \"maxDataDiskCount\":
         64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416-208s_v2\",\r\n      \"numberOfCores\":
         416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         8388608,\r\n      \"memoryInMB\": 5836800,\r\n      \"maxDataDiskCount\":
+        64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416s_v2\",\r\n      \"numberOfCores\":
+        416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        8388608,\r\n      \"memoryInMB\": 5836800,\r\n      \"maxDataDiskCount\":
+        64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416-208ms_v2\",\r\n      \"numberOfCores\":
+        416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        8388608,\r\n      \"memoryInMB\": 11673600,\r\n      \"maxDataDiskCount\":
         64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416ms_v2\",\r\n      \"numberOfCores\":
         416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         8388608,\r\n      \"memoryInMB\": 11673600,\r\n      \"maxDataDiskCount\":
         64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416s_8_v2\",\r\n      \"numberOfCores\":
         416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         4194304,\r\n      \"memoryInMB\": 7782400,\r\n      \"maxDataDiskCount\":
-        64\r\n    },\r\n    {\r\n      \"name\": \"Standard_M416s_v2\",\r\n      \"numberOfCores\":
-        416,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        8388608,\r\n      \"memoryInMB\": 5836800,\r\n      \"maxDataDiskCount\":
         64\r\n    },\r\n    {\r\n      \"name\": \"Standard_DC1s_v3\",\r\n      \"numberOfCores\":
         1,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         0,\r\n      \"memoryInMB\": 8192,\r\n      \"maxDataDiskCount\": 4\r\n    },\r\n
@@ -2023,18 +2031,18 @@ http_interactions:
         \   },\r\n    {\r\n      \"name\": \"Standard_DC48ds_v3\",\r\n      \"numberOfCores\":
         48,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         2457600,\r\n      \"memoryInMB\": 393216,\r\n      \"maxDataDiskCount\": 32\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NV4as_v4\",\r\n      \"numberOfCores\":
-        4,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        90112,\r\n      \"memoryInMB\": 14336,\r\n      \"maxDataDiskCount\": 8\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NV8as_v4\",\r\n      \"numberOfCores\":
-        8,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        180224,\r\n      \"memoryInMB\": 28672,\r\n      \"maxDataDiskCount\": 16\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NV16as_v4\",\r\n      \"numberOfCores\":
-        16,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        360448,\r\n      \"memoryInMB\": 57344,\r\n      \"maxDataDiskCount\": 32\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NV32as_v4\",\r\n      \"numberOfCores\":
-        32,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        720896,\r\n      \"memoryInMB\": 114688,\r\n      \"maxDataDiskCount\": 32\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC6s_v3\",\r\n      \"numberOfCores\":
+        6,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        344064,\r\n      \"memoryInMB\": 114688,\r\n      \"maxDataDiskCount\": 12\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC12s_v3\",\r\n      \"numberOfCores\":
+        12,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        688128,\r\n      \"memoryInMB\": 229376,\r\n      \"maxDataDiskCount\": 24\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC24rs_v3\",\r\n      \"numberOfCores\":
+        24,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        3018752,\r\n      \"memoryInMB\": 458752,\r\n      \"maxDataDiskCount\": 32\r\n
+        \   },\r\n    {\r\n      \"name\": \"Standard_NC24s_v3\",\r\n      \"numberOfCores\":
+        24,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
+        1376256,\r\n      \"memoryInMB\": 458752,\r\n      \"maxDataDiskCount\": 32\r\n
         \   },\r\n    {\r\n      \"name\": \"Standard_G1\",\r\n      \"numberOfCores\":
         2,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         393216,\r\n      \"memoryInMB\": 28672,\r\n      \"maxDataDiskCount\": 8\r\n
@@ -2137,17 +2145,6 @@ http_interactions:
         \   },\r\n    {\r\n      \"name\": \"Standard_NV72ads_A10_v5\",\r\n      \"numberOfCores\":
         72,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         2949120,\r\n      \"memoryInMB\": 901120,\r\n      \"maxDataDiskCount\": 32\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC24ads_A100_v4\",\r\n      \"numberOfCores\":
-        24,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        65536,\r\n      \"memoryInMB\": 225280,\r\n      \"maxDataDiskCount\": 8\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC48ads_A100_v4\",\r\n      \"numberOfCores\":
-        48,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        131072,\r\n      \"memoryInMB\": 450560,\r\n      \"maxDataDiskCount\": 16\r\n
-        \   },\r\n    {\r\n      \"name\": \"Standard_NC96ads_A100_v4\",\r\n      \"numberOfCores\":
-        96,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
-        262144,\r\n      \"memoryInMB\": 901120,\r\n      \"maxDataDiskCount\": 32\r\n
         \   }\r\n  ]\r\n}"
-    adapter_metadata:
-      vcr_decompressed: gzip
-  recorded_at: Wed, 09 Aug 2023 01:00:30 GMT
+  recorded_at: Wed, 06 Sep 2023 00:04:51 GMT
 recorded_with: VCR 6.1.0
