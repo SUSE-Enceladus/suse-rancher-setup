@@ -19,7 +19,6 @@ module K8s
     def prepare()
       execute(%w(version --output=json))
     rescue CliError => e
-      debugger
       # let kuberlr do its thing
       raise unless e.message.include?('Right kubectl missing, downloading version')
     end
