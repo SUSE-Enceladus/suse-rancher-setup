@@ -1,6 +1,3 @@
-7793edfc5f5c08b5e751677e3ed34175.yaml	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}
-d45b5ddfd6f5913a60655d4ebf33c4b7.yaml	aws route53 change-resource-record-sets --hosted-zone-id /hostedzone/Z02789583EHHMJ1NWHJKM --change-batch {"Comment":"Delete suse-rancher-setup record set","Changes":[{"Action":"DELETE","ResourceRecordSet":{"Name":"rancher-setup-test.aws.bear454.com","Type":"CNAME","TTL":900,"ResourceRecords":[{"Value":"aaf2688be10c84ca2a670766a27c578e-505904997.us-west-2.elb.amazonaws.com"}]}}]}
-b0857e16b4f72a10089c58ca375fe9e3.yaml	helm uninstall ingress-nginx --namespace ingress-nginx
 2c52d4c33b09df1d55524c892159756b.yaml	aws eks delete-nodegroup --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --cluster-name suse-rancher-setup-8689-cluster
 06dbf6e23352aa4be8fe40ec1d44e4ed.yaml	aws eks describe-nodegroup --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --cluster-name suse-rancher-setup-8689-cluster
 a006e848b5b28ec21ec05889391d5538.yaml	aws iam detach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore

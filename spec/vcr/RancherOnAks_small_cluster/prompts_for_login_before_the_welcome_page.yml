@@ -5,7 +5,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -62,7 +62,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -173,7 +173,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -2059,7 +2059,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -2687,7 +2687,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -2846,7 +2846,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -3129,7 +3129,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -3309,7 +3309,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -5195,7 +5195,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -5252,7 +5252,7 @@ http_interactions:
     uri: https://management.azure.com/subscriptions/[subscription]/resourceGroups/suse-rancher-setup-5700/providers/Microsoft.ContainerService/managedClusters/suse-rancher-setup-5700-cluster?api-version=2023-05-01
     body:
       encoding: UTF-8
-      string: '{"location":"westus3","properties":{"kubernetesVersion":"1.26","dnsPrefix":"rancher-setup","agentPoolProfiles":[{"name":"nodepool1","count":3,"vmSize":"Standard_D2as_v5","availabilityZones":["1","3","2"],"osType":"Linux","type":"VirtualMachineScaleSets","enableNodePublicIP":false,"mode":"System"}],"networkProfile":{"loadBalancerSku":"standard","outboundType":"loadBalancer"},"servicePrincipalProfile":{"clientId":"[app_id]","secret":"[password]"}}}'
+      string: '{"location":"westus3","properties":{"kubernetesVersion":"1.26","dnsPrefix":"rancher-setup","agentPoolProfiles":[{"name":"nodepool1","count":3,"vmSize":"Standard_D2as_v5","availabilityZones":["1","3","2"],"osType":"Linux","type":"VirtualMachineScaleSets","enableNodePublicIP":false,"mode":"System"}],"networkProfile":{"loadBalancerSku":"standard","outboundType":"loadBalancer"},"servicePrincipalProfile":{"clientId":"[app_id]","secret":"[[password_encoded]]"}}}'
     headers:
       Accept:
       - application/json
@@ -8518,7 +8518,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -8641,7 +8641,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -8752,7 +8752,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -8973,7 +8973,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -9080,7 +9080,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -9193,7 +9193,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -9298,7 +9298,7 @@ http_interactions:
     uri: https://login.microsoftonline.com/[tenant]/oauth2/token
     body:
       encoding: UTF-8
-      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[password_encoded]&resource=https%3A%2F%2Fmanagement.azure.com%2F
+      string: grant_type=client_credentials&client_id=[app_id]&client_secret=[[password_encoded]]&resource=https%3A%2F%2Fmanagement.azure.com%2F
     headers:
       Accept:
       - application/json
@@ -9406,4 +9406,115 @@ http_interactions:
       encoding: UTF-8
       string: ''
   recorded_at: Wed, 06 Sep 2023 00:15:24 GMT
+- request:
+    method: head
+    uri: https://management.azure.com/subscriptions/[subscription]/resourcegroups/suse-rancher-setup-9165?api-version=2023-07-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux x86_64) ruby/3.1.2p20
+      Authorization:
+      - "[token]"
+      Host:
+      - management.azure.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Length:
+      - '0'
+      Expires:
+      - "-1"
+      X-Ms-Failure-Cause:
+      - gateway
+      X-Ms-Request-Id:
+      - bdef915c-47ae-4fc3-91a9-3437e7072877
+      X-Ms-Correlation-Request-Id:
+      - bdef915c-47ae-4fc3-91a9-3437e7072877
+      X-Ms-Routing-Request-Id:
+      - WESTUS:20230906T002002Z:bdef915c-47ae-4fc3-91a9-3437e7072877
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Cache:
+      - CONFIG_NOCACHE
+      X-Msedge-Ref:
+      - 'Ref A: BED853E081D94E39BFAFB9D63D60F155 Ref B: CO6AA3150219035 Ref C: 2023-09-06T00:20:02Z'
+      Date:
+      - Wed, 06 Sep 2023 00:20:01 GMT
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Wed, 06 Sep 2023 00:20:02 GMT
+- request:
+    method: put
+    uri: https://management.azure.com/subscriptions/[subscription]/resourcegroups/suse-rancher-setup-9165?api-version=2023-07-01
+    body:
+      encoding: UTF-8
+      string: '{"location":"westus3"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - rest-client/2.0.2 (linux x86_64) ruby/3.1.2p20
+      Authorization:
+      - "[token]"
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '22'
+      Host:
+      - management.azure.com
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Cache-Control:
+      - no-cache
+      Pragma:
+      - no-cache
+      Content-Length:
+      - '129'
+      Content-Type:
+      - application/json; charset=utf-8
+      Expires:
+      - "-1"
+      X-Ms-Failure-Cause:
+      - gateway
+      X-Ms-Request-Id:
+      - cfed4355-8723-40bb-8846-4bb15600a116
+      X-Ms-Correlation-Request-Id:
+      - cfed4355-8723-40bb-8846-4bb15600a116
+      X-Ms-Routing-Request-Id:
+      - WESTUS:20230906T002002Z:cfed4355-8723-40bb-8846-4bb15600a116
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains
+      X-Content-Type-Options:
+      - nosniff
+      X-Cache:
+      - CONFIG_NOCACHE
+      X-Msedge-Ref:
+      - 'Ref A: B0A8D38E458F4F079368DD45F0184682 Ref B: CO6AA3150217033 Ref C: 2023-09-06T00:20:02Z'
+      Date:
+      - Wed, 06 Sep 2023 00:20:01 GMT
+    body:
+      encoding: UTF-8
+      string: '{"error":{"code":"SubscriptionNotFound","message":"The subscription
+        ''[subscription]'' could not be found."}}'
+  recorded_at: Wed, 06 Sep 2023 00:20:02 GMT
 recorded_with: VCR 6.1.0
