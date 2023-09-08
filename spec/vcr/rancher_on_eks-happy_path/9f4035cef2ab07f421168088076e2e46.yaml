@@ -1,0 +1,23 @@
+---
+- |
+  {
+      "InternetGateways": [
+          {
+              "Attachments": [
+                  {
+                      "State": "available",
+                      "VpcId": "vpc-077775ad628d471db"
+                  }
+              ],
+              "InternetGatewayId": "igw-05bbb6de093dc3d4d",
+              "OwnerId": "810320120389",
+              "Tags": [
+                  {
+                      "Key": "Name",
+                      "Value": "suse-rancher-setup-8689/internet-gateway"
+                  }
+              ]
+          }
+      ]
+  }
+- ''

@@ -242,6 +242,7 @@ module Azure
         kubeconfig,
         Base64.decode64(JSON.parse(response)['kubeconfigs'].first['value'])
       )
+      FileUtils.chmod(0600, kubeconfig)
     end
 
     # DNS zones
@@ -254,7 +255,6 @@ module Azure
       id = JSON.parse(response)['value'].find{|resource| resource['name'] == zone }['id']
       id.match(/resourceGroups\/(?<resourcegroup>.+)\/providers/)[:resourcegroup]
     rescue RestClient::ExceptionWithResponse, NoMethodError
-      debugger
       nil
     end
 

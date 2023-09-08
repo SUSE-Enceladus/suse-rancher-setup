@@ -39,24 +39,24 @@ http_interactions:
       P3p:
       - CP="DSP CUR OTPi IND OTRi ONL FIN"
       X-Ms-Request-Id:
-      - 9f678a55-c268-4ad0-b39e-5347701d9200
+      - b1971819-766f-4a82-9c72-cdc1b059a301
       X-Ms-Ests-Server:
-      - 2.1.15984.6 - NEULR1 ProdSlices
+      - 2.1.16150.3 - SEC ProdSlices
       X-Xss-Protection:
       - '0'
       Set-Cookie:
-      - fpc=AoaoarZRVCFNjXCLhyjDXF7QZtlFAQAAABDcZNwOAAAA; expires=Fri, 08-Sep-2023
-        01:00:00 GMT; path=/; secure; HttpOnly; SameSite=None
+      - fpc=Ap6H8K69LslIm0XyprD8DqfQZtlFAQAAAAW5idwOAAAA; expires=Fri, 06-Oct-2023
+        00:04:22 GMT; path=/; secure; HttpOnly; SameSite=None
       - stsservicecookie=estsfd; path=/; secure; samesite=none; httponly
       - x-ms-gateway-slice=estsfd; path=/; secure; samesite=none; httponly
       Date:
-      - Wed, 09 Aug 2023 01:00:00 GMT
+      - Wed, 06 Sep 2023 00:04:22 GMT
       Content-Length:
       - '1468'
     body:
       encoding: UTF-8
-      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1691546400","not_before":"1691542500","resource":"https://management.azure.com/","access_token":"[token]"}'
-  recorded_at: Wed, 09 Aug 2023 01:00:00 GMT
+      string: '{"token_type":"Bearer","expires_in":"3599","ext_expires_in":"3599","expires_on":"1693962262","not_before":"1693958362","resource":"https://management.azure.com/","access_token":"[token]"}'
+  recorded_at: Wed, 06 Sep 2023 00:04:22 GMT
 - request:
     method: get
     uri: https://management.azure.com/subscriptions/[subscription]/providers/Microsoft.Compute/locations/eastus2/vmSizes?api-version=2023-03-01
@@ -83,33 +83,32 @@ http_interactions:
       - no-cache
       Pragma:
       - no-cache
-      Transfer-Encoding:
-      - chunked
+      Content-Length:
+      - '140332'
       Content-Type:
       - application/json; charset=utf-8
       Expires:
       - "-1"
-      Vary:
-      - Accept-Encoding
       X-Ms-Ratelimit-Remaining-Resource:
       - Microsoft.Compute/GetSubscriptionInfo3Min;358
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains
       X-Ms-Request-Id:
-      - aae14390-d940-4261-956c-5673634d0bd4
-      Server:
-      - Microsoft-HTTPAPI/2.0
-      - Microsoft-HTTPAPI/2.0
+      - 23035bb7-4740-4c38-8d86-8d5309434cc7
       X-Ms-Ratelimit-Remaining-Subscription-Reads:
       - '11999'
       X-Ms-Correlation-Request-Id:
-      - 95b802ea-5a42-4127-ad7e-4d977704b9a7
+      - a305d81d-cab7-4f96-96ab-c99f550c3943
       X-Ms-Routing-Request-Id:
-      - WESTUS2:20230809T010001Z:95b802ea-5a42-4127-ad7e-4d977704b9a7
+      - WESTUS2:20230906T000422Z:a305d81d-cab7-4f96-96ab-c99f550c3943
       X-Content-Type-Options:
       - nosniff
+      X-Cache:
+      - CONFIG_NOCACHE
+      X-Msedge-Ref:
+      - 'Ref A: 2A4C735971E24D62AD390638A5041B3D Ref B: CO6AA3150217051 Ref C: 2023-09-06T00:04:22Z'
       Date:
-      - Wed, 09 Aug 2023 01:00:01 GMT
+      - Wed, 06 Sep 2023 00:04:22 GMT
     body:
       encoding: UTF-8
       string: "{\r\n  \"value\": [\r\n    {\r\n      \"name\": \"Standard_NV6ads_A10_v5\",\r\n
@@ -2138,7 +2137,5 @@ http_interactions:
         96,\r\n      \"osDiskSizeInMB\": 1047552,\r\n      \"resourceDiskSizeInMB\":
         2969600,\r\n      \"memoryInMB\": 1970176,\r\n      \"maxDataDiskCount\":
         16\r\n    }\r\n  ]\r\n}"
-    adapter_metadata:
-      vcr_decompressed: gzip
-  recorded_at: Wed, 09 Aug 2023 01:00:01 GMT
+  recorded_at: Wed, 06 Sep 2023 00:04:23 GMT
 recorded_with: VCR 6.1.0

@@ -1,0 +1,32 @@
+---
+- |
+  {
+      "NatGateways": [
+          {
+              "CreateTime": "2023-09-05T22:49:26+00:00",
+              "NatGatewayAddresses": [
+                  {
+                      "AllocationId": "eipalloc-0ea8bdf29fbcddb61",
+                      "NetworkInterfaceId": "eni-00a159143821f7d95",
+                      "PrivateIp": "192.168.8.188",
+                      "PublicIp": "35.155.142.100",
+                      "AssociationId": "eipassoc-0e956174672f1aa60",
+                      "IsPrimary": true,
+                      "Status": "succeeded"
+                  }
+              ],
+              "NatGatewayId": "nat-016f49a7fe9427489",
+              "State": "available",
+              "SubnetId": "subnet-0f25ed15952bbdf05",
+              "VpcId": "vpc-077775ad628d471db",
+              "Tags": [
+                  {
+                      "Key": "Name",
+                      "Value": "suse-rancher-setup-8689/nat-gateway"
+                  }
+              ],
+              "ConnectivityType": "public"
+          }
+      ]
+  }
+- ''

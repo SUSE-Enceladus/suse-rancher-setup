@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (InvalidInternetGatewayID.NotFound) when calling the DescribeInternetGateways operation: The internetGateway ID 'igw-05bbb6de093dc3d4d' does not exist

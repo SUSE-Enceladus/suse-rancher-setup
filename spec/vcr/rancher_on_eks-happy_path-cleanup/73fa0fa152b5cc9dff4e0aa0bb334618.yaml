@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (NoSuchEntity) when calling the GetRole operation: The role with name suse-rancher-setup-8689-cluster-role cannot be found.

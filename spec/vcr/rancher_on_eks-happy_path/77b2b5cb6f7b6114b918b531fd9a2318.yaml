@@ -1,0 +1,138 @@
+---
+- |
+  {
+      "apiVersion": "v1",
+      "items": [
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-09-05T23:04:24Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "cert-manager"
+                  },
+                  "name": "cert-manager",
+                  "resourceVersion": "1661",
+                  "uid": "e34791ef-4900-4437-89c8-138bd8581dcf"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-09-05T22:57:33Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "default"
+                  },
+                  "name": "default",
+                  "resourceVersion": "187",
+                  "uid": "a6923771-d667-44bc-86b7-2fd6d39c0d55"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-09-05T23:03:38Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "ingress-nginx"
+                  },
+                  "name": "ingress-nginx",
+                  "resourceVersion": "1402",
+                  "uid": "db6e8541-3216-4422-aac5-5708cf683003"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-09-05T22:57:31Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "kube-node-lease"
+                  },
+                  "name": "kube-node-lease",
+                  "resourceVersion": "36",
+                  "uid": "3a3ee478-a111-4c82-b860-0499ff196358"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-09-05T22:57:31Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "kube-public"
+                  },
+                  "name": "kube-public",
+                  "resourceVersion": "27",
+                  "uid": "2d172e0a-e62c-4d48-9daf-336f94139dea"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          },
+          {
+              "apiVersion": "v1",
+              "kind": "Namespace",
+              "metadata": {
+                  "creationTimestamp": "2023-09-05T22:57:31Z",
+                  "labels": {
+                      "kubernetes.io/metadata.name": "kube-system"
+                  },
+                  "name": "kube-system",
+                  "resourceVersion": "8",
+                  "uid": "480825a7-ff8c-4084-8711-02ef22a117cd"
+              },
+              "spec": {
+                  "finalizers": [
+                      "kubernetes"
+                  ]
+              },
+              "status": {
+                  "phase": "Active"
+              }
+          }
+      ],
+      "kind": "List",
+      "metadata": {
+          "resourceVersion": ""
+      }
+  }
+- ''

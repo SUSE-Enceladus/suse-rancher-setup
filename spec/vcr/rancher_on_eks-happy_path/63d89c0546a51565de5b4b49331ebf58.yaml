@@ -13,6 +13,16 @@
               "ResourceRecordSetCount": 3
           },
           {
+              "Id": "/hostedzone/Z0128328LM44PYGYT4OK",
+              "Name": "aws.mb.com.",
+              "CallerReference": "e32aaa64-e630-4089-9122-c8e9fb3bc896",
+              "Config": {
+                  "Comment": "",
+                  "PrivateZone": false
+              },
+              "ResourceRecordSetCount": 2
+          },
+          {
               "Id": "/hostedzone/Z0787079247TTSL1W47B0",
               "Name": "jesus.hosted.zone.com.",
               "CallerReference": "jesus_hosted_zone",

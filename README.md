@@ -69,6 +69,8 @@ Example:
 LASSO_WORKFLOW=RancherOnAks LASSO_ENGINES=Azure,ShirtSize,PreFlight,RancherOnAks,Helm rspec
 ```
 
+💡 *Use the environment variable `RERECORD=true` when re-recording the test suite.*
+
 ### Azure
 
 The Azure interface uses the Azure REST API; test fixtures are recorded with VCR. To record new tests, delete the old recordings from `spec/vcr/$SPEC_NAME`, and set the following environment variables when running `rspec`:
@@ -77,6 +79,14 @@ The Azure interface uses the Azure REST API; test fixtures are recorded with VCR
 * `PASSWORD` - the Azure service principal secret
 * `TENANT` - the Azure service principal tenant UUID
 * `SUBSCRIPTION` - the Azure subscription UUID where the application will be executed (SP must have permissions)
+
+Due to random selection, a few static values need to be reset on the suite after re-recording. Please follow the inline instructions to update the `before(:example)` block in spec/system/RancherOnAks/happy_path_spec.rb .
+
+### AWS
+
+The AWS interface uses the AWS CLI (`aws`); test fixtures are recorded via a harness trap. Please see `rails -T vcr` for _rake_ tasks used to maintain the recordings. Your local AWS CLI must be authenticated to the account where Rancher will be deployed.
+
+Due to random selection, a few static values need to be reset on the suite after re-recording. Please follow the inline instructions to update the `before(:example)` block in spec/system/RancherOnEks/happy_path_spec.rb .
 
 ## Component Engine Architecture
 

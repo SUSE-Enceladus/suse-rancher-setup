@@ -1,0 +1,5 @@
+---
+- ''
+- |2
+
+  An error occurred (ResourceNotFoundException) when calling the DescribeNodegroup operation: No node group found for name: suse-rancher-setup-8689-cluster-nodegroup.
