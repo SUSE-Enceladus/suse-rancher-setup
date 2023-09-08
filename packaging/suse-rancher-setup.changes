@@ -1,4 +1,10 @@
 -------------------------------------------------------------------
+Fri Sep  8 15:43:20 UTC 2023 - James Mason <jmason@suse.com>
+
+- version 2.1.0
+  - Support Rancher 2.7 & k8s 1.26
+
+-------------------------------------------------------------------
 Fri Aug 25 16:26:57 UTC 2023 - James Mason <jmason@suse.com>
 
 - version 2.0.6
