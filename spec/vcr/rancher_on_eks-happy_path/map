@@ -7,7 +7,6 @@
 63d89c0546a51565de5b4b49331ebf58.yaml	aws route53 list-hosted-zones-by-name --dns-name aws.bear454.com
 39e8bf8f111c2d59e5311200689f3445.yaml	aws service-quotas get-service-quota --service-code vpc --quota-code L-F678F1CE
 9b4bb46598581d00efd6404765f33101.yaml	aws ec2 describe-vpcs --no-paginate --query Vpcs[].VpcId
-1d6db4c04cdcec090c16f20b67ae72de.yaml	aws ec2 describe-instance-type-offerings --location-type availability-zone --filters Name=instance-type,Values=m5a.large
 6f395d4e3bedbd6ae62bd4aba7a88114.yaml	aws ec2 create-vpc --cidr-block 192.168.0.0/16 --tag-specifications ResourceType=vpc,Tags=[{Key=Name,Value="suse-rancher-setup-8689/vpc"}]
 2f137cdf747c4bb6b1d435cc79ff3d12.yaml	aws ec2 describe-vpcs --vpc-ids vpc-077775ad628d471db
 1fef9dfd295790326c1c92fdcc4e9128.yaml	aws ec2 modify-vpc-attribute --vpc-id vpc-077775ad628d471db --enable-dns-hostnames
@@ -64,28 +63,4 @@ f26081866093c74120448f31953485e3.yaml	aws iam attach-role-policy --role-name sus
 62bf15a8f26c682acbc467ecfe3acfa4.yaml	aws iam attach-role-policy --role-name suse-rancher-setup-8689-nodegroup-role --policy-arn arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy
 342efafb146db95c66057078f18ced8b.yaml	aws eks create-nodegroup --cluster-name suse-rancher-setup-8689-cluster --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --scaling-config minSize=2,maxSize=4,desiredSize=3 --instance-types m5a.large --ami-type AL2_x86_64 --node-role arn:aws:iam::810320120389:role/suse-rancher-setup-8689-nodegroup-role --labels role=suse-rancher-setup-8689-cluster-general-worker --capacity-type ON_DEMAND --subnets subnet-0f25ed15952bbdf05 subnet-0be509226f10f10ed subnet-0748caf3ee03f51b0
 06dbf6e23352aa4be8fe40ec1d44e4ed.yaml	aws eks describe-nodegroup --nodegroup-name suse-rancher-setup-8689-cluster-nodegroup --cluster-name suse-rancher-setup-8689-cluster
-cad54a0267a6016885d0ba38d65bc24e.yaml	aws eks update-kubeconfig --name suse-rancher-setup-8689-cluster --kubeconfig /tmp/kubeconfig
-635e62cdc23854e4760fb40639d313a0.yaml	kubectl version --output=json
-77b2b5cb6f7b6114b918b531fd9a2318.yaml	kubectl get namespaces --output json
-8c756c122e9b63f583880ba873c881a7.yaml	kubectl create namespace ingress-nginx
-852e5b3e7e62b09e0e7b500b32b80dea.yaml	helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-8e00ee7cb4604761a2258b9dcf882005.yaml	helm repo update
-98657bffccce9e780d3da69b9441ff49.yaml	helm install ingress-nginx ingress-nginx/ingress-nginx --namespace ingress-nginx --version 4.0.18 --set controller.service.type=LoadBalancer --set controller.service.externalTrafficPolicy=Local
-a08d18d2b4e898faadb87070309f1ea7.yaml	helm status ingress-nginx --namespace ingress-nginx --show-desc --output json
-efbbb73070d71660443ed0b21fe3e118.yaml	kubectl rollout status deployment/ingress-nginx-controller --namespace ingress-nginx
-1ef9c2f42501bf68c44599174df5527c.yaml	kubectl get services --namespace ingress-nginx --output json
-b48b8a4a4334b093887a0600b98a79a5.yaml	kubectl get service ingress-nginx-controller --namespace ingress-nginx --output json
-787e0d37d32a94516607ed6e23ed73a4.yaml	aws route53 change-resource-record-sets --hosted-zone-id /hostedzone/Z02789583EHHMJ1NWHJKM --change-batch file:///var/tmp/dns_record.json
-882c6d0cbb0f8cc6c6ebd54f485fdb67.yaml	aws route53 list-resource-record-sets --hosted-zone-id /hostedzone/Z02789583EHHMJ1NWHJKM
-6324154e5104c0757a739350c2a775f6.yaml	kubectl create namespace cert-manager
-7c23ec2fc27ae4193158d32e65c1de05.yaml	kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.7.1/cert-manager.crds.yaml
-566efc0fa13aeb3e47298a37a1a78311.yaml	helm repo add jetstack https://charts.jetstack.io
-f38bc324ffd0969471aaf73c763e25d6.yaml	helm install cert-manager jetstack/cert-manager --namespace cert-manager --version 1.7.1
-7849bfcdb1e3273102b850b9bf211011.yaml	helm status cert-manager --namespace cert-manager --show-desc --output json
-43d58ef14613c09690cd1d5277049734.yaml	kubectl rollout status deployment/cert-manager --namespace cert-manager
-637c37a77cb665fec8d768c3a71e663d.yaml	kubectl create namespace cattle-system
-5a99aac9ce7c62be859e6cf3443e4331.yaml	helm repo add rancher-stable https://releases.rancher.com/server-charts/stable
-3c345438158818589930cc80dbd8f1ca.yaml	helm install rancher-stable rancher-stable/rancher --namespace cattle-system --set extraEnv[0].name=CATTLE_PROMETHEUS_METRICS --set-string extraEnv[0].value=true --set ingress.ingressClassName=nginx --set letsEncrypt.ingress.class=nginx --set hostname=rancher-setup-test.aws.bear454.com --set replicas=3 --version 2.7.6 --set ingress.tls.source=rancher
-5c4d425c4ed10b60ff6827a05ab0c1c5.yaml	helm status rancher-stable --namespace cattle-system --show-desc --output json
-ccc9e1bb11f341328377a5eac6c09c7b.yaml	kubectl rollout status deployment/rancher-stable --namespace cattle-system
-7793edfc5f5c08b5e751677e3ed34175.yaml	kubectl get secret --namespace cattle-system bootstrap-secret -o go-template={{.data.bootstrapPassword|base64decode}}
+4698f404fe4d16ff8fd0f6eae87ffca1.yaml	aws eks update-kubeconfig --name suse-rancher-setup-8689-cluster --kubeconfig /home/jmason/projects/suse-rancher-setup/tmp/kubeconfig
